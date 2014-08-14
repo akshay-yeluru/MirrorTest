@@ -8,7 +8,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;08&#x2f;13 07&#x3a;26&#x3a;44.592</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;08&#x2f;14 03&#x3a;55&#x3a;36.223</modified_date>
+  <modified_date>2014&#x2f;08&#x2f;14 06&#x3a;28&#x3a;11.216</modified_date>
     <parameters>
     </parameters>
   <connection>
@@ -55,6 +55,31 @@
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
       <attribute><code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code><attribute>N</attribute></attribute>
       <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;TARGET_PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>TARGET_RDBMS_DEV</name>
+    <server>localhost</server>
+    <type>MSSQL</type>
+    <access>Native</access>
+    <database>receivables-warehouse</database>
+    <port>1433</port>
+    <username>srb</username>
+    <password>Encrypted 2be98afc86aa7a697a80abd7987cbf683</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1433</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
@@ -394,6 +419,24 @@
       <xloc>498</xloc>
       <yloc>448</yloc>
       </entry>
+    <entry>
+      <name>Truncate payroll human resources tables</name>
+      <description/>
+      <type>TRUNCATE_TABLES</type>
+      <connection>TARGET_RDBMS</connection>
+      <arg_from_previous>N</arg_from_previous>
+      <fields>
+        <field>
+          <name>PAY_EMPLOYEE_INTERLINK</name>
+          <schemaname/>
+        </field>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>511</xloc>
+      <yloc>570</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -417,6 +460,15 @@
     <hop>
       <from>Truncate payroll finance tables</from>
       <to>Truncate payroll tables</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Truncate payroll tables</from>
+      <to>Truncate payroll human resources tables</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

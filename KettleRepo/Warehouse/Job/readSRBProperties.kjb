@@ -8,7 +8,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;08&#x2f;12 20&#x3a;48&#x3a;31.489</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;08&#x2f;13 15&#x3a;07&#x3a;22.344</modified_date>
+  <modified_date>2014&#x2f;08&#x2f;14 04&#x3a;24&#x3a;08.031</modified_date>
     <parameters>
         <parameter>
             <name>SRB_PROPERTIES_FILE_PARAM</name>
@@ -122,8 +122,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>415</xloc>
-      <yloc>163</yloc>
+      <xloc>435</xloc>
+      <yloc>164</yloc>
       </entry>
     <entry>
       <name>Set variables from kettle properties file</name>
@@ -312,7 +312,7 @@
       <job_object_id/>
       <filename/>
       <jobname>HUMAN_RESOURCES_WAREHOUSE</jobname>
-      <directory>&#x2f;HumanResourceWarehouse&#x2f;Job</directory>
+      <directory>&#x2f;HumanResourcesWarehouse&#x2f;Job</directory>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
       <exec_per_row>N</exec_per_row>
@@ -572,15 +572,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>TEST</from>
-      <to>PAYROLL</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>PAYROLL</from>
       <to>PAYROLL_WAREHOUSE</to>
       <from_nr>0</from_nr>
@@ -596,15 +587,6 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>HUMAN_RESOURCES</from>
-      <to>FINANCE</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
@@ -644,24 +626,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>PAYROLL</from>
-      <to>PAYROLL_FINANCE</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>PAYROLL_FINANCE</from>
-      <to>HUMAN_RESOURCES</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
       <from>PAYROLL_FINANCE</from>
       <to>PAYROLL_FINANCE_WAREHOUSE</to>
       <from_nr>0</from_nr>
@@ -680,12 +644,48 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>FINANCE</from>
+      <from>Check Db connections</from>
+      <to>PAYROLL</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Check Db connections</from>
+      <to>PAYROLL_FINANCE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Check Db connections</from>
+      <to>HUMAN_RESOURCES</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Check Db connections</from>
+      <to>FINANCE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Check Db connections</from>
       <to>RECEIVABLES</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
-      <evaluation>N</evaluation>
+      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>

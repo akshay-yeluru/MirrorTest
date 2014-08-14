@@ -1,6 +1,6 @@
 SET PDI_HOME=C:\Users\MichaelC\Utilities\pdi-ce-5.1.0.0-752\data-integration
 SET SRB_WAREHOUSE_HOME=C:\\Users\\MichaelC\\Development\\github\\SRBWarehouse
-SET SRB_WAREHOUSE_JOB=Warehouse/Job/readSRBProperties
+SET SRB_WAREHOUSE_JOB=FinanceWarehouse/Job/startFinanceWarehouse
 SET SRB_WAREHOUSE_PROPERTIES=finance.properties
 SET SRB_WAREHOUSE_LOG=financeWarehouse.log
 

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+
+<!-- may use multiple database copy tags to copy multiple databases in future releases, for now only one
+	is permitted and required -->
+<databasecopy>
+	<!-- only one sourceDatabase and destinationDatabase permitted and required
+		more functionality is planned for future releases		
+		clearDatabase defaults to false and is only valid for destination database
+		databaseName is required and must be unique (it is not related to the name of the database
+			as stored, but only for reference)
+		type is required, and currently supports "generic", "mssql", "mysql", and "vortex"
+		warehouseTable is a table name to store data about the warehouse, defaults to "WAREHOUSE_STATUS"
+	-->
+
+	<sourceDatabase 
+		driver="null" 
+		driverScript="null" 
+		type="vortex" 
+		databaseName="source-receivables-warehouse" /> 
+
+	<destinationDatabase
+		driver="null"
+		driverScript="null"
+		type="mssql"
+		databaseName="target-receivables-warehouse"
+		clearDatabase="false"
+		clearNewTables="true"
+		warehouseTable="WAREHOUSE_STATUS"
+	/>
+	
+	<tablesNotToDrop >
+	</tablesNotToDrop >
+
+	<tables all="false" indices="true" createTables="true" copyData="false">
+		<table name="AR_TRANSACTION" copyData="false" createTable="true">
+                        <index name="INDEX_0" unique="false" columns="RECEIPT_BATCH_NO,RECEIPT_BATCH_NO_SEQ,BATCH_NO_SEQ"/>
+                        <index name="INDEX_1" unique="false" columns="SHORT_BATCH_NO,BATCH_NO_SEQ"/>
+                        <index name="INDEX_2" unique="false" columns="TRANSACTION_STATUS,CUSTOMER_NO,SUBSYSTEM_ID_CODE,INVOICE_TYPE,DOCUMENT_NO,SERIAL_NO"/>
+                        <index name="INDEX_3" unique="false" columns="RECEIPT_NO,RECEIPT_DATE,RECEIPT_LOC"/>
+                        <index name="INDEX_4" unique="false" columns="TRANSACTION_STATUS,SUBSYSTEM_ID_CODE,PARENT_ACCOUNT_NO,INVOICE_TYPE,DOCUMENT_NO,SERIAL_NO"/>
+                        <index name="INDEX_5" unique="false" columns="CUSTOMER_NO,SUBSYSTEM_ID_CODE,INVOICE_TYPE,DOCUMENT_NO,SERIAL_NO"/>
+                        <index name="INDEX_6" unique="false" columns="SUBSYSTEM_ID_CODE,PARENT_ACCOUNT_NO,INVOICE_TYPE,DOCUMENT_NO,SERIAL_NO"/>
+                        <index name="INDEX_7" unique="true" columns="RECEIPT_DATE,BATCH_NO"/>
+                        <index name="INDEX_8" unique="true" columns="BATCH_NO"/>
+                        <index name="INDEX_9" unique="true" columns="DISCOUNT_DATE,BATCH_NO"/>
+                        <index name="INDEX_10" unique="true" columns="DOCUMENT_NO,BATCH_NO"/>
+                        <index name="INDEX_11" unique="true" columns="DUE_DATE,BATCH_NO"/>
+                        <index name="INDEX_12" unique="true" columns="ENTRY_DATE,BATCH_NO"/>
+                        <index name="INDEX_13" unique="true" columns="INVOICE_TYPE,BATCH_NO"/>
+                        <index name="INDEX_14" unique="true" columns="RECEIPT_LOC,BATCH_NO"/>
+                        <index name="INDEX_15" unique="true" columns="RECEIPT_NO,BATCH_NO"/>
+                        <index name="INDEX_16" unique="true" columns="RECEIVABLE_GL_ACCT_NO,BATCH_NO"/>
+                        <index name="INDEX_17" unique="true" columns="SOURCE_CODE,BATCH_NO"/>
+                </table>
+                <table name="AR_INVOICE_HEADER" copyData="false" createTable="true">
+                        <index name="*"/>
+                        <index name="INDEX_0" unique="false" columns="BILLING_DATE,INVOICE_NO"/>
+                        <index name="INDEX_1" unique="false" columns="DISCOUNT_DATE,INVOICE_NO"/>
+                        <index name="INDEX_2" unique="false" columns="DUE_DATE,INVOICE_NO"/>
+                        <index name="INDEX_3" unique="false" columns="SOURCE_CODE,INVOICE_NO"/>
+                </table>
+                <table name="AR_DONATIONS" copyData="false" createTable="true">
+                        <index name="INDEX0" unique="false" columns="BATCH_NO"/>
+                </table>	
+		<table name="AR_BANK_CODE" copyData="false" createTable="true" /> 
+		<table name="AR_BATCH_CODE" copyData="false" createTable="true" /> 
+		<table name="AR_BATCH_TYPE_CODE" copyData="false" createTable="true" /> 
+		<table name="AR_CUSTOMER" copyData="false" createTable="true" /> 
+		<table name="AR_DONATIONS" copyData="false" createTable="true" /> 
+		<table name="AR_DONATION_PURPOSE_CODE" copyData="false" createTable="true" /> 
+		<table name="AR_GRANT" copyData="false" createTable="true" /> 
+		<table name="AR_GRANT_CODE" copyData="false" createTable="true" /> 
+		<table name="AR_INVOICE_DETAIL" copyData="false" createTable="true" /> 
+		<table name="AR_LOCATION_CODE" copyData="false" createTable="true" /> 
+		<table name="AR_MISC_CUSTOMER" copyData="false" createTable="true" /> 
+		<table name="AR_MISC_CUSTOMER_CROSS_REF" copyData="false" createTable="true" /> 
+		<table name="AR_PAYMENT_TYPE_CODE" copyData="false" createTable="true" /> 
+		<table name="AR_PROPERTY" copyData="false" createTable="true" /> 
+		<table name="AR_RECV_GROUP_CODE" copyData="false" createTable="true" /> 		
+		<table name="AR_SOURCE_CODE" copyData="false" createTable="true" /> 
+		<table name="AR_TAX_CODE" copyData="false" createTable="true" /> 
+	</tables>
+</databasecopy>

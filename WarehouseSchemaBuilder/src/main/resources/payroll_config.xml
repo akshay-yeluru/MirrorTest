@@ -1,0 +1,327 @@
+<?xml version="1.0"?>
+
+<!-- may use multiple database copy tags to copy multiple databases in future releases, for now only one
+	is permitted and required -->
+<databasecopy>
+	<!-- only one sourceDatabase and destinationDdatabase permitted and required
+		more functionality is planned for future releases		
+		clearDatabase defaults to false and is only valid for destination database
+		databaseName is required and must be unique (it is not related to the name of the database
+			as stored, but only for reference)
+		type is required, and currently supports "generic", "mssql","mysql", and "vortex"
+		warehouseTable is a table name to store data about the warehouse, defaults to "WAREHOUSE_STATUS"
+
+	-->
+
+	<sourceDatabase 
+		driver="null" 
+		driverScript="null"
+		type="vortex" 
+		databaseName="source-payroll-warehouse" /> 
+
+	<destinationDatabase
+		driver="null"
+		driverScript="null"
+		type="mssql"
+		databaseName="target-payroll-warehouse"
+		clearDatabase="false"
+		clearNewTables="true"
+		warehouseTable="WAREHOUSE_STATUS"
+	/>
+
+	<tablesNotToDrop >
+	</tablesNotToDrop >
+
+	<tables all="false" indices="true" createTables="true" copyData="false">
+		<table name="PAY_AUDIT" copyData="false" createTable="true"  whereClause="CHANGE_DATE [gt] '20110701'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_AUDIT_MEMO" copyData="false" createTable="true" whereClause="CHANGE_DATE [gt] '20110701'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_BANK_CYCLE_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_BENEFITS_PROFILE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_CALENDAR_CODE" copyData="false" createTable="true" whereClause="PAY_PERIOD [gteq] '201101'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_CHEQUE_HISTORY" copyData="false" createTable="true"  whereClause="ISSUE_DATE [gteq] '201101'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_COMMITMENT_ADJUST_HISTORY" copyData="false" createTable="true"  whereClause="PERIOD [gt] '2011'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_COMMITMENT_HISTORY" copyData="false" createTable="true" whereClause="PERIOD [gt] '2011'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_CONTRACT_HISTORY" copyData="false" createTable="true" whereClause="PAY_PERIOD [gteq] '201101'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_COST_CENTER_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_COST_CENTER_DEDUCTION_GL" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_COST_CENTER_EARNINGS_GL" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_CYCLE_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_DB_AUDIT" copyData="false" createTable="true" whereClause="CHANGE_DATE [gteq] '20110701'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+ 		<table name="PAY_DECOMMITMENT_HISTORY" copyData="false" createTable="true" whereClause="PERIOD [gteq] '2011'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_DEDUCTION_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_DEDUCTION_FREQUENCY_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_DEDUCTION_TABLE_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_EARNING_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_EMAIL_ADDRESS" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_EMPLOYEE_INTERLINK" copyData="false" createTable="true"  whereClause="PAYROLL_ID = 'CASL'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_EMPLOYEE_TYPE_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_FUNCTION_LINE_DEDUCTION_GL" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_FUNCTION_LINE_EARNINGS_GL" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_FUNCTION_LINE_EMP_BASED_GL" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_FUNCTION_LINE_GL" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_GL_HISTORY" copyData="false" createTable="true" whereClause="PAY_PERIOD [gteq] '201114'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_LOCAL_AUTH_PENSION_PLAN" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_LOCATION_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_MASTER_BENEFITS" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_MASTER_DEDUCTIONS" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_MASTER_DEDUCTIONS_TEMP" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_MASTER_DEMOGRAPHICS" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_MASTER_EARNINGS" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_MASTER_FUNCTION_CONTRACTS" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_MASTER_FUNCTION_LINE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_MASTER_INFO" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_MASTER_MEMO" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_MASTER_PROFILE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_MASTER_STORAGE_BANK" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_OCCUPATION_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_PAYROLL_LOCATION" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_SALARY_GRID_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_SHIFT_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_STORAGE_BANK_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_STORAGE_BANK_HISTORY" copyData="false" createTable="true" whereClause="PAY_PERIOD [gteq] '201101'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_STORAGE_BANK_TABLE_CODE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_STORAGE_BANK_YEAR_HISTORY" copyData="false" createTable="true" whereClause="BANK_YEAR [gteq] '2011'" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_TIMESHEET" copyData="false" createTable="true" whereClause="BATCH_NO [gt] '2011'" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_TIMESHEET_REASON" copyData="false" createTable="true" whereClause="BATCH_NO [gt] '2011'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_TIMESHEET_STORAGE_BANK" copyData="false" createTable="true" whereClause="BATCH_NO [gt] '2011'" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_USER_DEFINED" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_USER_DEFINED_PROFILE" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_VARIABLE_DEDUCTION" copyData="false" createTable="true" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_YTD_DEDUCTION_HISTORY" copyData="false" createTable="true"  whereClause="SERIAL_NO [lteq] '79929999'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_YTD_DETAIL_HISTORY" debugMode="N" copyData="false" createTable="true" whereClause="SERIAL_NO [lteq] '79929999'" > 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_YTD_EARNINGS_HISTORY" copyData="false" createTable="true" whereClause="SERIAL_NO [lteq] '79929999'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+		<table name="PAY_YTD_HISTORY" copyData="false" createTable="true" whereClause="SERIAL_NO [lteq] '79929999'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="CASL"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+	</tables>
+</databasecopy>

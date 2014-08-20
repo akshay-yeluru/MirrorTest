@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+
+<!-- may use multiple database copy tags to copy multiple databases in future releases, for now only one
+	is permitted and required -->
+<databasecopy>
+	<!-- only one sourceDatabase and destinationDdatabase permitted and required
+		more functionality is planned for future releases		
+		clearDatabase defaults to false and is only valid for destination database
+		databaseName is required and must be unique (it is not related to the name of the database
+			as stored, but only for reference)
+		type is required, and currently supports "generic", "mssql", "mysql", and "vortex"
+		warehouseTable is a table name to store data about the warehouse, defaults to "WAREHOUSE_STATUS"
+	-->
+
+	<sourceDatabase 
+		driver="null" 
+		driverScript="null"
+		type="vortex" 
+		databaseName="source-finance-warehouse" /> 
+
+	<destinationDatabase
+		driver="null"
+		driverScript="null"
+		type="mssql"
+		databaseName="target-finance-warehouse"
+		clearDatabase="false"
+		clearNewTables="true"
+		warehouseTable="WAREHOUSE_STATUS"
+	/>
+
+	<tablesNotToDrop >
+	</tablesNotToDrop >
+
+	<!-- Table and Column transformation capabilities:
+		TABLE parameters:
+		- Wildcards can be used to copy all (or a group of) source database tables
+				e.g. <table name="*" copyData="false" createTable="true"/>  
+		- Copy a specific table.
+				e.g. <table name="BAGL00" copyData="false" createTable="true"/>
+
+		- optional TABLE parameters:
+			newName		- rename table to newName
+				e.g. newName="FIN_GL"
+
+			whereClause	- select partial subset of data
+				e.g. whereClause="GL_YEAR >= 2007"
+
+			[binary and]	- keyword that is replaced with "&"
+				e.g. "CASE (ASCII(JE_STAT) [binary and] 4)"
+
+		COLUMN parameters:
+		- not specifying any column name selections indicates to copy all columns in the table.
+
+			name		- column name in the source table
+				e.g. <column name='OPEN_EXPENSE_AMT' 
+
+		- optional COLUMN parameters:
+			jdbcType	- data type in destination table
+				e.g. jdbcType="1"
+
+			length		- column length in destination table
+				e.g. length="1"
+
+			value		- create new column and specify an initial value
+				e.g. value=" "
+				NOTE: value cannot be an empty string.
+
+			copyFrom	- create new column and copy data from another column
+				e.g copyFrom="GL_STAT"
+				NOTE: can specify comma-delimited list of column names to concatenate into new column
+				e.g. copyFrom="GL_00,GL_01,GL_02,GL_03,GL_04"
+
+			copySubString - copy data from a segment of source column, (x,y) where x is starting position, y is ending position, indexed from 0.
+				e.g. copySubString="0,1"
+
+			bitYN		- transform a status bit into a Y/N string field
+				e.g. bitYN="128"
+
+				NOTE: to load second status bit (combination of copySubString and BitYN parameters) 
+				e.g. copyFrom="GL_STAT" copySubString="0,1" bitYN="128"
+
+		Note: jdbcType is mandatory when using copyFrom parameter
+		Note: jdbcType is mandatory when using length parameter
+-->
+
+	<tables all="false" indices="true" createTables="true" copyData="false">
+  		<table name="FIN_ALIAS_DICTIONARY" copyData="false" createTable="true" /> 
+  		<table name="FIN_ALIAS_DICTIONARY_LVL1" copyData="false" createTable="true" /> 
+  		<table name="FIN_ALIAS_DICTIONARY_LVL2" copyData="false" createTable="true" /> 
+  		<table name="FIN_ALIAS_DICTIONARY_LVL3" copyData="false" createTable="true" /> 
+  		<table name="FIN_ALIAS_DICTIONARY_LVL4" copyData="false" createTable="true" /> 
+  		<table name="FIN_ALIAS_DICTIONARY_LVL5" copyData="false" createTable="true" /> 
+  		<table name="FIN_ALIAS_DICTIONARY_LVL6" copyData="false" createTable="true" /> 
+  		<table name="FIN_ALIAS_DICTIONARY_LVL7" copyData="false" createTable="true" /> 
+  		<table name="FIN_ALIAS_DICTIONARY_LVL8" copyData="false" createTable="true" /> 
+  		<table name="FIN_ALIAS_DICTIONARY_LVL9" copyData="false" createTable="true" /> 
+  		<table name="FIN_ALIAS_DICTIONARY_LVL10" copyData="false" createTable="true" /> 
+  		<table name="FIN_ALIAS_FORMAT_PROFILE" copyData="false" createTable="true" /> 
+  		<table name="FIN_ALIAS_LEVELS" copyData="false" createTable="true" /> 
+  		<table name="FIN_AP_CHEQUE" copyData="false" createTable="true" /> 
+  		<table name="FIN_AP_CHEQUE_DETAIL" copyData="false" createTable="true" /> 
+  		<table name="FIN_AP_INVOICE" copyData="false" createTable="true" /> 
+  		<table name="FIN_AP_MISC_VENDOR" copyData="false" createTable="true" /> 
+  		<table name="FIN_AP_MISC_VENDOR_INVOICE" copyData="false" createTable="true" />
+  		<table name="FIN_AR_RECEIVABLE_TYPE_CODE" copyData="false" createTable="true" /> 
+  		<table name="FIN_BANK_CODE" copyData="false" createTable="true" />
+  		<table name="FIN_BATCH_CONTROL" copyData="false" createTable="true" />
+  		<table name="FIN_BATCH_SERIAL" copyData="false" createTable="true" />
+  		<table name="FIN_BATCH_TYPE_CODE" copyData="false" createTable="true" />
+  		<table name="FIN_BUDGET_GL_PARAMETER" copyData="false" createTable="true" />
+  		<table name="FIN_BUDGET_TRANSACTION" copyData="false" createTable="true" />
+  		<table name="FIN_BUDGET_TRANSACTION_DETAIL" copyData="false" createTable="true" />
+  		<table name="FIN_CALENDAR" copyData="false" createTable="true" />
+  		<table name="FIN_FUND_PROFILE" copyData="false" createTable="true" />
+		<table name="FIN_GL" copyData="false" createTable="true" />
+  		<table name="FIN_GL_DICTIONARY" copyData="false" createTable="true" />
+  		<table name="FIN_GL_DICTIONARY_LVL1" copyData="false" createTable="true" />
+  		<table name="FIN_GL_DICTIONARY_LVL2" copyData="false" createTable="true" />
+  		<table name="FIN_GL_DICTIONARY_LVL3" copyData="false" createTable="true" />
+  		<table name="FIN_GL_DICTIONARY_LVL4" copyData="false" createTable="true" />
+  		<table name="FIN_GL_DICTIONARY_LVL5" copyData="false" createTable="true" />
+  		<table name="FIN_GL_DICTIONARY_LVL6" copyData="false" createTable="true" />
+  		<table name="FIN_GL_FORMAT_PROFILE" copyData="false" createTable="true" />
+  		<table name="FIN_GL_JOURNAL" copyData="false" createTable="true" />
+  		<table name="FIN_GL_LEVELS" copyData="false" createTable="true" />
+  		<table name="FIN_GL_PERIOD_DETAIL" copyData="false" createTable="true" />
+  		<table name="FIN_GL_PRELIM_BUDGET" copyData="false" createTable="true" />
+  		<table name="FIN_GL_SELECTION_CRITERIA" copyData="false" createTable="true" />
+		<table name="FIN_GST" copyData="false" createTable="true" />
+  		<table name="FIN_LOCATION_CODE" copyData="false" createTable="true" />
+  		<table name="FIN_LOCATION_XREF" copyData="false" createTable="true" />
+  		<table name="FIN_PO" copyData="false" createTable="true" />
+  		<table name="FIN_PO_DESC_CODE" copyData="false" createTable="true" />
+  		<table name="FIN_PO_DETAIL" copyData="false" createTable="true" />
+  		<table name="FIN_PO_DISTRIBUTION" copyData="false" createTable="true" />
+  		<table name="FIN_PO_REQUISITION" copyData="false" createTable="true" />
+  		<table name="FIN_PO_REQUISITION_DETAIL" copyData="false" createTable="true" />
+  		<table name="FIN_PO_REQUISITION_GL_DETAIL" copyData="false" createTable="true" />
+  		<table name="FIN_REPORT_CATEGORY" copyData="false" createTable="true" />
+  		<table name="FIN_REPORT_NAME" copyData="false" createTable="true" />
+  		<table name="FIN_SL" copyData="false" createTable="true" />
+  		<table name="FIN_SL_CONTROL" copyData="false" createTable="true" />
+  		<table name="FIN_TAX_CODE" copyData="false" createTable="true" />
+  		<table name="FIN_USER_PROFILE" copyData="false" createTable="true" />
+  		<table name="FIN_VENDOR" copyData="false" createTable="true" />
+  		<table name="FIN_VENDOR_CONTRACT" copyData="false" createTable="true" />
+  		<table name="FIN_VENDOR_CONTACT" copyData="false" createTable="true" />
+  		<table name="FIN_VENDOR_DETAIL" copyData="false" createTable="true" />
+ 	</tables>
+
+<!--
+	Other tables: B2K_AUTH - authorizer table
+		<table name="B2K_AUTH" copyData="false" createTable="true"/>
+-->
+
+<!--
+	Other warehouse options not used above:
+
+	- To create a new column and include it on all indexes:
+		<table name="BAJE00" copyData="false" createTable="true">  
+			<column name="NEW_COLUMN" jdbcType="12" length="4" value="NEWV"/>
+			<srcColumns/>
+			<index name="*" prependColumns="NEW_COLUMN"/>
+		</table>
+
+	- To process all tables without transformation:
+		<table name="*" copyData="false" createTable="true"/>  
+-->
+
+
+
+</databasecopy>

@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+
+<!-- may use multiple database copy tags to copy multiple databases in future releases, for now only one
+	is permitted and required -->
+<databasecopy>
+	<!-- only one sourceDatabase and destinationDdatabase permitted and required
+		more functionality is planned for future releases		
+		clearDatabase defaults to false and is only valid for destination database
+		databaseName is required and must be unique (it is not related to the name of the database
+			as stored, but only for reference)
+		type is required, and currently supports "generic", "mssql","mysql", and "vortex"
+		warehouseTable is a table name to store data about the warehouse, defaults to "WAREHOUSE_STATUS"
+
+	-->
+
+	<sourceDatabase 
+		driver="null" 
+		driverScript="null"
+		type="vortex" 
+		databaseName="source-human-resources-warehouse" /> 
+
+	<destinationDatabase
+		driver="null"
+		driverScript="null"
+		type="mssql"
+		databaseName="target-human-resources-warehouse"
+		clearDatabase="false"
+		clearNewTables="true"
+		warehouseTable="WAREHOUSE_STATUS"
+	/>
+
+	<tablesNotToDrop >
+	</tablesNotToDrop >
+
+	<tables all="false" indices="true" createTables="true" copyData="false">
+		<table name="HR_ABSENCE_CODE" copyData="false" createTable="true"/>
+		<table name="HR_ABSENCE_AUTH_LOCATION" copyData="false" createTable="true"/>
+		<table name="HR_ABSENCE_DETAIL" copyData="false" createTable="true"/>
+		<table name="HR_ABSENCE_MASTER" copyData="false" createTable="true"/>
+		<table name="HR_ADS_ABSENCE_INQUIRY" copyData="false" createTable="true"/>
+		<table name="HR_ADS_PIN" copyData="false" createTable="true"/>
+		<table name="HR_ADS_PERMANENT_REQUESTS" copyData="false" createTable="true"/>
+		<table name="HR_ADS_WEB_MESSAGE" copyData="false" createTable="true"/>
+		<table name="HR_APPLICATION_REASON_CODE" copyData="false" createTable="true"/>
+		<table name="HR_APPLICATION_STATUS_CODE" copyData="false" createTable="true"/>
+		<table name="HR_APPLICATION_SUBJECT" copyData="false" createTable="true"/>
+		<table name="HR_APPL_RANKING_CODE" copyData="false" createTable="true"/>
+		<table name="HR_APPL_SUBJECT_GROUP_CODE" copyData="false" createTable="true"/>
+		<table name="HR_AREA_CODE" copyData="false" createTable="true"/>
+		<table name="HR_ASSIGNMENTS" copyData="false" createTable="true"/>
+		<table name="HR_ASSIGNMENT_GL" copyData="false" createTable="true"/>
+		<table name="HR_ASSIGNMENT_LOCATIONS" copyData="false" createTable="true"/>
+		<table name="HR_ASSIGNMENT_REASON_CODE" copyData="false" createTable="true"/>
+		<table name="HR_ASSIGNMENT_SALARY" copyData="false" createTable="true"/>
+		<table name="HR_ASSIGNMENT_SUBJECT" copyData="false" createTable="true"/>
+		<table name="HR_ASSIGNMENT_TYPE_CODE" copyData="false" createTable="true"/>
+		<table name="HR_BARGAINING_UNIT_CODE" copyData="false" createTable="true"/>
+		<table name="HR_CATEGORY_CODE" copyData="false" createTable="true"/>
+		<table name="HR_CERTIFICATION_CLASS_CODE" copyData="false" createTable="true"/>
+		<table name="HR_CERTIFICATION_CODE" copyData="false" createTable="true"/>
+		<table name="HR_CERTIFICATION_TYPE_CODE" copyData="false" createTable="true"/>
+		<table name="HR_CONTRACT_MONTHS_CODE" copyData="false" createTable="true"/>
+		<table name="HR_DEPARTMENT_CODE" copyData="false" createTable="true"/>
+		<table name="HR_DISABILITY_CODE" copyData="false" createTable="true"/>
+		<table name="HR_DISPATCH_AUTH_LOCATION" copyData="false" createTable="true"/>
+		<table name="HR_DISPATCH_DETAIL" copyData="false" createTable="true"/>
+		<table name="HR_DISPATCH_MASTER" copyData="false" createTable="true"/>
+		<table name="HR_EMAIL_ADDRESS" copyData="false" createTable="true"/>
+		<table name="HR_EMPLOYEE_APPLICATION" copyData="false" createTable="true"/>
+		<table name="HR_EMPLOYEE_CERTIFICATION" copyData="false" createTable="true"/>
+		<table name="HR_EMPLOYEE_DEMOGRAPHICS" copyData="false" createTable="true"/>
+		<table name="HR_EMPLOYEE_HIRE" copyData="false" createTable="true"/>
+		<table name="HR_EMPLOYEE_INTERLINK" copyData="false" createTable="true"/>
+		<table name="HR_EMPLOYEE_PREFERENCE" copyData="false" createTable="true"/>
+		<table name="HR_EMPLOYEE_STATUS_CODE" copyData="false" createTable="true"/>
+		<table name="HR_ETHNIC_CODE" copyData="false" createTable="true"/>
+		<table name="HR_EVALUATION" copyData="false" createTable="true"/>
+		<table name="HR_EVALUATION_CODE" copyData="false" createTable="true"/>
+		<table name="HR_EVALUATION_COMPLETION_CODE" copyData="false" createTable="true"/>
+		<table name="HR_EVALUATION_INTERVAL_CODE" copyData="false" createTable="true"/>
+		<table name="HR_FTE_ALLOCATION" copyData="false" createTable="true"/>
+		<table name="HR_FTE_ALLOCATION_CODE" copyData="false" createTable="true"/>
+		<table name="HR_HIRE_TYPE_CODE" copyData="false" createTable="true"/>
+		<table name="HR_INSTITUTION_CODE" copyData="false" createTable="true"/>
+		<table name="HR_LANGUAGE_CODE" copyData="false" createTable="true"/>
+		<table name="HR_LEAVES" copyData="false" createTable="true"/>
+		<table name="HR_LEAVE_RULE" copyData="false" createTable="true"/>
+		<table name="HR_LOCATION" copyData="false" createTable="true"/>
+		<table name="HR_LOCATION_TYPE_CODE" copyData="false" createTable="true"/>
+		<table name="HR_MARITAL_STATUS_CODE" copyData="false" createTable="true"/>
+		<table name="HR_PAYROLL_LOCATION" copyData="false" createTable="true"/>
+		<table name="HR_PERMANENT_EMP_SEARCH" copyData="false" createTable="true"/>
+		<table name="HR_PHASE_ONE_SEARCH" copyData="false" createTable="true"/>
+		<table name="HR_POSITION_CODE" copyData="false" createTable="true"/>
+		<table name="HR_POSTING" copyData="false" createTable="true"/>
+		<table name="HR_POSTING_DETAIL" copyData="false" createTable="true"/>
+		<table name="HR_POSTING_ROUND_CODE" copyData="false" createTable="true"/>
+		<table name="HR_POSTING_TYPE_CODE" copyData="false" createTable="true"/>
+		<table name="HR_REFUSAL_CODE" copyData="false" createTable="true"/>
+		<table name="HR_REPLACEMENT_TYPE_CODE" copyData="false" createTable="true"/>
+		<table name="HR_ROUTE_MASTER" copyData="false" createTable="true"/>
+		<table name="HR_ROUTING_AUTHORIZER_CODE" copyData="false" createTable="true"/>
+		<table name="HR_SALARY_CODE" copyData="false" createTable="true"/>
+		<table name="HR_SCHEDULE" copyData="false" createTable="true"/>
+		<table name="HR_SENIORITY" copyData="false" createTable="true"/>
+		<table name="HR_SENIORITY_CODE" copyData="false" createTable="true"/>
+		<table name="HR_SUBJECT_CODE" copyData="false" createTable="true"/>
+		<table name="HR_SUBJECT_LEVEL_CODE" copyData="false" createTable="true"/>
+		<table name="HR_SUB_PREFERENCES" copyData="false" createTable="true"/>
+		<table name="HR_SUCCESSFUL_APPLICANT" copyData="false" createTable="true"/>
+		<table name="HR_TASK" copyData="false" createTable="true"/>
+		<table name="HR_TASK_STATUS_CODE" copyData="false" createTable="true"/>
+		<table name="HR_TASK_TYPE_CODE" copyData="false" createTable="true"/>
+		<table name="HR_TERMINATION_CODE" copyData="false" createTable="true"/>
+		<table name="HR_UNAVAILABILITY_BOOKING" copyData="false" createTable="true"/>
+		<table name="HR_USER_DEFINED_DEMOGRAPHICS" copyData="false" createTable="true"/>
+		<table name="HR_WEB_CONFIRMATION" copyData="false" createTable="true"/>
+		<table name="HR_WEB_NAVIGATION" copyData="false" createTable="true"/>
+	</tables>
+</databasecopy>

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+
+<!-- may use multiple database copy tags to copy multiple databases in future releases, for now only one
+	is permitted and required -->
+<databasecopy>
+	<!-- only one sourceDatabase and destinationDdatabase permitted and required
+		more functionality is planned for future releases		
+		clearDatabase defaults to false and is only valid for destination database
+		databaseName is required and must be unique (it is not related to the name of the database
+			as stored, but only for reference)
+		type is required, and currently supports "generic", "mssql", "mysql", and "vortex"
+		warehouseTable is a table name to store data about the warehouse, defaults to "WAREHOUSE_STATUS"
+
+	-->
+
+	<sourceDatabase 
+		driver="null" 
+		driverScript="null"
+		type="vortex" 
+		databaseName="source-payroll-warehouse" /> 
+
+	<destinationDatabase
+		driver="null"
+		driverScript="null"
+		type="mssql"
+		databaseName="target-payroll-warehouse"
+		clearDatabase="false"
+		clearNewTables="true"
+		warehouseTable="WAREHOUSE_STATUS"
+	/>
+
+	<tablesNotToDrop >
+	</tablesNotToDrop >
+
+	<tables all="false" indices="true" createTables="true" copyData="false">
+		<table name="PAY_EMPLOYEE_INTERLINK" copyData="false" createTable="true"  whereClause="PAYROLL_ID = 'HRON'"> 
+                       <column name="GLOBAL_PAYROLL_ID" jdbcType="12" length="4" value="HRON"/>
+			<srcColumns/> 
+                       <index name="*" prependColumns="GLOBAL_PAYROLL_ID"/>
+		</table>
+	</tables>
+
+<!--
+	Other tables: B2K_AUTH - authorizer table
+		<table name="B2K_AUTH" copyData="true" createTable="false"/>
+-->
+
+<!--
+	Other warehouse options not used above:
+
+	- To create a new column and include it on all indexes:
+		<table name="BAJE00" copyData="true" createTable="false">  
+			<column name="NEW_COLUMN" jdbcType="12" length="4" value="NEWV"/>
+			<srcColumns/>
+			<index name="*" prependColumns="NEW_COLUMN"/>
+		</table>
+
+	- To process all tables without transformation:
+		<table name="*" copyData="true" createTable="false"/>  
+-->
+
+
+
+</databasecopy>

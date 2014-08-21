@@ -341,7 +341,12 @@ public abstract class Table {
 //			_logger.debug("Creating table " + _name);
 //			_logger.debug(">" + createSql);
 //			_logger.info("Create table sql" + createSql);
-			writeTableDDL("C:\\Users\\MichaelC\\temp\\" + _newName + ".ddl",createSql);
+
+/*
+ * I will want to parameterize this so that I can write out those files.			
+			writeTableDDL(_newName + ".ddl",createSql);
+	*/
+			
 			_stmnt.execute(createSql);
 //			_logger.debug("Created table " + _name);
 		}

@@ -1,0 +1,43 @@
+<project name="copy-and-zip" default="help" basedir=".">
+    <description>
+        Copy files into a directory so that they can be zipped for package and deployment
+    </description>
+	
+	  <!-- set global properties for this build -->
+  <property name="release" location="C:/Users/SRB-Build/Release/Development/SRBWarehouse"/>
+  <property name="webroot" location="C:/Users/SRB-Build/Apache/WebRoot/htdocs"/>
+  
+    <target name="build" depends="clean,copy,zip,writeProperties,publish" description="Copy and Package Zip File"/>
+
+    <target name="clean">
+        <delete includeemptydirs="true">
+                <fileset dir="${release}" includes="**/*"/>
+        </delete>
+    </target>
+
+    <target name="copy">
+        <mkdir dir="${release}/bin"/>
+        <copy todir="${release}/bin">
+                <fileset dir="bin"/>
+        </copy>
+    </target>
+
+    <target name="zip">
+        <zip destfile="${release}.zip"
+       basedir="${release}"
+  />
+    </target>
+
+    <target name="writeProperties">
+        <propertyfile
+            file="${release}/warehouse-package.properties">
+                <entry  key="package-name" value="SRBWarehouse.zip"/>
+                <entry  key="package-version" value="%build.number%"/>
+        </propertyfile>
+    </target>
+	
+    <target name="publish">
+        <copy file="${release}.zip" todir="${webroot}"/>
+        <copy file="${release}/warehouse-package.properties" todir="${webroot}"/>
+    </target>
+</project>

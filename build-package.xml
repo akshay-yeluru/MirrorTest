@@ -6,7 +6,8 @@
 	  <!-- set global properties for this build -->
   <property name="release" location="C:/Users/SRB-Build/Release/Development/SRBWarehouse"/>
   <property name="webroot" location="C:/Users/SRB-Build/Apache/WebRoot/htdocs"/>
-  <property name="maven-repo" location="http://10.143.102.215:8081/artifactory/simple"/>
+  <!-- I tried to make the maven repo a proeprty but it did not work correctly in the ant get task-->
+  <!--property name="maven-repo" location="http://10.143.102.215:8081/artifactory/simple"/-->
   
   
     <target name="build" depends="clean,copy,zip,writeProperties,publish" description="Copy and Package Zip File"/>
@@ -29,9 +30,9 @@
 		<copy file="WarehouseSchemaBuilder\target\SRBWarehouseSchemaBuilder-0.0.1-SNAPSHOT.jar" todir="${release}/lib"/>
 		<copy file="README.md" todir="${release}"/>
 		<copy file="VERSION.txt" todir="${release}"/>
-		<get src="${maven-repo}/ext-release-local/org/apache/logging/log4j/1.2.12/log4j-1.2.12.jar" dest="file:///{release}/lib"/>
-		<get src="${maven-repo}/ext-release-local/net/sourceforge/jtds/1.2/jtds-1.2.jar" dest="file:///${release}/lib"/>
-		<get src="${maven-repo}/ext-release-local/com/trifox/sql/vortex/2005.08.30/vortex-2005.08.30.jar" dest="file:///${release}/lib"/>
+		<get src="http://10.143.102.215:8081/artifactory/simple/ext-release-local/org/apache/logging/log4j/1.2.12/log4j-1.2.12.jar" dest="${release}/lib"/>
+		<get src="http://10.143.102.215:8081/artifactory/simple/ext-release-local/net/sourceforge/jtds/1.2/jtds-1.2.jar" dest="${release}/lib"/>
+		<get src="http://10.143.102.215:8081/artifactory/simple/ext-release-local/com/trifox/sql/vortex/2005.08.30/vortex-2005.08.30.jar" dest="${release}/lib"/>
 		
     </target>
 

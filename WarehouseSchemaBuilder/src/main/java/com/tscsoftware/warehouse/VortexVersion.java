@@ -41,9 +41,6 @@ public class VortexVersion {
 					.getProperty("SOURCE_CONNECTION_URL");
 
 			Connection conn = null;
-			// String urlv =
-			// "jdbc:vortex://system/manager/xvision:acuxdbc.cfg@1958:rad!VTX4";
-
 			DatabaseMetaData dmd;
 
 			Class.forName(sourceDriver);
@@ -51,7 +48,7 @@ public class VortexVersion {
 			dmd = conn.getMetaData();
 
 			_logger.info("getDriverVersion: " + dmd.getDriverVersion());
-			//System.out.println("getDriverVersion: " + dmd.getDriverVersion());
+
 			if (conn != null)
 				conn.close();
 		} catch (Exception e) {

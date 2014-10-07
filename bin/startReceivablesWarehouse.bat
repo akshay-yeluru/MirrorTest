@@ -1,5 +1,4 @@
-SET PDI_HOME=C:\Users\MichaelC\Utilities\pdi-ce-5.1.0.0-752\data-integration
-SET SRB_WAREHOUSE_HOME=C:\\Users\\MichaelC\\Development\\github\\SRBWarehouse
+call setPaths.bat
 SET SRB_WAREHOUSE_JOB=ReceivablesWarehouse/Job/startReceivablesWarehouse
 SET SRB_WAREHOUSE_PROPERTIES=receivables.properties
 SET SRB_WAREHOUSE_LOG=receivablesWarehouse.log

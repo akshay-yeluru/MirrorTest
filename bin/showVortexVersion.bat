@@ -1,0 +1,1 @@
+java -mx32M -cp ../lib/* com.tscsoftware.warehouse.VortexVersion finance.properties

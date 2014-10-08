@@ -839,8 +839,8 @@ _logger.debug("   - Col " + colName + ", type [" + colType + "]");
 				
 			} // for curCol
 			/*
-			//_logger.debug("\t" + "1. SQL> [" + createSql + "]");
-			//_logger.debug("\t" + "1. Primary Keys> [" + primaryKeys + "]");	
+			_logger.debug("\t" + "1. SQL> [" + createSql + "]");
+			_logger.debug("\t" + "1. Primary Keys> [" + primaryKeys + "]");	
 
 			ResultSetMetaData rsmd = srcPrimaryKeys.getMetaData();
 			rsmd.getColumnCount();
@@ -852,13 +852,14 @@ _logger.debug("   - Col " + colName + ", type [" + colType + "]");
 			
 			// add all primary keys
 			if(srcPrimaryKeys != null){
-				ArrayList arrayListPrimaryKeys = new ArrayList();
+				ArrayList<String> arrayListPrimaryKeys = new ArrayList<String>();
 				while(srcPrimaryKeys.next()){
-					//_logger.debug("\t" + "1. MetaData> [" + 
-					//srcPrimaryKeys.getString("COLUMN_NAME") + " " +
-					//srcPrimaryKeys.getString("KEY_SEQ") + " " +
-					//srcPrimaryKeys.getString("PK_NAME") + " " +
-					//"]");	
+					/*_logger.debug("\t" + "1. MetaData> [" + 
+					srcPrimaryKeys.getString("COLUMN_NAME") + " " +
+					srcPrimaryKeys.getString("KEY_SEQ") + " " +
+					srcPrimaryKeys.getString("PK_NAME") + " " +
+					"]");
+					*/	
 					String currentPrimaryKey = srcPrimaryKeys.getString("COLUMN_NAME");
 					
 					if (!arrayListPrimaryKeys.contains(currentPrimaryKey)){

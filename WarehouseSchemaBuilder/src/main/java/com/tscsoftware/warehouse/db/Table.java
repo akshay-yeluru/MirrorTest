@@ -838,23 +838,43 @@ _logger.debug("   - Col " + colName + ", type [" + colType + "]");
 				} // if making column
 				
 			} // for curCol
-//_logger.debug("\t" + "1. SQL> [" + createSql + "]");
+			/*
+			//_logger.debug("\t" + "1. SQL> [" + createSql + "]");
+			//_logger.debug("\t" + "1. Primary Keys> [" + primaryKeys + "]");	
+
+			ResultSetMetaData rsmd = srcPrimaryKeys.getMetaData();
+			rsmd.getColumnCount();
+			for (int x =1; x <= rsmd.getColumnCount(); x++){
+				_logger.debug("\t" + "1. MetaData> [" + rsmd.getColumnName(x) + "]");	
+				
+			}
+			*/
 			
 			// add all primary keys
 			if(srcPrimaryKeys != null){
+				ArrayList arrayListPrimaryKeys = new ArrayList();
 				while(srcPrimaryKeys.next()){
-					// TODO check config info
-					if(primaryKeys.length() > 0){
+					//_logger.debug("\t" + "1. MetaData> [" + 
+					//srcPrimaryKeys.getString("COLUMN_NAME") + " " +
+					//srcPrimaryKeys.getString("KEY_SEQ") + " " +
+					//srcPrimaryKeys.getString("PK_NAME") + " " +
+					//"]");	
+					String currentPrimaryKey = srcPrimaryKeys.getString("COLUMN_NAME");
+					
+					if (!arrayListPrimaryKeys.contains(currentPrimaryKey)){
+						arrayListPrimaryKeys.add(currentPrimaryKey);
 						// only add ',' after first column
-						primaryKeys += ",";
+						if(primaryKeys.length() > 0){
+							primaryKeys += ",";
+						}
+						primaryKeys += srcPrimaryKeys.getString("COLUMN_NAME");
 					}
-					primaryKeys += srcPrimaryKeys.getString("COLUMN_NAME");
-//_logger.debug("\t" + "Add PK [" + primaryKeys + "]");
 				}
 			}
+			//_logger.debug("\t" + "2. Primary Keys> [" + primaryKeys + "]");
 		}
 
-//_logger.debug("\t" + "2. SQL> [" + createSql + "]");
+		//_logger.debug("\t" + "2. SQL> [" + createSql + "]");
 		// build remaining columns using column tags
 		
 		if(_cfg != null){
@@ -868,15 +888,16 @@ _logger.debug("   - Col " + colName + ", type [" + colType + "]");
 					
 					// add name
 					createSql += cfgCol.getName() + " ";	// TODO error check if name is empty
-//_logger.debug("\t" + "adding Column [" + cfgCol.getName() + "]");
+					//_logger.debug("\t" + "adding Column [" + cfgCol.getName() + "]");
 					
 					// add type and parameters
 					createSql += buildCreateColType(null, colTypes, curCol, cfgCol.getName()) + " ";
-					
+				
 					// add primary key
 					if(cfgCol.isPrimaryKey()){
 						if(primaryKeys.length() > 0){
 							primaryKeys += ",";
+
 						}
 						primaryKeys += cfgCol.getName();
 					}
@@ -885,16 +906,17 @@ _logger.debug("   - Col " + colName + ", type [" + colType + "]");
 						createSql += ", ";
 				}
 			}
-//_logger.debug("\t" + "3. SQL> [" + createSql + "]");
+			
+//_logger.debug("\t" + "2. Create SQL> [" + createSql + "]");
 
 // add primary keys
 			if(primaryKeys.length() > 1){
 //				createSql += ", PRIMARY KEY (" + primaryKeys + ") ";
 				createSql += " PRIMARY KEY (" + primaryKeys + ") ";
-//_logger.debug("\t" + "adding Primary keys [" + primaryKeys + "]");
+//_logger.debug("\t" + "3. Primary Keys> [" + primaryKeys + "]");
 			}
 		}
-//_logger.debug("\t" + "4. SQL> [" + createSql + "]");
+//_logger.debug("\t" + "4. Create SQL> [" + createSql + "]");
 		
 		// build end
 		// clip trailing ", "

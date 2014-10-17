@@ -8,7 +8,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;07&#x2f;11 08&#x3a;04&#x3a;22.604</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;09&#x2f;30 08&#x3a;41&#x3a;45.213</modified_date>
+  <modified_date>2014&#x2f;10&#x2f;17 04&#x3a;42&#x3a;37.267</modified_date>
     <parameters>
         <parameter>
             <name>SRB_PROPERTIES_FILE_PARAM</name>
@@ -73,7 +73,7 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>receivables-warehouse</database>
+    <database>payroll-warehouse</database>
     <port>1433</port>
     <username>srb</username>
     <password>Encrypted 2be98afc86aa7a697a80abd7987cbf683</password>
@@ -243,6 +243,69 @@
       <xloc>1216</xloc>
       <yloc>69</yloc>
       </entry>
+    <entry>
+      <name>Mail</name>
+      <description/>
+      <type>MAIL</type>
+      <server>&#x24;&#x7b;EMAIL_SERVER&#x7d;</server>
+      <port>&#x24;&#x7b;EMAIL_PORT&#x7d;</port>
+      <destination>&#x24;&#x7b;EMAIL_ADDRESS&#x7d;</destination>
+      <destinationCc/>
+      <destinationBCc/>
+      <replyto>&#x24;&#x7b;EMAIL_ADDRESS&#x7d;</replyto>
+      <replytoname>&#x24;&#x7b;EMAIL_NAME&#x7d;</replytoname>
+      <subject>Receivables Warehouse Log</subject>
+      <include_date>Y</include_date>
+      <contact_person/>
+      <contact_phone/>
+      <comment/>
+      <include_files>Y</include_files>
+      <zip_files>N</zip_files>
+      <zip_name/>
+      <use_auth>N</use_auth>
+      <use_secure_auth>N</use_secure_auth>
+      <auth_user/>
+      <auth_password>Encrypted </auth_password>
+      <only_comment>N</only_comment>
+      <use_HTML>N</use_HTML>
+      <use_Priority>N</use_Priority>
+      <encoding>UTF-8</encoding>
+      <priority>normal</priority>
+      <importance>normal</importance>
+      <sensitivity>normal</sensitivity>
+      <secureconnectiontype>SSL</secureconnectiontype>
+      <replyToAddresses/>
+      <filetypes>        <filetype>GENERAL</filetype>
+      </filetypes>      <embeddedimages>
+      </embeddedimages>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1216</xloc>
+      <yloc>331</yloc>
+      </entry>
+    <entry>
+      <name>EMAIL LOG</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>&#x24;&#x7b;EMAIL_LOG&#x7d;</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>TRUE</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>N</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1220</xloc>
+      <yloc>200</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -284,6 +347,24 @@
     <hop>
       <from>RECEIVABLES</from>
       <to>RECEIVABLES_WAREHOUSE</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>RECEIVABLES_WAREHOUSE</from>
+      <to>EMAIL LOG</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>EMAIL LOG</from>
+      <to>Mail</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

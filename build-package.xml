@@ -13,6 +13,7 @@
     <target name="build" depends="clean,copy,zip,writeProperties,publish" description="Copy and Package Zip File"/>
 
     <target name="clean">
+		<mkdir dir="${release}"/>
         <delete includeemptydirs="true">
                 <fileset dir="${release}" includes="**/*"/>
         </delete>
@@ -37,14 +38,11 @@
     </target>
 
     <target name="zip">
-        <zip destfile="${release}.zip"
-       basedir="${release}"
-  />
+        <zip destfile="${release}.zip" basedir="${release}"/>
     </target>
 
     <target name="writeProperties">
-        <propertyfile
-            file="${release}/warehouse-package.properties">
+        <propertyfile file="${release}/warehouse-package.properties">
                 <entry  key="package-name" value="SRBWarehouse.zip"/>
                 <entry  key="package-version" value="${build.number}"/>
         </propertyfile>

@@ -351,7 +351,24 @@ public abstract class Table {
 //			_logger.debug("Created table " + _name);
 		}
 		catch(SQLException e){
+
+			
+			String message = "dbFetch exception: RMS: File";
+			
+			if(e.getMessage().startsWith(message)){
+				_logger.error("Unable to create table " + _newName);
+				_logger.error("Table failed because Vortex reported the the RMS file is empty.");
+				_logger.error("A dummy table will be created in its place.");
+				_logger.error("Once the file has data please rebuild the warehouse schema.");
+				_logger.error("Create dummy table " + _newName);
+				String dummySql = "CREATE TABLE "+_newName + "([DUMMY_TABLE_REBUILD_SCHEMA] [varchar](1))"; 
+				_stmnt.execute(dummySql);
+				
+				return true;
+			}
+
 			_logger.error("Unable to create table " + _newName, e);
+			
 			return false;
 		}
 		finally{

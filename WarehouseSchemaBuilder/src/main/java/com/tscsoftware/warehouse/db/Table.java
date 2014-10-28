@@ -352,10 +352,13 @@ public abstract class Table {
 		}
 		catch(SQLException e){
 
+			/*
+			 * Different messages for different versions of the server.
+			 */
+			String rmsMessage = "dbFetch exception: RMS: File";
+			String wormMmessage = "dbFetch exception: WORM: File";
 			
-			String message = "dbFetch exception: RMS: File";
-			
-			if(e.getMessage().startsWith(message)){
+			if(e.getMessage().startsWith(rmsMessage)  || e.getMessage().startsWith(wormMmessage)){
 				_logger.error("Unable to create table " + _newName);
 				_logger.error("Table failed because Vortex reported the the RMS file is empty.");
 				_logger.error("A dummy table will be created in its place.");

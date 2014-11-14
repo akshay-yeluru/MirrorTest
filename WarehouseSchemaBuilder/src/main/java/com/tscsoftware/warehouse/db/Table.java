@@ -360,8 +360,7 @@ public abstract class Table {
 			String wormGfloatMessage = "dbFetch exception: WORM: GFLOAT";
 			
 			if(e.getMessage().startsWith(rmsFileMessage)  || 
-					e.getMessage().startsWith(wormFileMessage) || 
-					e.getMessage().startsWith(wormGfloatMessage)){
+					e.getMessage().startsWith(wormFileMessage)){
 				
 				_logger.error("Unable to create table " + _newName);
 				_logger.error("Table failed because Vortex reported the the RMS file is empty.");
@@ -371,6 +370,13 @@ public abstract class Table {
 				String dummySql = "CREATE TABLE "+_newName + "([DUMMY_TABLE_REBUILD_SCHEMA] [varchar](1))"; 
 				_stmnt.execute(dummySql);
 				
+				return true;
+			}else if (e.getMessage().startsWith(wormGfloatMessage)){
+				_logger.error("Unable to create table " + _newName, e);
+				_logger.error("Table failed because Vortex was unable to read the table metadata.");
+				_logger.error("This errror does not occur when using the latest version of vortex server.");
+				_logger.error("If can create the table manually in the target db and the data transformation will run successfully.");
+				//This falsely represents the table as created, so that the program can continue.
 				return true;
 			}
 

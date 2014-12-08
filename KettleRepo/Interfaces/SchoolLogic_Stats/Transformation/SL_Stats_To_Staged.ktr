@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 14&#x3a;18&#x3a;54.768</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;11&#x2f;27 10&#x3a;03&#x3a;57.667</modified_date>
+  <modified_date>2014&#x2f;12&#x2f;08 10&#x3a;07&#x3a;45.540</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -227,8 +227,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>120</xloc>
-      <yloc>20</yloc>
+      <xloc>184</xloc>
+      <yloc>28</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -253,8 +253,57 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>120</xloc>
-      <yloc>146</yloc>
+      <xloc>184</xloc>
+      <yloc>154</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Group by</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <all_rows>N</all_rows>
+      <ignore_aggregate>N</ignore_aggregate>
+      <field_ignore/>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>grp</prefix>
+      <add_linenr>N</add_linenr>
+      <linenr_fieldname/>
+      <give_back_row>N</give_back_row>
+      <group>
+        <field>
+          <name>cuser</name>
+        </field>
+        <field>
+          <name>istudentid</name>
+        </field>
+        <field>
+          <name>ddate</name>
+        </field>
+        <field>
+          <name>cname</name>
+        </field>
+      </group>
+      <fields>
+        <field>
+          <aggregate/>
+          <subject>istudentid</subject>
+          <type>COUNT_DISTINCT</type>
+          <valuefield/>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>403</xloc>
+      <yloc>280</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -311,57 +360,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>559</xloc>
-      <yloc>76</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>N</give_back_row>
-      <group>
-        <field>
-          <name>cuser</name>
-        </field>
-        <field>
-          <name>istudentid</name>
-        </field>
-        <field>
-          <name>ddate</name>
-        </field>
-        <field>
-          <name>cname</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate/>
-          <subject>istudentid</subject>
-          <type>COUNT_DISTINCT</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>339</xloc>
-      <yloc>272</yloc>
+      <xloc>623</xloc>
+      <yloc>84</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -418,8 +418,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>558</xloc>
-      <yloc>272</yloc>
+      <xloc>622</xloc>
+      <yloc>280</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -436,7 +436,7 @@
            <schema_name/>
            </partitioning>
     <connection>SCHOOLLOGIC_DB</connection>
-    <sql>select distinct &#x27;District&#x27; as cname, &#xd;&#xa;istudentid, &#xd;&#xa;SUSER_name&#x28;&#x29; as cuser, &#xd;&#xa;Attendance.dDate as ddate&#xd;&#xa;from Attendance &#xd;&#xa;where iAttendanceStatusID &#x3d; 2 and &#xd;&#xa;ddate in &#x28;select top 1 ddate from CALendar where ddate &#x3c; getdate&#x28;&#x29; and isnumeric&#x28;cdaynumber&#x29; &#x3d; 1 order by ddate desc &#x29;&#xd;&#xa;UNION&#xd;&#xa;select school.cname, &#xd;&#xa;istudentid,&#xd;&#xa;SUSER_name&#x28;&#x29; as cuser, &#xd;&#xa;getdate&#x28;&#x29; as ddate&#xd;&#xa;from Attendance &#xd;&#xa;left join school on school.ischoolid &#x3d; attendance.ischoolid&#xd;&#xa;where iAttendanceStatusID &#x3d; 2 and &#xd;&#xa;ddate in &#x28;select top 1 ddate from CALendar where ddate &#x3c; getdate&#x28;&#x29; and isnumeric&#x28;cdaynumber&#x29; &#x3d; 1 order by ddate desc &#x29;&#xd;&#xa;order by 1,2&#xd;&#xa;</sql>
+    <sql>select distinct &#x27;District&#x27; as cname, &#xd;&#xa;istudentid, &#xd;&#xa;SUSER_name&#x28;&#x29; as cuser, &#xd;&#xa;Attendance.dDate as ddate&#xd;&#xa;from Attendance &#xd;&#xa;where iAttendanceStatusID &#x3d; 2 and &#xd;&#xa;ddate in &#x28;select top 1 ddate from CALendar where ddate &#x3c; getdate&#x28;&#x29; and isnumeric&#x28;cdaynumber&#x29; &#x3d; 1 order by ddate desc &#x29;&#xd;&#xa;UNION&#xd;&#xa;select school.cname, &#xd;&#xa;istudentid,&#xd;&#xa;SUSER_name&#x28;&#x29; as cuser, &#xd;&#xa;getdate&#x28;&#x29; as ddate&#xd;&#xa;from Attendance &#xd;&#xa;left join school on school.ischoolid &#x3d; attendance.ischoolid&#xd;&#xa;where iAttendanceStatusID &#x3d; 2 and &#xd;&#xa;ddate in &#x28;select top 1 ddate from Calendar where ddate &#x3c; getdate&#x28;&#x29; and isnumeric&#x28;cdaynumber&#x29; &#x3d; 1 order by ddate desc &#x29;&#xd;&#xa;order by 1,2&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -444,8 +444,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>120</xloc>
-      <yloc>272</yloc>
+      <xloc>184</xloc>
+      <yloc>280</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

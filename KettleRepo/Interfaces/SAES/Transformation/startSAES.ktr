@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;12&#x2f;10 08&#x3a;52&#x3a;24.568</modified_date>
+  <modified_date>2014&#x2f;12&#x2f;10 10&#x3a;17&#x3a;40.240</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -203,7 +203,6 @@
   </connection>
   <order>
   <hop> <from>Lookup Certificate Number</from><to>Check if email has domain</to><enabled>Y</enabled> </hop>
-  <hop> <from>Check if email has domain</from><to>Add District Domain to Email</to><enabled>Y</enabled> </hop>
   <hop> <from>Check if email has domain</from><to>Do Nothing...</to><enabled>Y</enabled> </hop>
   <hop> <from>Do Nothing...</from><to>Merge Info together again</to><enabled>Y</enabled> </hop>
   <hop> <from>Add District Domain to Email</from><to>Merge Info together again</to><enabled>Y</enabled> </hop>
@@ -219,18 +218,12 @@
   <hop> <from>Add SAES Position</from><to>Add in &#x23; Schools Flag</to><enabled>Y</enabled> </hop>
   <hop> <from>Add in Contract Type</from><to>Add in Content 1</to><enabled>Y</enabled> </hop>
   <hop> <from>Find SAES Content 1</from><to>Add in Content 1</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Data from atrieveDB</from><to>Lookup Certificate Number</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Employee Content Area</from><to>Get Content 1</to><enabled>Y</enabled> </hop>
   <hop> <from>Content Area Excel File</from><to>Find SAES Content 1</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Content 1</from><to>Find SAES Content 1</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Content 1</from><to>Get Content 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Content Area Excel File</from><to>Find SAES Content 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Content 2</from><to>Find SAES Content 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Content 2</from><to>Get Content 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Content 3</from><to>Find SAES Content 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Content Area Excel File</from><to>Find SAES Content 3</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Content 3</from><to>Get Content 4</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Content 4</from><to>Get Content 5</to><enabled>Y</enabled> </hop>
   <hop> <from>Content Area Excel File</from><to>Find SAES Content 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Content 4</from><to>Find SAES Content 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Content Area Excel File</from><to>Find SAES Content 5</to><enabled>Y</enabled> </hop>
@@ -239,11 +232,21 @@
   <hop> <from>Add in Content 2</from><to>Add in Content 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Add in Content 3</from><to>Add in Content 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Add in Content 4</from><to>Add in Content 5</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add in Content 5</from><to>Text file output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add in Content 5</from><to>Create SAES CSV File</to><enabled>Y</enabled> </hop>
   <hop> <from>Find SAES Content 2</from><to>Add in Content 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Find SAES Content 3</from><to>Add in Content 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Find SAES Content 4</from><to>Add in Content 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Find SAES Content 5</from><to>Add in Content 5</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Path to Output Destination</from><to>Lookup Certificate Number</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Data from atrieveDB</from><to>Add Output Path to data</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Output Path to data</from><to>Add Path to Output Destination</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Content 1</from><to>Find SAES Content 1</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Employee Content Area</from><to>Get Content 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Employee Content Area</from><to>Get Content 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Employee Content Area</from><to>Get Content 4</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Employee Content Area</from><to>Get Content 5</to><enabled>Y</enabled> </hop>
+  <hop> <from>Check if email has domain</from><to>Add Domain to data</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Domain to data</from><to>Add District Domain to Email</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add District Domain to Email</name>
@@ -301,7 +304,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>emaildefault</name>
+        <name>cdomain</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -320,8 +323,89 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>181</xloc>
-      <yloc>413</yloc>
+      <xloc>191</xloc>
+      <yloc>309</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add Path to Output Destination</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>cpath</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>cfilename</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+<targetFieldName>cOutput</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>189</xloc>
+      <yloc>105</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -356,8 +440,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>312</xloc>
-      <yloc>498</yloc>
+      <xloc>313</xloc>
+      <yloc>415</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -392,8 +476,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>439</xloc>
-      <yloc>498</yloc>
+      <xloc>440</xloc>
+      <yloc>415</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -428,8 +512,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1083</xloc>
-      <yloc>499</yloc>
+      <xloc>1071</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -464,8 +548,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1195</xloc>
-      <yloc>499</yloc>
+      <xloc>1183</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -500,8 +584,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1309</xloc>
-      <yloc>499</yloc>
+      <xloc>1297</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -536,8 +620,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1426</xloc>
-      <yloc>500</yloc>
+      <xloc>1414</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -572,8 +656,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1542</xloc>
-      <yloc>500</yloc>
+      <xloc>1530</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -608,8 +692,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>820</xloc>
-      <yloc>498</yloc>
+      <xloc>821</xloc>
+      <yloc>415</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -716,8 +800,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>693</xloc>
-      <yloc>498</yloc>
+      <xloc>694</xloc>
+      <yloc>415</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -752,8 +836,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>566</xloc>
-      <yloc>498</yloc>
+      <xloc>567</xloc>
+      <yloc>415</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -770,7 +854,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Do Nothing...</send_true_to>
-<send_false_to>Add District Domain to Email</send_false_to>
+<send_false_to>Add Domain to data</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -793,8 +877,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>123</xloc>
-      <yloc>316</yloc>
+      <xloc>63</xloc>
+      <yloc>228</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -897,8 +981,8 @@
     <spreadsheet_type>POI</spreadsheet_type>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>958</xloc>
-      <yloc>133</yloc>
+      <xloc>931</xloc>
+      <yloc>200</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -966,7 +1050,7 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>43</xloc>
+      <xloc>63</xloc>
       <yloc>412</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1022,14 +1106,14 @@
       <value>
         <name>SAESCode</name>
         <rename>ContentArea1</rename>
-        <default/>
+        <default>15</default>
         <type>String</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1083</xloc>
-      <yloc>217</yloc>
+      <xloc>1073</xloc>
+      <yloc>305</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1058,14 +1142,14 @@
       <value>
         <name>SAESCode</name>
         <rename>ContentArea2</rename>
-        <default/>
+        <default>15</default>
         <type>String</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1195</xloc>
-      <yloc>217</yloc>
+      <xloc>1185</xloc>
+      <yloc>305</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1094,14 +1178,14 @@
       <value>
         <name>SAESCode</name>
         <rename>ContentArea3</rename>
-        <default/>
+        <default>15</default>
         <type>String</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1309</xloc>
-      <yloc>217</yloc>
+      <xloc>1299</xloc>
+      <yloc>305</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1130,14 +1214,14 @@
       <value>
         <name>SAESCode</name>
         <rename>ContentArea4</rename>
-        <default/>
+        <default>15</default>
         <type>String</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1426</xloc>
-      <yloc>218</yloc>
+      <xloc>1416</xloc>
+      <yloc>306</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1166,14 +1250,14 @@
       <value>
         <name>SAESCode</name>
         <rename>ContentArea5</rename>
-        <default/>
+        <default>15</default>
         <type>String</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1542</xloc>
-      <yloc>218</yloc>
+      <xloc>1532</xloc>
+      <yloc>306</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1190,7 +1274,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Find SAES Content 1</send_true_to>
-<send_false_to>Get Content 2</send_false_to>
+<send_false_to/>
     <compare>
 <condition>
  <negated>N</negated>
@@ -1201,8 +1285,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1083</xloc>
-      <yloc>23</yloc>
+      <xloc>1075</xloc>
+      <yloc>22</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1219,7 +1303,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Find SAES Content 2</send_true_to>
-<send_false_to>Get Content 3</send_false_to>
+<send_false_to/>
     <compare>
 <condition>
  <negated>N</negated>
@@ -1230,7 +1314,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1195</xloc>
+      <xloc>1185</xloc>
       <yloc>23</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1248,7 +1332,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Find SAES Content 3</send_true_to>
-<send_false_to>Get Content 4</send_false_to>
+<send_false_to/>
     <compare>
 <condition>
  <negated>N</negated>
@@ -1259,8 +1343,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1309</xloc>
-      <yloc>23</yloc>
+      <xloc>1300</xloc>
+      <yloc>22</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1277,7 +1361,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Find SAES Content 4</send_true_to>
-<send_false_to>Get Content 5</send_false_to>
+<send_false_to/>
     <compare>
 <condition>
  <negated>N</negated>
@@ -1288,8 +1372,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1426</xloc>
-      <yloc>24</yloc>
+      <xloc>1416</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1317,8 +1401,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1542</xloc>
-      <yloc>24</yloc>
+      <xloc>1531</xloc>
+      <yloc>21</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1361,7 +1445,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>Select distinct HR_EMPLOYEE_INTERLINK.employee_no,&#xd;&#xa;HR_EMPLOYEE_INTERLINK.last_name, &#xd;&#xa;HR_EMPLOYEE_INTERLINK.first_name,&#xd;&#xa;HR_EMPLOYEE_INTERLINK.middle_name,&#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.address_1, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.address_2, &#xd;&#xa;&#x27;&#x27; as address_3,&#xd;&#xa;&#x27;&#x27; as address_4,&#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.postal_code, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.city, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.province, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.country,&#xd;&#xa;concat&#x28;substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.phone_no,1,3&#x29;,&#x27;-&#x27;,substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.phone_no,4,3&#x29;,&#x27;-&#x27;,RIGHT&#x28;HR_EMPLOYEE_DEMOGRAPHICS.phone_no,4&#x29;&#x29; as phone_no,&#xd;&#xa;HR_EMAIL_ADDRESS.employee_email,&#xd;&#xa;&#x27;don.com&#x27; as emaildefault,&#xd;&#xa;&#x27;CERT&#x27; as Cert_type,&#xd;&#xa;HR_ASSIGNMENT_LOCATIONS.LOCATION,&#xd;&#xa;HR_ASSIGNMENTS.Hours_FTE,&#xd;&#xa;HR_ASSIGNMENTS.POSITION_CODE,&#xd;&#xa;&#x27;&#x27; as content2,&#xd;&#xa;&#x27;&#x27; as content3,&#xd;&#xa;&#x27;&#x27; as content4,&#xd;&#xa;&#x27;&#x27; as content5,&#xd;&#xa;substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.salary_grid,3,2&#x29; as SG_Education,&#xd;&#xa;substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.salary_grid,5,2&#x29; as SG_Experience&#xd;&#xa;from HR_EMPLOYEE_INTERLINK&#xd;&#xa;	left join HR_EMPLOYEE_DEMOGRAPHICS on HR_EMPLOYEE_DEMOGRAPHICS.employee_no &#x3d; HR_EMPLOYEE_INTERLINK.employee_no&#xd;&#xa;	left join HR_EMAIL_ADDRESS on HR_EMAIL_ADDRESS.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_INTERLINK.employee_no&#xd;&#xa;	left join HR_ASSIGNMENTS on hr_assignments.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_INTERLINK.EMPLOYEE_NO &#xd;&#xa;	left join HR_ASSIGNMENT_LOCATIONS on HR_ASSIGNMENT_LOCATIONS.THE_KEY &#x3d; HR_ASSIGNMENTS.THE_KEY&#xd;&#xa;	inner join HR_LOCATION on HR_LOCATION.LOCATION_NO &#x3d; HR_ASSIGNMENT_LOCATIONS.LOCATION&#xd;&#xa;where HR_EMPLOYEE_INTERLINK.status &#x3d; &#x27;A&#x27;&#xd;&#xa;    and HR_EMPLOYEE_DEMOGRAPHICS.BARGAINING_UNIT &#x3d; &#x27;ATA&#x27;&#xd;&#xa;	and &#x28;HR_ASSIGNMENTS.STATUS &#x3d; &#x27;A&#x27; OR  HR_ASSIGNMENTS.END_DATE &#x3d; &#x27;99999999&#x27;&#x29;&#xd;&#xa;order by last_name, first_name&#xd;&#xa;</sql>
+    <sql>Select distinct HR_EMPLOYEE_INTERLINK.employee_no,&#xd;&#xa;HR_EMPLOYEE_INTERLINK.last_name, &#xd;&#xa;HR_EMPLOYEE_INTERLINK.first_name,&#xd;&#xa;HR_EMPLOYEE_INTERLINK.middle_name,&#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.address_1, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.address_2, &#xd;&#xa;&#x27;&#x27; as address_3,&#xd;&#xa;&#x27;&#x27; as address_4,&#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.postal_code, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.city, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.province, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.country,&#xd;&#xa;concat&#x28;substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.phone_no,1,3&#x29;,&#x27;-&#x27;,substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.phone_no,4,3&#x29;,&#x27;-&#x27;,RIGHT&#x28;HR_EMPLOYEE_DEMOGRAPHICS.phone_no,4&#x29;&#x29; as phone_no,&#xd;&#xa;HR_EMAIL_ADDRESS.employee_email,&#xd;&#xa;&#x27;CERT&#x27; as Cert_type,&#xd;&#xa;HR_ASSIGNMENT_LOCATIONS.LOCATION,&#xd;&#xa;HR_ASSIGNMENTS.Hours_FTE,&#xd;&#xa;HR_ASSIGNMENTS.POSITION_CODE,&#xd;&#xa;substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.salary_grid,3,2&#x29; as SG_Education,&#xd;&#xa;substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.salary_grid,5,2&#x29; as SG_Experience,&#xd;&#xa;	&#x28;select REPLACE&#x28;CONCAT&#x28;location_NO,location_name,&#x27;_&#x27;,&#xd;&#xa;		case when month&#x28;getdate&#x28;&#x29;&#x29; &#x3c; 8 &#xd;&#xa;				then convert&#x28;varchar&#x28;4&#x29;,year&#x28;getdate&#x28;&#x29;&#x29;-1&#x29; &#xd;&#xa;				else convert&#x28;varchar&#x28;4&#x29;,year&#x28;getdate&#x28;&#x29;&#x29;&#x29; end&#x29;,&#x27; &#x27;,&#x27;&#x27;&#x29;&#xd;&#xa;	from hr_location where location_type &#x3d; &#x27;D&#x27;&#x29; as cfilename&#xd;&#xa;from HR_EMPLOYEE_INTERLINK&#xd;&#xa;	left join HR_EMPLOYEE_DEMOGRAPHICS on HR_EMPLOYEE_DEMOGRAPHICS.employee_no &#x3d; HR_EMPLOYEE_INTERLINK.employee_no&#xd;&#xa;	left join HR_EMAIL_ADDRESS on HR_EMAIL_ADDRESS.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_INTERLINK.employee_no&#xd;&#xa;	left join HR_ASSIGNMENTS on hr_assignments.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_INTERLINK.EMPLOYEE_NO &#xd;&#xa;	left join HR_ASSIGNMENT_LOCATIONS on HR_ASSIGNMENT_LOCATIONS.THE_KEY &#x3d; HR_ASSIGNMENTS.THE_KEY&#xd;&#xa;	inner join HR_LOCATION on HR_LOCATION.LOCATION_NO &#x3d; HR_ASSIGNMENT_LOCATIONS.LOCATION&#xd;&#xa;where HR_EMPLOYEE_INTERLINK.status &#x3d; &#x27;A&#x27;&#xd;&#xa;    and HR_EMPLOYEE_DEMOGRAPHICS.BARGAINING_UNIT &#x3d; &#x27;ATA&#x27;&#xd;&#xa;	and &#x28;HR_ASSIGNMENTS.STATUS &#x3d; &#x27;A&#x27; OR  HR_ASSIGNMENTS.END_DATE &#x3d; &#x27;99999999&#x27;&#x29;&#xd;&#xa;order by last_name, first_name&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1369,7 +1453,7 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>124</xloc>
+      <xloc>48</xloc>
       <yloc>24</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1395,8 +1479,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>954</xloc>
-      <yloc>22</yloc>
+      <xloc>931</xloc>
+      <yloc>141</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1495,8 +1579,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>123</xloc>
-      <yloc>202</yloc>
+      <xloc>63</xloc>
+      <yloc>164</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1584,8 +1668,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>109</xloc>
-      <yloc>497</yloc>
+      <xloc>191</xloc>
+      <yloc>414</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1695,7 +1779,7 @@
     </step>
 
   <step>
-    <name>Text file output</name>
+    <name>Create SAES CSV File</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1715,8 +1799,8 @@
     <compression>None</compression>
     <encoding>windows-1252</encoding>
     <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField>filename</fileNameField>
+    <fileNameInField>Y</fileNameInField>
+    <fileNameField>coutput</fileNameField>
     <create_parent_folder>Y</create_parent_folder>
     <file>
       <name>&#x24;&#x7b;OUTPUT_FILE&#x7d;</name>
@@ -2220,8 +2304,96 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1655</xloc>
-      <yloc>500</yloc>
+      <xloc>1643</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Mapping input specification</name>
+    <type>MappingInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+        <select_unspecified>N</select_unspecified>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1855</xloc>
+      <yloc>515</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add Output Path to data</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>cpath</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>c&#x3a;&#x5c;tmp&#x5c;</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>191</xloc>
+      <yloc>23</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add Domain to data</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>cdomain</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hotmail.com</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>191</xloc>
+      <yloc>227</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

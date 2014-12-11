@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2014&#x2f;12&#x2f;11 08&#x3a;33&#x3a;56.021</modified_date>
+  <modified_date>2014&#x2f;12&#x2f;11 13&#x3a;46&#x3a;33.605</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -230,8 +230,8 @@
   <order>
   <hop> <from>Lookup Certificate Number</from><to>Check if email has domain</to><enabled>Y</enabled> </hop>
   <hop> <from>Check if email has domain</from><to>Do Nothing...</to><enabled>Y</enabled> </hop>
-  <hop> <from>Do Nothing...</from><to>Merge Info together again</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add District Domain to Email</from><to>Merge Info together again</to><enabled>Y</enabled> </hop>
+  <hop> <from>Do Nothing...</from><to>Merge Info</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Domain to Email</from><to>Merge Info</to><enabled>Y</enabled> </hop>
   <hop> <from>Find Number of Schools</from><to>Add in &#x23; Schools Flag</to><enabled>Y</enabled> </hop>
   <hop> <from>Add in &#x23; Schools Flag</from><to>Add in Teaching FTE</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Teaching FTE</from><to>Add in Teaching FTE</to><enabled>Y</enabled> </hop>
@@ -239,7 +239,7 @@
   <hop> <from>Get Grade Levels</from><to>Add in Grade Levels</to><enabled>Y</enabled> </hop>
   <hop> <from>Add in Grade Levels</from><to>Add in Contract Type</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Contract Type</from><to>Add in Contract Type</to><enabled>Y</enabled> </hop>
-  <hop> <from>Merge Info together again</from><to>Add SAES Position</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge Info</from><to>Add SAES Position</to><enabled>Y</enabled> </hop>
   <hop> <from>Position Excel File</from><to>Add SAES Position</to><enabled>Y</enabled> </hop>
   <hop> <from>Add SAES Position</from><to>Add in &#x23; Schools Flag</to><enabled>Y</enabled> </hop>
   <hop> <from>Add in Contract Type</from><to>Add in Content 1</to><enabled>Y</enabled> </hop>
@@ -262,21 +262,21 @@
   <hop> <from>Find SAES Content 3</from><to>Add in Content 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Find SAES Content 4</from><to>Add in Content 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Find SAES Content 5</from><to>Add in Content 5</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Path to Output Destination</from><to>Lookup Certificate Number</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Data from atrieveDB</from><to>Add Output Path to data</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Output Path to data</from><to>Add Path to Output Destination</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Path to Output</from><to>Lookup Certificate Number</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Content 1</from><to>Find SAES Content 1</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Employee Content Area</from><to>Get Content 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Employee Content Area</from><to>Get Content 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Employee Content Area</from><to>Get Content 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Employee Content Area</from><to>Get Content 5</to><enabled>Y</enabled> </hop>
-  <hop> <from>Check if email has domain</from><to>Add Domain to data</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Domain to data</from><to>Add District Domain to Email</to><enabled>Y</enabled> </hop>
   <hop> <from>Add in Content 5</from><to>Sort rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Create SAES CSV File</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Data from atrieveDB</from><to>Get Path Variable</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Path Variable</from><to>Add Path to Output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Check if email has domain</from><to>Get Domain Variable</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Domain Variable</from><to>Add Domain to Email</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Add District Domain to Email</name>
+    <name>Add Domain to Email</name>
     <type>ConcatFields</type>
     <description/>
     <distribute>N</distribute>
@@ -331,7 +331,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>cdomain</name>
+        <name>DIST_DOMAIN</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -350,80 +350,14 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>191</xloc>
-      <yloc>309</yloc>
+      <xloc>210</xloc>
+      <yloc>326</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Add Domain to data</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>cdomain</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>hotmail.com</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>191</xloc>
-      <yloc>227</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add Output Path to data</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>cpath</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>c&#x3a;&#x5c;tmp&#x5c;</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>191</xloc>
-      <yloc>23</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add Path to Output Destination</name>
+    <name>Add Path to Output</name>
     <type>ConcatFields</type>
     <description/>
     <distribute>N</distribute>
@@ -466,7 +400,7 @@
     </file>
     <fields>
       <field>
-        <name>cpath</name>
+        <name>OUTPUT_PATH</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -497,8 +431,8 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>188</xloc>
-      <yloc>144</yloc>
+      <xloc>210</xloc>
+      <yloc>131</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -534,7 +468,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>313</xloc>
-      <yloc>415</yloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -570,7 +504,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>440</xloc>
-      <yloc>415</yloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -806,7 +740,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>821</xloc>
-      <yloc>415</yloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -831,6 +765,10 @@
       <key>
         <name>employee_no</name>
         <field>employee_no</field>
+      </key>
+      <key>
+        <name>LOCATION</name>
+        <field>LOCATION</field>
       </key>
       <value>
         <name>GradeK</name>
@@ -914,7 +852,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>694</xloc>
-      <yloc>415</yloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -940,6 +878,10 @@
         <name>employee_no</name>
         <field>employee_no</field>
       </key>
+      <key>
+        <name>LOCATION</name>
+        <field>LOCATION</field>
+      </key>
       <value>
         <name>TEACH_FTE</name>
         <rename>TEACH_FTE</rename>
@@ -950,7 +892,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>567</xloc>
-      <yloc>415</yloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -967,7 +909,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Do Nothing...</send_true_to>
-<send_false_to>Add Domain to data</send_false_to>
+<send_false_to>Get Domain Variable</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -990,8 +932,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>63</xloc>
-      <yloc>228</yloc>
+      <xloc>62</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1696,7 +1638,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>63</xloc>
-      <yloc>412</yloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2090,7 +2032,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>Select distinct HR_EMPLOYEE_INTERLINK.employee_no,&#xd;&#xa;HR_EMPLOYEE_INTERLINK.last_name, &#xd;&#xa;HR_EMPLOYEE_INTERLINK.first_name,&#xd;&#xa;HR_EMPLOYEE_INTERLINK.middle_name,&#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.address_1, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.address_2, &#xd;&#xa;&#x27;&#x27; as address_3,&#xd;&#xa;&#x27;&#x27; as address_4,&#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.postal_code, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.city, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.province, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.country,&#xd;&#xa;concat&#x28;substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.phone_no,1,3&#x29;,&#x27;-&#x27;,substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.phone_no,4,3&#x29;,&#x27;-&#x27;,RIGHT&#x28;HR_EMPLOYEE_DEMOGRAPHICS.phone_no,4&#x29;&#x29; as phone_no,&#xd;&#xa;HR_EMAIL_ADDRESS.employee_email,&#xd;&#xa;&#x27;CERT&#x27; as Cert_type,&#xd;&#xa;HR_ASSIGNMENT_LOCATIONS.LOCATION,&#xd;&#xa;HR_ASSIGNMENTS.Hours_FTE,&#xd;&#xa;HR_ASSIGNMENTS.POSITION_CODE,&#xd;&#xa;substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.salary_grid,3,2&#x29; as SG_Education,&#xd;&#xa;substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.salary_grid,5,2&#x29; as SG_Experience,&#xd;&#xa;	&#x28;select REPLACE&#x28;CONCAT&#x28;location_NO,location_name,&#x27;_&#x27;,&#xd;&#xa;		case when month&#x28;getdate&#x28;&#x29;&#x29; &#x3c; 8 &#xd;&#xa;				then convert&#x28;varchar&#x28;4&#x29;,year&#x28;getdate&#x28;&#x29;&#x29;-1&#x29; &#xd;&#xa;				else convert&#x28;varchar&#x28;4&#x29;,year&#x28;getdate&#x28;&#x29;&#x29;&#x29; end&#x29;,&#x27; &#x27;,&#x27;&#x27;&#x29;&#xd;&#xa;	from hr_location where location_type &#x3d; &#x27;D&#x27;&#x29; as cfilename&#xd;&#xa;from HR_EMPLOYEE_INTERLINK&#xd;&#xa;	left join HR_EMPLOYEE_DEMOGRAPHICS on HR_EMPLOYEE_DEMOGRAPHICS.employee_no &#x3d; HR_EMPLOYEE_INTERLINK.employee_no&#xd;&#xa;	left join HR_EMAIL_ADDRESS on HR_EMAIL_ADDRESS.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_INTERLINK.employee_no&#xd;&#xa;	left join HR_ASSIGNMENTS on hr_assignments.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_INTERLINK.EMPLOYEE_NO &#xd;&#xa;	left join HR_ASSIGNMENT_LOCATIONS on HR_ASSIGNMENT_LOCATIONS.THE_KEY &#x3d; HR_ASSIGNMENTS.THE_KEY&#xd;&#xa;	inner join HR_LOCATION on HR_LOCATION.LOCATION_NO &#x3d; HR_ASSIGNMENT_LOCATIONS.LOCATION&#xd;&#xa;where HR_EMPLOYEE_INTERLINK.status &#x3d; &#x27;A&#x27;&#xd;&#xa;    and HR_EMPLOYEE_DEMOGRAPHICS.BARGAINING_UNIT &#x3d; &#x27;ATA&#x27;&#xd;&#xa;	and &#x28;HR_ASSIGNMENTS.STATUS &#x3d; &#x27;A&#x27; OR  HR_ASSIGNMENTS.END_DATE &#x3d; &#x27;99999999&#x27;&#x29;&#xd;&#xa;order by last_name, first_name&#xd;&#xa;</sql>
+    <sql>Select distinct HR_EMPLOYEE_INTERLINK.employee_no,&#xd;&#xa;HR_EMPLOYEE_INTERLINK.last_name, &#xd;&#xa;HR_EMPLOYEE_INTERLINK.first_name,&#xd;&#xa;HR_EMPLOYEE_INTERLINK.middle_name,&#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.address_1, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.address_2, &#xd;&#xa;&#x27;&#x27; as address_3,&#xd;&#xa;&#x27;&#x27; as address_4,&#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.postal_code, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.city, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.province, &#xd;&#xa;HR_EMPLOYEE_DEMOGRAPHICS.country,&#xd;&#xa;concat&#x28;substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.phone_no,1,3&#x29;,&#x27;-&#x27;,substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.phone_no,4,3&#x29;,&#x27;-&#x27;,RIGHT&#x28;HR_EMPLOYEE_DEMOGRAPHICS.phone_no,4&#x29;&#x29; as phone_no,&#xd;&#xa;HR_EMAIL_ADDRESS.employee_email,&#xd;&#xa;&#x27;CERT&#x27; as Cert_type,&#xd;&#xa;HR_ASSIGNMENT_LOCATIONS.LOCATION,&#xd;&#xa;HR_ASSIGNMENTS.Hours_FTE,&#xd;&#xa;HR_ASSIGNMENTS.POSITION_CODE,&#xd;&#xa;substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.salary_grid,3,2&#x29; as SG_Education,&#xd;&#xa;substring&#x28;HR_EMPLOYEE_DEMOGRAPHICS.salary_grid,5,2&#x29; as SG_Experience,&#xd;&#xa;&#x28;select REPLACE&#x28;CONCAT&#x28;location_NO,location_name,&#x27;_&#x27;,&#xd;&#xa;		case when month&#x28;getdate&#x28;&#x29;&#x29; &#x3c; 8 &#xd;&#xa;				then convert&#x28;varchar&#x28;4&#x29;,year&#x28;getdate&#x28;&#x29;&#x29;-1&#x29; &#xd;&#xa;				else convert&#x28;varchar&#x28;4&#x29;,year&#x28;getdate&#x28;&#x29;&#x29;&#x29; end&#x29;,&#x27; &#x27;,&#x27;&#x27;&#x29;&#xd;&#xa;	from hr_location where location_type &#x3d; &#x27;D&#x27;&#x29; as cfilename&#xd;&#xa;from HR_EMPLOYEE_INTERLINK&#xd;&#xa;	left join HR_EMPLOYEE_DEMOGRAPHICS on HR_EMPLOYEE_DEMOGRAPHICS.employee_no &#x3d; HR_EMPLOYEE_INTERLINK.employee_no&#xd;&#xa;	left join HR_EMAIL_ADDRESS on HR_EMAIL_ADDRESS.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_INTERLINK.employee_no&#xd;&#xa;	left join HR_ASSIGNMENTS on hr_assignments.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_INTERLINK.EMPLOYEE_NO &#xd;&#xa;	left join HR_ASSIGNMENT_LOCATIONS on HR_ASSIGNMENT_LOCATIONS.THE_KEY &#x3d; HR_ASSIGNMENTS.THE_KEY&#xd;&#xa;	inner join HR_LOCATION on HR_LOCATION.LOCATION_NO &#x3d; HR_ASSIGNMENT_LOCATIONS.LOCATION&#xd;&#xa;where HR_EMPLOYEE_INTERLINK.status &#x3d; &#x27;A&#x27;&#xd;&#xa;    and HR_EMPLOYEE_DEMOGRAPHICS.BARGAINING_UNIT &#x3d; &#x27;ATA&#x27;&#xd;&#xa;	and &#x28;HR_ASSIGNMENTS.STATUS &#x3d; &#x27;A&#x27; OR  HR_ASSIGNMENTS.END_DATE &#x3d; &#x27;99999999&#x27;&#x29;&#xd;&#xa;	and HR_ASSIGNMENT_LOCATIONS.LOCATION_FTE &#x3e; 0&#xd;&#xa;order by last_name, first_name&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2100,6 +2042,39 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>48</xloc>
       <yloc>24</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Domain Variable</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>DIST_DOMAIN</name>
+        <variable>&#x24;&#x7b;DIST_DOMAIN&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>210</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2116,7 +2091,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>Select DISTINCT&#xd;&#xa;	HR_ASSIGNMENTS.employee_no,&#xd;&#xa;	HR_ASSIGNMENT_SUBJECT.SUBJECT, &#xd;&#xa;	HR_ASSIGNMENT_SUBJECT.LOCATION,&#xd;&#xa;	ROW_NUMBER&#x28;&#x29; over &#x28;partition by HR_ASSIGNMENTS.employee_no order by HR_ASSIGNMENT_SUBJECT.FTE_AMT DESC&#x29; as columnid,&#xd;&#xa;	HR_ASSIGNMENT_SUBJECT.FTE_AMT&#xd;&#xa;from HR_ASSIGNMENTS, HR_ASSIGNMENT_SUBJECT, HR_EMPLOYEE_DEMOGRAPHICS &#xd;&#xa;where HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO &#x3d; HR_ASSIGNMENTS.EMPLOYEE_NO&#xd;&#xa;	and HR_EMPLOYEE_DEMOGRAPHICS.BARGAINING_UNIT &#x3d; &#x27;ATA&#x27;&#xd;&#xa;	and HR_ASSIGNMENTS.END_DATE &#x3d; &#x27;99999999&#x27;&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.END_DATE &#x3d; &#x27;99999999&#x27;&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.employee_no &#x3d; HR_ASSIGNMENTS.employee_no&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.FTE_AMT &#x3e; 0 &#xd;&#xa;order by HR_ASSIGNMENTS.employee_no,HR_ASSIGNMENT_SUBJECT.FTE_AMT desc </sql>
+    <sql>Select HR_ASSIGNMENTS.employee_no,&#xd;&#xa;	HR_ASSIGNMENT_SUBJECT.LOCATION,&#xd;&#xa;	HR_ASSIGNMENT_SUBJECT.SUBJECT, &#xd;&#xa;	ROW_NUMBER&#x28;&#x29; over &#x28;partition by HR_ASSIGNMENTS.employee_no,HR_ASSIGNMENT_SUBJECT.LOCATION order by HR_ASSIGNMENT_SUBJECT.FTE_AMT DESC&#x29; as columnid,&#xd;&#xa;	HR_ASSIGNMENT_SUBJECT.FTE_AMT&#xd;&#xa;from HR_ASSIGNMENTS, HR_ASSIGNMENT_SUBJECT, HR_EMPLOYEE_DEMOGRAPHICS &#xd;&#xa;where HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO &#x3d; HR_ASSIGNMENTS.EMPLOYEE_NO&#xd;&#xa;	and HR_EMPLOYEE_DEMOGRAPHICS.BARGAINING_UNIT &#x3d; &#x27;ATA&#x27;&#xd;&#xa;	and HR_ASSIGNMENTS.END_DATE &#x3d; &#x27;99999999&#x27;&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.END_DATE &#x3d; &#x27;99999999&#x27;&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.employee_no &#x3d; HR_ASSIGNMENTS.employee_no&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.FTE_AMT &#x3e; 0 &#xd;&#xa;order by HR_ASSIGNMENTS.employee_no,HR_ASSIGNMENT_SUBJECT.FTE_AMT desc </sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2142,7 +2117,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>Select HR_ASSIGNMENT_SUBJECT.employee_no,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;K&#x27;,&#x27;0&#x27;,&#x27;PRI&#x27;&#x29; then &#x27;Y&#x27; else &#x27;&#x27; end as GradeK,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;ELEM&#x27;,&#x27;1&#x27;,&#x27;01&#x27;&#x29; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade1,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;ELEM&#x27;,&#x27;2&#x27;,&#x27;02&#x27;&#x29; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade2,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;ELEM&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;3&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade3,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;ELEM&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;4&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade4,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;ELEM&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;5&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade5,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;ELEM&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;6&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade6,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;INT&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;7&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade7,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;INT&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;8&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade8,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;INT&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;9&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade9,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;SEC&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;10&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade10,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;SEC&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;11&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade11,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;SEC&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;12&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade12&#xd;&#xa;from HR_ASSIGNMENTS, HR_ASSIGNMENT_SUBJECT, HR_EMPLOYEE_DEMOGRAPHICS &#xd;&#xa;where HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO &#x3d; HR_ASSIGNMENTS.EMPLOYEE_NO&#xd;&#xa;	and HR_EMPLOYEE_DEMOGRAPHICS.BARGAINING_UNIT &#x3d; &#x27;ATA&#x27;&#xd;&#xa;	and HR_ASSIGNMENTS.END_DATE &#x3d; &#x27;99999999&#x27;&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.END_DATE &#x3d; &#x27;99999999&#x27;&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.employee_no &#x3d; HR_ASSIGNMENTS.employee_no&#xd;&#xa;Order by 1,2</sql>
+    <sql>Select HR_ASSIGNMENT_SUBJECT.employee_no,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;K&#x27;,&#x27;0&#x27;,&#x27;PRI&#x27;&#x29; then &#x27;Y&#x27; else &#x27;&#x27; end as GradeK,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;ELEM&#x27;,&#x27;1&#x27;,&#x27;01&#x27;&#x29; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade1,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;ELEM&#x27;,&#x27;2&#x27;,&#x27;02&#x27;&#x29; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade2,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;ELEM&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;3&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade3,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;ELEM&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;4&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade4,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;ELEM&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;5&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade5,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;ELEM&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;6&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade6,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;INT&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;7&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade7,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;INT&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;8&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade8,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;INT&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;9&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade9,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;SEC&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;10&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade10,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;SEC&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;11&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade11,&#xd;&#xa;case when HR_ASSIGNMENT_SUBJECT.LEVEL in &#x28;&#x27;SEC&#x27;&#x29; OR HR_ASSIGNMENT_SUBJECT.LEVEL LIKE &#x27;&#x25;12&#x25;&#x27; then &#x27;Y&#x27; else &#x27;&#x27; end as Grade12,&#xd;&#xa;HR_ASSIGNMENT_SUBJECT.LOCATION&#xd;&#xa;from HR_ASSIGNMENTS, HR_ASSIGNMENT_SUBJECT, HR_EMPLOYEE_DEMOGRAPHICS &#xd;&#xa;where HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO &#x3d; HR_ASSIGNMENTS.EMPLOYEE_NO&#xd;&#xa;	and HR_EMPLOYEE_DEMOGRAPHICS.BARGAINING_UNIT &#x3d; &#x27;ATA&#x27;&#xd;&#xa;	and HR_ASSIGNMENTS.END_DATE &#x3d; &#x27;99999999&#x27;&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.END_DATE &#x3d; &#x27;99999999&#x27;&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.employee_no &#x3d; HR_ASSIGNMENTS.employee_no&#xd;&#xa;Order by 1,2</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2152,6 +2127,39 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>690</xloc>
       <yloc>22</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Path Variable</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>OUTPUT_PATH</name>
+        <variable>&#x24;&#x7b;OUTPUT_PATH&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>210</xloc>
+      <yloc>24</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2168,7 +2176,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>Select HR_ASSIGNMENT_SUBJECT.employee_no,&#xd;&#xa;SUM&#x28;HR_ASSIGNMENT_SUBJECT.FTE_AMT&#x29; as TEACH_FTE&#xd;&#xa;from HR_ASSIGNMENTS, HR_ASSIGNMENT_SUBJECT, HR_EMPLOYEE_DEMOGRAPHICS &#xd;&#xa;where HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO &#x3d; HR_ASSIGNMENTS.EMPLOYEE_NO&#xd;&#xa;	and HR_EMPLOYEE_DEMOGRAPHICS.BARGAINING_UNIT &#x3d; &#x27;ATA&#x27;&#xd;&#xa;	and HR_ASSIGNMENTS.END_DATE &#x3d; &#x27;99999999&#x27;&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.END_DATE &#x3d; &#x27;99999999&#x27;&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.employee_no &#x3d; HR_ASSIGNMENTS.employee_no&#xd;&#xa;Group by HR_ASSIGNMENT_SUBJECT.employee_no</sql>
+    <sql>Select HR_ASSIGNMENT_SUBJECT.employee_no,&#xd;&#xa;HR_ASSIGNMENT_SUBJECT.LOCATION,&#xd;&#xa;SUM&#x28;HR_ASSIGNMENT_SUBJECT.FTE_AMT&#x29; as TEACH_FTE&#xd;&#xa;from HR_ASSIGNMENTS, HR_ASSIGNMENT_SUBJECT, HR_EMPLOYEE_DEMOGRAPHICS &#xd;&#xa;where HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO &#x3d; HR_ASSIGNMENTS.EMPLOYEE_NO&#xd;&#xa;	and HR_EMPLOYEE_DEMOGRAPHICS.BARGAINING_UNIT &#x3d; &#x27;ATA&#x27;&#xd;&#xa;	and HR_ASSIGNMENTS.END_DATE &#x3d; &#x27;99999999&#x27;&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.END_DATE &#x3d; &#x27;99999999&#x27;&#xd;&#xa;	and HR_ASSIGNMENT_SUBJECT.employee_no &#x3d; HR_ASSIGNMENTS.employee_no&#xd;&#xa;Group by HR_ASSIGNMENT_SUBJECT.employee_no,HR_ASSIGNMENT_SUBJECT.LOCATION</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2224,14 +2232,14 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>63</xloc>
-      <yloc>164</yloc>
+      <xloc>61</xloc>
+      <yloc>131</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Merge Info together again</name>
+    <name>Merge Info</name>
     <type>SortedMerge</type>
     <description/>
     <distribute>Y</distribute>
@@ -2287,10 +2295,6 @@
         <ascending>Y</ascending>
         </field>
       <field>
-        <name>employee_email</name>
-        <ascending>Y</ascending>
-        </field>
-      <field>
         <name>LOCATION</name>
         <ascending>Y</ascending>
         </field>
@@ -2310,11 +2314,15 @@
         <name>CERT_NO</name>
         <ascending>Y</ascending>
         </field>
+      <field>
+        <name>employee_email</name>
+        <ascending>N</ascending>
+        </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>191</xloc>
-      <yloc>414</yloc>
+      <xloc>210</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

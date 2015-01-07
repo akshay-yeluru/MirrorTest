@@ -938,6 +938,43 @@ _logger.debug("   - Col " + colName + ", type [" + colType + "]");
 				}
 			}
 			
+			/*
+			 * Michael Cox
+			 * 
+			 * In the old version of the Vortex JDBC driver the primary keys did
+			 * not get reported correctly as primary keys.  Instead it reported them as an index.
+			 * 
+			 * The new Vortex JDBC driver reports the primary keys correctly but this caused
+			 * a problem as the primary keys for payroll were being created without 
+			 * the GLOBAL_PAYROLL_ID column.  This caused the data not to go into the table.
+			 * 
+			 * There are two possible fixes for this.
+			 * 
+			 * We can update the payroll_config.xml file so that only certain tables have the
+			 * GLOBAL_PAYROLL_ID column but this could change from release to release.
+			 * 
+			 * OR
+			 * 
+			 * We could use the code below that checks if a primary key is being created and if 
+			 * the GLOBAL_PAYROLL_ID column was added.  
+			 *
+			 * This hopefully makes the code backwards compatible but it looks a little 
+			 * weird to me.
+			 * 
+			 */
+			if(_cfg != null){
+				if(addedColumns.contains("GLOBAL_PAYROLL_ID")){
+					if(primaryKeys.length() > 1){
+						if(!primaryKeys.toUpperCase().contains("GLOBAL_PAYROLL_ID")){
+							primaryKeys += ",";
+							primaryKeys += "GLOBAL_PAYROLL_ID";
+							//System.out.println(primaryKeys);
+						}
+					}
+				}
+			}
+			
+			
 //_logger.debug("\t" + "2. Create SQL> [" + createSql + "]");
 
 // add primary keys

@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;12&#x2f;16 10&#x3a;58&#x3a;56.479</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;01&#x2f;14 15&#x3a;51&#x3a;25.774</modified_date>
+  <modified_date>2015&#x2f;01&#x2f;21 16&#x3a;14&#x3a;23.842</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -181,7 +181,7 @@
     <server>localhost</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>receivables-warehouse</database>
+    <database>payroll-warehouse</database>
     <port>1433</port>
     <username>srb</username>
     <password>Encrypted 2be98afc86aa7a697a80abd7987cbf683</password>
@@ -220,9 +220,7 @@
   <hop> <from>PositionCrossRefNON</from><to>Sort rows 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 4</from><to>Merge Join 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 6</from><to>SortByEmp</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>Sort rows 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 3</from><to>Merge Join 4</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values 5</from><to>Sort rows 3 2</to><enabled>Y</enabled> </hop>
   <hop> <from>PositionCrossRefTEAC</from><to>Sort rows7</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 3 2</from><to>Merge Join 5</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows7</from><to>Merge Join 5</to><enabled>Y</enabled> </hop>
@@ -246,7 +244,12 @@
   <hop> <from>Select values 4 2</from><to>Sort rows 5</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 5</from><to>Sorted Merge 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 7</from><to>Sorted Merge 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sorted Merge 2</from><to>PRJOBMAS</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sorted Merge 2</from><to>Value Mapper</to><enabled>Y</enabled> </hop>
+  <hop> <from>Value Mapper</from><to>PRJOBMAS</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>PadLoc</to><enabled>Y</enabled> </hop>
+  <hop> <from>PadLoc</from><to>Sort rows 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 5</from><to>PadLoc 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>PadLoc 2</from><to>Sort rows 3 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -1400,7 +1403,7 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>262</xloc>
+      <xloc>266</xloc>
       <yloc>166</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1431,7 +1434,7 @@
     <fileNameField/>
     <create_parent_folder>N</create_parent_folder>
     <file>
-      <name>C&#x3a;&#x5c;Users&#x5c;NatalieY&#x5c;Documents&#x5c;Conversions&#x5c;Sunrise&#x5c;ForConversion&#x5c;PRJOBMAS.csv</name>
+      <name>C&#x3a;&#x5c;Users&#x5c;NatalieY&#x5c;Documents&#x5c;Conversions&#x5c;Sunrise&#x5c;PentahoOutput&#x5c;forConversion&#x5c;PRJOBMAS.csv</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
@@ -2606,8 +2609,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>142</xloc>
-      <yloc>35</yloc>
+      <xloc>106</xloc>
+      <yloc>25</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3570,8 +3573,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>112</xloc>
-      <yloc>170</yloc>
+      <xloc>88</xloc>
+      <yloc>167</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6257,7 +6260,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -7826,7 +7829,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -8140,8 +8143,116 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>39</xloc>
-      <yloc>163</yloc>
+      <xloc>26</xloc>
+      <yloc>168</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Value Mapper</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <field_to_use>PayLocation</field_to_use>
+    <target_field/>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value>0070</source_value>
+        <target_value>0012</target_value>
+      </field>
+      <field>
+        <source_value>0088</source_value>
+        <target_value>0000</target_value>
+      </field>
+      <field>
+        <source_value>0026</source_value>
+        <target_value>0023</target_value>
+      </field>
+      <field>
+        <source_value>0084</source_value>
+        <target_value>0012</target_value>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>466</xloc>
+      <yloc>1099</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>PadLoc</name>
+    <type>StringOperations</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>PayLocation</in_stream_name>
+        <out_stream_name/>
+        <trim_type>none</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>left</padding_type>
+        <pad_char>0</pad_char>
+        <pad_len>4</pad_len>
+        <init_cap>no</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>168</xloc>
+      <yloc>33</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>PadLoc 2</name>
+    <type>StringOperations</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>PayLocation</in_stream_name>
+        <out_stream_name/>
+        <trim_type>none</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>left</padding_type>
+        <pad_char>0</pad_char>
+        <pad_len>4</pad_len>
+        <init_cap>no</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>135</xloc>
+      <yloc>167</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

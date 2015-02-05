@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;12&#x2f;16 10&#x3a;58&#x3a;56.479</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;01&#x2f;21 16&#x3a;14&#x3a;23.842</modified_date>
+  <modified_date>2015&#x2f;02&#x2f;04 16&#x3a;15&#x3a;10.627</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -233,10 +233,8 @@
   <hop> <from>Calculator 2</from><to>Select values 6 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 4</from><to>SetFTE</to><enabled>Y</enabled> </hop>
   <hop> <from>SetFTE</from><to>Replace in string</to><enabled>Y</enabled> </hop>
-  <hop> <from>JobCodeOverride</from><to>SortByEmpNo</to><enabled>Y</enabled> </hop>
   <hop> <from>Replace in string</from><to>Sort rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Merge Join 3</to><enabled>Y</enabled> </hop>
-  <hop> <from>SortByEmpNo</from><to>Merge Join 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Merge Join 3</from><to>Filter rows 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 2</from><to>Select values 4 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 2</from><to>Select values 4 2</to><enabled>Y</enabled> </hop>
@@ -250,6 +248,9 @@
   <hop> <from>PadLoc</from><to>Sort rows 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 5</from><to>PadLoc 2</to><enabled>Y</enabled> </hop>
   <hop> <from>PadLoc 2</from><to>Sort rows 3 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>JobCodeOverride</from><to>SortByEmpNo</to><enabled>Y</enabled> </hop>
+  <hop> <from>SortByEmpNo</from><to>String operations</to><enabled>Y</enabled> </hop>
+  <hop> <from>String operations</from><to>Merge Join 3</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -1007,8 +1008,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>367</xloc>
-      <yloc>86</yloc>
+      <xloc>496</xloc>
+      <yloc>74</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1040,8 +1041,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>329</xloc>
-      <yloc>163</yloc>
+      <xloc>454</xloc>
+      <yloc>161</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1073,8 +1074,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>394</xloc>
-      <yloc>33</yloc>
+      <xloc>566</xloc>
+      <yloc>75</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1106,8 +1107,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>390</xloc>
-      <yloc>159</yloc>
+      <xloc>548</xloc>
+      <yloc>161</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1143,7 +1144,7 @@
 
   <step>
     <name>JobCodeOverride</name>
-    <type>AccessInput</type>
+    <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1152,117 +1153,102 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <include>N</include>
-    <include_field/>
-    <tablename>N</tablename>
-    <filename_Field/>
-    <tablename_field/>
-    <rownum>N</rownum>
-    <isaddresult>Y</isaddresult>
-    <filefield>N</filefield>
+    <filename>C&#x3a;&#x5c;Users&#x5c;NatalieY&#x5c;Documents&#x5c;Conversions&#x5c;Sunrise&#x5c;PentahoInput&#x5c;CrossRefs&#x5c;JobCodeOverrides.csv</filename>
+    <filename_field/>
     <rownum_field/>
-    <resetrownumber>N</resetrownumber>
-    <table_name>JobCodeOverrides</table_name>
-    <file>
-      <name>C&#x3a;&#x5c;Users&#x5c;NatalieY&#x5c;Documents&#x5c;Conversions&#x5c;Sunrise&#x5c;AccessDB&#x5c;nonteach.mdb</name>
-      <filemask/>
-      <exclude_filemask/>
-      <file_required>N</file_required>
-      <include_subfolders>N</include_subfolders>
-    </file>
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>&#x22;</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>N</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding/>
     <fields>
       <field>
         <name>JOBCODE</name>
-        <attribut>JOBCODE</attribut>
         <type>String</type>
         <format/>
-        <length>-1</length>
-        <precision>-1</precision>
         <currency/>
         <decimal/>
         <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
-        <repeat>N</repeat>
       </field>
       <field>
         <name>EMPNO</name>
-        <attribut>EMPNO</attribut>
         <type>String</type>
         <format/>
-        <length>-1</length>
-        <precision>-1</precision>
         <currency/>
         <decimal/>
         <group/>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
       </field>
       <field>
         <name>Field3</name>
-        <attribut>Field3</attribut>
         <type>String</type>
         <format/>
-        <length>-1</length>
-        <precision>-1</precision>
         <currency/>
         <decimal/>
         <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
-        <repeat>N</repeat>
       </field>
       <field>
         <name>Field4</name>
-        <attribut>Field4</attribut>
         <type>String</type>
         <format/>
-        <length>-1</length>
-        <precision>-1</precision>
         <currency/>
         <decimal/>
         <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
-        <repeat>N</repeat>
       </field>
       <field>
         <name>OLDOCC</name>
-        <attribut>OLDOCC</attribut>
         <type>String</type>
         <format/>
-        <length>-1</length>
-        <precision>-1</precision>
         <currency/>
         <decimal/>
         <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
-        <repeat>N</repeat>
       </field>
       <field>
         <name>NEWOCC</name>
-        <attribut>NEWOCC</attribut>
         <type>String</type>
         <format/>
-        <length>-1</length>
-        <precision>-1</precision>
         <currency/>
         <decimal/>
         <group/>
+        <length>-1</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
-        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>Position_Name</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
     </fields>
-    <limit>0</limit>
-    <shortFileFieldName/>
-    <pathFieldName/>
-    <hiddenFieldName/>
-    <lastModificationTimeFieldName/>
-    <uriNameFieldName/>
-    <rootUriNameFieldName/>
-    <extensionFieldName/>
-    <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>47</xloc>
-      <yloc>814</yloc>
+      <xloc>27</xloc>
+      <yloc>716</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1336,14 +1322,12 @@
            </partitioning>
 <join_type>LEFT OUTER</join_type>
 <step1>Sort rows</step1>
-<step2>SortByEmpNo</step2>
+<step2>String operations</step2>
     <keys_1>
       <key>Employee</key>
-      <key>NewCode</key>
     </keys_1>
     <keys_2>
       <key>EMPNO</key>
-      <key>OLDOCC</key>
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -1375,8 +1359,8 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>305</xloc>
-      <yloc>43</yloc>
+      <xloc>425</xloc>
+      <yloc>71</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1403,8 +1387,8 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>266</xloc>
-      <yloc>166</yloc>
+      <xloc>376</xloc>
+      <yloc>158</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2266,6 +2250,74 @@
     </step>
 
   <step>
+    <name>PadLoc</name>
+    <type>StringOperations</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>PayLocation</in_stream_name>
+        <out_stream_name/>
+        <trim_type>none</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>left</padding_type>
+        <pad_char>0</pad_char>
+        <pad_len>4</pad_len>
+        <init_cap>no</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>267</xloc>
+      <yloc>29</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>PadLoc 2</name>
+    <type>StringOperations</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>PayLocation</in_stream_name>
+        <out_stream_name/>
+        <trim_type>none</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>left</padding_type>
+        <pad_char>0</pad_char>
+        <pad_len>4</pad_len>
+        <init_cap>no</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>204</xloc>
+      <yloc>148</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>PositionCrossRefNON</name>
     <type>AccessInput</type>
     <description/>
@@ -2288,7 +2340,7 @@
     <resetrownumber>N</resetrownumber>
     <table_name>PositionCrossRef</table_name>
     <file>
-      <name>C&#x3a;&#x5c;Users&#x5c;NatalieY&#x5c;Documents&#x5c;Conversions&#x5c;Sunrise&#x5c;AccessDB&#x5c;nonteach.mdb</name>
+      <name>C&#x3a;&#x5c;Users&#x5c;NatalieY&#x5c;Documents&#x5c;Conversions&#x5c;Sunrise&#x5c;AccessDB&#x5c;nonteachv1.mdb</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -2414,7 +2466,7 @@
     <resetrownumber>N</resetrownumber>
     <table_name>PositionCrossRef</table_name>
     <file>
-      <name>C&#x3a;&#x5c;Users&#x5c;NatalieY&#x5c;Documents&#x5c;Conversions&#x5c;Sunrise&#x5c;AccessDB&#x5c;teach.mdb</name>
+      <name>C&#x3a;&#x5c;Users&#x5c;NatalieY&#x5c;Documents&#x5c;Conversions&#x5c;Sunrise&#x5c;AccessDB&#x5c;teachv1.mdb</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -2609,7 +2661,7 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>106</xloc>
+      <xloc>167</xloc>
       <yloc>25</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3573,8 +3625,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>88</xloc>
-      <yloc>167</yloc>
+      <xloc>139</xloc>
+      <yloc>157</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3617,8 +3669,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>450</xloc>
-      <yloc>37</yloc>
+      <xloc>654</xloc>
+      <yloc>88</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3661,8 +3713,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>445</xloc>
-      <yloc>146</yloc>
+      <xloc>620</xloc>
+      <yloc>169</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3723,7 +3775,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>364</xloc>
+      <xloc>366</xloc>
       <yloc>771</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3757,8 +3809,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>228</xloc>
-      <yloc>40</yloc>
+      <xloc>338</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3791,8 +3843,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>182</xloc>
-      <yloc>161</yloc>
+      <xloc>277</xloc>
+      <yloc>141</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3825,8 +3877,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>146</xloc>
-      <yloc>106</yloc>
+      <xloc>167</xloc>
+      <yloc>88</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3961,8 +4013,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>527</xloc>
-      <yloc>44</yloc>
+      <xloc>754</xloc>
+      <yloc>136</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3995,8 +4047,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>500</xloc>
-      <yloc>132</yloc>
+      <xloc>712</xloc>
+      <yloc>190</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4131,8 +4183,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>148</xloc>
-      <yloc>810</yloc>
+      <xloc>114</xloc>
+      <yloc>718</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4156,8 +4208,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>624</xloc>
-      <yloc>218</yloc>
+      <xloc>857</xloc>
+      <yloc>235</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4183,6 +4235,80 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>379</xloc>
       <yloc>1042</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>String operations</name>
+    <type>StringOperations</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>NEWOCC</in_stream_name>
+        <out_stream_name/>
+        <trim_type>none</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>left</padding_type>
+        <pad_char>0</pad_char>
+        <pad_len>4</pad_len>
+        <init_cap>no</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>191</xloc>
+      <yloc>774</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Value Mapper</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <field_to_use>PayLocation</field_to_use>
+    <target_field/>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value>0070</source_value>
+        <target_value>0012</target_value>
+      </field>
+      <field>
+        <source_value>0088</source_value>
+        <target_value>0000</target_value>
+      </field>
+      <field>
+        <source_value>0026</source_value>
+        <target_value>0023</target_value>
+      </field>
+      <field>
+        <source_value>0084</source_value>
+        <target_value>0012</target_value>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>466</xloc>
+      <yloc>1099</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4240,7 +4366,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -4366,7 +4492,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -5090,7 +5216,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -6574,8 +6700,8 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>42</xloc>
-      <yloc>35</yloc>
+      <xloc>62</xloc>
+      <yloc>21</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6659,7 +6785,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -8143,116 +8269,8 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>26</xloc>
-      <yloc>168</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Value Mapper</name>
-    <type>ValueMapper</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <field_to_use>PayLocation</field_to_use>
-    <target_field/>
-    <non_match_default/>
-    <fields>
-      <field>
-        <source_value>0070</source_value>
-        <target_value>0012</target_value>
-      </field>
-      <field>
-        <source_value>0088</source_value>
-        <target_value>0000</target_value>
-      </field>
-      <field>
-        <source_value>0026</source_value>
-        <target_value>0023</target_value>
-      </field>
-      <field>
-        <source_value>0084</source_value>
-        <target_value>0012</target_value>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>466</xloc>
-      <yloc>1099</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>PadLoc</name>
-    <type>StringOperations</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>PayLocation</in_stream_name>
-        <out_stream_name/>
-        <trim_type>none</trim_type>
-        <lower_upper>none</lower_upper>
-        <padding_type>left</padding_type>
-        <pad_char>0</pad_char>
-        <pad_len>4</pad_len>
-        <init_cap>no</init_cap>
-        <mask_xml>none</mask_xml>
-        <digits>none</digits>
-        <remove_special_characters>none</remove_special_characters>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>168</xloc>
-      <yloc>33</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>PadLoc 2</name>
-    <type>StringOperations</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>PayLocation</in_stream_name>
-        <out_stream_name/>
-        <trim_type>none</trim_type>
-        <lower_upper>none</lower_upper>
-        <padding_type>left</padding_type>
-        <pad_char>0</pad_char>
-        <pad_len>4</pad_len>
-        <init_cap>no</init_cap>
-        <mask_xml>none</mask_xml>
-        <digits>none</digits>
-        <remove_special_characters>none</remove_special_characters>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>135</xloc>
-      <yloc>167</yloc>
+      <xloc>50</xloc>
+      <yloc>161</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

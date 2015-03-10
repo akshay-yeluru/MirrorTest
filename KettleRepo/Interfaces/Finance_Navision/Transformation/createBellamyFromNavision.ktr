@@ -1,12 +1,12 @@
 <transformation>
   <info>
-    <name>add4thDatabase</name>
+    <name>createBellamyFromNavision</name>
     <description>Create Bellamy CSV files from Great Plains</description>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>&#x2f;Interfaces&#x2f;Finance_GreatPlains&#x2f;Transformation</directory>
+    <directory>&#x2f;Interfaces&#x2f;Finance_Navision&#x2f;Transformation</directory>
     <parameters>
     </parameters>
     <log>
@@ -68,30 +68,9 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;02&#x2f;20 13&#x3a;43&#x3a;25.367</modified_date>
+  <modified_date>2015&#x2f;01&#x2f;21 12&#x3a;51&#x3a;25.839</modified_date>
   </info>
   <notepads>
-    <notepad>
-      <note>The 4th database transformation is unique to Sunrise and the Capital database &#x28;SUNCA&#x29;.   &#xd;&#xa;As the account numbers are not the same length as the account numbers in the other databases, &#xd;&#xa;this transformation adds a &#x27;-000&#x27; to the end of the account number in the glMastr, pomstgl, glTrans and the historical glTrans files</note>
-      <xloc>16</xloc>
-      <yloc>0</yloc>
-      <width>694</width>
-      <heigth>58</heigth>
-      <fontname>Segoe UI</fontname>
-      <fontsize>9</fontsize>
-      <fontbold>N</fontbold>
-      <fontitalic>N</fontitalic>
-      <fontcolorred>0</fontcolorred>
-      <fontcolorgreen>0</fontcolorgreen>
-      <fontcolorblue>0</fontcolorblue>
-      <backgroundcolorred>255</backgroundcolorred>
-      <backgroundcolorgreen>205</backgroundcolorgreen>
-      <backgroundcolorblue>112</backgroundcolorblue>
-      <bordercolorred>100</bordercolorred>
-      <bordercolorgreen>100</bordercolorgreen>
-      <bordercolorblue>100</bordercolorblue>
-      <drawshadow>Y</drawshadow>
-    </notepad>
   </notepads>
   <connection>
     <name>GREATPLAINS2_DB</name>
@@ -353,665 +332,20 @@
     </attributes>
   </connection>
   <order>
+  <hop> <from>Vendor EFT</from><to>apvenbk</to><enabled>Y</enabled> </hop>
+  <hop> <from>Vendor Master</from><to>apvndwhse</to><enabled>Y</enabled> </hop>
   <hop> <from>GP Account Master</from><to>glMastr</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP Purchase Order</from><to>Create pomsthd</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP current journal entries</from><to>gltrans &#x28;current&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP 2014 journal entries</from><to>gltrans2014 &#x28;Historical&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP 2013 journal entries</from><to>gltrans2013 &#x28;Historical&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP 2012 journal entries</from><to>gltrans2012 &#x28;Historical&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP 2011 journal entries</from><to>gltrans2011 &#x28;Historical&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP Purchase Order</from><to>Add Account Number</to><enabled>Y</enabled> </hop>
-  <hop> <from>PO Account Numbers</from><to>Add Account Number</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Account Number</from><to>Create pomstgl</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP Vendor EFT</from><to>Merge Rows &#x28;EFT 2&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP Vendor Master</from><to>Merge Rows &#x28;Vendors 2&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP Vendor Master 2</from><to>Merge Rows &#x28;Vendors 2&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Merge Rows &#x28;Vendors 2&#x29;</from><to>Merge Rows &#x28;Vendors 3&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP Vendor EFT 2</from><to>Merge Rows &#x28;EFT 2&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Merge Rows &#x28;EFT 2&#x29;</from><to>Merge Rows &#x28;EFT 3&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP Vendor Master 3</from><to>Merge Rows &#x28;Vendors 3&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP Vendor EFT 3</from><to>Merge Rows &#x28;EFT 3&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Merge Rows &#x28;Vendors 3&#x29;</from><to>Merge Rows &#x28;Vendors 4&#x29; </to><enabled>Y</enabled> </hop>
-  <hop> <from>Merge Rows &#x28;Vendors 4&#x29; </from><to>apvndwhse</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP Vendor EFT 4</from><to>Merge Rows &#x28;EFT 4&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>GP Vendor Master 4</from><to>Merge Rows &#x28;Vendors 4&#x29; </to><enabled>Y</enabled> </hop>
-  <hop> <from>Merge Rows &#x28;EFT 3&#x29;</from><to>Merge Rows &#x28;EFT 4&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Merge Rows &#x28;EFT 4&#x29;</from><to>apvenbk</to><enabled>Y</enabled> </hop>
+  <hop> <from>2009 Journal Entries</from><to>gltrans2009</to><enabled>Y</enabled> </hop>
+  <hop> <from>2010 Journal Enries</from><to>gltrans2010</to><enabled>Y</enabled> </hop>
+  <hop> <from>2011 Journal Enries</from><to>gltrans2011</to><enabled>Y</enabled> </hop>
+  <hop> <from>2012 Journal Enries</from><to>gltrans2012</to><enabled>Y</enabled> </hop>
+  <hop> <from>2013 Journal Enries</from><to>gltrans2013</to><enabled>Y</enabled> </hop>
+  <hop> <from>2014 Journal Enries</from><to>gltrans2014</to><enabled>Y</enabled> </hop>
+  <hop> <from>2015 Journal Enries</from><to>gltrans2015 </to><enabled>Y</enabled> </hop>
+  <hop> <from>2016 Journal Enries</from><to>gltrans2016</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Add Account Number</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>PO Account Numbers</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>PONUMBER</name>
-        <field>POnbr</field>
-      </key>
-      <value>
-        <name>ACTNUMST</name>
-        <rename>POAccount</rename>
-        <default> </default>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1043</xloc>
-      <yloc>209</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Create pomstgl</name>
-    <type>TextFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <separator>,</separator>
-    <enclosure>&#x22;</enclosure>
-    <enclosure_forced>Y</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding>windows-1252</encoding>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField>coutput</fileNameField>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;pomstgl</name>
-      <is_command>N</is_command>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
-      <extention>CSV</extention>
-      <append>Y</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>N</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>POPREFIX</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PONUM</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POSEQ</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POAccount</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POAmount</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1146</xloc>
-      <yloc>209</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Create pomsthd</name>
-    <type>TextFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <separator>,</separator>
-    <enclosure>&#x22;</enclosure>
-    <enclosure_forced>Y</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding>windows-1252</encoding>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField>coutput</fileNameField>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;pomsthd</name>
-      <is_command>N</is_command>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
-      <extention>CSV</extention>
-      <append>Y</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>N</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
-    <fields>
-      <field>
-        <name>POPREFIX</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PONUM</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POSEQ</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PODESCRIPTION</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POVENDID</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POVENDID</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>poordercentury</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>poorderyyear</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>poordermonth</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>poorderday</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>podelcentury</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>podelyear</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>podelmonth</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>podelyear</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>poexpcentury</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>poexpyear</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>poexpmonth</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>poexpday</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POUserID</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POTYPE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POSTATUS</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POYes</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POYes</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POFILLER</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POFILLER</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POFILLER</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POFILLER</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POAmount</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POYes</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POYear</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>polocationcode</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POFILLER</name>
-        <type>String</type>
-        <format> </format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POFILLER</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POFILLER</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POFILLER</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>povendorfax</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1146</xloc>
-      <yloc>78</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>GP 2011 journal entries</name>
+    <name>2009 Journal Entries</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1021,8 +355,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>GREATPLAINS4_DB</connection>
-    <sql>Select &#xd;&#xa;	JRNENTRY as glbch_nbr,&#xd;&#xa;	SEQNUMBR as glbsq_nbr,&#xd;&#xa;	&#x28;select SUBSTRING&#x28;GL00105.ACTNUMST,1,9&#x29;&#x2b;&#x27;-000-&#x27;&#x2b;SUBSTRING&#x28;GL00105.ACTNUMST,11,3&#x29; from gl00105 where gl00105.actindx &#x3d; GL30000.actindx&#x29; as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	Replace&#x28;refrence,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29; as gldes1,&#xd;&#xa;	Replace&#x28;DSCRIPTN,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29; as gldes2,&#xd;&#xa;	JRNENTRY as glref_nbr,&#xd;&#xa;	case when crdtamnt &#x3d; 0 then debitamt else crdtamnt &#x2a; -1 end as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	SOURCDOC as glfsub,&#xd;&#xa;	&#x27;&#x27; as glsact,&#xd;&#xa;	&#x27;&#x27; as glofst,&#xd;&#xa;	HSTyear as glyear,&#xd;&#xa;	PERIODID as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From GL30000&#xd;&#xa;where hstyear &#x3d; 2011 &#xd;&#xa;	and hstyear &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d;&#xd;&#xa;	and voided &#x3d; 0 &#xd;&#xa;and SOURCDOC not in &#x28;&#x27;BBF&#x27;,&#x27;P&#x2f;L&#x27;&#x29;&#xd;&#xa;order by hstyear,periodid</sql>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>Select &#xd;&#xa;	&#x5b;Entry No_&#x5d; as glbch_nbr,&#xd;&#xa;	&#x5b;Transaction No_&#x5d; as glbsq_nbr,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment1&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length1&#x7d; &#x3d; 0 then &#x27;&#x27; else     RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment1&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length1&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment2&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length2&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment2&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length2&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment3&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length3&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment3&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length3&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment4&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length4&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment4&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length4&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment5&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length5&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment5&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length5&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment6&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length6&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment6&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length6&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment7&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length7&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment7&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length7&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment8&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length8&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment8&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length8&#x7d;&#x29; end &#xd;&#xa;		as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;Description&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes1,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;External Document No_&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes2,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glref_nbr,&#xd;&#xa;	&#x5b;Amount&#x5d; as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	&#x5b;Source Code&#x5d; as glfsub,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glsact,&#xd;&#xa;	&#x27; &#x27; as glofst,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x2b; 1 &#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29;  &#xd;&#xa;		end&#xd;&#xa;		as glyear,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; - 8&#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x2b; 4 &#xd;&#xa;		end&#xd;&#xa;		as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;&#xd;&#xa;Where &#x5b;Posting Date&#x5d; &#x3e;&#x3d; &#x27;2008.09.01&#x27; &#xd;&#xa;	and &#x5b;Posting Date&#x5d; &#x3c; &#x27;2009.09.01&#x27;  &#xd;&#xa;	and convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d;  &#xd;&#xa;order by glyear, glprno, glact_nbr</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1030,14 +364,14 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>754</xloc>
-      <yloc>78</yloc>
+      <xloc>431</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>GP 2012 journal entries</name>
+    <name>2010 Journal Enries</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1047,8 +381,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>GREATPLAINS4_DB</connection>
-    <sql>Select &#xd;&#xa;	JRNENTRY as glbch_nbr,&#xd;&#xa;	SEQNUMBR as glbsq_nbr,&#xd;&#xa;	&#x28;select SUBSTRING&#x28;GL00105.ACTNUMST,1,9&#x29;&#x2b;&#x27;-000-&#x27;&#x2b;SUBSTRING&#x28;GL00105.ACTNUMST,11,3&#x29; from gl00105 where gl00105.actindx &#x3d; GL30000.actindx&#x29; as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	Replace&#x28;refrence,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29; as gldes1,&#xd;&#xa;	Replace&#x28;DSCRIPTN,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29; as gldes2,&#xd;&#xa;	JRNENTRY as glref_nbr,&#xd;&#xa;	case when crdtamnt &#x3d; 0 then debitamt else crdtamnt &#x2a; -1 end as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	SOURCDOC as glfsub,&#xd;&#xa;	&#x27;&#x27; as glsact,&#xd;&#xa;	&#x27;&#x27; as glofst,&#xd;&#xa;	HSTyear as glyear,&#xd;&#xa;	PERIODID as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From GL30000&#xd;&#xa;where hstyear &#x3d; 2012 &#xd;&#xa;	and hstyear &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d;&#xd;&#xa;	and voided &#x3d; 0 &#xd;&#xa;	and SOURCDOC not in &#x28;&#x27;BBF&#x27;,&#x27;P&#x2f;L&#x27;&#x29;&#xd;&#xa;order by hstyear,periodid</sql>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>Select &#xd;&#xa;	&#x5b;Entry No_&#x5d; as glbch_nbr,&#xd;&#xa;	&#x5b;Transaction No_&#x5d; as glbsq_nbr,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment1&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length1&#x7d; &#x3d; 0 then &#x27;&#x27; else     RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment1&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length1&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment2&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length2&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment2&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length2&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment3&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length3&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment3&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length3&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment4&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length4&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment4&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length4&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment5&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length5&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment5&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length5&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment6&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length6&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment6&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length6&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment7&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length7&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment7&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length7&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment8&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length8&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment8&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length8&#x7d;&#x29; end &#xd;&#xa;		as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;Description&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes1,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;External Document No_&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes2,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glref_nbr,&#xd;&#xa;	&#x5b;Amount&#x5d; as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	&#x5b;Source Code&#x5d; as glfsub,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glsact,&#xd;&#xa;	&#x27; &#x27; as glofst,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x2b; 1 &#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29;  &#xd;&#xa;		end&#xd;&#xa;		as glyear,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; - 8&#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x2b; 4 &#xd;&#xa;		end&#xd;&#xa;		as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;&#xd;&#xa;Where &#x5b;Posting Date&#x5d; &#x3e;&#x3d; &#x27;2009.09.01&#x27; &#xd;&#xa;	and &#x5b;Posting Date&#x5d; &#x3c; &#x27;2010.09.01&#x27;  &#xd;&#xa;	and convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d;  &#xd;&#xa;order by glyear, glprno, glact_nbr</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1056,14 +390,14 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>620</xloc>
-      <yloc>78</yloc>
+      <xloc>554</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>GP 2013 journal entries</name>
+    <name>2011 Journal Enries</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1073,8 +407,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>GREATPLAINS4_DB</connection>
-    <sql>Select &#xd;&#xa;	JRNENTRY as glbch_nbr,&#xd;&#xa;	SEQNUMBR as glbsq_nbr,&#xd;&#xa;	&#x28;select SUBSTRING&#x28;GL00105.ACTNUMST,1,9&#x29;&#x2b;&#x27;-000-&#x27;&#x2b;SUBSTRING&#x28;GL00105.ACTNUMST,11,3&#x29; from gl00105 where gl00105.actindx &#x3d; GL30000.actindx&#x29; as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	Replace&#x28;refrence,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29; as gldes1,&#xd;&#xa;	Replace&#x28;DSCRIPTN,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29; as gldes2,&#xd;&#xa;	JRNENTRY as glref_nbr,&#xd;&#xa;	case when crdtamnt &#x3d; 0 then debitamt else crdtamnt &#x2a; -1 end as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	SOURCDOC as glfsub,&#xd;&#xa;	&#x27;&#x27; as glsact,&#xd;&#xa;	&#x27;&#x27; as glofst,&#xd;&#xa;	HSTyear as glyear,&#xd;&#xa;	PERIODID as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From GL30000&#xd;&#xa;where hstyear &#x3d; 2013 &#xd;&#xa;	and hstyear &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d;&#xd;&#xa;	and voided &#x3d; 0 &#xd;&#xa;	and SOURCDOC not in &#x28;&#x27;BBF&#x27;,&#x27;P&#x2f;L&#x27;&#x29;&#xd;&#xa;order by hstyear,periodid</sql>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>Select &#xd;&#xa;	&#x5b;Entry No_&#x5d; as glbch_nbr,&#xd;&#xa;	&#x5b;Transaction No_&#x5d; as glbsq_nbr,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment1&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length1&#x7d; &#x3d; 0 then &#x27;&#x27; else     RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment1&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length1&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment2&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length2&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment2&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length2&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment3&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length3&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment3&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length3&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment4&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length4&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment4&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length4&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment5&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length5&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment5&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length5&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment6&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length6&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment6&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length6&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment7&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length7&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment7&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length7&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment8&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length8&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment8&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length8&#x7d;&#x29; end &#xd;&#xa;		as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;Description&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes1,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;External Document No_&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes2,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glref_nbr,&#xd;&#xa;	&#x5b;Amount&#x5d; as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	&#x5b;Source Code&#x5d; as glfsub,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glsact,&#xd;&#xa;	&#x27; &#x27; as glofst,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x2b; 1 &#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29;  &#xd;&#xa;		end&#xd;&#xa;		as glyear,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; - 8&#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x2b; 4 &#xd;&#xa;		end&#xd;&#xa;		as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;&#xd;&#xa;Where &#x5b;Posting Date&#x5d; &#x3e;&#x3d; &#x27;2010.09.01&#x27; &#xd;&#xa;	and &#x5b;Posting Date&#x5d; &#x3c; &#x27;2011.09.01&#x27;  &#xd;&#xa;	and convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d;  &#xd;&#xa;order by glyear, glprno, glact_nbr</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1082,14 +416,14 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>486</xloc>
-      <yloc>78</yloc>
+      <xloc>677</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>GP 2014 journal entries</name>
+    <name>2012 Journal Enries</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1099,8 +433,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>GREATPLAINS4_DB</connection>
-    <sql>Select &#xd;&#xa;	JRNENTRY as glbch_nbr,&#xd;&#xa;	SEQNUMBR as glbsq_nbr,&#xd;&#xa;	&#x28;select SUBSTRING&#x28;GL00105.ACTNUMST,1,9&#x29;&#x2b;&#x27;-000-&#x27;&#x2b;SUBSTRING&#x28;GL00105.ACTNUMST,11,3&#x29; from gl00105 where gl00105.actindx &#x3d; GL30000.actindx&#x29; as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL30000.TRXDATE,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	Replace&#x28;refrence,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29; as gldes1,&#xd;&#xa;	Replace&#x28;DSCRIPTN,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29; as gldes2,&#xd;&#xa;	JRNENTRY as glref_nbr,&#xd;&#xa;	case when crdtamnt &#x3d; 0 then debitamt else crdtamnt &#x2a; -1 end as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	SOURCDOC as glfsub,&#xd;&#xa;	&#x27;&#x27; as glsact,&#xd;&#xa;	&#x27;&#x27; as glofst,&#xd;&#xa;	HSTyear as glyear,&#xd;&#xa;	PERIODID as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From GL30000&#xd;&#xa;where hstyear &#x3d; 2014 &#xd;&#xa;	and hstyear &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d;&#xd;&#xa;	and voided &#x3d; 0 &#xd;&#xa;	and SOURCDOC not in &#x28;&#x27;BBF&#x27;,&#x27;P&#x2f;L&#x27;&#x29;&#xd;&#xa;order by hstyear,periodid</sql>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>Select &#xd;&#xa;	&#x5b;Entry No_&#x5d; as glbch_nbr,&#xd;&#xa;	&#x5b;Transaction No_&#x5d; as glbsq_nbr,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment1&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length1&#x7d; &#x3d; 0 then &#x27;&#x27; else     RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment1&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length1&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment2&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length2&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment2&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length2&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment3&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length3&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment3&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length3&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment4&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length4&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment4&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length4&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment5&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length5&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment5&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length5&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment6&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length6&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment6&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length6&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment7&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length7&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment7&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length7&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment8&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length8&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment8&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length8&#x7d;&#x29; end &#xd;&#xa;		as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;Description&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes1,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;External Document No_&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes2,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glref_nbr,&#xd;&#xa;	&#x5b;Amount&#x5d; as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	&#x5b;Source Code&#x5d; as glfsub,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glsact,&#xd;&#xa;	&#x27; &#x27; as glofst,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x2b; 1 &#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29;  &#xd;&#xa;		end&#xd;&#xa;		as glyear,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; - 8&#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x2b; 4 &#xd;&#xa;		end&#xd;&#xa;		as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;&#xd;&#xa;Where &#x5b;Posting Date&#x5d; &#x3e;&#x3d; &#x27;2011.09.01&#x27; &#xd;&#xa;	and &#x5b;Posting Date&#x5d; &#x3c; &#x27;2012.09.01&#x27;  &#xd;&#xa;	and convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d;  &#xd;&#xa;order by glyear, glprno, glact_nbr</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1108,8 +442,112 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>352</xloc>
-      <yloc>78</yloc>
+      <xloc>800</xloc>
+      <yloc>20</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>2013 Journal Enries</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>Select &#xd;&#xa;	&#x5b;Entry No_&#x5d; as glbch_nbr,&#xd;&#xa;	&#x5b;Transaction No_&#x5d; as glbsq_nbr,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment1&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length1&#x7d; &#x3d; 0 then &#x27;&#x27; else     RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment1&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length1&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment2&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length2&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment2&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length2&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment3&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length3&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment3&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length3&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment4&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length4&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment4&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length4&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment5&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length5&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment5&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length5&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment6&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length6&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment6&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length6&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment7&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length7&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment7&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length7&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment8&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length8&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment8&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length8&#x7d;&#x29; end &#xd;&#xa;		as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;Description&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes1,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;External Document No_&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes2,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glref_nbr,&#xd;&#xa;	&#x5b;Amount&#x5d; as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	&#x5b;Source Code&#x5d; as glfsub,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glsact,&#xd;&#xa;	&#x27; &#x27; as glofst,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x2b; 1 &#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29;  &#xd;&#xa;		end&#xd;&#xa;		as glyear,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; - 8&#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x2b; 4 &#xd;&#xa;		end&#xd;&#xa;		as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;&#xd;&#xa;Where &#x5b;Posting Date&#x5d; &#x3e;&#x3d; &#x27;2012.09.01&#x27; &#xd;&#xa;	and &#x5b;Posting Date&#x5d; &#x3c; &#x27;2013.09.01&#x27;  &#xd;&#xa;	and convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d;  &#xd;&#xa;order by glyear, glprno, glact_nbr</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>923</xloc>
+      <yloc>20</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>2014 Journal Enries</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>Select &#xd;&#xa;	&#x5b;Entry No_&#x5d; as glbch_nbr,&#xd;&#xa;	&#x5b;Transaction No_&#x5d; as glbsq_nbr,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment1&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length1&#x7d; &#x3d; 0 then &#x27;&#x27; else     RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment1&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length1&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment2&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length2&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment2&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length2&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment3&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length3&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment3&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length3&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment4&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length4&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment4&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length4&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment5&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length5&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment5&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length5&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment6&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length6&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment6&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length6&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment7&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length7&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment7&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length7&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment8&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length8&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment8&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length8&#x7d;&#x29; end &#xd;&#xa;		as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;Description&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes1,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;External Document No_&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes2,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glref_nbr,&#xd;&#xa;	&#x5b;Amount&#x5d; as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	&#x5b;Source Code&#x5d; as glfsub,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glsact,&#xd;&#xa;	&#x27; &#x27; as glofst,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x2b; 1 &#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29;  &#xd;&#xa;		end&#xd;&#xa;		as glyear,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; - 8&#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x2b; 4 &#xd;&#xa;		end&#xd;&#xa;		as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;&#xd;&#xa;Where &#x5b;Posting Date&#x5d; &#x3e;&#x3d; &#x27;2013.09.01&#x27; &#xd;&#xa;	and &#x5b;Posting Date&#x5d; &#x3c; &#x27;2014.09.01&#x27;  &#xd;&#xa;	and convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d;  &#xd;&#xa;order by glyear, glprno, glact_nbr</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1046</xloc>
+      <yloc>20</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>2015 Journal Enries</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>Select &#xd;&#xa;	&#x5b;Entry No_&#x5d; as glbch_nbr,&#xd;&#xa;	&#x5b;Transaction No_&#x5d; as glbsq_nbr,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment1&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length1&#x7d; &#x3d; 0 then &#x27;&#x27; else     RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment1&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length1&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment2&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length2&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment2&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length2&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment3&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length3&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment3&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length3&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment4&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length4&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment4&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length4&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment5&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length5&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment5&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length5&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment6&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length6&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment6&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length6&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment7&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length7&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment7&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length7&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment8&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length8&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment8&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length8&#x7d;&#x29; end &#xd;&#xa;		as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;Description&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes1,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;External Document No_&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes2,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glref_nbr,&#xd;&#xa;	&#x5b;Amount&#x5d; as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	&#x5b;Source Code&#x5d; as glfsub,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glsact,&#xd;&#xa;	&#x27; &#x27; as glofst,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x2b; 1 &#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29;  &#xd;&#xa;		end&#xd;&#xa;		as glyear,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; - 8&#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x2b; 4 &#xd;&#xa;		end&#xd;&#xa;		as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;&#xd;&#xa;Where &#x5b;Posting Date&#x5d; &#x3e;&#x3d; &#x27;2014.09.01&#x27; &#xd;&#xa;	and &#x5b;Posting Date&#x5d; &#x3c; &#x27;2015.09.01&#x27;  &#xd;&#xa;	and convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d;  &#xd;&#xa;order by glyear, glprno, glact_nbr</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1169</xloc>
+      <yloc>20</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>2016 Journal Enries</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>Select &#xd;&#xa;	&#x5b;Entry No_&#x5d; as glbch_nbr,&#xd;&#xa;	&#x5b;Transaction No_&#x5d; as glbsq_nbr,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment1&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length1&#x7d; &#x3d; 0 then &#x27;&#x27; else     RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment1&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length1&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment2&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length2&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment2&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length2&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment3&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length3&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment3&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length3&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment4&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length4&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment4&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length4&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment5&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length5&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment5&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length5&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment6&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length6&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment6&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length6&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment7&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length7&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment7&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length7&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment8&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length8&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment8&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length8&#x7d;&#x29; end &#xd;&#xa;		as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Document Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;Description&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes1,&#xd;&#xa;	substring&#x28;replace&#x28;&#x5b;External Document No_&#x5d;,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29;,1,200&#x29; as gldes2,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glref_nbr,&#xd;&#xa;	&#x5b;Amount&#x5d; as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	&#x5b;Source Code&#x5d; as glfsub,&#xd;&#xa;	&#x5b;Document No_&#x5d; as glsact,&#xd;&#xa;	&#x27; &#x27; as glofst,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x2b; 1 &#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29;  &#xd;&#xa;		end&#xd;&#xa;		as glyear,&#xd;&#xa;	Case when convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x3e; 8 &#xd;&#xa;		then convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; - 8&#xd;&#xa;		else convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,6,2&#x29;&#x29; &#x2b; 4 &#xd;&#xa;		end&#xd;&#xa;		as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;&#xd;&#xa;Where &#x5b;Posting Date&#x5d; &#x3e;&#x3d; &#x27;2015.09.01&#x27; &#xd;&#xa;	and &#x5b;Posting Date&#x5d; &#x3c; &#x27;2016.09.01&#x27;  &#xd;&#xa;	and convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Posting Date&#x5d;,23&#x29;,1,4&#x29;&#x29; &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d;  &#xd;&#xa;order by glyear, glprno, glact_nbr</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1292</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1125,8 +563,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>GREATPLAINS4_DB</connection>
-    <sql>Select &#xd;&#xa;	SUBSTRING&#x28;GL00105.ACTNUMST,1,9&#x29;&#x2b;&#x27;-000-&#x27;&#x2b;SUBSTRING&#x28;GL00105.ACTNUMST,11,3&#x29; as AccountNumber, &#xd;&#xa;	REPLACE&#x28;actdescr,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29; as AccountDesc,&#xd;&#xa;	accttype as AccountType,&#xd;&#xa;	case when active&#x3d;1 then &#x27;A&#x27; else &#x27;I&#x27; end as AccountStatus,&#xd;&#xa;	&#x27;&#x27; as AccountSubsdurary,&#xd;&#xa;	SUBSTRING&#x28;GL00105.ACTNUMST,1,9&#x29;&#x2b;&#x27;-000-&#x27;&#x2b;SUBSTRING&#x28;GL00105.ACTNUMST,11,3&#x29; as HeaderAccountNumber,&#xd;&#xa;	&#x27;&#x27; as GSTCode,&#xd;&#xa;	&#x27;&#x27; as SpecialCodes,&#xd;&#xa;	0 as FirstYear,&#xd;&#xa;	0 as lastyear,&#xd;&#xa;	&#x27;&#x27; as CalcMethod,&#xd;&#xa;	Gl00105.actnumbr_1 as element1,&#xd;&#xa;	Gl00105.actnumbr_2 as element2,&#xd;&#xa;	Gl00105.actnumbr_3 as element3,&#xd;&#xa;	Gl00105.actnumbr_4 as element5,&#xd;&#xa;	&#x27;000&#x27; as element4,&#xd;&#xa;	0 as element6,&#xd;&#xa;	0 as element7,&#xd;&#xa;	0 as element8,&#xd;&#xa;	0 as element9,&#xd;&#xa;	0 as element10,&#xd;&#xa;	substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL00100.CREATDDT,23&#x29;,1,2&#x29; as enteredcentury,&#xd;&#xa;	substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL00100.CREATDDT,23&#x29;,3,2&#x29; as enteredyear,&#xd;&#xa;	substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL00100.CREATDDT,23&#x29;,6,2&#x29; as enteredmonth,&#xd;&#xa;	substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL00100.CREATDDT,23&#x29;,9,2&#x29; as enteredday,&#xd;&#xa;	&#x27;CONVERSION&#x27; as userid&#xd;&#xa;From GL00100,GL00105&#xd;&#xa;Where GL00105.actindx &#x3d; GL00100.actindx&#xd;&#xa;	and &#x28;GL00100.ACTINDX in &#x28;select gl20000.actindx from GL20000&#x29;&#xd;&#xa;	OR GL00100.ACTINDX in &#x28;select gl30000.actindx from GL30000 where hstyear &#x3e;&#x3d; &#x24;&#x7b;CUTOFF_YEAR&#x7d; &#x29; &#x29;&#xd;&#xa;Order by 1</sql>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>SELECT distinct &#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment1&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length1&#x7d; &#x3d; 0 then &#x27;&#x27; else     RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment1&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length1&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment2&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length2&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment2&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length2&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment3&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length3&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment3&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length3&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment4&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length4&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment4&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length4&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment5&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length5&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment5&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length5&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment6&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length6&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment6&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length6&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment7&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length7&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment7&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length7&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment8&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length8&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment8&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length8&#x7d;&#x29; end &#xd;&#xa;		as AccountNumber,&#xd;&#xa;	&#x5b;Name&#x5d; as AccountDesc,&#xd;&#xa;	case when &#x5b;Account Type&#x5d; &#x3d; 1 then &#x27;R&#x27; &#xd;&#xa;		when   &#x5b;Account Type&#x5d; &#x3d; 2 then &#x27;E&#x27; &#xd;&#xa;		when  &#x5b;Account Type&#x5d; &#x3d; 3 then &#x27;A&#x27; &#xd;&#xa;		when  &#x5b;Account Type&#x5d; &#x3d; 4 then &#x27;L&#x27; &#xd;&#xa;		else &#x27;H&#x27; end&#xd;&#xa;		as AccountType,&#xd;&#xa;	Case when &#x5b;Blocked&#x5d; &#x3d; 0 then &#x27;A&#x27; else &#x27;I&#x27; end as AccountStatus,&#xd;&#xa;	&#x27;A&#x27; as AccountSubsdurary,&#xd;&#xa;	&#x27;&#x27; as HeaderAccountNumber,&#xd;&#xa;	&#x27;&#x27; as GSTCode,&#xd;&#xa;	&#x27;&#x27; as SpecialCodes,&#xd;&#xa;	0 as FirstYear,&#xd;&#xa;	0 as LastYear,&#xd;&#xa;	&#x27;&#x27; as CalcMethod,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment1&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length1&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment1&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length1&#x7d;&#x29; end as Element1,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment2&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length2&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment2&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length2&#x7d;&#x29; end as Element2,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment3&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length3&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment3&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length3&#x7d;&#x29; end as Element3,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment4&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length4&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment4&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length4&#x7d;&#x29; end as Element4,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment5&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length5&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment5&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length5&#x7d;&#x29; end as Element5,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment6&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length6&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment6&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length6&#x7d;&#x29; end as Element6,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment7&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length7&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment7&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length7&#x7d;&#x29; end as Element7,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment8&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length8&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;Segment8&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length8&#x7d;&#x29; end as Element8,&#xd;&#xa;	&#x27;&#x27; as Element9,&#xd;&#xa;	&#x27;&#x27; as Element10,&#xd;&#xa;	substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Last Date Modified&#x5d;,23&#x29;,1,2&#x29; as EnteredCentury,&#xd;&#xa;	substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Last Date Modified&#x5d;,23&#x29;,3,2&#x29; as EnteredYear,&#xd;&#xa;	substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Last Date Modified&#x5d;,23&#x29;,6,2&#x29; as EnteredMonth,&#xd;&#xa;	substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Last Date Modified&#x5d;,23&#x29;,9,2&#x29; as EnteredDay,&#xd;&#xa;	&#x27;CONVERSION&#x27; as Userid&#xd;&#xa;FROM &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Account&#x5d;&#xd;&#xa;Where &#x5b;Blocked&#x5d; &#x3d; 0&#xd;&#xa;	and not exists &#x28;select &#x2a; from &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d; where &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Account&#x5d;.&#x5b;No_&#x5d; &#x3d; &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;G_L Account No_&#x5d;&#xd;&#xa;  	and &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;Posting Date&#x5d; &#x3e;&#x3d; &#x27;2009-09-01&#x27;&#x29; &#xd;&#xa; UNION &#xd;&#xa; SELECT distinct &#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment1&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length1&#x7d; &#x3d; 0 then &#x27;&#x27; else     RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment1&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length1&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment2&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length2&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment2&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length2&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment3&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length3&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment3&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length3&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment4&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length4&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment4&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length4&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment5&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length5&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment5&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length5&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment6&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length6&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment6&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length6&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment7&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length7&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment7&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length7&#x7d;&#x29; end &#x2b;&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment8&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length8&#x7d; &#x3d; 0 then &#x27;&#x27; else &#x27;-&#x27;&#x2b;RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment8&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length8&#x7d;&#x29; end &#xd;&#xa;		as AccountNumber,&#xd;&#xa;	&#x5b;Name&#x5d; as AccountDesc,&#xd;&#xa;	case when &#x5b;Account Type&#x5d; &#x3d; 1 then &#x27;R&#x27; &#xd;&#xa;		when   &#x5b;Account Type&#x5d; &#x3d; 2 then &#x27;E&#x27; &#xd;&#xa;		when  &#x5b;Account Type&#x5d; &#x3d; 3 then &#x27;A&#x27; &#xd;&#xa;		when  &#x5b;Account Type&#x5d; &#x3d; 4 then &#x27;L&#x27; &#xd;&#xa;		else &#x27;H&#x27; end&#xd;&#xa;		as AccountType,&#xd;&#xa;	Case when &#x5b;Blocked&#x5d; &#x3d; 0 then &#x27;A&#x27; else &#x27;I&#x27; end as AccountStatus,&#xd;&#xa;	&#x27;B&#x27; as AccountSubsdurary,&#xd;&#xa;	&#x27;&#x27; as HeaderAccountNumber,&#xd;&#xa;	&#x27;&#x27; as GSTCode,&#xd;&#xa;	&#x27;&#x27; as SpecialCodes,&#xd;&#xa;	0 as FirstYear,&#xd;&#xa;	0 as LastYear,&#xd;&#xa;	&#x27;&#x27; as CalcMethod,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment1&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length1&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment1&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length1&#x7d;&#x29; end as Element1,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment2&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length2&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment2&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length2&#x7d;&#x29; end as Element2,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment3&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length3&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment3&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length3&#x7d;&#x29; end as Element3,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment4&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length4&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment4&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length4&#x7d;&#x29; end as Element4,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment5&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length5&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment5&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length5&#x7d;&#x29; end as Element5,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment6&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length6&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment6&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length6&#x7d;&#x29; end as Element6,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment7&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length7&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment7&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length7&#x7d;&#x29; end as Element7,&#xd;&#xa;	case when LEN&#x28;&#x27;&#x24;&#x7b;Segment8&#x7d;&#x27;&#x29; &#x3d; 0 OR &#x24;&#x7b;Length8&#x7d; &#x3d; 0 then &#x27;&#x27; else  RIGHT&#x28;&#x27;00000000&#x27;&#x2b;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;&#x24;&#x7b;Segment8&#x7d;&#x5d;&#x29;,&#x24;&#x7b;Length8&#x7d;&#x29; end as Element8,&#xd;&#xa;	&#x27;&#x27; as Element9,&#xd;&#xa;	&#x27;&#x27; as Element10,&#xd;&#xa;	substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Last Date Modified&#x5d;,23&#x29;,1,2&#x29; as EnteredCentury,&#xd;&#xa;	substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Last Date Modified&#x5d;,23&#x29;,3,2&#x29; as EnteredYear,&#xd;&#xa;	substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Last Date Modified&#x5d;,23&#x29;,6,2&#x29; as EnteredMonth,&#xd;&#xa;	substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Last Date Modified&#x5d;,23&#x29;,9,2&#x29; as EnteredDay,&#xd;&#xa;	&#x27;CONVERSION&#x27; as Userid&#xd;&#xa;FROM &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;, &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Account&#x5d;&#xd;&#xa;  where &#x5b;Posting Date&#x5d; &#x3e;&#x3d; &#x27;2009-09-01&#x27;&#xd;&#xa;  	and &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Entry&#x5d;.&#x5b;G_L Account No_&#x5d; &#x3d; &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;G_L Account&#x5d;.&#x5b;No_&#x5d;&#xd;&#xa;ORDER by 1</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1134,40 +572,14 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>47</xloc>
-      <yloc>78</yloc>
+      <xloc>54</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>GP Purchase Order</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>GREATPLAINS4_DB</connection>
-    <sql>SELECT  SUBSTRING&#x28;PO.&#x5b;PONUMBER&#x5d;,3,2&#x29; as poprefix, &#xd;&#xa;		SUBSTRING&#x28;PO.&#x5b;PONUMBER&#x5d;,5,10&#x29; as ponum, &#xd;&#xa;		ROW_NUMBER&#x28;&#x29; over &#x28;partition by PO.&#x5b;PONUMBER&#x5d; order by PO.&#x5b;PONUMBER&#x5d;,PO.&#x5b;POLineNUmber&#x5d;&#x29; as poseq,&#xd;&#xa;        PO.&#x5b;VendorID&#x5d; AS povendid,&#xd;&#xa;        PO.&#x5b;ItemDESC&#x5d; AS podescription,&#xd;&#xa;		convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PO.&#x5b;PODATE&#x5d;,23&#x29;,1,2&#x29;&#x29; as poordercentury,&#xd;&#xa;		convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PO.&#x5b;PODATE&#x5d;,23&#x29;,3,2&#x29;&#x29; as poorderyyear,&#xd;&#xa;		convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PO.&#x5b;PODATE&#x5d;,23&#x29;,6,2&#x29;&#x29; as poordermonth,&#xd;&#xa;		convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PO.&#x5b;PODATE&#x5d;,23&#x29;,9,2&#x29;&#x29; as poorderday,&#xd;&#xa;		convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PO.&#x5b;POEXPIRYDATE&#x5d;,23&#x29;,1,2&#x29;&#x29; as poexpcentury,&#xd;&#xa;		convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PO.&#x5b;POEXPIRYDATE&#x5d;,23&#x29;,3,2&#x29;&#x29; as poexpyear,&#xd;&#xa;		convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PO.&#x5b;POEXPIRYDATE&#x5d;,23&#x29;,6,2&#x29;&#x29; as poexpmonth,&#xd;&#xa;		convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PO.&#x5b;POEXPIRYDATE&#x5d;,23&#x29;,9,2&#x29;&#x29; as poexpday,&#xd;&#xa;		convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PO.&#x5b;PODELIVERYDATE&#x5d;,23&#x29;,1,2&#x29;&#x29; as podelcentury,&#xd;&#xa;		convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PO.&#x5b;PODELIVERYDATE&#x5d;,23&#x29;,3,2&#x29;&#x29; as podelyear,&#xd;&#xa;		convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PO.&#x5b;PODELIVERYDATE&#x5d;,23&#x29;,6,2&#x29;&#x29; as podelmonth,&#xd;&#xa;		convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PO.&#x5b;PODELIVERYDATE&#x5d;,23&#x29;,9,2&#x29;&#x29; as podelday,&#xd;&#xa;		PO.&#x5b;pouserid&#x5d;,&#xd;&#xa;		&#x27;2015&#x27; as poyear,&#xd;&#xa;		&#x27;&#x27; as pofiller,&#xd;&#xa;        PO.&#x5b;postatus&#x5d; ,&#xd;&#xa;        PO.&#x5b;potype&#x5d; ,&#xd;&#xa;		&#x27;Y&#x27; as poyes, &#xd;&#xa;        PO.&#x5b;polocationcode&#x5d; ,&#xd;&#xa;		PO.&#x5b;povendorfax&#x5d;,&#xd;&#xa;		PO.&#x5b;PONUMBER&#x5d;,&#xd;&#xa;        &#x28; &#x28; &#x28; PO.&#x5b;QtyOrdered&#x5d; - PO.&#x5b;QtyCanceled&#x5d; &#x29; - PO.&#x5b;QtyShipped&#x5d; &#x29; &#x2a; PO.&#x5b;OrigUnitCost&#x5d; &#x29; AS &#x5b;poAmount&#x5d;,&#xd;&#xa;        &#x28; &#x28; PO.&#x5b;QtyOrdered&#x5d; - PO.&#x5b;QtyCanceled&#x5d; &#x29; - PO.&#x5b;QtyShipped&#x5d; &#x29; AS &#x5b;QtyTORecv&#x5d; &#xd;&#xa;FROM    &#x28; SELECT    A.PONUMBER AS &#x5b;PONUMBER&#x5d; ,&#xd;&#xa;					A.POSTATUS as &#x5b;POSTATUS&#x5d;,&#xd;&#xa;                    CASE WHEN A.POSTATUS &#x3d; 1 THEN &#x27;New&#x27;&#xd;&#xa;                         WHEN A.POSTATUS &#x3d; 2 THEN &#x27;Released&#x27;&#xd;&#xa;                         WHEN A.POSTATUS &#x3d; 3 THEN &#x27;Change Order&#x27;&#xd;&#xa;                         WHEN A.POSTATUS &#x3d; 4 THEN &#x27;Received&#x27;&#xd;&#xa;                         WHEN A.POSTATUS &#x3d; 5 THEN &#x27;Closed&#x27;&#xd;&#xa;                         ELSE &#x27;Canceled&#x27;&#xd;&#xa;                    END AS &#x5b;POSTATUSDESCRIPTION&#x5d; ,&#xd;&#xa;					A.POTYPE AS &#x5b;POTYPE&#x5d;,&#xd;&#xa;                    CASE WHEN A.POTYPE &#x3d; 1 THEN &#x27;Standard&#x27;&#xd;&#xa;                         WHEN A.POTYPE &#x3d; 2 THEN &#x27;Drop-ship&#x27;&#xd;&#xa;                         WHEN A.POTYPE &#x3d; 3 THEN &#x27;Blanket&#x27;&#xd;&#xa;                         WHEN A.POTYPE &#x3d; 4 THEN &#x27;Drop-ship Blanket&#x27;&#xd;&#xa;                         ELSE &#x27;&#x27;&#xd;&#xa;                    END AS &#x5b;POTYPEDESCRIPTION&#x5d; ,&#xd;&#xa;                    A.DOCDATE AS &#x5b;PODATE&#x5d; ,&#xd;&#xa; 					A.REQDATE AS &#x5b;POEXPIRYDATE&#x5d; ,&#xd;&#xa;					A.PRMSHPDTE AS &#x5b;PODELIVERYDATE&#x5d; ,&#xd;&#xa;					A.USER2ENT as &#x5b;POUserID&#x5d;,&#xd;&#xa;					A.CURNCYID AS &#x5b;CurrencyID&#x5d; ,&#xd;&#xa;                    A.ORSUBTOT AS &#x5b;OrigSubtotal&#x5d; ,&#xd;&#xa;                    A.ORTDISAM AS &#x5b;OrigTradeDisc&#x5d; ,&#xd;&#xa;                    A.ORFRTAMT AS &#x5b;OrigFreightAmt&#x5d; ,&#xd;&#xa;                    A.OMISCAMT AS &#x5b;OrigMiscAmt&#x5d; ,&#xd;&#xa;                    A.ORTAXAMT AS &#x5b;OrigTaxAmt&#x5d; ,&#xd;&#xa;                    A.VENDORID AS &#x5b;VendorID&#x5d; ,&#xd;&#xa;                    A.VENDNAME AS &#x5b;VendorName&#x5d; ,&#xd;&#xa;                    A.FAX AS &#x5b;poVendorFax&#x5d; ,&#xd;&#xa;                    B.Ord AS &#x5b;POLineOrd&#x5d; ,&#xd;&#xa;                    B.LineNumber AS &#x5b;POLineNUMBER&#x5d; ,&#xd;&#xa;                    CASE WHEN B.POLNESTA &#x3d; 1 THEN &#x27;New&#x27;&#xd;&#xa;                         WHEN B.POLNESTA &#x3d; 2 THEN &#x27;Released&#x27;&#xd;&#xa;                         WHEN B.POLNESTA &#x3d; 3 THEN &#x27;Change Order&#x27;&#xd;&#xa;                         WHEN B.POLNESTA &#x3d; 4 THEN &#x27;Received&#x27;&#xd;&#xa;                         WHEN B.POLNESTA &#x3d; 5 THEN &#x27;Closed&#x27;&#xd;&#xa;                         ELSE &#x27;Canceled&#x27;&#xd;&#xa;                    END AS &#x5b;POLineSTATUS&#x5d; ,&#xd;&#xa;                    B.ITEMNMBR AS &#x5b;ItemNUMBER&#x5d; ,&#xd;&#xa;                    B.ITEMDESC AS &#x5b;ItemDESC&#x5d; ,&#xd;&#xa;                    B.VNDITNUM AS &#x5b;VendorItemNUMBER&#x5d; ,&#xd;&#xa;                    B.VNDITDSC AS &#x5b;VendorItemDESC&#x5d; ,&#xd;&#xa;                    B.LOCNCODE AS &#x5b;poLocationCode&#x5d; ,&#xd;&#xa;                    B.UOFM AS &#x5b;UoM&#x5d; ,&#xd;&#xa;                    B.QTYORDER AS &#x5b;QtyOrdered&#x5d; ,&#xd;&#xa;                    B.QTYCANCE AS &#x5b;QtyCanceled&#x5d; ,&#xd;&#xa;                    B.ORUNTCST AS &#x5b;OrigUnitCost&#x5d; ,&#xd;&#xa;                    B.OREXTCST AS &#x5b;OrigExtdCost&#x5d; ,&#xd;&#xa;                    ISNULL&#x28;&#x28; SELECT SUM&#x28;C.QTYSHPPD&#x29;&#xd;&#xa;                             FROM   POP10500 C&#xd;&#xa;                             WHERE  C.PONUMBER &#x3d; B.PONUMBER&#xd;&#xa;                                    AND C.POLNENUM &#x3d; B.ORD&#xd;&#xa;                                    AND C.POPTYPE IN &#x28; 1, 2, 3 &#x29;&#xd;&#xa;                           &#x29;, 0&#x29; AS &#x5b;QtyShipped&#x5d; ,&#xd;&#xa;                    ISNULL&#x28;&#x28; SELECT SUM&#x28;C.QTYINVCD&#x29;&#xd;&#xa;                             FROM   POP10500 C&#xd;&#xa;                             WHERE  C.PONUMBER &#x3d; B.PONUMBER&#xd;&#xa;                                    AND C.POLNENUM &#x3d; B.ORD&#xd;&#xa;                                    AND C.POPTYPE IN &#x28; 1, 2, 3 &#x29;&#xd;&#xa;                           &#x29;, 0&#x29; AS &#x5b;QtyInvoiced&#x5d; ,&#xd;&#xa;                    ISNULL&#x28;&#x28; SELECT SUM&#x28;C.QTYRESERVED&#x29;&#xd;&#xa;                             FROM   POP10500 C&#xd;&#xa;                             WHERE  C.PONUMBER &#x3d; B.PONUMBER&#xd;&#xa;                                    AND C.POLNENUM &#x3d; B.ORD&#xd;&#xa;                                    AND C.POPTYPE IN &#x28; 1, 2, 3 &#x29;&#xd;&#xa;                           &#x29;, 0&#x29; AS &#x5b;QtyReturned&#x5d;&#xd;&#xa;          FROM      POP10100 A&#xd;&#xa;                    INNER JOIN POP10110 B ON A.PONUMBER &#x3d; B.PONUMBER&#xd;&#xa;        &#x29; PO&#xd;&#xa;WHERE   SUBSTRING&#x28;PO.PONUMBER,3,2&#x29; &#x3d; &#x27;14&#x27; and &#x28; &#x28; PO.&#x5b;QtyOrdered&#x5d; - PO.&#x5b;QtyCanceled&#x5d; &#x29; - PO.&#x5b;QtyShipped&#x5d; &#x29; &#x3e; 0&#xd;&#xa;order by 1,2,3</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>905</xloc>
-      <yloc>78</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>GP Vendor EFT</name>
+    <name>Vendor EFT</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1177,216 +589,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>GREATPLAINS_DB</connection>
-    <sql>Select VendorID,&#xd;&#xa;	BankName,&#xd;&#xa;	EFTBankAcct,&#xd;&#xa;	EFTBankBranch,&#xd;&#xa;	EFTTransitRoutingNo,&#xd;&#xa;	EFTTransferMethod,&#xd;&#xa;	EFTAccountType,&#xd;&#xa;	&#x27;0&#x27;&#x2b;substring&#x28;EFTTransitRoutingNo,1,3&#x29; as EFTBank,&#xd;&#xa;	substring&#x28;EFTTransitRoutingNo,4,12&#x29; as EFTBranch,&#xd;&#xa;	case when inactive &#x3d; 1 then &#x27;I&#x27; else &#x27;A&#x27; end as EFTStatus, &#xd;&#xa;	&#x27;2&#x27; as apdact, &#xd;&#xa;	&#x27;E&#x27; as apdpys&#xd;&#xa;From SY06000 &#xd;&#xa;where EFTTransitRoutingNo &#x3e; &#x27;&#x27;&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>47</xloc>
-      <yloc>465</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>GP Vendor EFT 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>GREATPLAINS2_DB</connection>
-    <sql>Select VendorID,&#xd;&#xa;	BankName,&#xd;&#xa;	EFTBankAcct,&#xd;&#xa;	EFTBankBranch,&#xd;&#xa;	EFTTransitRoutingNo,&#xd;&#xa;	EFTTransferMethod,&#xd;&#xa;	EFTAccountType,&#xd;&#xa;	&#x27;0&#x27;&#x2b;substring&#x28;EFTTransitRoutingNo,1,3&#x29; as EFTBank,&#xd;&#xa;	substring&#x28;EFTTransitRoutingNo,4,12&#x29; as EFTBranch,&#xd;&#xa;	case when inactive &#x3d; 1 then &#x27;I&#x27; else &#x27;A&#x27; end as EFTStatus, &#xd;&#xa;	&#x27;2&#x27; as apdact, &#xd;&#xa;	&#x27;E&#x27; as apdpys&#xd;&#xa;From SY06000 &#xd;&#xa;where EFTTransitRoutingNo &#x3e; &#x27;&#x27;&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>46</xloc>
-      <yloc>563</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>GP Vendor EFT 3</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>GREATPLAINS3_DB</connection>
-    <sql>Select VendorID,&#xd;&#xa;	BankName,&#xd;&#xa;	EFTBankAcct,&#xd;&#xa;	EFTBankBranch,&#xd;&#xa;	EFTTransitRoutingNo,&#xd;&#xa;	EFTTransferMethod,&#xd;&#xa;	EFTAccountType,&#xd;&#xa;	&#x27;0&#x27;&#x2b;substring&#x28;EFTTransitRoutingNo,1,3&#x29; as EFTBank,&#xd;&#xa;	substring&#x28;EFTTransitRoutingNo,4,12&#x29; as EFTBranch,&#xd;&#xa;	case when inactive &#x3d; 1 then &#x27;I&#x27; else &#x27;A&#x27; end as EFTStatus, &#xd;&#xa;	&#x27;2&#x27; as apdact, &#xd;&#xa;	&#x27;E&#x27; as apdpys,&#xd;&#xa;	&#x27;&#x27; as flagfield&#xd;&#xa;From SY06000 &#xd;&#xa;where EFTTransitRoutingNo &#x3e; &#x27;&#x27;&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>218</xloc>
-      <yloc>563</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>GP Vendor EFT 4</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>GREATPLAINS4_DB</connection>
-    <sql>Select VendorID,&#xd;&#xa;	BankName,&#xd;&#xa;	EFTBankAcct,&#xd;&#xa;	EFTBankBranch,&#xd;&#xa;	EFTTransitRoutingNo,&#xd;&#xa;	EFTTransferMethod,&#xd;&#xa;	EFTAccountType,&#xd;&#xa;	&#x27;0&#x27;&#x2b;substring&#x28;EFTTransitRoutingNo,1,3&#x29; as EFTBank,&#xd;&#xa;	substring&#x28;EFTTransitRoutingNo,4,12&#x29; as EFTBranch,&#xd;&#xa;	case when inactive &#x3d; 1 then &#x27;I&#x27; else &#x27;A&#x27; end as EFTStatus, &#xd;&#xa;	&#x27;2&#x27; as apdact, &#xd;&#xa;	&#x27;E&#x27; as apdpys,&#xd;&#xa;	&#x27;&#x27; as flagfield,&#xd;&#xa;	&#x27;&#x27; as flagfield2&#xd;&#xa;From SY06000 &#xd;&#xa;where EFTTransitRoutingNo &#x3e; &#x27;&#x27;&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>433</xloc>
-      <yloc>564</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>GP Vendor Master</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>GREATPLAINS_DB</connection>
-    <sql>Select &#xd;&#xa;		PM00200.vendorid as apven_nbr,&#xd;&#xa;		PM00200.vndclsid as apvgrp,&#xd;&#xa;		PM00200.vndcntct as apcont,&#xd;&#xa;		&#x27;&#x27; as apcarc,&#xd;&#xa;		&#x27;&#x27; as apcph_nbr,&#xd;&#xa;		&#x27;&#x27; as apcex_nbr,&#xd;&#xa;		&#x27;&#x27; as apcpos,&#xd;&#xa;		Case when PM00200.vendstts&#x3d;2 then &#x27;N&#x27; else &#x27;Y&#x27; end as apcact,&#xd;&#xa;		&#x27;&#x27; as apterm,&#xd;&#xa;		0 as apytdp,&#xd;&#xa;		PM00200.txrgnnum as apvgst,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,1,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdc,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,3,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdy,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,6,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdm,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,9,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdd,&#xd;&#xa;		0 as apbal,&#xd;&#xa;		&#x27;&#x27; as apvbnk,&#xd;&#xa;		&#x27;&#x27; as apvtyp,&#xd;&#xa;		&#x27;C&#x27; as apvcur,&#xd;&#xa;		case when PM00200.prspayee &#x3d; 0 then &#x27;&#x27; else convert&#x28;varchar&#x28;10&#x29;,PM00200.prspayee&#x29; end as appvn_nbr,&#xd;&#xa;		&#x27;&#x27; as ap1099,&#xd;&#xa;		&#x27;&#x27; as appsts,&#xd;&#xa;		&#x27;&#x27; as apvptp,&#xd;&#xa;		&#x27;B&#x27; as apvent,&#xd;&#xa;		ISNULL&#x28;PM00201.amtpdytd,0&#x29; as apcurp,&#xd;&#xa;		ISNULL&#x28;PM00201.amtpdlyr,0&#x29; as aplstp,&#xd;&#xa;		ISNULL&#x28;PM00201.amtpdlif,0&#x29; as aplifp,&#xd;&#xa;		ISNULL&#x28;PM00201.currblnc,0&#x29; as apcurb,&#xd;&#xa;		0 as aphldb,&#xd;&#xa;		PM00200.vendname as naname,&#xd;&#xa;		upper&#x28;PM00200.vndchknm&#x29; as nasort,&#xd;&#xa;		&#x27;&#x27; as nasalu,&#xd;&#xa;		&#x27;&#x27; as nafnam,&#xd;&#xa;		&#x27;&#x27; as nalnam,&#xd;&#xa;		&#x27;&#x27; as nainit,&#xd;&#xa;		PM00200.Address1 as naadd1,&#xd;&#xa;		PM00200.Address2 as naadd2,&#xd;&#xa;		PM00200.Address3 as naadd3,&#xd;&#xa;		&#x27;&#x27; as naadd4,&#xd;&#xa;		PM00200.city as nacity,&#xd;&#xa;		PM00200.state as naaprv,&#xd;&#xa;		PM00200.country as nacntr,&#xd;&#xa;		PM00200.zipcode as napstc,&#xd;&#xa;		&#x27;&#x27; as nadmac,&#xd;&#xa;		&#x27;&#x27; as nadmdc,&#xd;&#xa;		case when left&#x28;PM00200.PHNUMBR1,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.PHNUMBR1,10&#x29; end as naphn1,&#xd;&#xa;		case when left&#x28;PM00200.PHNUMBR2,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.PHNUMBR2,10&#x29; end as naphn2,&#xd;&#xa;		case when left&#x28;PM00200.faxnumbr,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.faxnumbr,10&#x29; end as nafaxn,&#xd;&#xa;		case when left&#x28;PM00200.phone3,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.phone3,10&#x29; end as naceln,&#xd;&#xa;		ISNULL&#x28;&#x28;select sy01200.emailtoaddress from SY01200 where sy01200.master_id &#x3d; PM00200.VENDORID and sy01200.Master_Type &#x3d; &#x27;VEN&#x27; and sy01200.ADRSCODE &#x3d; &#x27;EFT&#x27; and len&#x28;convert&#x28;varchar&#x28;4&#x29;,sy01200.emailtoaddress&#x29;&#x29; &#x3e; 0 &#x29;,PM00200.comment1&#x29; as naemal,&#xd;&#xa;		&#x27;&#x27; as nanbro,&#xd;&#xa;		&#x27;Y&#x27; as naalwd,&#xd;&#xa;		&#x27;N&#x27; as nasubs,&#xd;&#xa;		Case when PM00200.vendstts&#x3d;2 then &#x27;I&#x27; else &#x27;A&#x27; end as nastsf,&#xd;&#xa;		&#x27;&#x27; as nasin_nbr,&#xd;&#xa;		&#x27;N&#x27; as nanewf,&#xd;&#xa;		&#x27;&#x27; as narelp,&#xd;&#xa;		0 as apfper&#xd;&#xa;From PM00200 &#xd;&#xa;	left join PM00201 on PM00201.vendorid &#x3d; PM00200.vendorid&#xd;&#xa;order by 1&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>47</xloc>
-      <yloc>303</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>GP Vendor Master 2</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>GREATPLAINS2_DB</connection>
-    <sql>Select &#xd;&#xa;		PM00200.vendorid as apven_nbr,&#xd;&#xa;		PM00200.vndclsid as apvgrp,&#xd;&#xa;		PM00200.vndcntct as apcont,&#xd;&#xa;		&#x27;&#x27; as apcarc,&#xd;&#xa;		&#x27;&#x27; as apcph_nbr,&#xd;&#xa;		&#x27;&#x27; as apcex_nbr,&#xd;&#xa;		&#x27;&#x27; as apcpos,&#xd;&#xa;		Case when PM00200.vendstts&#x3d;2 then &#x27;N&#x27; else &#x27;Y&#x27; end as apcact,&#xd;&#xa;		&#x27;&#x27; as apterm,&#xd;&#xa;		0 as apytdp,&#xd;&#xa;		PM00200.txrgnnum as apvgst,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,1,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdc,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,3,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdy,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,6,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdm,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,9,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdd,&#xd;&#xa;		0 as apbal,&#xd;&#xa;		&#x27;&#x27; as apvbnk,&#xd;&#xa;		&#x27;&#x27; as apvtyp,&#xd;&#xa;		&#x27;C&#x27; as apvcur,&#xd;&#xa;		case when PM00200.prspayee &#x3d; 0 then &#x27;&#x27; else convert&#x28;varchar&#x28;10&#x29;,PM00200.prspayee&#x29; end as appvn_nbr,&#xd;&#xa;		&#x27;&#x27; as ap1099,&#xd;&#xa;		&#x27;&#x27; as appsts,&#xd;&#xa;		&#x27;&#x27; as apvptp,&#xd;&#xa;		&#x27;B&#x27; as apvent,&#xd;&#xa;		ISNULL&#x28;PM00201.amtpdytd,0&#x29; as apcurp,&#xd;&#xa;		ISNULL&#x28;PM00201.amtpdlyr,0&#x29; as aplstp,&#xd;&#xa;		ISNULL&#x28;PM00201.amtpdlif,0&#x29; as aplifp,&#xd;&#xa;		ISNULL&#x28;PM00201.currblnc,0&#x29; as apcurb,&#xd;&#xa;		0 as aphldb,&#xd;&#xa;		PM00200.vendname as naname,&#xd;&#xa;		upper&#x28;PM00200.vndchknm&#x29; as nasort,&#xd;&#xa;		&#x27;&#x27; as nasalu,&#xd;&#xa;		&#x27;&#x27; as nafnam,&#xd;&#xa;		&#x27;&#x27; as nalnam,&#xd;&#xa;		&#x27;&#x27; as nainit,&#xd;&#xa;		PM00200.Address1 as naadd1,&#xd;&#xa;		PM00200.Address2 as naadd2,&#xd;&#xa;		PM00200.Address3 as naadd3,&#xd;&#xa;		&#x27;&#x27; as naadd4,&#xd;&#xa;		PM00200.city as nacity,&#xd;&#xa;		PM00200.state as naaprv,&#xd;&#xa;		PM00200.country as nacntr,&#xd;&#xa;		PM00200.zipcode as napstc,&#xd;&#xa;		&#x27;&#x27; as nadmac,&#xd;&#xa;		&#x27;&#x27; as nadmdc,&#xd;&#xa;		case when left&#x28;PM00200.PHNUMBR1,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.PHNUMBR1,10&#x29; end as naphn1,&#xd;&#xa;		case when left&#x28;PM00200.PHNUMBR2,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.PHNUMBR2,10&#x29; end as naphn2,&#xd;&#xa;		case when left&#x28;PM00200.faxnumbr,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.faxnumbr,10&#x29; end as nafaxn,&#xd;&#xa;		case when left&#x28;PM00200.phone3,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.phone3,10&#x29; end as naceln,&#xd;&#xa;		ISNULL&#x28;&#x28;select sy01200.emailtoaddress from SY01200 where sy01200.master_id &#x3d; PM00200.VENDORID and sy01200.Master_Type &#x3d; &#x27;VEN&#x27; and sy01200.ADRSCODE &#x3d; &#x27;EFT&#x27; and len&#x28;convert&#x28;varchar&#x28;4&#x29;,sy01200.emailtoaddress&#x29;&#x29; &#x3e; 0 &#x29;,PM00200.comment1&#x29; as naemal,&#xd;&#xa;		&#x27;&#x27; as nanbro,&#xd;&#xa;		&#x27;Y&#x27; as naalwd,&#xd;&#xa;		&#x27;N&#x27; as nasubs,&#xd;&#xa;		Case when PM00200.vendstts&#x3d;2 then &#x27;I&#x27; else &#x27;A&#x27; end as nastsf,&#xd;&#xa;		&#x27;&#x27; as nasin_nbr,&#xd;&#xa;		&#x27;N&#x27; as nanewf,&#xd;&#xa;		&#x27;&#x27; as narelp,&#xd;&#xa;		0 as apfper&#xd;&#xa;From PM00200 &#xd;&#xa;	left join PM00201 on PM00201.vendorid &#x3d; PM00200.vendorid&#xd;&#xa;order by 1&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>47</xloc>
-      <yloc>393</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>GP Vendor Master 3</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>GREATPLAINS3_DB</connection>
-    <sql>Select &#xd;&#xa;		PM00200.vendorid as apven_nbr,&#xd;&#xa;		PM00200.vndclsid as apvgrp,&#xd;&#xa;		PM00200.vndcntct as apcont,&#xd;&#xa;		&#x27;&#x27; as apcarc,&#xd;&#xa;		&#x27;&#x27; as apcph_nbr,&#xd;&#xa;		&#x27;&#x27; as apcex_nbr,&#xd;&#xa;		&#x27;&#x27; as apcpos,&#xd;&#xa;		Case when PM00200.vendstts&#x3d;2 then &#x27;N&#x27; else &#x27;Y&#x27; end as apcact,&#xd;&#xa;		&#x27;&#x27; as apterm,&#xd;&#xa;		0 as apytdp,&#xd;&#xa;		PM00200.txrgnnum as apvgst,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,1,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdc,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,3,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdy,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,6,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdm,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,9,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdd,&#xd;&#xa;		0 as apbal,&#xd;&#xa;		&#x27;&#x27; as apvbnk,&#xd;&#xa;		&#x27;&#x27; as apvtyp,&#xd;&#xa;		&#x27;C&#x27; as apvcur,&#xd;&#xa;		case when PM00200.prspayee &#x3d; 0 then &#x27;&#x27; else convert&#x28;varchar&#x28;10&#x29;,PM00200.prspayee&#x29; end as appvn_nbr,&#xd;&#xa;		&#x27;&#x27; as ap1099,&#xd;&#xa;		&#x27;&#x27; as appsts,&#xd;&#xa;		&#x27;&#x27; as apvptp,&#xd;&#xa;		&#x27;B&#x27; as apvent,&#xd;&#xa;		ISNULL&#x28;PM00201.amtpdytd,0&#x29; as apcurp,&#xd;&#xa;		ISNULL&#x28;PM00201.amtpdlyr,0&#x29; as aplstp,&#xd;&#xa;		ISNULL&#x28;PM00201.amtpdlif,0&#x29; as aplifp,&#xd;&#xa;		ISNULL&#x28;PM00201.currblnc,0&#x29; as apcurb,&#xd;&#xa;		0 as aphldb,&#xd;&#xa;		PM00200.vendname as naname,&#xd;&#xa;		upper&#x28;PM00200.vndchknm&#x29; as nasort,&#xd;&#xa;		&#x27;&#x27; as nasalu,&#xd;&#xa;		&#x27;&#x27; as nafnam,&#xd;&#xa;		&#x27;&#x27; as nalnam,&#xd;&#xa;		&#x27;&#x27; as nainit,&#xd;&#xa;		PM00200.Address1 as naadd1,&#xd;&#xa;		PM00200.Address2 as naadd2,&#xd;&#xa;		PM00200.Address3 as naadd3,&#xd;&#xa;		&#x27;&#x27; as naadd4,&#xd;&#xa;		PM00200.city as nacity,&#xd;&#xa;		PM00200.state as naaprv,&#xd;&#xa;		PM00200.country as nacntr,&#xd;&#xa;		PM00200.zipcode as napstc,&#xd;&#xa;		&#x27;&#x27; as nadmac,&#xd;&#xa;		&#x27;&#x27; as nadmdc,&#xd;&#xa;		case when left&#x28;PM00200.PHNUMBR1,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.PHNUMBR1,10&#x29; end as naphn1,&#xd;&#xa;		case when left&#x28;PM00200.PHNUMBR2,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.PHNUMBR2,10&#x29; end as naphn2,&#xd;&#xa;		case when left&#x28;PM00200.faxnumbr,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.faxnumbr,10&#x29; end as nafaxn,&#xd;&#xa;		case when left&#x28;PM00200.phone3,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.phone3,10&#x29; end as naceln,&#xd;&#xa;		ISNULL&#x28;&#x28;select sy01200.emailtoaddress from SY01200 where sy01200.master_id &#x3d; PM00200.VENDORID and sy01200.Master_Type &#x3d; &#x27;VEN&#x27; and sy01200.ADRSCODE &#x3d; &#x27;EFT&#x27; and len&#x28;convert&#x28;varchar&#x28;4&#x29;,sy01200.emailtoaddress&#x29;&#x29; &#x3e; 0 &#x29;,PM00200.comment1&#x29; as naemal,&#xd;&#xa;		&#x27;&#x27; as nanbro,&#xd;&#xa;		&#x27;Y&#x27; as naalwd,&#xd;&#xa;		&#x27;N&#x27; as nasubs,&#xd;&#xa;		Case when PM00200.vendstts&#x3d;2 then &#x27;I&#x27; else &#x27;A&#x27; end as nastsf,&#xd;&#xa;		&#x27;&#x27; as nasin_nbr,&#xd;&#xa;		&#x27;N&#x27; as nanewf,&#xd;&#xa;		&#x27;&#x27; as narelp,&#xd;&#xa;		0 as apfper,&#xd;&#xa;		&#x27;&#x27; as flagfield&#xd;&#xa;From PM00200 &#xd;&#xa;	left join PM00201 on PM00201.vendorid &#x3d; PM00200.vendorid&#xd;&#xa;order by 1&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>218</xloc>
-      <yloc>393</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>GP Vendor Master 4</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>GREATPLAINS4_DB</connection>
-    <sql>Select &#xd;&#xa;		PM00200.vendorid as apven_nbr,&#xd;&#xa;		PM00200.vndclsid as apvgrp,&#xd;&#xa;		PM00200.vndcntct as apcont,&#xd;&#xa;		&#x27;&#x27; as apcarc,&#xd;&#xa;		&#x27;&#x27; as apcph_nbr,&#xd;&#xa;		&#x27;&#x27; as apcex_nbr,&#xd;&#xa;		&#x27;&#x27; as apcpos,&#xd;&#xa;		Case when PM00200.vendstts&#x3d;2 then &#x27;N&#x27; else &#x27;Y&#x27; end as apcact,&#xd;&#xa;		&#x27;&#x27; as apterm,&#xd;&#xa;		0 as apytdp,&#xd;&#xa;		PM00200.txrgnnum as apvgst,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,1,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdc,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,3,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdy,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,6,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdm,&#xd;&#xa;		ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,PM00201.LSTCHKDT,23&#x29;,9,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdd,&#xd;&#xa;		0 as apbal,&#xd;&#xa;		&#x27;&#x27; as apvbnk,&#xd;&#xa;		&#x27;&#x27; as apvtyp,&#xd;&#xa;		&#x27;C&#x27; as apvcur,&#xd;&#xa;		case when PM00200.prspayee &#x3d; 0 then &#x27;&#x27; else convert&#x28;varchar&#x28;10&#x29;,PM00200.prspayee&#x29; end as appvn_nbr,&#xd;&#xa;		&#x27;&#x27; as ap1099,&#xd;&#xa;		&#x27;&#x27; as appsts,&#xd;&#xa;		&#x27;&#x27; as apvptp,&#xd;&#xa;		&#x27;B&#x27; as apvent,&#xd;&#xa;		ISNULL&#x28;PM00201.amtpdytd,0&#x29; as apcurp,&#xd;&#xa;		ISNULL&#x28;PM00201.amtpdlyr,0&#x29; as aplstp,&#xd;&#xa;		ISNULL&#x28;PM00201.amtpdlif,0&#x29; as aplifp,&#xd;&#xa;		ISNULL&#x28;PM00201.currblnc,0&#x29; as apcurb,&#xd;&#xa;		0 as aphldb,&#xd;&#xa;		PM00200.vendname as naname,&#xd;&#xa;		upper&#x28;PM00200.vndchknm&#x29; as nasort,&#xd;&#xa;		&#x27;&#x27; as nasalu,&#xd;&#xa;		&#x27;&#x27; as nafnam,&#xd;&#xa;		&#x27;&#x27; as nalnam,&#xd;&#xa;		&#x27;&#x27; as nainit,&#xd;&#xa;		PM00200.Address1 as naadd1,&#xd;&#xa;		PM00200.Address2 as naadd2,&#xd;&#xa;		PM00200.Address3 as naadd3,&#xd;&#xa;		&#x27;&#x27; as naadd4,&#xd;&#xa;		PM00200.city as nacity,&#xd;&#xa;		PM00200.state as naaprv,&#xd;&#xa;		PM00200.country as nacntr,&#xd;&#xa;		PM00200.zipcode as napstc,&#xd;&#xa;		&#x27;&#x27; as nadmac,&#xd;&#xa;		&#x27;&#x27; as nadmdc,&#xd;&#xa;		case when left&#x28;PM00200.PHNUMBR1,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.PHNUMBR1,10&#x29; end as naphn1,&#xd;&#xa;		case when left&#x28;PM00200.PHNUMBR2,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.PHNUMBR2,10&#x29; end as naphn2,&#xd;&#xa;		case when left&#x28;PM00200.faxnumbr,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.faxnumbr,10&#x29; end as nafaxn,&#xd;&#xa;		case when left&#x28;PM00200.phone3,3&#x29; &#x3d; &#x27;000&#x27; then &#x27;&#x27; else left&#x28;PM00200.phone3,10&#x29; end as naceln,&#xd;&#xa;		ISNULL&#x28;&#x28;select sy01200.emailtoaddress from SY01200 where sy01200.master_id &#x3d; PM00200.VENDORID and sy01200.Master_Type &#x3d; &#x27;VEN&#x27; and sy01200.ADRSCODE &#x3d; &#x27;EFT&#x27; and len&#x28;convert&#x28;varchar&#x28;4&#x29;,sy01200.emailtoaddress&#x29;&#x29; &#x3e; 0 &#x29;,PM00200.comment1&#x29; as naemal,&#xd;&#xa;		&#x27;&#x27; as nanbro,&#xd;&#xa;		&#x27;Y&#x27; as naalwd,&#xd;&#xa;		&#x27;N&#x27; as nasubs,&#xd;&#xa;		Case when PM00200.vendstts&#x3d;2 then &#x27;I&#x27; else &#x27;A&#x27; end as nastsf,&#xd;&#xa;		&#x27;&#x27; as nasin_nbr,&#xd;&#xa;		&#x27;N&#x27; as nanewf,&#xd;&#xa;		&#x27;&#x27; as narelp,&#xd;&#xa;		0 as apfper,&#xd;&#xa;		&#x27;&#x27; as flagfield,&#xd;&#xa;		&#x27;&#x27; as flagfield2&#xd;&#xa;From PM00200 &#xd;&#xa;	left join PM00201 on PM00201.vendorid &#x3d; PM00200.vendorid&#xd;&#xa;order by 1&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>433</xloc>
-      <yloc>390</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>GP current journal entries</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>GREATPLAINS4_DB</connection>
-    <sql>Select &#xd;&#xa;	JRNENTRY as glbch_nbr,&#xd;&#xa;	SEQNUMBR as glbsq_nbr,&#xd;&#xa;	&#x28;select SUBSTRING&#x28;GL00105.ACTNUMST,1,9&#x29;&#x2b;&#x27;-000-&#x27;&#x2b;SUBSTRING&#x28;GL00105.ACTNUMST,11,3&#x29; from gl00105 where gl00105.actindx &#x3d; GL20000.actindx&#x29; as glact_nbr,&#xd;&#xa;	&#x27;Y&#x27; as glpstf,&#xd;&#xa;	&#x27;D&#x27; as gltrtp,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL20000.TRXDATE,23&#x29;,1,2&#x29;&#x29; as glapdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL20000.TRXDATE,23&#x29;,3,2&#x29;&#x29; as glapdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL20000.TRXDATE,23&#x29;,6,2&#x29;&#x29; as glapdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL20000.TRXDATE,23&#x29;,9,2&#x29;&#x29; as glapdd,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL20000.TRXDATE,23&#x29;,1,2&#x29;&#x29; as gltrdc,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL20000.TRXDATE,23&#x29;,3,2&#x29;&#x29; as gltrdy,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL20000.TRXDATE,23&#x29;,6,2&#x29;&#x29; as gltrdm,&#xd;&#xa;	convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,GL20000.TRXDATE,23&#x29;,9,2&#x29;&#x29; as gltrdd,&#xd;&#xa;	Replace&#x28;refrence,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29; as gldes1,&#xd;&#xa;	Replace&#x28;DSCRIPTN,&#x27;&#x22;&#x27;,&#x27; &#x27;&#x29; as gldes2,&#xd;&#xa;	convert&#x28;varchar&#x28;100&#x29;,JRNENTRY&#x29; as glref_nbr,&#xd;&#xa;	case when crdtamnt &#x3d; 0 then debitamt else crdtamnt &#x2a; -1 end as glamnt,&#xd;&#xa;	&#x27;&#x27; as glpo_nbrp,&#xd;&#xa;	0 as glpo_nbr,&#xd;&#xa;	0 as glpol_nbr,&#xd;&#xa;	&#x27;&#x27; as glpotc,&#xd;&#xa;	0 as glpotq,&#xd;&#xa;	0 as glpot,&#xd;&#xa;	&#x27;E&#x27; as glbsrc,&#xd;&#xa;	&#x27;&#x27; as glwo_nbr,&#xd;&#xa;	&#x27;&#x27; as gltsub,&#xd;&#xa;	SOURCDOC as glfsub,&#xd;&#xa;	&#x27; &#x27; as glsact,&#xd;&#xa;	&#x27; &#x27; as glofst,&#xd;&#xa;	openyear as glyear,&#xd;&#xa;	PERIODID as glprno,&#xd;&#xa;	&#x27;&#x27; as glna_nbr&#xd;&#xa;From gl20000&#xd;&#xa;Where voided &#x3d; 0 and SOURCDOC not in &#x28;&#x27;BBF&#x27;,&#x27;P&#x2f;L&#x27;&#x29;&#xd;&#xa;order by openyear, periodid &#xd;&#xa;</sql>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>select DISTINCT &#x5b;Vendor No_&#x5d; as VendorID, &#xd;&#xa;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor Bank Account&#x5d;.&#x5b;Name&#x5d; as BankName,&#xd;&#xa;&#x5b;Code&#x5d; as EFT_Code, &#xd;&#xa;case when len&#x28;&#x5b;Bank Branch No_&#x5d;&#x29; &#x3d; 3 then &#x27;0&#x27;&#x2b;&#x5b;Bank Branch No_&#x5d; else &#x5b;Bank Branch No_&#x5d; end as EFTBank, &#xd;&#xa;&#x5b;Transit No_&#x5d; as EFTBranch,&#xd;&#xa;&#x5b;Bank Account No_&#x5d; as EFTBankAcct, &#xd;&#xa;case when &#x5b;Use for Electronic Payments&#x5d; &#x3d; 1 and &#x5b;Payment Method Code&#x5d; &#x3d; &#x27;EFT&#x27; then &#x27;A&#x27; else &#x27;I&#x27; end  as EFTStatus,&#xd;&#xa;&#x27;&#x27; as apdact, &#xd;&#xa;&#x27;&#x27; as apdpys&#xd;&#xa;from &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor Bank Account&#x5d;, &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;&#xd;&#xa;where &#x5b;Vendor No_&#x5d; &#x3d; &#x5b;No_&#x5d;&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1394,194 +598,14 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>218</xloc>
-      <yloc>78</yloc>
+      <xloc>284</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Merge Rows &#x28;EFT 2&#x29;</name>
-    <type>MergeRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <keys>
-      <key>VendorID</key>
-    </keys>
-    <values>
-      <value>VendorID</value>
-    </values>
-<flag_field>flagfield</flag_field>
-<reference>GP Vendor EFT</reference>
-<compare>GP Vendor EFT 2</compare>
-    <compare>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>218</xloc>
-      <yloc>465</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Merge Rows &#x28;EFT 3&#x29;</name>
-    <type>MergeRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <keys>
-      <key>VendorID</key>
-    </keys>
-    <values>
-      <value>VendorID</value>
-    </values>
-<flag_field>flagfield2</flag_field>
-<reference>Merge Rows &#x28;EFT 2&#x29;</reference>
-<compare>GP Vendor EFT 3</compare>
-    <compare>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>433</xloc>
-      <yloc>465</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Merge Rows &#x28;EFT 4&#x29;</name>
-    <type>MergeRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <keys>
-      <key>VendorID</key>
-    </keys>
-    <values>
-      <value>VendorID</value>
-    </values>
-<flag_field>flagfield3</flag_field>
-<reference>Merge Rows &#x28;EFT 3&#x29;</reference>
-<compare>GP Vendor EFT 4</compare>
-    <compare>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>620</xloc>
-      <yloc>465</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Merge Rows &#x28;Vendors 2&#x29;</name>
-    <type>MergeRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <keys>
-      <key>apven_nbr</key>
-    </keys>
-    <values>
-      <value>apven_nbr</value>
-    </values>
-<flag_field>flagfield</flag_field>
-<reference>GP Vendor Master</reference>
-<compare>GP Vendor Master 2</compare>
-    <compare>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>218</xloc>
-      <yloc>303</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Merge Rows &#x28;Vendors 3&#x29;</name>
-    <type>MergeRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <keys>
-      <key>apven_nbr</key>
-    </keys>
-    <values>
-      <value>apven_nbr</value>
-    </values>
-<flag_field>flagfield2</flag_field>
-<reference>Merge Rows &#x28;Vendors 2&#x29;</reference>
-<compare>GP Vendor Master 3</compare>
-    <compare>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>435</xloc>
-      <yloc>303</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Merge Rows &#x28;Vendors 4&#x29; </name>
-    <type>MergeRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <keys>
-      <key>apven_nbr</key>
-    </keys>
-    <values>
-      <value>apven_nbr</value>
-    </values>
-<flag_field>flagfield3</flag_field>
-<reference>Merge Rows &#x28;Vendors 3&#x29;</reference>
-<compare>GP Vendor Master 4</compare>
-    <compare>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>620</xloc>
-      <yloc>303</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>PO Account Numbers</name>
+    <name>Vendor Master</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -1591,17 +615,17 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>GREATPLAINS4_DB</connection>
-    <sql>SELECT POP10100.ponumber AS POnbr,&#xd;&#xa;	SUBSTRING&#x28;GL00105.ACTNUMST,1,9&#x29;&#x2b;&#x27;-000-&#x27;&#x2b;SUBSTRING&#x28;GL00105.ACTNUMST,11,3&#x29; AS ACTNUMST&#xd;&#xa;FROM POP10100 &#xd;&#xa;	INNER JOIN POP10110 ON POP10100.PONUMBER &#x3d; POP10110.PONUMBER &#xd;&#xa;	INNER JOIN GL00105 ON POP10110.INVINDX &#x3d; GL00105.ACTINDX</sql>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>Select  &#xd;&#xa;&#x5b;No_&#x5d; as apven_nbr, &#xd;&#xa;&#x5b;Vendor Posting Group&#x5d; as apvgrp,&#xd;&#xa;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;Contact&#x5d; as apcont,&#xd;&#xa;&#x27;&#x27; as apcarc,&#xd;&#xa;&#x27;&#x27; as apcph_nbr,&#xd;&#xa;&#x27;&#x27; as apcex_nbr,&#xd;&#xa;&#x27;&#x27; as apcpos,&#xd;&#xa;&#x27;&#x27; as apvgst,&#xd;&#xa;&#x27;Y&#x27; as apcact,&#xd;&#xa;&#x27;&#x27; as apterm,&#xd;&#xa;0 as apytdp,&#xd;&#xa;&#x27;&#x27; as apcurp,&#xd;&#xa;&#x27;&#x27; as apvent,&#xd;&#xa;&#x27;&#x27; as aplstp,&#xd;&#xa;&#x27;&#x27; as aplifp,&#xd;&#xa;&#x27;&#x27; as apcurb,&#xd;&#xa;&#x27;&#x27; as nasalu,&#xd;&#xa;&#x27;&#x27; as nafnam,&#xd;&#xa;&#x27;&#x27; as nalnam,&#xd;&#xa;&#x27;&#x27; as nainit,&#xd;&#xa;&#x27;&#x27; as naphn2,&#xd;&#xa;&#x27;&#x27; as naceln,&#xd;&#xa;&#x27;&#x27; as nadmac, &#xd;&#xa;&#x27;&#x27; as nadmdc,&#xd;&#xa;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;Name&#x5d; as naname, &#xd;&#xa;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;Name 2&#x5d;, &#xd;&#xa;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;Address&#x5d; as naadd1, &#xd;&#xa;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;Address 2&#x5d; as naadd2, &#xd;&#xa;&#x27;&#x27; as naadd3,&#xd;&#xa;&#x27;&#x27; as naadd4,&#xd;&#xa;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;City&#x5d; as nacity, &#xd;&#xa;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;County&#x5d; as naaprv, &#xd;&#xa;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;Post Code&#x5d; as napstc, &#xd;&#xa;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;Country Code&#x5d; as nacntr, &#xd;&#xa;SUBSTRING&#x28;REPLACE&#x28;REPLACE&#x28;REPLACE&#x28;REPLACE&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;Phone No_&#x5d;, &#x27;-&#x27;, &#x27;&#x27;&#x29;, &#x27;&#x28;&#x27;, &#x27;&#x27;&#x29;, &#x27;&#x29; &#x27;, &#x27;&#x27;&#x29;, &#x27;&#x29;&#x27;, &#x27;&#x27;&#x29;,1,50&#x29; as naphn1, &#xd;&#xa;SUBSTRING&#x28;REPLACE&#x28;REPLACE&#x28;REPLACE&#x28;REPLACE&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;Fax No_&#x5d;, &#x27;-&#x27;, &#x27;&#x27;&#x29;, &#x27;&#x28;&#x27;, &#x27;&#x27;&#x29;, &#x27;&#x29; &#x27;, &#x27;&#x27;&#x29;, &#x27;&#x29;&#x27;, &#x27;&#x27;&#x29;,1,50&#x29; as nafaxn, &#xd;&#xa;case when &#x5b;EFT Email&#x5d; &#x3d;&#x27;&#x27; or &#x5b;EFT Email&#x5d; &#x3d; &#x27;R&#x27;  then &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor Bank Account&#x5d;.&#x5b;E-Mail&#x5d; else &#x5b;EFT Email&#x5d; end as naemal,&#xd;&#xa;&#x5b;Social Insurance No_&#x5d; as nasin_nbr,&#xd;&#xa;&#x27;A&#x27; as nastsf,&#xd;&#xa;&#x27;&#x27; as nanbro,&#xd;&#xa;&#x27;Y&#x27; as naalwd,&#xd;&#xa;&#x27;N&#x27; as nasubs,&#xd;&#xa;&#x27;N&#x27; as nanewf,&#xd;&#xa;&#x27;&#x27; as narelp,&#xd;&#xa;0 as apfper,&#xd;&#xa;&#x27;&#x27; as apcarc,&#xd;&#xa;&#x27;&#x27; as apcph_nbr,&#xd;&#xa;&#x27;&#x27; as apcex_nbr,&#xd;&#xa;&#x27;&#x27; as apcpos,&#xd;&#xa;0 as apbal,&#xd;&#xa;&#x27;&#x27; as apvbnk,&#xd;&#xa;&#x27;&#x27; as apvtyp,&#xd;&#xa;&#x27;C&#x27; as apvcur,&#xd;&#xa;&#x27;&#x27; as ap1099,&#xd;&#xa;&#x27;&#x27; as appsts,&#xd;&#xa;&#x27;&#x27; as apvptp,&#xd;&#xa;0 as aphldb,&#xd;&#xa;&#x5b;Pay-to Vendor No_&#x5d; as appvn_nbr,&#xd;&#xa;&#x5b;Search Name&#x5d; as nasort, &#xd;&#xa;ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Last Date Modified&#x5d;,23&#x29;,1,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdc,&#xd;&#xa;ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Last Date Modified&#x5d;,23&#x29;,3,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdy,&#xd;&#xa;ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Last Date Modified&#x5d;,23&#x29;,6,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdm,&#xd;&#xa;ISNULL&#x28;convert&#x28;smallint,substring&#x28;convert&#x28;varchar&#x28;20&#x29;,&#x5b;Last Date Modified&#x5d;,23&#x29;,9,2&#x29;&#x29;,&#x27;&#x27;&#x29; as apltdd,&#xd;&#xa;&#x5b;Payment Method Code&#x5d;, &#xd;&#xa;&#x5b;Last Date Modified&#x5d; as &#x5b;Last Date Modified&#x5d;, &#xd;&#xa;&#x5b;Pay-to Vendor No_&#x5d;, &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;Currency Code&#x5d;, &#xd;&#xa;&#x5b;VAT Registration No_&#x5d; &#xd;&#xa;From &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d; &#xd;&#xa;LEFT JOIN &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor Bank Account&#x5d; on &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;No_&#x5d; &#x3d; &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor Bank Account&#x5d;.&#x5b;Vendor No_&#x5d; &#xd;&#xa;and &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor Bank Account&#x5d;.&#x5b;Use for Electronic Payments&#x5d; &#x3d; 1 &#xd;&#xa;and &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Vendor&#x5d;.&#x5b;Payment Method Code&#x5d; &#x3d; &#x27;EFT&#x27; &#xd;&#xa;&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>905</xloc>
-      <yloc>209</yloc>
+      <xloc>193</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1736,8 +760,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>754</xloc>
-      <yloc>465</yloc>
+      <xloc>284</xloc>
+      <yloc>139</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2014,7 +1038,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>apven_nbr</name>
+        <name>appvn_nbr</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -2484,8 +1508,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>754</xloc>
-      <yloc>303</yloc>
+      <xloc>193</xloc>
+      <yloc>139</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2520,7 +1544,7 @@
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>Y</do_not_open_new_file_init>
       <extention>CSV</extention>
-      <append>Y</append>
+      <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
       <add_date>N</add_date>
@@ -2594,7 +1618,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>HeaderAccountNumber</name>
+        <name>accountnumber</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -2848,14 +1872,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>47</xloc>
-      <yloc>209</yloc>
+      <xloc>54</xloc>
+      <yloc>139</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>gltrans &#x28;current&#x29;</name>
+    <name>gltrans2009</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2873,18 +1897,18 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding>windows-1252</encoding>
+    <encoding/>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;gltrans</name>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;gltrans2009</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>csv</extention>
-      <append>Y</append>
+      <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
       <add_date>N</add_date>
@@ -3284,14 +2308,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>218</xloc>
-      <yloc>209</yloc>
+      <xloc>431</xloc>
+      <yloc>139</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>gltrans2011 &#x28;Historical&#x29;</name>
+    <name>gltrans2010</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -3309,7 +2333,443 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding>windows-1252</encoding>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;gltrans2010</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>csv</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>glbch_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glbsq_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glact_nbr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpstf</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrtp</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glapdc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glapdy</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glapdm</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glapdd</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrdc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrdy</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrdm</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrdd</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gldes1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gldes2</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glref_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glamnt</name>
+        <type>BigNumber</type>
+        <format>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpo_nbrp</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpo_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpol_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpotc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpotq</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpot</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glbsrc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glwo_nbr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltsub</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glfsub</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glsact</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glofst</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glyear</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glprno</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glna_nbr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>554</xloc>
+      <yloc>139</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>gltrans2011</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator>,</separator>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>Y</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -3320,7 +2780,7 @@
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>csv</extention>
-      <append>Y</append>
+      <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
       <add_date>N</add_date>
@@ -3720,14 +3180,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>754</xloc>
-      <yloc>209</yloc>
+      <xloc>677</xloc>
+      <yloc>139</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>gltrans2012 &#x28;Historical&#x29;</name>
+    <name>gltrans2012</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -3745,7 +3205,7 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding>windows-1252</encoding>
+    <encoding/>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -3756,7 +3216,7 @@
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>csv</extention>
-      <append>Y</append>
+      <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
       <add_date>N</add_date>
@@ -4156,14 +3616,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>620</xloc>
-      <yloc>209</yloc>
+      <xloc>800</xloc>
+      <yloc>139</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>gltrans2013 &#x28;Historical&#x29;</name>
+    <name>gltrans2013</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -4181,7 +3641,7 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding>windows-1252</encoding>
+    <encoding/>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -4192,7 +3652,7 @@
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>csv</extention>
-      <append>Y</append>
+      <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
       <add_date>N</add_date>
@@ -4592,14 +4052,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>486</xloc>
-      <yloc>209</yloc>
+      <xloc>923</xloc>
+      <yloc>139</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>gltrans2014 &#x28;Historical&#x29;</name>
+    <name>gltrans2014</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -4617,7 +4077,7 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding>windows-1252</encoding>
+    <encoding/>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -4628,7 +4088,7 @@
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>csv</extention>
-      <append>Y</append>
+      <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
       <add_date>N</add_date>
@@ -5028,8 +4488,880 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>352</xloc>
-      <yloc>209</yloc>
+      <xloc>1046</xloc>
+      <yloc>139</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>gltrans2015 </name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator>,</separator>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>Y</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;gltrans2015</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>csv</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>glbch_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glbsq_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glact_nbr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpstf</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrtp</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glapdc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glapdy</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glapdm</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glapdd</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrdc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrdy</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrdm</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrdd</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gldes1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gldes2</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glref_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glamnt</name>
+        <type>BigNumber</type>
+        <format>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpo_nbrp</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpo_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpol_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpotc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpotq</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpot</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glbsrc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glwo_nbr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltsub</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glfsub</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glsact</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glofst</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glyear</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glprno</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glna_nbr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1169</xloc>
+      <yloc>139</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>gltrans2016</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator>,</separator>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>Y</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;gltrans2016</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>csv</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>glbch_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glbsq_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glact_nbr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpstf</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrtp</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glapdc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glapdy</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glapdm</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glapdd</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrdc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrdy</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrdm</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltrdd</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gldes1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gldes2</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glref_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glamnt</name>
+        <type>BigNumber</type>
+        <format>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpo_nbrp</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpo_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpol_nbr</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpotc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpotq</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glpot</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glbsrc</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glwo_nbr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>gltsub</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glfsub</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glsact</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glofst</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glyear</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glprno</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>glna_nbr</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1292</xloc>
+      <yloc>139</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

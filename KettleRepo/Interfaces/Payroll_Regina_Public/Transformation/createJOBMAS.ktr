@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;03&#x2f;23 12&#x3a;24&#x3a;45.796</modified_date>
+  <modified_date>2015&#x2f;03&#x2f;24 08&#x3a;36&#x3a;10.978</modified_date>
   </info>
   <notepads>
     <notepad>
@@ -355,12 +355,12 @@
   <order>
   <hop> <from>Occupation Cross Reference</from><to>Add Employee Job to Job Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Employee Job to Job Master</from><to>Switch Employee Number</to><enabled>Y</enabled> </hop>
-  <hop> <from>PREMPMAS</from><to>Switch Employee Number</to><enabled>Y</enabled> </hop>
   <hop> <from>Switch Employee Number</from><to>Add constants</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Assignment</from><to>Get Employee Job</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Employee Job</from><to>Add Employee Job to Job Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Payroll Employee Job</from><to>Get Employee Job</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants</from><to>PRJOBMAS</to><enabled>Y</enabled> </hop>
+  <hop> <from>Employee Master &#x28;PREMPMAS&#x29;</from><to>Switch Employee Number</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Employee Job to Job Master</name>
@@ -675,6 +675,66 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>231</xloc>
       <yloc>161</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Employee Job</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Employee Assignment</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>empjob_emp_code</name>
+        <field>jr_employee_id_number</field>
+      </key>
+      <key>
+        <name>empjob_employer_code</name>
+        <field>jr_employer_code</field>
+      </key>
+      <key>
+        <name>empjob_barg_unit</name>
+        <field>jr_barg_unit</field>
+      </key>
+      <key>
+        <name>empjob_job_no</name>
+        <field>jr_payroll_job_number</field>
+      </key>
+      <value>
+        <name>jr_job_code</name>
+        <rename>jr_job_code</rename>
+        <default/>
+        <type>None</type>
+      </value>
+      <value>
+        <name>jr_job_subcode</name>
+        <rename>jr_job_subcode</rename>
+        <default/>
+        <type>None</type>
+      </value>
+      <value>
+        <name>jr_base_facility</name>
+        <rename>jr_base_facility</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>231</xloc>
+      <yloc>285</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2165,7 +2225,43 @@
     </step>
 
   <step>
-    <name>PREMPMAS</name>
+    <name>Switch Employee Number</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>PREMPMAS</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>empjob_emp_code</name>
+        <field>ma_employee_id_number</field>
+      </key>
+      <value>
+        <name>reference ID</name>
+        <rename>Employee_ID</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>577</xloc>
+      <yloc>285</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Employee Master &#x28;PREMPMAS&#x29;</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2235,8 +2331,8 @@
       </field>
       <field>
         <name>ma_street_direction</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2323,8 +2419,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2334,7 +2430,7 @@
       </field>
       <field>
         <name>emp_bank_account_1</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -2345,8 +2441,8 @@
       </field>
       <field>
         <name>emp_bank_account_2</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2378,8 +2474,8 @@
       </field>
       <field>
         <name>FillerNumber</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>Number</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2400,8 +2496,8 @@
       </field>
       <field>
         <name>ma_marital_status</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2411,8 +2507,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2422,8 +2518,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2433,8 +2529,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2466,8 +2562,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2477,8 +2573,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2510,8 +2606,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2521,8 +2617,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2532,8 +2628,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2543,8 +2639,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2554,8 +2650,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2565,8 +2661,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2576,8 +2672,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2587,8 +2683,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2598,8 +2694,8 @@
       </field>
       <field>
         <name>ma_cell_phone</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2609,8 +2705,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2620,8 +2716,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2631,8 +2727,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2642,8 +2738,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2653,8 +2749,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2664,8 +2760,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2675,8 +2771,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2686,8 +2782,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2697,8 +2793,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2708,8 +2804,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2730,8 +2826,8 @@
       </field>
       <field>
         <name>emp_end_date</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2741,8 +2837,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2752,8 +2848,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2763,8 +2859,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2774,8 +2870,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2785,8 +2881,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2796,19 +2892,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2818,8 +2903,8 @@
       </field>
       <field>
         <name>ma_title</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2829,8 +2914,8 @@
       </field>
       <field>
         <name>ma_previous_surname</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2862,8 +2947,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2873,8 +2958,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2884,8 +2969,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2895,8 +2980,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2917,8 +3002,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2928,8 +3013,8 @@
       </field>
       <field>
         <name>ma_suffix</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2939,8 +3024,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2961,8 +3046,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss.SSS</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2973,104 +3058,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>563</xloc>
+      <xloc>577</xloc>
       <yloc>161</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Switch Employee Number</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>PREMPMAS</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>empjob_emp_code</name>
-        <field>ma_employee_id_number</field>
-      </key>
-      <value>
-        <name>reference ID</name>
-        <rename>Employee_ID</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>563</xloc>
-      <yloc>285</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Employee Job</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Employee Assignment</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>empjob_emp_code</name>
-        <field>jr_employee_id_number</field>
-      </key>
-      <key>
-        <name>empjob_employer_code</name>
-        <field>jr_employer_code</field>
-      </key>
-      <key>
-        <name>empjob_barg_unit</name>
-        <field>jr_barg_unit</field>
-      </key>
-      <key>
-        <name>empjob_job_no</name>
-        <field>jr_payroll_job_number</field>
-      </key>
-      <value>
-        <name>jr_job_code</name>
-        <rename>jr_job_code</rename>
-        <default/>
-        <type>None</type>
-      </value>
-      <value>
-        <name>jr_job_subcode</name>
-        <rename>jr_job_subcode</rename>
-        <default/>
-        <type>None</type>
-      </value>
-      <value>
-        <name>jr_base_facility</name>
-        <rename>jr_base_facility</rename>
-        <default/>
-        <type>None</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>231</xloc>
-      <yloc>285</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

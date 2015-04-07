@@ -68,15 +68,15 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;03&#x2f;26 10&#x3a;34&#x3a;33.714</modified_date>
+  <modified_date>2015&#x2f;04&#x2f;01 15&#x3a;06&#x3a;14.744</modified_date>
   </info>
   <notepads>
     <notepad>
-      <note>Create the Employee Earning Master.   &#xd;&#xa;&#x2a; Get the Job Code &#x2f; Sub Code from Employee Assignment&#xd;&#xa;&#x2a; Get the job from the PROCCTBL using the Job Code&#x2f;Sub Code to look it up&#xd;&#xa;&#x2a; Get the occupation&#x2f;grid from PRSTPTBL&#xd;&#xa;&#x2a; Get the Reference ID of the employee from PREMPMAS</note>
+      <note>Create the Employee Earning Master.   &#xd;&#xa;&#x2a; Drop records that ended before Sept 1, 2014&#xd;&#xa;&#x2a; Get the Job Code &#x2f; Sub Code from Employee Assignment&#xd;&#xa;&#x2a; Get the job from the PROCCTBL using the Job Code&#x2f;Sub Code to look it up&#xd;&#xa;&#x2a; Get the occupation&#x2f;grid from PRSTPTBL&#xd;&#xa;&#x2a; Get the Reference ID of the employee from PREMPMAS</note>
       <xloc>6</xloc>
       <yloc>7</yloc>
       <width>415</width>
-      <heigth>90</heigth>
+      <heigth>106</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
       <fontbold>N</fontbold>
@@ -365,8 +365,9 @@
   <hop> <from>Get Employee Grid</from><to>Get Employee Occupation&#x2f;Step</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Employee Job</from><to>Add Employee Job from Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Earnings</from><to>Convert Dates</to><enabled>Y</enabled> </hop>
-  <hop> <from>Convert Dates</from><to>Get Employee Job</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Master &#x28;PREMPMAS&#x29;</from><to>Switch Employee Number</to><enabled>Y</enabled> </hop>
+  <hop> <from>Convert Dates</from><to>Drop earnings that have ended</to><enabled>Y</enabled> </hop>
+  <hop> <from>Drop earnings that have ended</from><to>Get Employee Job</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Employee Job from Master</name>
@@ -402,8 +403,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>531</xloc>
-      <yloc>365</yloc>
+      <xloc>719</xloc>
+      <yloc>260</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -447,8 +448,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>970</xloc>
-      <yloc>365</yloc>
+      <xloc>1044</xloc>
+      <yloc>372</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -512,8 +513,49 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>219</xloc>
-      <yloc>365</yloc>
+      <xloc>230</xloc>
+      <yloc>260</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Drop earnings that have ended</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to/>
+<send_false_to>Get Employee Job</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>empearn_end_date</leftvalue>
+   <function>&#x3c;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>Date</type><text>2014&#x2f;09&#x2f;01 00&#x3a;00&#x3a;00.000</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>yyyy&#x2f;MM&#x2f;dd</mask></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>empearn_emp_code</leftvalue>
+   <function>&#x3c;&#x3e;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>23</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>393</xloc>
+      <yloc>260</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -744,8 +786,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>380</xloc>
-      <yloc>242</yloc>
+      <xloc>556</xloc>
+      <yloc>137</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1020,8 +1062,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>57</xloc>
-      <yloc>365</yloc>
+      <xloc>67</xloc>
+      <yloc>260</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1043,7 +1085,7 @@
     <include_filename>N</include_filename>
     <separator>,</separator>
     <enclosure>&#x22;</enclosure>
-    <header>Y</header>
+    <header>N</header>
     <buffer_size>50000</buffer_size>
     <lazy_conversion>Y</lazy_conversion>
     <add_filename_result>N</add_filename_result>
@@ -1835,8 +1877,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>682</xloc>
-      <yloc>242</yloc>
+      <xloc>882</xloc>
+      <yloc>137</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1875,8 +1917,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>833</xloc>
-      <yloc>242</yloc>
+      <xloc>1045</xloc>
+      <yloc>137</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1935,8 +1977,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>380</xloc>
-      <yloc>365</yloc>
+      <xloc>556</xloc>
+      <yloc>260</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1989,8 +2031,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>833</xloc>
-      <yloc>365</yloc>
+      <xloc>1045</xloc>
+      <yloc>260</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2012,7 +2054,7 @@
     <include_filename>N</include_filename>
     <separator>,</separator>
     <enclosure>&#x22;</enclosure>
-    <header>Y</header>
+    <header>N</header>
     <buffer_size>50000</buffer_size>
     <lazy_conversion>Y</lazy_conversion>
     <add_filename_result>N</add_filename_result>
@@ -2199,8 +2241,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>531</xloc>
-      <yloc>242</yloc>
+      <xloc>719</xloc>
+      <yloc>137</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2220,7 +2262,7 @@
     <enclosure>&#x22;</enclosure>
     <enclosure_forced>Y</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
+    <header>N</header>
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
@@ -3019,8 +3061,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1108</xloc>
-      <yloc>366</yloc>
+      <xloc>1228</xloc>
+      <yloc>371</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3438,8 +3480,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>970</xloc>
-      <yloc>131</yloc>
+      <xloc>1208</xloc>
+      <yloc>26</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3481,8 +3523,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>970</xloc>
-      <yloc>242</yloc>
+      <xloc>1208</xloc>
+      <yloc>137</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3504,7 +3546,7 @@
     <include_filename>N</include_filename>
     <separator>,</separator>
     <enclosure>&#x22;</enclosure>
-    <header>Y</header>
+    <header>N</header>
     <buffer_size>50000</buffer_size>
     <lazy_conversion>Y</lazy_conversion>
     <add_filename_result>N</add_filename_result>
@@ -3603,8 +3645,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>833</xloc>
-      <yloc>131</yloc>
+      <xloc>1045</xloc>
+      <yloc>26</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3639,8 +3681,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>682</xloc>
-      <yloc>365</yloc>
+      <xloc>882</xloc>
+      <yloc>260</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

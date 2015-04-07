@@ -68,15 +68,15 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;03&#x2f;27 11&#x3a;06&#x3a;23.276</modified_date>
+  <modified_date>2015&#x2f;04&#x2f;01 15&#x3a;23&#x3a;19.980</modified_date>
   </info>
   <notepads>
     <notepad>
-      <note>This transformation takes information from the JobCodeMaster and builds a Job Table.   The Job table will become the occupations, &#xd;&#xa;so will ake the Job Code and the Sub-Code and come up with an Occupation Code that will be used in subsequent&#xd;&#xa; transformations &#x28;i.e. PRDEDMAS, PRERNMAS, PRJOBMAS&#x29;.  &#xd;&#xa;&#xd;&#xa;Process looks to see if the SubCode is less than 3 characters.  &#xd;&#xa;  If yes, then it takes all of the JobCode to join with the SubCode&#xd;&#xa;  If no, it takes the only the 1st character of JobCode to join with the SubCode&#xd;&#xa;&#xd;&#xa;Process removes extra chaacters from the JobCode and SubCode &#x28;dashes, periods, slashes, spaces&#x29;&#xd;&#xa;</note>
+      <note>This transformation takes information from the JobCodeMaster and builds a Job Table.   The Job table will become &#xd;&#xa;the occupations, so will take the Job Code and the Sub-Code and come up with an Occupation Code that will be &#xd;&#xa;used in subsequent transformations &#x28;i.e. PRDEDMAS, PRERNMAS, PRJOBMAS&#x29;.  &#xd;&#xa;&#xd;&#xa;If the JobCode is for teachers &#x28;T, T1, T5, T7&#x29;, then the Occupation is  a Teacher.   &#xd;&#xa;If the JobCode is T and the SubCode is SUB, then the Occupation is  a Substitute Teacher.&#xd;&#xa;Otherwise&#x3a;&#xd;&#xa;Process looks to see if the SubCode is less than 3 characters.  &#xd;&#xa;  If yes, then it takes all of the JobCode to join with the SubCode&#xd;&#xa;  If no, it takes the only the 1st character of JobCode to join with the SubCode&#xd;&#xa;&#xd;&#xa;Process removes extra characters from the JobCode and SubCode &#x28;dashes, periods, slashes, spaces&#x29;&#xd;&#xa;</note>
       <xloc>18</xloc>
       <yloc>12</yloc>
-      <width>708</width>
-      <heigth>167</heigth>
+      <width>617</width>
+      <heigth>215</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
       <fontbold>N</fontbold>
@@ -353,18 +353,22 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>JobCodeMaster</from><to>Separate Teaching from others</to><enabled>Y</enabled> </hop>
-  <hop> <from>Separate Teaching from others</from><to>Add constants</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants</from><to>PRJOBTBL</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants 2</from><to>PRJOBTBL</to><enabled>Y</enabled> </hop>
+  <hop> <from>JobCodeMaster</from><to>Separate Teachers from others</to><enabled>Y</enabled> </hop>
   <hop> <from>PRJOBTBL</from><to>PROCCTBL</to><enabled>Y</enabled> </hop>
-  <hop> <from>JobCode &#x2b; SubCode</from><to>Add constants 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Job Code &#x28;1 or 2&#x29;</from><to>Remove extra chars</to><enabled>Y</enabled> </hop>
-  <hop> <from>Remove extra chars</from><to>JobCode &#x2b; SubCode</to><enabled>Y</enabled> </hop>
-  <hop> <from>Separate Teaching from others</from><to>Job Code &#x28;1 or 2&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>JobCode &#x2b; SubCode</from><to>Add Blank Field</to><enabled>Y</enabled> </hop>
+  <hop> <from>Separate Teachers from others</from><to>Job Code &#x28;1 or 2&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Separate Teachers from others</from><to>Separate SUBS from teachers</to><enabled>Y</enabled> </hop>
+  <hop> <from>Separate SUBS from teachers</from><to>Set TEAC JobCode</to><enabled>Y</enabled> </hop>
+  <hop> <from>Separate SUBS from teachers</from><to>Set SUBS JobCode</to><enabled>Y</enabled> </hop>
+  <hop> <from>Job Code &#x28;1 or 2&#x29;</from><to>Remove Dash from JobCode</to><enabled>Y</enabled> </hop>
+  <hop> <from>Remove Dash from JobCode</from><to>JobCode &#x2b; SubCode</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Blank Field</from><to>Remove extra chars</to><enabled>Y</enabled> </hop>
+  <hop> <from>Remove extra chars</from><to>PRJOBTBL</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set SUBS JobCode</from><to>Remove extra chars</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set TEAC JobCode</from><to>Remove extra chars</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Add constants</name>
+    <name>Add Blank Field</name>
     <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
@@ -375,30 +379,6 @@
            <schema_name/>
            </partitioning>
     <fields>
-      <field>
-        <name>JobCode1</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>NewJobCode</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>TEAC</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
       <field>
         <name>Fillerstring</name>
         <type>String</type>
@@ -414,15 +394,15 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>708</xloc>
-      <yloc>223</yloc>
+      <xloc>868</xloc>
+      <yloc>402</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Add constants 2</name>
-    <type>Constant</type>
+    <name>Job Code &#x28;1 or 2&#x29;</name>
+    <type>Janino</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -431,24 +411,17 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>
-      <field>
-        <name>Fillerstring</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
+       <formula><field_name>JobCode1</field_name>
+<formula_string>jc_job_subcode.length&#x28;&#x29; &#x3c; 3 &#x3f; jc_job_code.substring&#x28;0,jc_job_code.length&#x28;&#x29;&#x29; &#x3a; jc_job_code.substring&#x28;0,1&#x29; </formula_string>
+<value_type>String</value_type>
+<value_length>4</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>707</xloc>
-      <yloc>319</yloc>
+      <xloc>871</xloc>
+      <yloc>111</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -528,8 +501,8 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>532</xloc>
-      <yloc>319</yloc>
+      <xloc>871</xloc>
+      <yloc>305</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -694,34 +667,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>31</xloc>
-      <yloc>223</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Job Code &#x28;1 or 2&#x29;</name>
-    <type>Janino</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>JobCode1</field_name>
-<formula_string>jc_job_subcode.length&#x28;&#x29; &#x3c; 3 &#x3f; jc_job_code.substring&#x28;0,jc_job_code.length&#x28;&#x29;&#x29; &#x3a; jc_job_code.substring&#x28;0,1&#x29; </formula_string>
-<value_type>String</value_type>
-<value_length>4</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>182</xloc>
-      <yloc>319</yloc>
+      <xloc>728</xloc>
+      <yloc>16</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -741,7 +688,7 @@
     <enclosure>&#x22;</enclosure>
     <enclosure_forced>Y</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
+    <header>N</header>
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
@@ -771,49 +718,49 @@
     <fields>
       <field>
         <name>NewJobCode</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
         <name>jc_job_description</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
         <name>jc_equity_group</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
         <name>jc_staffing_group</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -825,7 +772,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -837,7 +784,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -849,7 +796,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -861,7 +808,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -873,7 +820,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -885,7 +832,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -897,7 +844,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -909,7 +856,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -921,7 +868,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -933,7 +880,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -945,7 +892,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -957,7 +904,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -969,7 +916,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -981,7 +928,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -993,7 +940,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -1005,7 +952,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -1017,7 +964,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -1029,7 +976,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -1041,7 +988,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -1053,7 +1000,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -1065,7 +1012,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -1077,7 +1024,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -1089,7 +1036,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -1101,7 +1048,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -1113,15 +1060,15 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>890</xloc>
-      <yloc>264</yloc>
+      <xloc>1098</xloc>
+      <yloc>519</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1141,7 +1088,7 @@
     <enclosure>&#x22;</enclosure>
     <enclosure_forced>Y</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
+    <header>N</header>
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
@@ -1364,14 +1311,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1038</xloc>
-      <yloc>264</yloc>
+      <xloc>1226</xloc>
+      <yloc>518</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Remove extra chars</name>
+    <name>Remove Dash from JobCode</name>
     <type>ReplaceString</type>
     <description/>
     <distribute>Y</distribute>
@@ -1393,8 +1340,29 @@
         <whole_word>no</whole_word>
         <case_sensitive>no</case_sensitive>
       </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>868</xloc>
+      <yloc>209</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Remove extra chars</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
       <field>
-        <in_stream_name>jc_job_subcode</in_stream_name>
+        <in_stream_name>NewJobCode</in_stream_name>
         <out_stream_name/>
         <use_regex>no</use_regex>
         <replace_string>-</replace_string>
@@ -1405,7 +1373,7 @@
         <case_sensitive>no</case_sensitive>
       </field>
       <field>
-        <in_stream_name>jc_job_subcode</in_stream_name>
+        <in_stream_name>NewJobCode</in_stream_name>
         <out_stream_name/>
         <use_regex>no</use_regex>
         <replace_string>.</replace_string>
@@ -1416,7 +1384,7 @@
         <case_sensitive>no</case_sensitive>
       </field>
       <field>
-        <in_stream_name>jc_job_subcode</in_stream_name>
+        <in_stream_name>NewJobCode</in_stream_name>
         <out_stream_name/>
         <use_regex>no</use_regex>
         <replace_string>&#x2f;</replace_string>
@@ -1427,7 +1395,7 @@
         <case_sensitive>no</case_sensitive>
       </field>
       <field>
-        <in_stream_name>jc_job_subcode</in_stream_name>
+        <in_stream_name>NewJobCode</in_stream_name>
         <out_stream_name/>
         <use_regex>no</use_regex>
         <replace_string>&#x26;</replace_string>
@@ -1440,14 +1408,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>357</xloc>
-      <yloc>319</yloc>
+      <xloc>1097</xloc>
+      <yloc>402</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Separate Teaching from others</name>
+    <name>Separate SUBS from teachers</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -1457,7 +1425,41 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Add constants</send_true_to>
+<send_true_to>Set SUBS JobCode</send_true_to>
+<send_false_to>Set TEAC JobCode</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>jc_job_subcode</leftvalue>
+   <function>STARTS WITH</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>SUB</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1084</xloc>
+      <yloc>111</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Separate Teachers from others</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Separate SUBS from teachers</send_true_to>
 <send_false_to>Job Code &#x28;1 or 2&#x29;</send_false_to>
     <compare>
 <condition>
@@ -1502,8 +1504,122 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>181</xloc>
-      <yloc>223</yloc>
+      <xloc>981</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set SUBS JobCode</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>JobCode1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>NewJobCode</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>SUBS</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Fillerstring</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1020</xloc>
+      <yloc>209</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set TEAC JobCode</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>JobCode1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>NewJobCode</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>TEAC</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Fillerstring</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1168</xloc>
+      <yloc>209</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

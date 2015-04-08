@@ -68,13 +68,13 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;04&#x2f;01 15&#x3a;02&#x3a;40.094</modified_date>
+  <modified_date>2015&#x2f;04&#x2f;08 09&#x3a;59&#x3a;24.309</modified_date>
   </info>
   <notepads>
     <notepad>
-      <note>This transformation will find the following errors&#xd;&#xa;Empty SIN - Creates a spreadsheet in output_path named Demographic_Errors&#xd;&#xa;Empty Birthdate - Adds to Demographic_Errors&#xd;&#xa;Duplicate SINS - &#xd;&#xa;</note>
-      <xloc>14</xloc>
-      <yloc>12</yloc>
+      <note>This transformation will find the following errors&#xd;&#xa;Empty SIN - Creates a spreadsheet in output_path named Demographic_Errors&#xd;&#xa;Empty Birthdate - Adds to Demographic_Errors&#xd;&#xa;No records for the employee in the employeeassignment file &#xd;&#xa;</note>
+      <xloc>1053</xloc>
+      <yloc>6</yloc>
       <width>422</width>
       <heigth>89</heigth>
       <fontname>Segoe UI</fontname>
@@ -366,6 +366,11 @@
   <hop> <from>SIN Empty&#x3f;</from><to>Add Message Field</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Message Field</from><to>Add Seq by SIN</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Field</from><to>SIN Empty&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Employee Assignment</from><to>Get Employee Job</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Employee Job</from><to>No Job&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Field</from><to>Add constants 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants 2 2</from><to>Get Employee Job</to><enabled>Y</enabled> </hop>
+  <hop> <from>No Job&#x3f;</from><to>Excel - Demographic_Errors</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Dummy SIN</name>
@@ -397,8 +402,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>887</xloc>
-      <yloc>364</yloc>
+      <xloc>868</xloc>
+      <yloc>230</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -430,8 +435,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>815</xloc>
-      <yloc>26</yloc>
+      <xloc>312</xloc>
+      <yloc>230</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -463,8 +468,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>887</xloc>
-      <yloc>211</yloc>
+      <xloc>590</xloc>
+      <yloc>230</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -490,8 +495,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>887</xloc>
-      <yloc>283</yloc>
+      <xloc>729</xloc>
+      <yloc>230</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -559,8 +564,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>606</xloc>
-      <yloc>124</yloc>
+      <xloc>170</xloc>
+      <yloc>389</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -616,8 +621,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>726</xloc>
-      <yloc>212</yloc>
+      <xloc>590</xloc>
+      <yloc>313</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -645,8 +650,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>726</xloc>
-      <yloc>124</yloc>
+      <xloc>451</xloc>
+      <yloc>313</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -698,8 +703,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>606</xloc>
-      <yloc>26</yloc>
+      <xloc>173</xloc>
+      <yloc>230</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -754,8 +759,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1003</xloc>
-      <yloc>364</yloc>
+      <xloc>1007</xloc>
+      <yloc>230</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -851,8 +856,8 @@
       </custom>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>728</xloc>
-      <yloc>600</yloc>
+      <xloc>1141</xloc>
+      <yloc>389</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -880,8 +885,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>887</xloc>
-      <yloc>124</yloc>
+      <xloc>451</xloc>
+      <yloc>230</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1629,8 +1634,350 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>489</xloc>
-      <yloc>26</yloc>
+      <xloc>34</xloc>
+      <yloc>230</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>No Job&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Excel - Demographic_Errors</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>Data</leftvalue>
+ <function>IS NULL</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>000</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1141</xloc>
+      <yloc>124</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Employee Assignment</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <filename>&#x24;&#x7b;SOURCE_PATH&#x7d;EmployeeAssignment.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>&#x22;</enclosure>
+    <header>Y</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding/>
+    <fields>
+      <field>
+        <name>jr_employee_id_number</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_employer_code</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_barg_unit</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_timeframe_sequence</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_contract_type</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_assignment_start</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_assignment_end</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_facility_code</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_facility_time</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_job_code</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_job_subcode</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_dept_code</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_dept_head</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_payroll_job_number</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_total_time</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_annualized_portion</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_base_facility</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>jr_comment</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>451</xloc>
+      <yloc>29</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Employee Job</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Employee Assignment</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>ma_employee_id_number</name>
+        <field>jr_employee_id_number</field>
+      </key>
+      <value>
+        <name>jr_job_code</name>
+        <rename>Data</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>451</xloc>
+      <yloc>124</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add constants 2 2</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>Message</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>No Job in EmployeeAssignment</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>seqno</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>312</xloc>
+      <yloc>124</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -68,15 +68,15 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;04&#x2f;01 15&#x3a;06&#x3a;14.744</modified_date>
+  <modified_date>2015&#x2f;04&#x2f;08 10&#x3a;09&#x3a;25.512</modified_date>
   </info>
   <notepads>
     <notepad>
-      <note>Create the Employee Earning Master.   &#xd;&#xa;&#x2a; Drop records that ended before Sept 1, 2014&#xd;&#xa;&#x2a; Get the Job Code &#x2f; Sub Code from Employee Assignment&#xd;&#xa;&#x2a; Get the job from the PROCCTBL using the Job Code&#x2f;Sub Code to look it up&#xd;&#xa;&#x2a; Get the occupation&#x2f;grid from PRSTPTBL&#xd;&#xa;&#x2a; Get the Reference ID of the employee from PREMPMAS</note>
+      <note>Create the Employee Earning Master.   &#xd;&#xa;&#x2a; Drop records that ended before Sept 1, 2014&#xd;&#xa;&#x2a; Get the Job Code &#x2f; Sub Code from Employee Assignment&#xd;&#xa;&#x2a; Get the job from the PROCCTBL using the Job Code&#x2f;Sub Code to look it up&#xd;&#xa;&#x2a; Get the occupation&#x2f;grid from PRSTPTBL&#xd;&#xa;&#x2a; Get the Reference ID of the employee from PREMPMAS&#xd;&#xa;&#x2a; GL accounts created by putting Main &#x2b; Sub together</note>
       <xloc>6</xloc>
       <yloc>7</yloc>
       <width>415</width>
-      <heigth>106</heigth>
+      <heigth>122</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
       <fontbold>N</fontbold>
@@ -353,24 +353,27 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Job Cross Reference</from><to>Add Employee Job from Master</to><enabled>Y</enabled> </hop>
+  <hop> <from>Job Cross Reference</from><to>Add Employee Job</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Assignment</from><to>Get Employee Job</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants</from><to>PRERNMAS</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Employee Job from Master</from><to>Switch Employee Number</to><enabled>Y</enabled> </hop>
-  <hop> <from>Switch Employee Number</from><to>Get Employee Occupation&#x2f;Step</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Employee Job</from><to>Switch Employee No.</to><enabled>Y</enabled> </hop>
+  <hop> <from>Switch Employee No.</from><to>Get Employee Occupation&#x2f;Step</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Employee Occupation&#x2f;Step</from><to>Add constants</to><enabled>Y</enabled> </hop>
   <hop> <from>Payroll Employee Job</from><to>Remove extraneous 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Remove extraneous 2</from><to>Get Employee Grid</to><enabled>Y</enabled> </hop>
   <hop> <from>Salary Grids &#x28;PRSTPTBL&#x29;</from><to>Get Employee Grid</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Employee Grid</from><to>Get Employee Occupation&#x2f;Step</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Employee Job</from><to>Add Employee Job from Master</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Employee Job</from><to>Add Employee Job</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Earnings</from><to>Convert Dates</to><enabled>Y</enabled> </hop>
-  <hop> <from>Employee Master &#x28;PREMPMAS&#x29;</from><to>Switch Employee Number</to><enabled>Y</enabled> </hop>
+  <hop> <from>Employee Master &#x28;PREMPMAS&#x29;</from><to>Switch Employee No.</to><enabled>Y</enabled> </hop>
   <hop> <from>Convert Dates</from><to>Drop earnings that have ended</to><enabled>Y</enabled> </hop>
   <hop> <from>Drop earnings that have ended</from><to>Get Employee Job</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants</from><to>GL Account 1 </to><enabled>Y</enabled> </hop>
+  <hop> <from>GL Account 1 </from><to>GL Account 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>GL Account 2</from><to>GL Account 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>GL Account 3</from><to>PRERNMAS</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Add Employee Job from Master</name>
+    <name>Add Employee Job</name>
     <type>StreamLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -403,8 +406,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>719</xloc>
-      <yloc>260</yloc>
+      <xloc>667</xloc>
+      <yloc>259</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -445,10 +448,22 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+      <field>
+        <name>GLPercent</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>100</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1044</xloc>
+      <xloc>967</xloc>
       <yloc>372</yloc>
       <draw>Y</draw>
       </GUI>
@@ -513,8 +528,8 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>230</xloc>
-      <yloc>260</yloc>
+      <xloc>217</xloc>
+      <yloc>259</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -542,20 +557,13 @@
    <function>&#x3c;</function>
    <rightvalue/>
    <value><name>constant</name><type>Date</type><text>2014&#x2f;09&#x2f;01 00&#x3a;00&#x3a;00.000</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>yyyy&#x2f;MM&#x2f;dd</mask></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>empearn_emp_code</leftvalue>
-   <function>&#x3c;&#x3e;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>23</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   </conditions>
  </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>393</xloc>
-      <yloc>260</yloc>
+      <xloc>367</xloc>
+      <yloc>259</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -786,8 +794,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>556</xloc>
-      <yloc>137</yloc>
+      <xloc>517</xloc>
+      <yloc>136</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1063,7 +1071,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>67</xloc>
-      <yloc>260</yloc>
+      <yloc>259</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1877,8 +1885,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>882</xloc>
-      <yloc>137</yloc>
+      <xloc>817</xloc>
+      <yloc>136</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1917,8 +1925,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1045</xloc>
-      <yloc>137</yloc>
+      <xloc>967</xloc>
+      <yloc>136</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1977,8 +1985,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>556</xloc>
-      <yloc>260</yloc>
+      <xloc>517</xloc>
+      <yloc>259</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2031,8 +2039,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1045</xloc>
-      <yloc>260</yloc>
+      <xloc>967</xloc>
+      <yloc>259</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2241,8 +2249,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>719</xloc>
-      <yloc>137</yloc>
+      <xloc>667</xloc>
+      <yloc>136</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2370,7 +2378,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -2387,7 +2395,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>FillerNumber</name>
+        <name>GLPercent</name>
         <type>Integer</type>
         <format>0</format>
         <currency>&#x24;</currency>
@@ -2483,7 +2491,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>FillerString</name>
+        <name>GLAcct</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -2495,7 +2503,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>FillerString</name>
+        <name>GLAcct2</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -2507,9 +2515,9 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>FillerString</name>
-        <type>Integer</type>
-        <format>0</format>
+        <name>GLAcct3</name>
+        <type>String</type>
+        <format> </format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2520,8 +2528,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Integer</type>
-        <format>0</format>
+        <type>String</type>
+        <format> </format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2532,8 +2540,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Integer</type>
-        <format>0</format>
+        <type>String</type>
+        <format> </format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2544,8 +2552,8 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Integer</type>
-        <format>0</format>
+        <type>String</type>
+        <format> </format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -2556,7 +2564,31 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>Date</type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2603,18 +2635,6 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>empearn_exp_main</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
         <name>FillerString</name>
         <type>String</type>
         <format/>
@@ -2630,141 +2650,9 @@
         <name>FillerString</name>
         <type>String</type>
         <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FillerString</name>
-        <type>Number</type>
-        <format>0.&#x23;&#x23;&#x23;&#x23;&#x23;</format>
         <currency/>
         <decimal>.</decimal>
         <group>,</group>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FillerString</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FillerString</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FillerString</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FillerString</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FillerString</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FillerString</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FillerString</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FillerString</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FillerString</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FillerString</name>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
         <nullif/>
         <trim_type>both</trim_type>
         <length>-1</length>
@@ -2773,18 +2661,18 @@
       <field>
         <name>FillerNumber</name>
         <type>Number</type>
-        <format/>
+        <format>0.&#x23;&#x23;&#x23;&#x23;&#x23;</format>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
         <name>GridName</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2796,7 +2684,7 @@
       </field>
       <field>
         <name>empjob_step</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2808,7 +2696,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2820,7 +2708,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2832,7 +2720,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2844,7 +2732,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2856,7 +2744,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2868,7 +2756,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2880,7 +2768,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2892,7 +2780,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2904,7 +2792,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2916,7 +2804,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2928,7 +2816,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2940,7 +2828,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2952,7 +2840,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2964,7 +2852,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2976,7 +2864,7 @@
       </field>
       <field>
         <name>FillerNumber</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -2988,7 +2876,7 @@
       </field>
       <field>
         <name>FillerNumber</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -3000,7 +2888,7 @@
       </field>
       <field>
         <name>FillerNumber</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -3012,7 +2900,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -3024,7 +2912,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -3036,7 +2924,7 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -3048,7 +2936,55 @@
       </field>
       <field>
         <name>FillerString</name>
-        <type>None</type>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -3061,8 +2997,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1228</xloc>
-      <yloc>371</yloc>
+      <xloc>335</xloc>
+      <yloc>372</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3480,8 +3416,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1208</xloc>
-      <yloc>26</yloc>
+      <xloc>1127</xloc>
+      <yloc>25</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3523,8 +3459,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1208</xloc>
-      <yloc>137</yloc>
+      <xloc>1127</xloc>
+      <yloc>136</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3645,14 +3581,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1045</xloc>
-      <yloc>26</yloc>
+      <xloc>967</xloc>
+      <yloc>25</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Switch Employee Number</name>
+    <name>Switch Employee No.</name>
     <type>StreamLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -3681,8 +3617,251 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>882</xloc>
-      <yloc>260</yloc>
+      <xloc>817</xloc>
+      <yloc>259</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>GL Account 1 </name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>empearn_exp_main</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>empearn_exp_sub</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+<targetFieldName>GLAcct</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>800</xloc>
+      <yloc>372</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>GL Account 2</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>empearn_exp_main_1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>empearn_exp_sub_1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+<targetFieldName>GLAcct2</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>654</xloc>
+      <yloc>372</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>GL Account 3</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>empearn_exp_main_2</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>empearn_exp_sub_2</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+<targetFieldName>GLAcct3</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>489</xloc>
+      <yloc>372</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

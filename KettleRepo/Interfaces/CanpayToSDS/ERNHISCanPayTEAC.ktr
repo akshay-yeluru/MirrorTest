@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;01&#x2f;15 10&#x3a;19&#x3a;30.963</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;02&#x2f;05 14&#x3a;45&#x3a;09.513</modified_date>
+  <modified_date>2015&#x2f;03&#x2f;31 14&#x3a;33&#x3a;58.607</modified_date>
   </info>
   <notepads>
     <notepad>
@@ -252,7 +252,6 @@
   <hop> <from>Sort rows 8</from><to>ERNHIS2014_TEAC.csv</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 9</from><to>WrongPayrollYear</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 5</from><to>sortByDate</to><enabled>Y</enabled> </hop>
-  <hop> <from>sortByDate</from><to>Merge Join</to><enabled>Y</enabled> </hop>
   <hop> <from>DateSort</from><to>Merge Join</to><enabled>Y</enabled> </hop>
   <hop> <from>CalendarDates</from><to>PadPerNo</to><enabled>Y</enabled> </hop>
   <hop> <from>PadPerNo</from><to>DateSort</to><enabled>Y</enabled> </hop>
@@ -282,8 +281,6 @@
   <hop> <from>SetFTEDays</from><to>Select values 7</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 12</from><to>Sorted Merge 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort</from><to>Sorted Merge 3</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sorted Merge 3</from><to>Sort rows13</to><enabled>Y</enabled> </hop>
-  <hop> <from>FixHours&#x3d;1</from><to>FTEDays 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows13</from><to>Sorted Merge 2</to><enabled>Y</enabled> </hop>
   <hop> <from>ErnTeac2015</from><to>ConstED</to><enabled>Y</enabled> </hop>
   <hop> <from>ConstED</from><to>SEL7</to><enabled>Y</enabled> </hop>
@@ -299,6 +296,18 @@
   <hop> <from>Filter rows 2</from><to>Filter rows 7</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 7</from><to>NoPosnRecord</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>Sort rows 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>FixHours&#x3d;1 2</from><to>HalfConst</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort 2</from><to>Sorted Merge 3 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>HalfConst</from><to>Div2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Div2</from><to>Select values 7 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 7 3</from><to>Sort 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>FixHours&#x3d;1</from><to>FixHours&#x3d;1 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>FixHours&#x3d;1 2</from><to>FTEDays 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sorted Merge 3</from><to>Sort rows13 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows13 2</from><to>Sorted Merge 3 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sorted Merge 3 2</from><to>Sort rows13</to><enabled>Y</enabled> </hop>
+  <hop> <from>sortByDate</from><to>PadPerNo 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>PadPerNo 2</from><to>Merge Join</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -681,6 +690,39 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>513</xloc>
       <yloc>707</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Div2</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>FTEDays</field_name>
+<calc_type>DIVIDE</calc_type>
+<field_a>Hours</field_a>
+<field_b>Div</field_b>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>747</xloc>
+      <yloc>1078</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2073,8 +2115,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>743</xloc>
-      <yloc>1081</yloc>
+      <xloc>746</xloc>
+      <yloc>998</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2360,7 +2402,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>RemoveHrs</send_true_to>
-<send_false_to>FTEDays 2</send_false_to>
+<send_false_to>FixHours&#x3d;1 2</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -2392,13 +2434,68 @@
    <function>&#x3c;&#x3e;</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>40</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>PayTypeNo</leftvalue>
+   <function>&#x3c;&#x3e;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>33</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>PayTypeNo</leftvalue>
+   <function>&#x3c;&#x3e;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>29</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   </conditions>
  </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>597</xloc>
-      <yloc>1084</yloc>
+      <xloc>600</xloc>
+      <yloc>1001</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>FixHours&#x3d;1 2</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>HalfConst</send_true_to>
+<send_false_to>FTEDays 2</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>NewCode</leftvalue>
+   <function>IN LIST</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>0001&#x3b;0002&#x3b;0003&#x3b;0004&#x3b;0005&#x3b;0006&#x3b;0007&#x3b;0008&#x3b;T999</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>PayTypeNo</leftvalue>
+   <function>IN LIST</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>33&#x3b;29</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>592</xloc>
+      <yloc>1083</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2567,6 +2664,39 @@
     </step>
 
   <step>
+    <name>HalfConst</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>Div</name>
+        <type>Number</type>
+        <format>&#x23;.&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>2</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>679</xloc>
+      <yloc>1078</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Merge Join</name>
     <type>MergeJoin</type>
     <description/>
@@ -2578,7 +2708,7 @@
            <schema_name/>
            </partitioning>
 <join_type>LEFT OUTER</join_type>
-<step1>sortByDate</step1>
+<step1>PadPerNo 2</step1>
 <step2>DateSort</step2>
     <keys_1>
       <key>PayrollYear</key>
@@ -3778,8 +3908,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>667</xloc>
-      <yloc>1083</yloc>
+      <xloc>670</xloc>
+      <yloc>1000</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4162,8 +4292,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>595</xloc>
-      <yloc>558</yloc>
+      <xloc>601</xloc>
+      <yloc>512</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4553,6 +4683,134 @@
     </step>
 
   <step>
+    <name>Select values 7 3</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>PayrollYear</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>LineID</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>EmpName</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>EmpNo</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>EmpSIN</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>PayTypeNo</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>PayType</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Period</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>PeriodEndDate</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Payroll</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>NewJobClass</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>TxnDate</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Occupation</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Hours</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>FTEDays</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>FiscalYr</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>DistrictNo</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Fund</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Dept</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Function</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Program</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Object</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>CostCentre</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GroupName</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>CurPayrollYr</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>CurFiscalYr</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>827</xloc>
+      <yloc>1079</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Select values 8</name>
     <type>SelectValues</type>
     <description/>
@@ -4802,8 +5060,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>821</xloc>
-      <yloc>1080</yloc>
+      <xloc>824</xloc>
+      <yloc>997</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4887,8 +5145,60 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>900</xloc>
-      <yloc>1082</yloc>
+      <xloc>903</xloc>
+      <yloc>999</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>PayrollYear</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>Period</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>EmpNo</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>PayTypeNo</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>911</xloc>
+      <yloc>1075</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5135,8 +5445,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1038</xloc>
-      <yloc>1029</yloc>
+      <xloc>1067</xloc>
+      <yloc>937</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5478,6 +5788,58 @@
     </step>
 
   <step>
+    <name>Sort rows13 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>PayrollYear</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>Period</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>EmpNo</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>PayTypeNo</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1071</xloc>
+      <yloc>1049</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Sort10</name>
     <type>SortRows</type>
     <description/>
@@ -5646,8 +6008,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1077</xloc>
-      <yloc>962</yloc>
+      <xloc>1070</xloc>
+      <yloc>862</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5720,8 +6082,45 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>982</xloc>
-      <yloc>1099</yloc>
+      <xloc>995</xloc>
+      <yloc>1000</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sorted Merge 3 2</name>
+    <type>SortedMerge</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>PayrollYear</name>
+        <ascending>N</ascending>
+        </field>
+      <field>
+        <name>Period</name>
+        <ascending>N</ascending>
+        </field>
+      <field>
+        <name>EmpNo</name>
+        <ascending>N</ascending>
+        </field>
+      <field>
+        <name>PayTypeNo</name>
+        <ascending>N</ascending>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1021</xloc>
+      <yloc>1142</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -8428,8 +8827,42 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>598</xloc>
-      <yloc>630</yloc>
+      <xloc>599</xloc>
+      <yloc>579</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>PadPerNo 2</name>
+    <type>StringOperations</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>Period</in_stream_name>
+        <out_stream_name/>
+        <trim_type>none</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>left</padding_type>
+        <pad_char>0</pad_char>
+        <pad_len>4</pad_len>
+        <init_cap>no</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>601</xloc>
+      <yloc>654</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

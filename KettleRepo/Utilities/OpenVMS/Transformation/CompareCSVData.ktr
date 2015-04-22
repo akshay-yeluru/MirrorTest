@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;03&#x2f;24 05&#x3a;52&#x3a;38.144</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;03&#x2f;31 09&#x3a;56&#x3a;28.189</modified_date>
+  <modified_date>2015&#x2f;04&#x2f;22 13&#x3a;24&#x3a;15.708</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -213,11 +213,204 @@
   <hop> <from>If field value is null</from><to>Select values 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 2</from><to>Last Split Fields</to><enabled>Y</enabled> </hop>
   <hop> <from>Last Split Fields</from><to>Split Fields</to><enabled>Y</enabled> </hop>
-  <hop> <from>Split Fields</from><to>Calculator</to><enabled>Y</enabled> </hop>
-  <hop> <from>Calculator</from><to>Filter rows 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 2</from><to>Get System Info</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get System Info</from><to>Text file output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Convert Minutes to Seconds</from><to>Sum Seconds</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sum Seconds</from><to>Subtract Difference of Seconds</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split Fields</from><to>Add constants</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants</from><to>Convert Minutes to Seconds</to><enabled>Y</enabled> </hop>
+  <hop> <from>Split Date and Time</from><to>Add Start and End Time</to><enabled>Y</enabled> </hop>
+  <hop> <from>Start Date Time</from><to>End Date Time</to><enabled>Y</enabled> </hop>
+  <hop> <from>SystemDate to String</from><to>Split Date and Time</to><enabled>Y</enabled> </hop>
+  <hop> <from>End Date Time</from><to>Concat DateTime</to><enabled>Y</enabled> </hop>
+  <hop> <from>Concat DateTime</from><to>Filter Warnings or Errors</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter Warnings or Errors</from><to>Add Status WARNING</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter Warnings or Errors</from><to>Add Status ERROR</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Status WARNING</from><to>Text file exceededCPUTime</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Status ERROR</from><to>Text file exceededCPUTime</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get System Info</from><to>SystemDate to String</to><enabled>Y</enabled> </hop>
+  <hop> <from>Subtract Difference of Seconds</from><to>Seconds Threshold constants</to><enabled>Y</enabled> </hop>
+  <hop> <from>Seconds Threshold constants</from><to>Set field value to a constant</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set field value to a constant</from><to>Filter rows 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Start and End Time</from><to>Set Start and End Time</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set Start and End Time</from><to>Start Date Time</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Seconds Threshold constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>SecondsThreshold</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>0</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>676</xloc>
+      <yloc>348</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add Start and End Time</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>StartTime</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>EndTime</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>268</xloc>
+      <yloc>555</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add Status ERROR</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>Status</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>ERROR</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1185</xloc>
+      <yloc>690</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add Status WARNING</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>Status</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>WARNING</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>988</xloc>
+      <yloc>689</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>Sixty</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>60</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>65</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>CSV file input</name>
     <type>CsvInput</type>
@@ -345,14 +538,88 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>67</xloc>
+      <xloc>65</xloc>
       <yloc>181</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Calculator</name>
+    <name>Concat DateTime</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>ConcatStartDateTime</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ConcatEndDateTime</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>SystemDateTime</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>CPUSeconds</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Pid</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ProcessName</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+      <meta>        <name>ConcatStartDateTime</name>
+        <rename>ConcatStartDateTime</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss</conversion_mask>
+        <date_format_lenient>true</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>      <meta>        <name>ConcatEndDateTime</name>
+        <rename>ConcatEndDateTime</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy&#x2f;MM&#x2f;dd HH&#x3a;mm&#x3a;ss</conversion_mask>
+        <date_format_lenient>true</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>877</xloc>
+      <yloc>555</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Convert Minutes to Seconds</name>
     <type>Calculator</type>
     <description/>
     <distribute>Y</distribute>
@@ -362,12 +629,26 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>CPUMinutes</field_name>
-<calc_type>SUBTRACT</calc_type>
-<field_a>TotalCPUMinutes</field_a>
-<field_b>LastTotalCPUMinutes</field_b>
+       <calculation><field_name>LastTotalCPUMinSeconds</field_name>
+<calc_type>MULTIPLY</calc_type>
+<field_a>LastTotalCPUMinutes</field_a>
+<field_b>Sixty</field_b>
 <field_c/>
-<value_type>Integer</value_type>
+<value_type>None</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>TotalCPUMinSeconds</field_name>
+<calc_type>MULTIPLY</calc_type>
+<field_a>TotalCPUMinutes</field_a>
+<field_b>Sixty</field_b>
+<field_c/>
+<value_type>None</value_type>
 <value_length>-1</value_length>
 <value_precision>-1</value_precision>
 <remove>N</remove>
@@ -378,8 +659,130 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>700</xloc>
-      <yloc>246</yloc>
+      <xloc>65</xloc>
+      <yloc>348</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>End Date Time</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator> </separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>Date</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>EndTime</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+<targetFieldName>ConcatEndDateTime</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>736</xloc>
+      <yloc>555</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter Warnings or Errors</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Add Status WARNING</send_true_to>
+<send_false_to>Add Status ERROR</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>SystemDateTime</leftvalue>
+   <function>&#x3e;&#x3d;</function>
+   <rightvalue>ConcatStartDateTime</rightvalue>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>SystemDateTime</leftvalue>
+   <function>&#x3c;&#x3d;</function>
+   <rightvalue>ConcatEndDateTime</rightvalue>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1080</xloc>
+      <yloc>555</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -429,15 +832,15 @@
     <compare>
 <condition>
  <negated>N</negated>
- <leftvalue>CPUMinutes</leftvalue>
+ <leftvalue>CPUSeconds</leftvalue>
  <function>&#x3e;&#x3d;</function>
- <rightvalue/>
- <value><name>constant</name><type>Integer</type><text>2</text><length>-1</length><precision>0</precision><isnull>N</isnull><mask>&#x23;&#x3b;-&#x23;</mask></value> </condition>
+ <rightvalue>SecondsThreshold</rightvalue>
+ </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>856</xloc>
-      <yloc>245</yloc>
+      <xloc>1082</xloc>
+      <yloc>348</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -458,11 +861,15 @@
         <name>SystemDate</name>
         <type>system date &#x28;fixed&#x29;</type>
         </field>
+      <field>
+        <name>SystemDateTime</name>
+        <type>system date &#x28;fixed&#x29;</type>
+        </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>972</xloc>
-      <yloc>244</yloc>
+      <xloc>1082</xloc>
+      <yloc>445</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -628,7 +1035,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>67</xloc>
+      <xloc>65</xloc>
       <yloc>46</yloc>
       <draw>Y</draw>
       </GUI>
@@ -651,6 +1058,10 @@
         <precision>-2</precision>
       </field>      <field>        <name>TotalCPUTime</name>
         <rename>LastTotalCPUTime</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ProcessName</name>
+        <rename>LastProcessName</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
@@ -737,7 +1148,7 @@
       </field>      <field>        <name>LastTotalCPUSeconds</name>
         <id/>
         <idrem>N</idrem>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <group/>
         <decimal/>
@@ -748,8 +1159,8 @@
         <trimtype>none</trimtype>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>442</xloc>
-      <yloc>246</yloc>
+      <xloc>1082</xloc>
+      <yloc>119</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -801,6 +1212,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>ProcessName</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -830,6 +1245,10 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>TotalCPUTime</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ProcessName</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -877,6 +1296,52 @@
     </step>
 
   <step>
+    <name>Split Date and Time</name>
+    <type>FieldSplitter</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <splitfield>SystemDate</splitfield>
+   <delimiter> </delimiter>
+   <enclosure/>
+    <fields>      <field>        <name>Date</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>both</trimtype>
+      </field>      <field>        <name>Time</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>both</trimtype>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>65</xloc>
+      <yloc>555</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Split Fields</name>
     <type>FieldSplitter</type>
     <description/>
@@ -917,7 +1382,7 @@
       </field>      <field>        <name>TotalCPUSeconds</name>
         <id/>
         <idrem>N</idrem>
-        <type>String</type>
+        <type>Integer</type>
         <format/>
         <group/>
         <decimal/>
@@ -928,14 +1393,230 @@
         <trimtype>none</trimtype>
       </field>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>567</xloc>
-      <yloc>246</yloc>
+      <xloc>1082</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Text file output</name>
+    <name>Start Date Time</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator> </separator>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>Date</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>StartTime</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+<targetFieldName>ConcatStartDateTime</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>600</xloc>
+      <yloc>555</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Subtract Difference of Seconds</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>CPUSeconds</field_name>
+<calc_type>SUBTRACT</calc_type>
+<field_a>TotalCPUSum</field_a>
+<field_b>LastTotalCPUSum</field_b>
+<field_c/>
+<value_type>Integer</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>473</xloc>
+      <yloc>348</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sum Seconds</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>LastTotalCPUSum</field_name>
+<calc_type>ADD</calc_type>
+<field_a>LastTotalCPUMinSeconds</field_a>
+<field_b>LastTotalCPUSeconds</field_b>
+<field_c/>
+<value_type>None</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>TotalCPUSum</field_name>
+<calc_type>ADD</calc_type>
+<field_a>TotalCPUMinSeconds</field_a>
+<field_b>TotalCPUSeconds</field_b>
+<field_c/>
+<value_type>None</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>270</xloc>
+      <yloc>348</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>SystemDate to String</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>SystemDate</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>SystemDateTime</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Pid</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>CPUSeconds</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ProcessName</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+      <meta>        <name>SystemDate</name>
+        <rename>SystemDate</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>65</xloc>
+      <yloc>445</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Text file exceededCPUTime</name>
     <type>TextFileOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -953,7 +1634,7 @@
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
+    <encoding>windows-1252</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -978,7 +1659,19 @@
     </file>
     <fields>
       <field>
-        <name>SystemDate</name>
+        <name>Status</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>SystemDateTime</name>
         <type>None</type>
         <format/>
         <currency/>
@@ -1002,7 +1695,19 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>CPUMinutes</name>
+        <name>ProcessName</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>CPUSeconds</name>
         <type>None</type>
         <format/>
         <currency/>
@@ -1016,8 +1721,89 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1092</xloc>
-      <yloc>247</yloc>
+      <xloc>1099</xloc>
+      <yloc>772</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set field value to a constant</name>
+    <type>SetValueConstant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <usevar>Y</usevar>
+    <fields>
+      <field>
+        <name>SecondsThreshold</name>
+        <value>&#x24;&#x7b;CPUTIME_SECONDS_THRESHOLD&#x7d;</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>872</xloc>
+      <yloc>348</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set Start and End Time</name>
+    <type>SetValueConstant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <usevar>Y</usevar>
+    <fields>
+      <field>
+        <name>StartTime</name>
+        <value>&#x24;&#x7b;WARNING_START_TIME&#x7d;</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>EndTime</name>
+        <value>&#x24;&#x7b;WARNING_END_TIME&#x7d;</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>450</xloc>
+      <yloc>555</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calculator</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1385</xloc>
+      <yloc>872</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

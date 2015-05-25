@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;05&#x2f;13 10&#x3a;07&#x3a;37.304</modified_date>
+  <modified_date>2015&#x2f;05&#x2f;20 10&#x3a;49&#x3a;43.401</modified_date>
   </info>
   <notepads>
     <notepad>
@@ -355,7 +355,6 @@
   <order>
   <hop> <from>With or without areacode</from><to>Add AreaCode to phone</to><enabled>Y</enabled> </hop>
   <hop> <from>Add AreaCode to phone</from><to>Remove extra chars</to><enabled>Y</enabled> </hop>
-  <hop> <from>With or without areacode</from><to>Add Default AreaCode to phone</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Default Areacode</from><to>With or without areacode</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Default AreaCode to phone</from><to>Remove extra chars</to><enabled>Y</enabled> </hop>
   <hop> <from>Remove extra chars</from><to>Convert Dates</to><enabled>Y</enabled> </hop>
@@ -376,7 +375,6 @@
   <hop> <from>Sort by SIN</from><to>Pad SIN parts</to><enabled>Y</enabled> </hop>
   <hop> <from>Pad SIN parts</from><to>Add Seq by SIN</to><enabled>Y</enabled> </hop>
   <hop> <from>eeMaster</from><to>Drop unwanted records</to><enabled>Y</enabled> </hop>
-  <hop> <from>Drop unwanted records</from><to>Get Default Areacode</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Dummy SIN</from><to>Sort rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Join 3 SIN parts</from><to>Sort rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
@@ -394,6 +392,11 @@
   <hop> <from>Sort rows 3</from><to>Group by SIN 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 2</from><to>DupSINS 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 2</from><to>PREMPMAS</to><enabled>Y</enabled> </hop>
+  <hop> <from>Drop unwanted records</from><to>Get Default Areacode</to><enabled>Y</enabled> </hop>
+  <hop> <from>With or without areacode</from><to>NullPhoneNos</to><enabled>Y</enabled> </hop>
+  <hop> <from>NullPhoneNos</from><to>Add Default AreaCode to phone</to><enabled>Y</enabled> </hop>
+  <hop> <from>NullPhoneNos</from><to>AddNullPhone</to><enabled>Y</enabled> </hop>
+  <hop> <from>AddNullPhone</from><to>Remove extra chars</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add AreaCode to phone</name>
@@ -551,8 +554,8 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>579</xloc>
-      <yloc>366</yloc>
+      <xloc>635</xloc>
+      <yloc>412</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -694,6 +697,75 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1156</xloc>
       <yloc>475</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>AddNullPhone</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>ma_home_phone</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+<targetFieldName>Fullphone</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>460</xloc>
+      <yloc>425</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -903,8 +975,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>498</xloc>
-      <yloc>93</yloc>
+      <xloc>510</xloc>
+      <yloc>78</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3044,7 +3116,7 @@
     <fields>
       <field>
         <name>DefaultAreaCode</name>
-        <variable>&#x24;&#x7b;Area_Code&#x7d;</variable>
+        <variable>&#x24;&#x7b;AREA_CODE&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -3057,8 +3129,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>497</xloc>
-      <yloc>187</yloc>
+      <xloc>509</xloc>
+      <yloc>184</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3452,6 +3524,35 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>793</xloc>
       <yloc>99</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>NullPhoneNos</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>AddNullPhone</send_true_to>
+<send_false_to>Add Default AreaCode to phone</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>ma_home_phone</leftvalue>
+ <function>IS NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>569</xloc>
+      <yloc>337</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4601,8 +4702,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>639</xloc>
-      <yloc>187</yloc>
+      <xloc>640</xloc>
+      <yloc>226</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4941,7 +5042,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Add AreaCode to phone</send_true_to>
-<send_false_to>Add Default AreaCode to phone</send_false_to>
+<send_false_to>NullPhoneNos</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -4952,13 +5053,20 @@
    <function>IS NOT NULL</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>&#x28;</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>ma_home_phone</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
   </conditions>
  </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>497</xloc>
-      <yloc>275</yloc>
+      <xloc>513</xloc>
+      <yloc>271</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4974,7 +5082,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;SOURCE_PATH&#x7d;eeMaster.csv</filename>
+    <filename>&#x24;&#x7b;OUTPUT_PATH&#x7d;eeMaster.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -5261,7 +5369,7 @@
         <group>,</group>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
       </field>
       <field>
         <name>ma_home_phone</name>
@@ -5706,8 +5814,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>497</xloc>
-      <yloc>11</yloc>
+      <xloc>510</xloc>
+      <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

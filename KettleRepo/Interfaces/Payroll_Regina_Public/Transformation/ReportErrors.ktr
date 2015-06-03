@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;05&#x2f;20 12&#x3a;48&#x3a;44.962</modified_date>
+  <modified_date>2015&#x2f;06&#x2f;02 14&#x3a;33&#x3a;03.866</modified_date>
   </info>
   <notepads>
     <notepad>
@@ -445,7 +445,6 @@
   <hop> <from>PayrollEmployeeJob</from><to>Sort rows 3</to><enabled>Y</enabled> </hop>
   <hop> <from>DupSINs 2</from><to>Filter rows 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 3</from><to>Sort rows 2 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows 3</from><to>Stream lookup 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2 2</from><to>Stream lookup 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Stream lookup 2</from><to>Filter rows 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 4</from><to>Select values 2</to><enabled>Y</enabled> </hop>
@@ -454,8 +453,6 @@
   <hop> <from>Select values 3</from><to>Sort rows 5</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 5</from><to>Sorted Merge</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 4</from><to>Sorted Merge</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sorted Merge</from><to>newPayrollEmployeeJob</to><enabled>Y</enabled> </hop>
-  <hop> <from>EmployeeAssignment</from><to>Sort rows 3 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 3 2</from><to>Stream lookup 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>DupSINs 2 2</from><to>Filter rows 3 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2 2 2</from><to>Stream lookup 2 2</to><enabled>Y</enabled> </hop>
@@ -468,7 +465,6 @@
   <hop> <from>Filter rows 3 2</from><to>Sort rows 2 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 4 2</from><to>Select values 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 4 2</from><to>Select values 3 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>EmpEICDetail</from><to>SortByEmp</to><enabled>Y</enabled> </hop>
   <hop> <from>SortByEmp</from><to>LookupEmpNO</to><enabled>Y</enabled> </hop>
   <hop> <from>DupSINFile</from><to>FilterDups</to><enabled>Y</enabled> </hop>
   <hop> <from>SortEmp</from><to>LookupEmpNO</to><enabled>Y</enabled> </hop>
@@ -494,7 +490,6 @@
   <hop> <from>FilterDups 2</from><to>SortEmp 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows8</from><to>Select values8</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows8</from><to>Select values9</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sortemp 3</from><to>LookupEmpNO 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>DupSINFile 2 2</from><to>FilterDups 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>SortEmp 2 2</from><to>LookupEmpNO 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>LookupEmpNO 2 2</from><to>Filter rows8 2</to><enabled>Y</enabled> </hop>
@@ -507,6 +502,15 @@
   <hop> <from>Filter rows8 2</from><to>Select</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows8 2</from><to>Select2</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Earnings</from><to>Sortemp 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sorted Merge</from><to>newPayrollEmployeeJob</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 3</from><to>Filter rows 5</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows 5</from><to>Stream lookup 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>EmployeeAssignment</from><to>Filter rows 6</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows 6</from><to>Sort rows 3 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>EmpEICDetail</from><to>Filter rows 7</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows 7</from><to>SortByEmp</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sortemp 3</from><to>Filter rows 8</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows 8</from><to>LookupEmpNO 2 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Dummy SIN</name>
@@ -2652,8 +2656,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>40</xloc>
-      <yloc>1472</yloc>
+      <xloc>30</xloc>
+      <yloc>1469</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3159,8 +3163,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>57</xloc>
-      <yloc>1217</yloc>
+      <xloc>40</xloc>
+      <yloc>1213</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3910,8 +3914,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>64</xloc>
-      <yloc>996</yloc>
+      <xloc>46</xloc>
+      <yloc>994</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4058,9 +4062,28 @@
     <compare>
 <condition>
  <negated>N</negated>
- <leftvalue>NewEmpId</leftvalue>
- <function>IS NULL</function>
- <rightvalue/>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>NewEmpId</leftvalue>
+   <function>IS NULL</function>
+   <rightvalue/>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>ma_employee_id_number</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>ma_employee_id_number</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>4210</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
  </condition>
     </compare>
      <cluster_schema/>
@@ -7752,8 +7775,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>162</xloc>
-      <yloc>995</yloc>
+      <xloc>227</xloc>
+      <yloc>998</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -8126,8 +8149,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>155</xloc>
-      <yloc>1220</yloc>
+      <xloc>234</xloc>
+      <yloc>1228</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -11663,8 +11686,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>736</xloc>
-      <yloc>840</yloc>
+      <xloc>730</xloc>
+      <yloc>845</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -12173,6 +12196,170 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>748</xloc>
       <yloc>1577</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows 5</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to/>
+<send_false_to>Stream lookup 2</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>empjob_emp_code</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>empjob_emp_code</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>4210</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>204</xloc>
+      <yloc>746</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows 6</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to/>
+<send_false_to>Sort rows 3 2</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>jr_employee_id_number</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>jr_employee_id_number</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>4210</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>146</xloc>
+      <yloc>992</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows 7</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to/>
+<send_false_to>SortByEmp</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>empuic_emp_code</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>empuic_employer_code</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>4210</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>129</xloc>
+      <yloc>1221</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows 8</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to/>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>empearn_emp_code</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>empearn_emp_code</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>4210</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>212</xloc>
+      <yloc>1716</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

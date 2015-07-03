@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;06&#x2f;29 16&#x3a;17&#x3a;51.767</modified_date>
+  <modified_date>2015&#x2f;07&#x2f;02 09&#x3a;44&#x3a;51.259</modified_date>
   </info>
   <notepads>
     <notepad>
@@ -404,8 +404,6 @@
   <hop> <from>Convert Dates 2</from><to>Get Active Earnings</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Active Earnings</from><to>Get Earning Amt</to><enabled>Y</enabled> </hop>
   <hop> <from>Add No. 5</from><to>Multiply Hrs by 5</to><enabled>Y</enabled> </hop>
-  <hop> <from>EarningMaster</from><to>Get Today 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Today 2</from><to>Convert Dates 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Main Salary&#x3f;</from><to>Set Seq &#x3d; 1</to><enabled>Y</enabled> </hop>
   <hop> <from>Main Salary&#x3f;</from><to>Set Seq &#x3d; 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Earning Amt</from><to>Main Salary&#x3f;</to><enabled>Y</enabled> </hop>
@@ -480,6 +478,8 @@
   <hop> <from>Value Mapper</from><to>Get Employee Grid</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Earnings</from><to>Get Variables</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables</from><to>Convert Dates</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables 2</from><to>Convert Dates 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>EarningMaster</from><to>Get Variables 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add No. 5</name>
@@ -891,8 +891,8 @@
         <grouping_symbol/>
         <currency_symbol/>
         <storage_type/>
-      </meta>      <meta>        <name>Today</name>
-        <rename>Today</rename>
+      </meta>      <meta>        <name>CutoffDate</name>
+        <rename>CutoffDate</rename>
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -1795,8 +1795,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1312</xloc>
-      <yloc>21</yloc>
+      <xloc>1314</xloc>
+      <yloc>25</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3716,7 +3716,7 @@
    <negated>N</negated>
    <leftvalue>earn_end_date</leftvalue>
    <function>&#x3e;&#x3d;</function>
-   <rightvalue>Today</rightvalue>
+   <rightvalue>CutoffDate</rightvalue>
    </condition>
   </conditions>
  </condition>
@@ -4076,8 +4076,8 @@
     </step>
 
   <step>
-    <name>Get Today 2</name>
-    <type>SystemInfo</type>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -4088,14 +4088,55 @@
            </partitioning>
     <fields>
       <field>
-        <name>Today</name>
-        <type>today start</type>
-        </field>
-      </fields>
+        <name>CutoffDate</name>
+        <variable>&#x24;&#x7b;CUTOFF_DATE&#x7d;</variable>
+        <type>Date</type>
+        <format>yyyy&#x2f;MM&#x2f;dd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1217</xloc>
-      <yloc>21</yloc>
+      <xloc>135</xloc>
+      <yloc>261</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables 2</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>CutoffDate</name>
+        <variable>&#x24;&#x7b;CUTOFF_DATE&#x7d;</variable>
+        <type>Date</type>
+        <format>yyyy&#x2f;MM&#x2f;dd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1208</xloc>
+      <yloc>22</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -10387,39 +10428,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>234</xloc>
       <yloc>1750</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>CutoffDate</name>
-        <variable>&#x24;&#x7b;CUTOFF_DATE&#x7d;</variable>
-        <type>Date</type>
-        <format>yyyy&#x2f;MM&#x2f;dd</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>135</xloc>
-      <yloc>261</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

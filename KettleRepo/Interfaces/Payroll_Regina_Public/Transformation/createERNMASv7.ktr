@@ -1,6 +1,6 @@
 <transformation>
   <info>
-    <name>createERNMAS</name>
+    <name>createERNMASv7</name>
     <description>Create SDS EMPLOYEE EARNING MASTER</description>
     <extended_description/>
     <trans_version/>
@@ -68,15 +68,15 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;06&#x2f;05 15&#x3a;45&#x3a;39.299</modified_date>
+  <modified_date>2015&#x2f;07&#x2f;22 12&#x3a;31&#x3a;46.484</modified_date>
   </info>
   <notepads>
     <notepad>
-      <note>Create the Employee Earning Master.   &#xd;&#xa;&#x2a; Drop records that ended before Sept 1, 2014&#xd;&#xa;&#x2a;Drop records that no not contain SAL - &#xd;&#xa;we only want the salary amount to create the function lines.&#xd;&#xa;&#x2a; Get the Reference ID of the employee from PREMPMAS&#xd;&#xa;&#x2a; Get the job from the PRJOBMAS table&#xd;&#xa;&#x2a; Get the occupation&#x2f;grid from PRSTPTBL&#xd;&#xa;&#x2a; GL accounts created by putting Main &#x2b; Sub together</note>
-      <xloc>6</xloc>
+      <note>Create the Employee Earning Master.   &#xd;&#xa;&#x2a; Drop records that ended before Sept 1, 2014&#xd;&#xa;&#x2a;Drop records that no not contain SAL - &#xd;&#xa;we only want the salary amount to create the function lines.&#xd;&#xa;&#x2a; Get the Reference ID of the employee from PREMPMAS&#xd;&#xa;&#x2a; Get the job from the PRJOBMAS table&#xd;&#xa;&#x2a; Get the Grid assignment form PayrollEmployeeJob &#xd;&#xa;- override if a probation grid is found.&#xd;&#xa;&#x2a; Get the occupation&#x2f;grid from PRSTPTBL&#xd;&#xa;&#x2a; GL accounts created by putting Main &#x2b; Sub together</note>
+      <xloc>7</xloc>
       <yloc>7</yloc>
       <width>325</width>
-      <heigth>138</heigth>
+      <heigth>170</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
       <fontbold>N</fontbold>
@@ -98,6 +98,27 @@
       <yloc>467</yloc>
       <width>183</width>
       <heigth>89</heigth>
+      <fontname>Segoe UI</fontname>
+      <fontsize>9</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>Get new GL&#x27;s from Cross Ref</note>
+      <xloc>288</xloc>
+      <yloc>1358</yloc>
+      <width>159</width>
+      <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
       <fontbold>N</fontbold>
@@ -374,7 +395,6 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Salary Grids &#x28;PRSTPTBL&#x29;</from><to>Get Employee Grid</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Employee Grid</from><to>Get Employee Occupation&#x2f;Step</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Master &#x28;PREMPMAS&#x29;</from><to>Switch Employee No.</to><enabled>Y</enabled> </hop>
   <hop> <from>Convert Dates</from><to>Drop ended earnings</to><enabled>Y</enabled> </hop>
@@ -383,12 +403,7 @@
   <hop> <from>Get Employee Occupation&#x2f;Step</from><to>Get Earning Amt</to><enabled>Y</enabled> </hop>
   <hop> <from>Convert Dates 2</from><to>Get Active Earnings</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Active Earnings</from><to>Get Earning Amt</to><enabled>Y</enabled> </hop>
-  <hop> <from>Payroll Employee Job</from><to>Add No. 5</to><enabled>Y</enabled> </hop>
   <hop> <from>Add No. 5</from><to>Multiply Hrs by 5</to><enabled>Y</enabled> </hop>
-  <hop> <from>Employee Earnings</from><to>Get Today</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Today</from><to>Convert Dates</to><enabled>Y</enabled> </hop>
-  <hop> <from>EarningMaster</from><to>Get Today 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Today 2</from><to>Convert Dates 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Main Salary&#x3f;</from><to>Set Seq &#x3d; 1</to><enabled>Y</enabled> </hop>
   <hop> <from>Main Salary&#x3f;</from><to>Set Seq &#x3d; 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Earning Amt</from><to>Main Salary&#x3f;</to><enabled>Y</enabled> </hop>
@@ -399,10 +414,8 @@
   <hop> <from>Drop ended earnings</from><to>GetSALEarningsOnly</to><enabled>Y</enabled> </hop>
   <hop> <from>GetSALEarningsOnly</from><to>Switch Employee No.</to><enabled>Y</enabled> </hop>
   <hop> <from>Blank Oc</from><to>noOccFoundERNMAS</to><enabled>Y</enabled> </hop>
-  <hop> <from>Blank Oc</from><to>PRERNMAS</to><enabled>Y</enabled> </hop>
   <hop> <from>BlankGrid</from><to>Blank Oc</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 3</from><to>Select values 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filter rows 3</from><to>Calculator</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Seq &#x3d; 1</from><to>GL Account 1 </to><enabled>Y</enabled> </hop>
   <hop> <from>Set Seq &#x3d; 2</from><to>GL Account 1 </to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 2</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
@@ -410,7 +423,6 @@
   <hop> <from>Sort rows</from><to>Sorted Merge</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>Sorted Merge</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 3</from><to>Sorted Merge</to><enabled>Y</enabled> </hop>
-  <hop> <from>Calculator</from><to>Select values 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 3</from><to>Sort rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 2</from><to>Filter rows 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 4</from><to>Select values</to><enabled>Y</enabled> </hop>
@@ -434,9 +446,45 @@
   <hop> <from>ConvertGLPct</from><to>getSAL-FREN</to><enabled>Y</enabled> </hop>
   <hop> <from>getSAL-FREN</from><to>Const12</to><enabled>Y</enabled> </hop>
   <hop> <from>Const12</from><to>Calculator 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>getSAL-FREN</from><to>BlankGrid</to><enabled>Y</enabled> </hop>
   <hop> <from>Calculator 2</from><to>Select values 7</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 7</from><to>BlankGrid</to><enabled>Y</enabled> </hop>
+  <hop> <from>GLCrossRef</from><to>Replace in string</to><enabled>Y</enabled> </hop>
+  <hop> <from>Replace in string</from><to>sortGL</to><enabled>Y</enabled> </hop>
+  <hop> <from>sortGL</from><to>newGL1</to><enabled>Y</enabled> </hop>
+  <hop> <from>Blank Oc</from><to>sortGL1</to><enabled>Y</enabled> </hop>
+  <hop> <from>sortGL1</from><to>newGL1</to><enabled>Y</enabled> </hop>
+  <hop> <from>newGL1</from><to>sortGL2</to><enabled>Y</enabled> </hop>
+  <hop> <from>sortGL2</from><to>NewGL2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Replace in string</from><to>sort2GL</to><enabled>Y</enabled> </hop>
+  <hop> <from>sort2GL</from><to>NewGL2</to><enabled>Y</enabled> </hop>
+  <hop> <from>sort2GL</from><to>sort3GL</to><enabled>Y</enabled> </hop>
+  <hop> <from>NewGL2</from><to>sortGL3</to><enabled>Y</enabled> </hop>
+  <hop> <from>sortGL3</from><to>NewGL3</to><enabled>Y</enabled> </hop>
+  <hop> <from>sort3GL</from><to>NewGL3</to><enabled>Y</enabled> </hop>
+  <hop> <from>sort3GL</from><to>sort4GL</to><enabled>Y</enabled> </hop>
+  <hop> <from>NewGL3</from><to>sortGL4</to><enabled>Y</enabled> </hop>
+  <hop> <from>sortGL4</from><to>NewGL4</to><enabled>Y</enabled> </hop>
+  <hop> <from>sort4GL</from><to>NewGL4</to><enabled>Y</enabled> </hop>
+  <hop> <from>PRERNMAS</from><to>PRERNMAS 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Payroll Employee Job</from><to>OnProbation&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>OnProbation&#x3f;</from><to>Add No. 5</to><enabled>Y</enabled> </hop>
+  <hop> <from>OnProbation&#x3f;</from><to>Select values 8</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 8</from><to>Add No. 5</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows 3</from><to>Calculator</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator</from><to>Select values 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>Salary Grids &#x28;PRSTPTBL&#x29;</from><to>Value Mapper</to><enabled>Y</enabled> </hop>
+  <hop> <from>Value Mapper</from><to>Get Employee Grid</to><enabled>Y</enabled> </hop>
+  <hop> <from>Employee Earnings</from><to>Get Variables</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>Convert Dates</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables 2</from><to>Convert Dates 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>EarningMaster</from><to>Get Variables 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>NewGL4</from><to>Replace in string 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Replace in string 2</from><to>Filter rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows</from><to>Replace in string 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>Replace in string 3</from><to>PRERNMAS</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows</from><to>PRERNMAS</to><enabled>Y</enabled> </hop>
+  <hop> <from>getSAL-FREN</from><to>Select values 9</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 9</from><to>BlankGrid</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add No. 5</name>
@@ -462,11 +510,68 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+      <field>
+        <name>Number1</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Number12</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>12</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>625</xloc>
-      <yloc>21</yloc>
+      <xloc>756</xloc>
+      <yloc>22</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>AddNo100</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>100</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>100</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>291</xloc>
+      <yloc>825</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -483,7 +588,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>noOccFoundERNMAS</send_true_to>
-<send_false_to>PRERNMAS</send_false_to>
+<send_false_to>sortGL1</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -597,8 +702,74 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>169</xloc>
+      <xloc>170</xloc>
       <yloc>485</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calculator 2</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>NewSalAmt</field_name>
+<calc_type>DIVIDE</calc_type>
+<field_a>SalAmt</field_a>
+<field_b>12</field_b>
+<field_c/>
+<value_type>None</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>453</xloc>
+      <yloc>970</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Const12</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>12</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>12</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>382</xloc>
+      <yloc>970</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -660,8 +831,8 @@
         <grouping_symbol/>
         <currency_symbol/>
         <storage_type/>
-      </meta>      <meta>        <name>Today</name>
-        <rename>Today</rename>
+      </meta>      <meta>        <name>CutoffDate</name>
+        <rename>CutoffDate</rename>
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -725,8 +896,8 @@
         <grouping_symbol/>
         <currency_symbol/>
         <storage_type/>
-      </meta>      <meta>        <name>Today</name>
-        <rename>Today</rename>
+      </meta>      <meta>        <name>CutoffDate</name>
+        <rename>CutoffDate</rename>
         <type>Date</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -744,6 +915,81 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1122</xloc>
       <yloc>21</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>ConvertGLPct</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>GLPct</field_name>
+<calc_type>MULTIPLY</calc_type>
+<field_a>empearn_exp_pct</field_a>
+<field_b>100</field_b>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>GLPct1</field_name>
+<calc_type>MULTIPLY</calc_type>
+<field_a>empearn_exp_pct1</field_a>
+<field_b>100</field_b>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>GLPct2</field_name>
+<calc_type>MULTIPLY</calc_type>
+<field_a>empearn_exp_pct2</field_a>
+<field_b>100</field_b>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>GLPct3</field_name>
+<calc_type>MULTIPLY</calc_type>
+<field_a>empearn_exp_pct3</field_a>
+<field_b>100</field_b>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>292</xloc>
+      <yloc>901</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -769,14 +1015,14 @@
    <negated>N</negated>
    <leftvalue>empearn_end_date</leftvalue>
    <function>&#x3c;</function>
-   <rightvalue>Today</rightvalue>
+   <rightvalue>CutoffDate</rightvalue>
    </condition>
   <condition>
    <negated>N</negated>
    <operator>OR</operator>
    <leftvalue>empearn_start_date</leftvalue>
    <function>&#x3e;</function>
-   <rightvalue>Today</rightvalue>
+   <rightvalue>CutoffDate</rightvalue>
    </condition>
   </conditions>
  </condition>
@@ -1554,8 +1800,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1312</xloc>
-      <yloc>21</yloc>
+      <xloc>1314</xloc>
+      <yloc>25</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1571,7 +1817,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;SOURCE_PATH&#x7d;EmpEarnDetail.csv</filename>
+    <filename>&#x24;&#x7b;OUTPUT_PATH&#x7d;empearndetail.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1638,7 +1884,7 @@
         <group>,</group>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
       </field>
       <field>
         <name>empearn_end_date</name>
@@ -1696,7 +1942,7 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>empearn_exp_main</name>
+        <name>empearn_exp_main1</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -1707,7 +1953,7 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>empearn_exp_main</name>
+        <name>empearn_exp_main2</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -1718,18 +1964,7 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>empearn_exp_main</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>empearn_exp_sub</name>
+        <name>empearn_exp_main3</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -1751,7 +1986,7 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>empearn_exp_sub</name>
+        <name>empearn_exp_sub1</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -1762,7 +1997,18 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>empearn_exp_sub</name>
+        <name>empearn_exp_sub2</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>empearn_exp_sub3</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -1784,7 +2030,7 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>empearn_exp_pct</name>
+        <name>empearn_exp_pct1</name>
         <type>Number</type>
         <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
         <currency>&#x24;</currency>
@@ -1795,7 +2041,7 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>empearn_exp_pct</name>
+        <name>empearn_exp_pct2</name>
         <type>Number</type>
         <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
         <currency>&#x24;</currency>
@@ -1806,7 +2052,7 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>empearn_exp_pct</name>
+        <name>empearn_exp_pct3</name>
         <type>Number</type>
         <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
         <currency>&#x24;</currency>
@@ -1830,7 +2076,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>42</xloc>
+      <xloc>43</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2652,7 +2898,7 @@
     </step>
 
   <step>
-    <name>GetSALEarningsOnly</name>
+    <name>Filter rows</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -2662,32 +2908,32 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Switch Employee No.</send_true_to>
-<send_false_to/>
+<send_true_to>Replace in string 3</send_true_to>
+<send_false_to>PRERNMAS</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
  <conditions>
   <condition>
    <negated>N</negated>
-   <leftvalue>empearn_earn_code</leftvalue>
-   <function>CONTAINS</function>
+   <leftvalue>SRBPayroll</leftvalue>
+   <function>&#x3d;</function>
    <rightvalue/>
-   <value><name>constant</name><type>String</type><text>SAL</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+   <value><name>constant</name><type>String</type><text>TEAC</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>AND</operator>
    <leftvalue>empearn_earn_code</leftvalue>
-   <function>&#x3c;&#x3e;</function>
+   <function>&#x3d;</function>
    <rightvalue/>
-   <value><name>constant</name><type>String</type><text>SAL-ADJ</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+   <value><name>constant</name><type>String</type><text>SAL-T-TC</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   </conditions>
  </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>471</xloc>
-      <yloc>259</yloc>
+      <xloc>235</xloc>
+      <yloc>1973</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2997,7 +3243,7 @@
     </file>
     <fields>
       <field>
-        <name>empearn_exp_main_1</name>
+        <name>empearn_exp_main1</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -3009,7 +3255,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>empearn_exp_sub_1</name>
+        <name>empearn_exp_sub1</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -3159,7 +3405,7 @@
     </file>
     <fields>
       <field>
-        <name>empearn_exp_main_2</name>
+        <name>empearn_exp_main2</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -3171,7 +3417,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>empearn_exp_sub_2</name>
+        <name>empearn_exp_sub2</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -3321,7 +3567,7 @@
     </file>
     <fields>
       <field>
-        <name>empearn_exp_main_3</name>
+        <name>empearn_exp_main3</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -3333,7 +3579,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>empearn_exp_sub_3</name>
+        <name>empearn_exp_pct3</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -3440,6 +3686,62 @@
     </step>
 
   <step>
+    <name>GLCrossRef</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <filename>&#x24;&#x7b;SOURCE_PATH&#x7d;GLCrossRef.csv</filename>
+    <filename_field/>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>&#x22;</enclosure>
+    <header>N</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>N</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding/>
+    <fields>
+      <field>
+        <name>Current Payroll GL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+      </field>
+      <field>
+        <name>Current Oracle GL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>27</xloc>
+      <yloc>1293</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Get Active Earnings</name>
     <type>FilterRows</type>
     <description/>
@@ -3460,7 +3762,7 @@
    <negated>N</negated>
    <leftvalue>earn_end_date</leftvalue>
    <function>&#x3e;&#x3d;</function>
-   <rightvalue>Today</rightvalue>
+   <rightvalue>CutoffDate</rightvalue>
    </condition>
   </conditions>
  </condition>
@@ -3604,7 +3906,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <from>Salary Grids &#x28;PRSTPTBL&#x29;</from>
+    <from>Value Mapper</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>N</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -3612,7 +3914,7 @@
     <lookup>
       <key>
         <name>empjob_class</name>
-        <field>class_scale</field>
+        <field>ClassScale</field>
       </key>
       <key>
         <name>empjob_step</name>
@@ -3625,16 +3927,10 @@
         <type>String</type>
       </value>
       <value>
-        <name>class_salary</name>
+        <name>BaseRate</name>
         <rename>class_salary</rename>
         <default/>
         <type>Number</type>
-      </value>
-      <value>
-        <name>class_days_or_hours</name>
-        <rename>class_days_or_hours</rename>
-        <default/>
-        <type>String</type>
       </value>
       <value>
         <name>Level</name>
@@ -3651,6 +3947,12 @@
       <value>
         <name>SalDivisor</name>
         <rename>SalDivisor</rename>
+        <default/>
+        <type>None</type>
+      </value>
+      <value>
+        <name>class_days_or_hours</name>
+        <rename>class_days_or_hours</rename>
         <default/>
         <type>None</type>
       </value>
@@ -3804,6 +4106,12 @@
         <default/>
         <type>None</type>
       </value>
+      <value>
+        <name>Number12</name>
+        <rename>Number12</rename>
+        <default/>
+        <type>None</type>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -3814,8 +4122,8 @@
     </step>
 
   <step>
-    <name>Get Today</name>
-    <type>SystemInfo</type>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -3826,21 +4134,29 @@
            </partitioning>
     <fields>
       <field>
-        <name>Today</name>
-        <type>today start</type>
-        </field>
-      </fields>
+        <name>CutoffDate</name>
+        <variable>&#x24;&#x7b;CUTOFF_DATE&#x7d;</variable>
+        <type>Date</type>
+        <format>yyyy&#x2f;MM&#x2f;dd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>139</xloc>
-      <yloc>256</yloc>
+      <xloc>135</xloc>
+      <yloc>261</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Get Today 2</name>
-    <type>SystemInfo</type>
+    <name>Get Variables 2</name>
+    <type>GetVariable</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -3851,14 +4167,70 @@
            </partitioning>
     <fields>
       <field>
-        <name>Today</name>
-        <type>today start</type>
-        </field>
-      </fields>
+        <name>CutoffDate</name>
+        <variable>&#x24;&#x7b;CUTOFF_DATE&#x7d;</variable>
+        <type>Date</type>
+        <format>yyyy&#x2f;MM&#x2f;dd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1217</xloc>
-      <yloc>21</yloc>
+      <xloc>1208</xloc>
+      <yloc>22</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>GetSALEarningsOnly</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Switch Employee No.</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>empearn_earn_code</leftvalue>
+   <function>CONTAINS</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>SAL</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>empearn_earn_code</leftvalue>
+   <function>&#x3c;&#x3e;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>SAL-ADJ</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>empearn_earn_code</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>TRUSTEER</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>471</xloc>
+      <yloc>259</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4779,8 +5151,145 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>721</xloc>
-      <yloc>21</yloc>
+      <xloc>839</xloc>
+      <yloc>22</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>NewGL2</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>sort2GL</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>GLAcct2</name>
+        <field>Current Payroll GL</field>
+      </key>
+      <value>
+        <name>Current Oracle GL</name>
+        <rename>NewGL2</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>234</xloc>
+      <yloc>1517</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>NewGL3</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>sort3GL</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>GLAcct3</name>
+        <field>Current Payroll GL</field>
+      </key>
+      <value>
+        <name>Current Oracle GL</name>
+        <rename>NewGL3</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>233</xloc>
+      <yloc>1674</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>NewGL4</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>sort4GL</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>GLAcct4</name>
+        <field>Current Payroll GL</field>
+      </key>
+      <value>
+        <name>Current Oracle GL</name>
+        <rename>NewGL4</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>236</xloc>
+      <yloc>1837</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>OnProbation&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Add No. 5</send_true_to>
+<send_false_to>Select values 8</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>empjob_probation_class</leftvalue>
+ <function>IS NULL</function>
+ <rightvalue/>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>502</xloc>
+      <yloc>20</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4901,7 +5410,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>empjob_salary_basis</name>
+        <name>earn_time_based</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -4963,7 +5472,7 @@
       <field>
         <name>GLPct3</name>
         <type>Number</type>
-        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <format/>
         <currency/>
         <decimal/>
         <group/>
@@ -5117,7 +5626,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>GLAcct</name>
+        <name>NewGL1</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -5129,7 +5638,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>GLAcct2</name>
+        <name>NewGL2</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -5141,7 +5650,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>GLAcct3</name>
+        <name>NewGL3</name>
         <type>String</type>
         <format> </format>
         <currency>&#x24;</currency>
@@ -5153,7 +5662,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>GLAcct4</name>
+        <name>NewGL4</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -5551,8 +6060,780 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>117</xloc>
-      <yloc>1242</yloc>
+      <xloc>238</xloc>
+      <yloc>2156</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>PRERNMAS 2</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator>,</separator>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>Y</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>windows-1252</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>N</create_parent_folder>
+    <file>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;PRERNMASWrk.csv</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention/>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>N</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>Employee_ID</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Occ</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Seq</name>
+        <type>String</type>
+        <format> </format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>SalAmt</name>
+        <type>None</type>
+        <format>0</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>SalAmt</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>empearn_earn_code</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_time_based</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>empearn_start_date</name>
+        <type>Date</type>
+        <format>MM&#x2f;dd&#x2f;yyyy</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GLPct</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GLPct1</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GLPct2</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GLPct3</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerNumber</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerNumber</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerNumber</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerNumber</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format> </format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format> </format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format> </format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>NewGL1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>NewGL2</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>NewGL3</name>
+        <type>String</type>
+        <format> </format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>NewGL4</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerNumber</name>
+        <type>Number</type>
+        <format>0.&#x23;&#x23;&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>class_days_or_hours</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GridName</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>empjob_step</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerNumber</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerNumber</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerNumber</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FillerString</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>WeeklyHours</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>class_pension_rate</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>SRBPayroll</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>235</xloc>
+      <yloc>2248</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5568,7 +6849,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;SOURCE_PATH&#x7d;PayrollEmployeeJob.csv</filename>
+    <filename>&#x24;&#x7b;OUTPUT_PATH&#x7d;PayrollEmployeeJob.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -5576,7 +6857,7 @@
     <enclosure>&#x22;</enclosure>
     <header>Y</header>
     <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
+    <lazy_conversion>N</lazy_conversion>
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
@@ -5970,8 +7251,126 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>517</xloc>
+      <xloc>399</xloc>
       <yloc>21</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Replace in string</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>Current Oracle GL</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>-</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+      </field>
+      <field>
+        <in_stream_name>Current Payroll GL</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>-</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>24</xloc>
+      <yloc>1371</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Replace in string 2</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>earn_time_based</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>Y</replace_string>
+        <replace_by_string>H</replace_by_string>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+      </field>
+      <field>
+        <in_stream_name>earn_time_based</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>N</replace_string>
+        <replace_by_string/>
+        <set_empty_string>Y</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>237</xloc>
+      <yloc>1901</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Replace in string 3</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>earn_time_based</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>H</replace_string>
+        <replace_by_string/>
+        <set_empty_string>Y</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>339</xloc>
+      <yloc>1975</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5993,7 +7392,7 @@
     <include_filename>N</include_filename>
     <separator>,</separator>
     <enclosure>&#x22;</enclosure>
-    <header>N</header>
+    <header>Y</header>
     <buffer_size>50000</buffer_size>
     <lazy_conversion>N</lazy_conversion>
     <add_filename_result>N</add_filename_result>
@@ -6003,91 +7402,91 @@
     <fields>
       <field>
         <name>class_start_date</name>
-        <type>Date</type>
-        <format>yyyyMMdd</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
       </field>
       <field>
         <name>Level</name>
         <type>String</type>
         <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
       </field>
       <field>
         <name>class_step</name>
         <type>String</type>
-        <format> </format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>-1</length>
-        <precision>0</precision>
-        <trim_type>both</trim_type>
-      </field>
-      <field>
-        <name>class_salary</name>
-        <type>Number</type>
-        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
-        <currency> </currency>
-        <decimal>.</decimal>
-        <group> </group>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>BaseRate</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
         <name>class_days_or_hours</name>
         <type>String</type>
         <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
       </field>
       <field>
         <name>GridName</name>
         <type>String</type>
         <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
       </field>
       <field>
         <name>GridDescription</name>
         <type>String</type>
         <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <name>class_scale</name>
+        <name>ClassScale</name>
         <type>String</type>
         <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
+        <currency/>
+        <decimal/>
+        <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
       </field>
       <field>
         <name>class_pension_rate</name>
@@ -6098,23 +7497,34 @@
         <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <name>DailyHours</name>
-        <type>Number</type>
-        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <name>calendar_daily_hours</name>
+        <type>String</type>
+        <format/>
         <currency/>
-        <decimal>.</decimal>
+        <decimal/>
         <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
       </field>
       <field>
         <name>DaysPerYear</name>
-        <type>Number</type>
-        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>PayPeriods</name>
+        <type>String</type>
+        <format/>
         <currency/>
         <decimal/>
         <group/>
@@ -6125,7 +7535,7 @@
       <field>
         <name>SalDivisor</name>
         <type>Number</type>
-        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <format/>
         <currency/>
         <decimal/>
         <group/>
@@ -6136,8 +7546,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>967</xloc>
-      <yloc>21</yloc>
+      <xloc>969</xloc>
+      <yloc>0</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6181,6 +7591,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>empearn_flat_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>      <field>        <name>empearn_portion</name>
         <rename/>
         <length>-2</length>
@@ -6189,15 +7603,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_1</name>
+      </field>      <field>        <name>empearn_exp_main1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_2</name>
+      </field>      <field>        <name>empearn_exp_main2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_3</name>
+      </field>      <field>        <name>empearn_exp_main3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6205,15 +7619,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_1</name>
+      </field>      <field>        <name>empearn_exp_sub1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_2</name>
+      </field>      <field>        <name>empearn_exp_sub2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_3</name>
+      </field>      <field>        <name>empearn_exp_sub3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6221,15 +7635,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_1</name>
+      </field>      <field>        <name>empearn_exp_pct1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_2</name>
+      </field>      <field>        <name>empearn_exp_pct2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_3</name>
+      </field>      <field>        <name>empearn_exp_pct3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6237,7 +7651,7 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>Today</name>
+      </field>      <field>        <name>CutoffDate</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6289,7 +7703,67 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>Number12</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>      <field>        <name>earn_special_type</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_time_based</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6326,12 +7800,12 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>empearn_flat_amount</name>
-        <rename/>
+        <rename>SalAmt</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
       <meta>        <name>empearn_flat_amount</name>
-        <rename>SalAmt</rename>
+        <rename>empearn_flat_amount</rename>
         <type>Number</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -6392,6 +7866,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>empearn_flat_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>      <field>        <name>empearn_portion</name>
         <rename/>
         <length>-2</length>
@@ -6400,15 +7878,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_1</name>
+      </field>      <field>        <name>empearn_exp_main1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_2</name>
+      </field>      <field>        <name>empearn_exp_main2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_3</name>
+      </field>      <field>        <name>empearn_exp_main3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6416,15 +7894,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_1</name>
+      </field>      <field>        <name>empearn_exp_sub1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_2</name>
+      </field>      <field>        <name>empearn_exp_sub2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_3</name>
+      </field>      <field>        <name>empearn_exp_sub3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6432,15 +7910,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_1</name>
+      </field>      <field>        <name>empearn_exp_pct1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_2</name>
+      </field>      <field>        <name>empearn_exp_pct2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_3</name>
+      </field>      <field>        <name>empearn_exp_pct3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6448,7 +7926,7 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>Today</name>
+      </field>      <field>        <name>CutoffDate</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6500,7 +7978,67 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>Number12</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>      <field>        <name>earn_special_type</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_time_based</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6537,12 +8075,27 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>earn_amount</name>
-        <rename/>
+        <rename>SalAmt</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
       <meta>        <name>earn_amount</name>
-        <rename>SalAmt</rename>
+        <rename>earn_amount</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>      <meta>        <name>empearn_flat_amount</name>
+        <rename>empearn_flat_amount</rename>
         <type>Number</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -6603,6 +8156,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>empearn_flat_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>      <field>        <name>empearn_portion</name>
         <rename/>
         <length>-2</length>
@@ -6611,15 +8168,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_1</name>
+      </field>      <field>        <name>empearn_exp_main1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_2</name>
+      </field>      <field>        <name>empearn_exp_main2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_3</name>
+      </field>      <field>        <name>empearn_exp_main3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6627,15 +8184,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_1</name>
+      </field>      <field>        <name>empearn_exp_sub1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_2</name>
+      </field>      <field>        <name>empearn_exp_sub2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_3</name>
+      </field>      <field>        <name>empearn_exp_sub3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6643,15 +8200,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_1</name>
+      </field>      <field>        <name>empearn_exp_pct1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_2</name>
+      </field>      <field>        <name>empearn_exp_pct2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_3</name>
+      </field>      <field>        <name>empearn_exp_pct3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6659,7 +8216,7 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>Today</name>
+      </field>      <field>        <name>CutoffDate</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6711,7 +8268,67 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>Number12</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>      <field>        <name>earn_special_type</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_time_based</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6748,12 +8365,27 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>SalCalc</name>
-        <rename/>
+        <rename>SalAmt</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
-      <meta>        <name>SalCalc</name>
-        <rename>SalAmt</rename>
+      <meta>        <name>empearn_flat_amount</name>
+        <rename>empearn_flat_amount</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>      <meta>        <name>earn_amount</name>
+        <rename>earn_amount</rename>
         <type>Number</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -6814,6 +8446,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>empearn_flat_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>      <field>        <name>empearn_portion</name>
         <rename/>
         <length>-2</length>
@@ -6822,15 +8458,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_1</name>
+      </field>      <field>        <name>empearn_exp_main1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_2</name>
+      </field>      <field>        <name>empearn_exp_main2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_3</name>
+      </field>      <field>        <name>empearn_exp_main3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6838,15 +8474,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_1</name>
+      </field>      <field>        <name>empearn_exp_sub1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_2</name>
+      </field>      <field>        <name>empearn_exp_sub2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_3</name>
+      </field>      <field>        <name>empearn_exp_sub3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6854,15 +8490,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_1</name>
+      </field>      <field>        <name>empearn_exp_pct1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_2</name>
+      </field>      <field>        <name>empearn_exp_pct2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_3</name>
+      </field>      <field>        <name>empearn_exp_pct3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6870,7 +8506,7 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>Today</name>
+      </field>      <field>        <name>CutoffDate</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6922,7 +8558,67 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>Number12</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>      <field>        <name>earn_special_type</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_time_based</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -6965,6 +8661,36 @@
       </field>        <select_unspecified>N</select_unspecified>
       <meta>        <name>SalAmt</name>
         <rename>SalAmt</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>      <meta>        <name>empearn_flat_amount</name>
+        <rename>empearn_flat_amount</rename>
+        <type>Number</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>      <meta>        <name>earn_amount</name>
+        <rename>earn_amount</rename>
         <type>Number</type>
         <length>-2</length>
         <precision>-2</precision>
@@ -7033,35 +8759,35 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>earn_exp_main</name>
-        <rename>empearn_exp_main</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_1</name>
+      </field>      <field>        <name>empearn_exp_main</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_2</name>
+      </field>      <field>        <name>empearn_exp_main1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_3</name>
+      </field>      <field>        <name>empearn_exp_main2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>earn_exp_sub</name>
-        <rename>empearn_exp_sub</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_1</name>
+      </field>      <field>        <name>empearn_exp_main3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_2</name>
+      </field>      <field>        <name>empearn_exp_sub</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_3</name>
+      </field>      <field>        <name>empearn_exp_sub1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_sub2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_sub3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -7070,22 +8796,22 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>earn_exp_pct1</name>
-        <rename>empearn_exp_pct_1</rename>
+        <rename>empearn_exp_pct1</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>earn_exp_pct2</name>
-        <rename>empearn_exp_pct_2</rename>
+        <rename>empearn_exp_pct2</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>earn_exp_pct3</name>
-        <rename>empearn_exp_pct_3</rename>
+        <rename>empearn_exp_pct3</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>empearn_added_on</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>Today</name>
+      </field>      <field>        <name>CutoffDate</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -7137,6 +8863,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>Number12</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>      <field>        <name>earn_amount</name>
         <rename/>
         <length>-2</length>
@@ -7146,6 +8876,54 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>earn_time_based</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -7241,15 +9019,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_1</name>
+      </field>      <field>        <name>empearn_exp_main1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_2</name>
+      </field>      <field>        <name>empearn_exp_main2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_3</name>
+      </field>      <field>        <name>empearn_exp_main3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -7257,15 +9035,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_1</name>
+      </field>      <field>        <name>empearn_exp_sub1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_2</name>
+      </field>      <field>        <name>empearn_exp_sub2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_3</name>
+      </field>      <field>        <name>empearn_exp_sub3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -7273,15 +9051,15 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_1</name>
+      </field>      <field>        <name>empearn_exp_pct1</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_2</name>
+      </field>      <field>        <name>empearn_exp_pct2</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_3</name>
+      </field>      <field>        <name>empearn_exp_pct3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -7289,7 +9067,7 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>Today</name>
+      </field>      <field>        <name>CutoffDate</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -7341,6 +9119,10 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>Number12</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>      <field>        <name>earn_amount</name>
         <rename/>
         <length>-2</length>
@@ -7350,6 +9132,54 @@
         <length>-2</length>
         <precision>-2</precision>
       </field>      <field>        <name>earn_time_based</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct3</name>
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
@@ -7390,6 +9220,726 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>664</xloc>
       <yloc>382</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values 7</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>empearn_emp_code</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_employer_code</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_barg_unit</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_job_no</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_earn_code</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_end_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_start_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_flat_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_portion</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_main</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_main1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_main2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_main3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_sub</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_sub1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_sub2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_sub3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_pct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_pct1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_pct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_pct3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_added_on</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>CutoffDate</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Employee_ID</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Occ</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>SRBPayroll</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GridName</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_step</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>class_salary</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>class_days_or_hours</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_salary_basis</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>WeeklyHours</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Level</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>class_pension_rate</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>SalDivisor</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Number12</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_special_type</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_time_based</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Seq</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>FillerString</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>FillerNumber</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Number1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLAcct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLAcct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLAcct3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLAcct4</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>NewSalAmt</name>
+        <rename>SalAmt</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>100</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLPct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLPct1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLPct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLPct3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>452</xloc>
+      <yloc>1040</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values 8</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>empjob_emp_code</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_employer_code</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_barg_unit</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_job_no</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_status</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_start_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_end_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_rehire_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>seniority date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_part_payroll</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_calendar</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>calendar_pay_periods</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>calendar_daily_hours</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_portion</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_payroll</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_group</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_pension_plan</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_pension_grossup</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_salary_basis</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_probation_class</name>
+        <rename>empjob_class</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_probation_step</name>
+        <rename>empjob_step</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_probation_class</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_probation_step</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_bonus_class</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_bonus_step</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_sick_class</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_sick_step</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_vacation_class</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_vacation_step</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_exp_prefix</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_exp_extension</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_liab_prefix</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_liab_extension</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_pre02_expernce</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_grid_placed</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>498</xloc>
+      <yloc>98</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values 9</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>empearn_emp_code</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_employer_code</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_barg_unit</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_job_no</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_earn_code</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_end_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_start_date</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_flat_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_portion</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_main</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_main1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_main2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_main3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_sub</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_sub1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_sub2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_sub3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_pct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_pct1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_pct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_exp_pct3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empearn_added_on</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>CutoffDate</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Employee_ID</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Occ</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>SRBPayroll</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GridName</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_step</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>class_salary</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>class_days_or_hours</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>empjob_salary_basis</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>WeeklyHours</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Level</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>class_pension_rate</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>SalDivisor</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Number12</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_amount</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_special_type</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_time_based</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_main3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_sub3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>earn_exp_pct3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Seq</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>FillerString</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>FillerNumber</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>Number1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLAcct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLAcct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLAcct3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLAcct4</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>SalAmt</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>100</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLPct</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLPct1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLPct2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GLPct3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>298</xloc>
+      <yloc>1046</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -7728,6 +10278,18 @@
            <schema_name/>
            </partitioning>
     <fields>
+      <field>
+        <name>Employee_ID</name>
+        <ascending>N</ascending>
+        </field>
+      <field>
+        <name>Occ</name>
+        <ascending>N</ascending>
+        </field>
+      <field>
+        <name>Seq</name>
+        <ascending>N</ascending>
+        </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -7769,6 +10331,99 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>658</xloc>
       <yloc>256</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Value Mapper</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <field_to_use>SalDivisor</field_to_use>
+    <target_field/>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value/>
+        <target_value>1</target_value>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>970</xloc>
+      <yloc>62</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>getSAL-FREN</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Const12</send_true_to>
+<send_false_to>Select values 9</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>empearn_earn_code</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>SAL-FREN</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>294</xloc>
+      <yloc>970</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>newGL1</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>sortGL</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>GLAcct</name>
+        <field>Current Payroll GL</field>
+      </key>
+      <value>
+        <name>Current Oracle GL</name>
+        <rename>NewGL1</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>232</xloc>
+      <yloc>1373</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -7901,6 +10556,18 @@
         <precision>-1</precision>
       </field>
       <field>
+        <name>empearn_flat_amount</name>
+        <type>Number</type>
+        <format>&#x23;.&#x23;&#x3b;&#x23;.&#x23;-</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>0</precision>
+      </field>
+      <field>
         <name>empearn_portion</name>
         <type>String</type>
         <format/>
@@ -7925,7 +10592,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>empearn_exp_main_1</name>
+        <name>empearn_exp_main1</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -7937,7 +10604,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>empearn_exp_main_2</name>
+        <name>empearn_exp_main2</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -7949,7 +10616,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>empearn_exp_main_3</name>
+        <name>empearn_exp_main3</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -7973,7 +10640,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>empearn_exp_sub_1</name>
+        <name>empearn_exp_sub1</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -7985,7 +10652,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>empearn_exp_sub_2</name>
+        <name>empearn_exp_sub2</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -7997,7 +10664,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>empearn_exp_sub_3</name>
+        <name>empearn_exp_sub3</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -8010,51 +10677,51 @@
       </field>
       <field>
         <name>empearn_exp_pct</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif/>
         <trim_type>none</trim_type>
         <length>-1</length>
-        <precision>-1</precision>
+        <precision>0</precision>
       </field>
       <field>
-        <name>empearn_exp_pct_1</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
+        <name>empearn_exp_pct1</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif/>
         <trim_type>none</trim_type>
         <length>-1</length>
-        <precision>-1</precision>
+        <precision>0</precision>
       </field>
       <field>
-        <name>empearn_exp_pct_2</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
+        <name>empearn_exp_pct2</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif/>
         <trim_type>none</trim_type>
         <length>-1</length>
-        <precision>-1</precision>
+        <precision>0</precision>
       </field>
       <field>
-        <name>empearn_exp_pct_3</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
+        <name>empearn_exp_pct3</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif/>
         <trim_type>none</trim_type>
         <length>-1</length>
-        <precision>-1</precision>
+        <precision>0</precision>
       </field>
       <field>
         <name>empearn_added_on</name>
@@ -8069,7 +10736,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>Today</name>
+        <name>CutoffDate</name>
         <type>Date</type>
         <format>yyyy&#x2f;MM&#x2f;dd</format>
         <currency/>
@@ -8077,7 +10744,7 @@
         <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>-1</length>
+        <length>10</length>
         <precision>-1</precision>
       </field>
       <field>
@@ -8124,7 +10791,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -8143,12 +10810,12 @@
       <field>
         <name>class_salary</name>
         <type>Number</type>
-        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
-        <currency> </currency>
-        <decimal>.</decimal>
-        <group> </group>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
         <nullif/>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -8160,7 +10827,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -8196,7 +10863,7 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -8208,12 +10875,36 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
         <name>SalDivisor</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Number12</name>
+        <type>Number</type>
+        <format>&#x23;.&#x23;&#x3b;-&#x23;.&#x23;</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_amount</name>
         <type>Number</type>
         <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
         <currency/>
@@ -8228,6 +10919,162 @@
         <name>earn_special_type</name>
         <type>String</type>
         <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_time_based</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_exp_main</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_exp_sub</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_exp_pct</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_exp_main1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_exp_main2</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_exp_main3</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_exp_sub1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_exp_sub2</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_exp_sub3</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_exp_pct1</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_exp_pct2</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>earn_exp_pct3</name>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
         <currency/>
         <decimal/>
         <group/>
@@ -8334,7 +11181,67 @@
       </field>
       <field>
         <name>SalAmt</name>
-        <type>String</type>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>100</name>
+        <type>Number</type>
+        <format>&#x23;.&#x23;&#x3b;-&#x23;.&#x23;</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GLPct</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GLPct1</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GLPct2</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GLPct3</name>
+        <type>Number</type>
         <format/>
         <currency/>
         <decimal/>
@@ -8347,8 +11254,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>232</xloc>
-      <yloc>1327</yloc>
+      <xloc>138</xloc>
+      <yloc>1242</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -8367,7 +11274,7 @@
        <calculation><field_name>SalAmt</field_name>
 <calc_type>DIVIDE</calc_type>
 <field_a>empearn_flat_amount</field_a>
-<field_b>SalDivisor</field_b>
+<field_b>Number12</field_b>
 <field_c/>
 <value_type>None</value_type>
 <value_length>-1</value_length>
@@ -8380,185 +11287,83 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>450</xloc>
-      <yloc>540</yloc>
+      <xloc>449</xloc>
+      <yloc>541</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>ConvertGLPct</name>
-    <type>Calculator</type>
+    <name>sort2GL</name>
+    <type>SortRows</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>GLPct</field_name>
-<calc_type>MULTIPLY</calc_type>
-<field_a>empearn_exp_pct</field_a>
-<field_b>100</field_b>
-<field_c/>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-       <calculation><field_name>GLPct1</field_name>
-<calc_type>MULTIPLY</calc_type>
-<field_a>empearn_exp_pct_1</field_a>
-<field_b>100</field_b>
-<field_c/>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-       <calculation><field_name>GLPct2</field_name>
-<calc_type>MULTIPLY</calc_type>
-<field_a>empearn_exp_pct_2</field_a>
-<field_b>100</field_b>
-<field_c/>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-       <calculation><field_name>GLPct3</field_name>
-<calc_type>MULTIPLY</calc_type>
-<field_a>empearn_exp_pct_3</field_a>
-<field_b>100</field_b>
-<field_c/>
-<value_type>Number</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>292</xloc>
-      <yloc>901</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>AddNo100</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>100</name>
-        <type>Number</type>
-        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>100</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
+        <name>Current Payroll GL</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>291</xloc>
-      <yloc>825</yloc>
+      <xloc>32</xloc>
+      <yloc>1517</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>getSAL-FREN</name>
-    <type>FilterRows</type>
+    <name>sort3GL</name>
+    <type>SortRows</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Const12</send_true_to>
-<send_false_to>BlankGrid</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>empearn_earn_code</leftvalue>
- <function>&#x3d;</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>SAL-FREN</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>294</xloc>
-      <yloc>970</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Const12</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>12</name>
-        <type>Number</type>
-        <format>&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;.&#x23;&#x23;&#x23;</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>12</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
+        <name>Current Payroll GL</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>382</xloc>
-      <yloc>970</yloc>
+      <xloc>36</xloc>
+      <yloc>1673</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Calculator 2</name>
-    <type>Calculator</type>
+    <name>sort4GL</name>
+    <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -8567,31 +11372,66 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>NewSalAmt</field_name>
-<calc_type>DIVIDE</calc_type>
-<field_a>SalAmt</field_a>
-<field_b>12</field_b>
-<field_c/>
-<value_type>None</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>Current Payroll GL</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>453</xloc>
-      <yloc>970</yloc>
+      <xloc>38</xloc>
+      <yloc>1836</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Select values 7</name>
-    <type>SelectValues</type>
+    <name>sortGL</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>Current Payroll GL</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>152</xloc>
+      <yloc>1372</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>sortGL1</name>
+    <type>SortRows</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -8600,207 +11440,127 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>empearn_emp_code</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_employer_code</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_barg_unit</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_job_no</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_earn_code</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_end_date</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_start_date</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_portion</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_2</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_main_3</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_2</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_sub_3</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_2</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_exp_pct_3</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empearn_added_on</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Today</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Employee_ID</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Occ</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>SRBPayroll</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>GridName</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empjob_step</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>class_salary</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>class_days_or_hours</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>empjob_salary_basis</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>WeeklyHours</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Level</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>class_pension_rate</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>SalDivisor</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>earn_special_type</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Seq</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>FillerString</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>FillerNumber</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Number1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>GLAcct</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>GLAcct2</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>GLAcct3</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>GLAcct4</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>NewSalAmt</name>
-        <rename>SalAmt</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>100</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>GLPct</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>GLPct1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>GLPct2</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>GLPct3</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>N</select_unspecified>
-    </fields>     <cluster_schema/>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>GLAcct</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>452</xloc>
-      <yloc>1040</yloc>
+      <xloc>233</xloc>
+      <yloc>1315</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>sortGL2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>GLAcct2</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>233</xloc>
+      <yloc>1447</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>sortGL3</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>GLAcct3</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>234</xloc>
+      <yloc>1599</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>sortGL4</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>GLAcct4</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>234</xloc>
+      <yloc>1750</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

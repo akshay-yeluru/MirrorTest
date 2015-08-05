@@ -1,15 +1,20 @@
 <job>
-  <name>ASEBP</name>
+  <name>SYSTEM_PROPERTY_DEV</name>
     <description/>
     <extended_description/>
     <job_version/>
     <job_status>0</job_status>
-  <directory>&#x2f;Interfaces&#x2f;Asebp&#x2f;Job</directory>
+  <directory>&#x2f;Interfaces&#x2f;SystemProperty</directory>
   <created_user>-</created_user>
-  <created_date>2014&#x2f;07&#x2f;18 07&#x3a;48&#x3a;36.780</created_date>
+  <created_date>2014&#x2f;08&#x2f;12 20&#x3a;48&#x3a;31.489</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;08&#x2f;05 10&#x3a;00&#x3a;48.677</modified_date>
+  <modified_date>2015&#x2f;06&#x2f;11 10&#x3a;17&#x3a;15.638</modified_date>
     <parameters>
+        <parameter>
+            <name>SRB_PROPERTIES_FILE_PARAM</name>
+            <default_value>null</default_value>
+            <description>A parameter that specified a file with specific variables needed to run the job.</description>
+        </parameter>
     </parameters>
   <connection>
     <name>SCHOOLLOGIC_DB</name>
@@ -179,250 +184,93 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>32</xloc>
-      <yloc>76</yloc>
+      <xloc>125</xloc>
+      <yloc>27</yloc>
       </entry>
     <entry>
-      <name>get-rows-as-json</name>
+      <name>Checks if files exist</name>
       <description/>
-      <type>TRANS</type>
-      <specification_method>rep_name</specification_method>
-      <trans_object_id/>
+      <type>FILES_EXIST</type>
       <filename/>
-      <transname>get-rows-as-json</transname>
-      <directory>&#x2f;Interfaces&#x2f;Asebp&#x2f;Transformation</directory>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>500</xloc>
-      <yloc>79</yloc>
-      </entry>
-    <entry>
-      <name>Success</name>
-      <description/>
-      <type>SUCCESS</type>
+      <fields>
+        <field>
+          <name>&#x24;&#x7b;SRB_PROPERTIES_FILE&#x7d;</name>
+        </field>
+      </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1134</xloc>
-      <yloc>82</yloc>
+      <xloc>415</xloc>
+      <yloc>163</yloc>
       </entry>
     <entry>
-      <name>for-each-row-invoke-service</name>
+      <name>Set variables from kettle properties file</name>
       <description/>
-      <type>TRANS</type>
-      <specification_method>rep_name</specification_method>
-      <trans_object_id/>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename>&#x24;&#x7b;SRB_PROPERTIES_FILE&#x7d;</filename>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+      </fields>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>434</xloc>
+      <yloc>296</yloc>
+      </entry>
+    <entry>
+      <name>Checks for cmd line param</name>
+      <description/>
+      <type>FILES_EXIST</type>
       <filename/>
-      <transname>for-each-row-invoke-service</transname>
-      <directory>&#x2f;Interfaces&#x2f;Asebp&#x2f;Transformation</directory>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>706</xloc>
-      <yloc>81</yloc>
-      </entry>
-    <entry>
-      <name>Evaluate rows number in a table</name>
-      <description/>
-      <type>EVAL_TABLE_CONTENT</type>
-      <connection>SOURCE_RMS</connection>
-      <schemaname/>
-      <tablename/>
-      <success_condition>rows_count_greater</success_condition>
-      <limit>0</limit>
-      <is_custom_sql>Y</is_custom_sql>
-      <is_usevars>N</is_usevars>
-      <custom_sql>SELECT &#x2a; FROM PAY_ASEBP WHERE TRANSFER_FLAG&#x3d;&#x27;Y&#x27;</custom_sql>
-      <add_rows_result>N</add_rows_result>
-      <clear_result_rows>Y</clear_result_rows>
+      <fields>
+        <field>
+          <name>&#x24;&#x7b;SRB_PROPERTIES_FILE_PARAM&#x7d;</name>
+        </field>
+      </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>314</xloc>
-      <yloc>77</yloc>
+      <xloc>129</xloc>
+      <yloc>157</yloc>
       </entry>
     <entry>
-      <name>Success 2</name>
+      <name>Set variables from cmd line param</name>
       <description/>
-      <type>SUCCESS</type>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>314</xloc>
-      <yloc>210</yloc>
-      </entry>
-    <entry>
-      <name>UNIT_TEST Check</name>
-      <description/>
-      <type>SIMPLE_EVAL</type>
-      <valuetype>variable</valuetype>
-      <fieldname>&#x24;&#x7b;JOB_TYPE&#x7d;</fieldname>
-      <variablename>&#x24;&#x7b;UNIT_TEST&#x7d;</variablename>
-      <fieldtype>string</fieldtype>
-      <mask/>
-      <comparevalue>FALSE</comparevalue>
-      <minvalue/>
-      <maxvalue/>
-      <successcondition>equal</successcondition>
-      <successnumbercondition>equal</successnumbercondition>
-      <successbooleancondition>false</successbooleancondition>
-      <successwhenvarset>N</successwhenvarset>
+      <type>SET_VARIABLES</type>
+      <replacevars>Y</replacevars>
+      <filename>&#x24;&#x7b;SRB_PROPERTIES_FILE_PARAM&#x7d;</filename>
+      <file_variable_type>JVM</file_variable_type>
+      <fields>
+      </fields>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>133</xloc>
-      <yloc>76</yloc>
+      <yloc>291</yloc>
       </entry>
     <entry>
-      <name>get-rows-as-json-from-file</name>
+      <name>Check Db connections</name>
       <description/>
-      <type>TRANS</type>
-      <specification_method>rep_name</specification_method>
-      <trans_object_id/>
-      <filename/>
-      <transname>get-rows-as-json-from-file</transname>
-      <directory>&#x2f;Interfaces&#x2f;Asebp&#x2f;Transformation</directory>
-      <arg_from_previous>N</arg_from_previous>
-      <params_from_previous>N</params_from_previous>
-      <exec_per_row>N</exec_per_row>
-      <clear_rows>N</clear_rows>
-      <clear_files>N</clear_files>
-      <set_logfile>N</set_logfile>
-      <logfile/>
-      <logext/>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <loglevel>Basic</loglevel>
-      <cluster>N</cluster>
-      <slave_server_name/>
-      <set_append_logfile>N</set_append_logfile>
-      <wait_until_finished>Y</wait_until_finished>
-      <follow_abort_remote>N</follow_abort_remote>
-      <create_parent_folder>N</create_parent_folder>
-      <logging_remote_work>N</logging_remote_work>
-      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
-      </parameters>      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>136</xloc>
-      <yloc>435</yloc>
-      </entry>
-    <entry>
-      <name>Mail</name>
-      <description/>
-      <type>MAIL</type>
-      <server>&#x24;&#x7b;EMAIL_SERVER&#x7d;</server>
-      <port>&#x24;&#x7b;EMAIL_PORT&#x7d;</port>
-      <destination>&#x24;&#x7b;EMAIL_TO_ADDRESS&#x7d;</destination>
-      <destinationCc/>
-      <destinationBCc/>
-      <replyto>&#x24;&#x7b;EMAIL_FROM_ADDRESS&#x7d;</replyto>
-      <replytoname>&#x24;&#x7b;EMAIL_FROM_NAME&#x7d;</replytoname>
-      <subject>ASEBP Interface</subject>
-      <include_date>N</include_date>
-      <contact_person/>
-      <contact_phone/>
-      <comment>The ASEBP interface has completed please run the following report for results.&#xd;&#xa;&#xd;&#xa;&#x24;&#x7b;EMAIL_REPORT_URI&#x7d;&#xd;&#xa;&#xd;&#xa;</comment>
-      <include_files>N</include_files>
-      <zip_files>N</zip_files>
-      <zip_name/>
-      <use_auth>N</use_auth>
-      <use_secure_auth>N</use_secure_auth>
-      <auth_user/>
-      <auth_password>Encrypted </auth_password>
-      <only_comment>N</only_comment>
-      <use_HTML>N</use_HTML>
-      <use_Priority>N</use_Priority>
-      <encoding>UTF-8</encoding>
-      <priority>normal</priority>
-      <importance>normal</importance>
-      <sensitivity>normal</sensitivity>
-      <secureconnectiontype>SSL</secureconnectiontype>
-      <replyToAddresses/>
-      <filetypes>      </filetypes>      <embeddedimages>
-      </embeddedimages>
+      <type>CHECK_DB_CONNECTIONS</type>
+      <connections>
+        <connection>
+          <name>TARGET_RDBMS_DEV</name>
+          <waitfor>0</waitfor>
+          <waittime>millisecond</waittime>
+        </connection>
+      </connections>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1004</xloc>
-      <yloc>80</yloc>
-      </entry>
-    <entry>
-      <name>EMAIL Check</name>
-      <description/>
-      <type>SIMPLE_EVAL</type>
-      <valuetype>variable</valuetype>
-      <fieldname>&#x24;&#x7b;JOB_TYPE&#x7d;</fieldname>
-      <variablename>&#x24;&#x7b;EMAIL_LOG&#x7d;</variablename>
-      <fieldtype>string</fieldtype>
-      <mask/>
-      <comparevalue>TRUE</comparevalue>
-      <minvalue/>
-      <maxvalue/>
-      <successcondition>equal</successcondition>
-      <successnumbercondition>equal</successnumbercondition>
-      <successbooleancondition>false</successbooleancondition>
-      <successwhenvarset>N</successwhenvarset>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>884</xloc>
-      <yloc>81</yloc>
-      </entry>
-    <entry>
-      <name>Success 3</name>
-      <description/>
-      <type>SUCCESS</type>
-      <parallel>N</parallel>
-      <draw>Y</draw>
-      <nr>0</nr>
-      <xloc>885</xloc>
-      <yloc>244</yloc>
+      <xloc>281</xloc>
+      <yloc>395</yloc>
       </entry>
   </entries>
   <hops>
     <hop>
-      <from>get-rows-as-json</from>
-      <to>for-each-row-invoke-service</to>
+      <from>Checks if files exist</from>
+      <to>Set variables from kettle properties file</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -430,17 +278,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Evaluate rows number in a table</from>
-      <to>get-rows-as-json</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Evaluate rows number in a table</from>
-      <to>Success 2</to>
+      <from>Checks for cmd line param</from>
+      <to>Checks if files exist</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -449,7 +288,7 @@
     </hop>
     <hop>
       <from>START</from>
-      <to>UNIT_TEST Check</to>
+      <to>Checks for cmd line param</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -457,8 +296,8 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>UNIT_TEST Check</from>
-      <to>Evaluate rows number in a table</to>
+      <from>Checks for cmd line param</from>
+      <to>Set variables from cmd line param</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -466,17 +305,8 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>UNIT_TEST Check</from>
-      <to>get-rows-as-json-from-file</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>get-rows-as-json-from-file</from>
-      <to>for-each-row-invoke-service</to>
+      <from>Set variables from kettle properties file</from>
+      <to>Check Db connections</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -484,39 +314,12 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Mail</from>
-      <to>Success</to>
+      <from>Set variables from cmd line param</from>
+      <to>Check Db connections</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>for-each-row-invoke-service</from>
-      <to>EMAIL Check</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>EMAIL Check</from>
-      <to>Mail</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>EMAIL Check</from>
-      <to>Success 3</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>

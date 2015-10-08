@@ -68,7 +68,9 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;06&#x2f;17 11&#x3a;50&#x3a;56.753</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;06&#x2f;19 14&#x3a;29&#x3a;00.279</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;06 15&#x3a;23&#x3a;38.425</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
+    <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
@@ -177,7 +179,9 @@
   </connection>
   <order>
   <hop> <from>Map Values</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
-  <hop> <from>HR_SUBJECT_LEVEL_CODE</from><to>Map Values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Escape Fields</from><to>Map Values</to><enabled>Y</enabled> </hop>
+  <hop> <from>HR_SUBJECT_LEVEL_CODE</from><to>Remove &#x28;X&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Remove &#x28;X&#x29;</from><to>Escape Fields</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Copy rows to result</name>
@@ -192,8 +196,38 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>444</xloc>
-      <yloc>147</yloc>
+      <xloc>665</xloc>
+      <yloc>143</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Escape Fields</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var Description &#x3d; escape&#x28;DESCR&#x29;&#x3b;&#xd;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>Description</name>
+        <rename>Description</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>401</xloc>
+      <yloc>143</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -210,7 +244,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>select&#xd;&#xa;         CODE&#xd;&#xa;        ,DESCRIPTION&#xd;&#xa;&#xd;&#xa;from     HR_SUBJECT_LEVEL_CODE&#xd;&#xa;</sql>
+    <sql>select&#xd;&#xa;         CODE&#xd;&#xa;        ,DESCRIPTION AS DESCR&#xd;&#xa;&#xd;&#xa;from     HR_SUBJECT_LEVEL_CODE&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -219,7 +253,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>137</xloc>
-      <yloc>147</yloc>
+      <yloc>143</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -239,15 +273,47 @@
         <rename>Code</rename>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>DESCRIPTION</name>
-        <rename>Description</rename>
+      </field>      <field>        <name>Description</name>
+        <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>304</xloc>
-      <yloc>147</yloc>
+      <xloc>533</xloc>
+      <yloc>143</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Remove &#x28;X&#x29;</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>DESCR</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>&#x28;X&#x29;</replace_string>
+        <replace_by_string/>
+        <set_empty_string>N</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>269</xloc>
+      <yloc>143</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

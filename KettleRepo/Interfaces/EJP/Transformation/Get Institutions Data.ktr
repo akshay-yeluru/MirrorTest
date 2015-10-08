@@ -6,7 +6,7 @@
     <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>&#x2f;Interfaces&#x2f;EJP&#x2f;Job</directory>
+    <directory>&#x2f;Interfaces&#x2f;EJP&#x2f;Transformation</directory>
     <parameters>
     </parameters>
     <log>
@@ -68,7 +68,9 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;06&#x2f;15 15&#x3a;53&#x3a;36.043</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;06&#x2f;19 14&#x3a;20&#x3a;42.074</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;06 10&#x3a;24&#x3a;13.160</modified_date>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
+    <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
@@ -176,7 +178,8 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>HR_INSTITUTION_CODE</from><to>Map Values</to><enabled>Y</enabled> </hop>
+  <hop> <from>HR_INSTITUTION_CODE</from><to>Escape Fields</to><enabled>Y</enabled> </hop>
+  <hop> <from>Escape Fields</from><to>Map Values</to><enabled>Y</enabled> </hop>
   <hop> <from>Map Values</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
   </order>
   <step>
@@ -192,8 +195,38 @@
            </partitioning>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>655</xloc>
-      <yloc>178</yloc>
+      <xloc>654</xloc>
+      <yloc>177</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Escape Fields</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var Description &#x3d; escape&#x28;DESCR&#x29;&#x3b;&#xd;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>Description</name>
+        <rename>Description</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>426</xloc>
+      <yloc>177</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -210,7 +243,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>select&#xd;&#xa;         CODE&#xd;&#xa;        ,DESCRIPTION&#xd;&#xa;&#xd;&#xa;from	 HR_INSTITUTION_CODE</sql>
+    <sql>select&#xd;&#xa;         CODE&#xd;&#xa;        ,DESCRIPTION AS DESCR&#xd;&#xa;&#xd;&#xa;from	 HR_INSTITUTION_CODE&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -239,14 +272,14 @@
         <rename>Code</rename>
         <length>-2</length>
         <precision>-2</precision>
-      </field>      <field>        <name>DESCRIPTION</name>
-        <rename>Description</rename>
+      </field>      <field>        <name>Description</name>
+        <rename/>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>485</xloc>
+      <xloc>540</xloc>
       <yloc>177</yloc>
       <draw>Y</draw>
       </GUI>

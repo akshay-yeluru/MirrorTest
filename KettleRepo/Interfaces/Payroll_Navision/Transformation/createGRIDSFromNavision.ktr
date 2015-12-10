@@ -1,12 +1,12 @@
 <transformation>
   <info>
-    <name>get-rows-as-json</name>
-    <description/>
+    <name>createGRIDSFromNavision</name>
+    <description>Create SDS GRIDS from Navision Payroll</description>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
     <trans_status>0</trans_status>
-    <directory>&#x2f;Interfaces&#x2f;Asebp&#x2f;Transformation</directory>
+    <directory>&#x2f;Interfaces&#x2f;Payroll_Navision&#x2f;Transformation</directory>
     <parameters>
     </parameters>
     <log>
@@ -66,35 +66,113 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2014&#x2f;07&#x2f;18 07&#x3a;50&#x3a;26.316</created_date>
+  <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;10&#x2f;22 14&#x3a;05&#x3a;05.389</modified_date>
+  <modified_date>2015&#x2f;01&#x2f;29 14&#x3a;34&#x3a;05.237</modified_date>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>DEV_ASEBP</name>
-    <server/>
+    <name>GREATPLAINS2_DB</name>
+    <server>&#x24;&#x7b;TARGET_HOST&#x7d;</server>
     <type>GENERIC</type>
     <access>Native</access>
-    <database/>
-    <port>1521</port>
+    <database>&#x24;&#x7b;TARGET_DATABASE_NAME&#x7d;</database>
+    <port>&#x24;&#x7b;TARGET_PORT&#x7d;</port>
     <username/>
     <password>Encrypted </password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
-      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>vortex.sql.vortexDriver</attribute></attribute>
-      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;vortex&#x3a;&#x2f;&#x2f;tsc&#x2f;tscssi0101&#x2f;RMS&#x3a;5_00_teac_payroll.ini&#x40;1963&#x3a;199.216.238.182&#x21;VTX4</attribute></attribute>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;SOURCE_DRIVER&#x7d;</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;SOURCE2_CONNECTION_URL&#x7d;</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;TARGET_PORT&#x7d;</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>GREATPLAINS3_DB</name>
+    <server>&#x24;&#x7b;TARGET_HOST&#x7d;</server>
+    <type>GENERIC</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;TARGET_DATABASE_NAME&#x7d;</database>
+    <port>&#x24;&#x7b;TARGET_PORT&#x7d;</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;SOURCE_DRIVER&#x7d;</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;SOURCE3_CONNECTION_URL&#x7d;</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;TARGET_PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>GREATPLAINS4_DB</name>
+    <server>&#x24;&#x7b;TARGET_HOST&#x7d;</server>
+    <type>GENERIC</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;TARGET_DATABASE_NAME&#x7d;</database>
+    <port>&#x24;&#x7b;TARGET_PORT&#x7d;</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;SOURCE_DRIVER&#x7d;</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;SOURCE4_CONNECTION_URL&#x7d;</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;TARGET_PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>GREATPLAINS_DB</name>
+    <server>&#x24;&#x7b;TARGET_HOST&#x7d;</server>
+    <type>GENERIC</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;TARGET_DATABASE_NAME&#x7d;</database>
+    <port>&#x24;&#x7b;TARGET_PORT&#x7d;</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;SOURCE_DRIVER&#x7d;</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;SOURCE_CONNECTION_URL&#x7d;</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;TARGET_PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -113,6 +191,32 @@
     <attributes>
       <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;SCHOOLLOGIC_DRIVER&#x7d;</attribute></attribute>
       <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;SCHOOLLOGIC_CONNECTION_URL&#x7d;</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;TARGET_PORT&#x7d;</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>SOURCE_RDBMS</name>
+    <server>&#x24;&#x7b;TARGET_HOST&#x7d;</server>
+    <type>GENERIC</type>
+    <access>Native</access>
+    <database>&#x24;&#x7b;TARGET_DATABASE_NAME&#x7d;</database>
+    <port>&#x24;&#x7b;TARGET_PORT&#x7d;</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;SOURCE_DRIVER&#x7d;</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;SOURCE_CONNECTION_URL&#x7d;</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
@@ -147,32 +251,6 @@
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>SOURCE_RMS_DEV</name>
-    <server/>
-    <type>GENERIC</type>
-    <access>Native</access>
-    <database/>
-    <port>1521</port>
-    <username/>
-    <password>Encrypted </password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>vortex.sql.vortexDriver</attribute></attribute>
-      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;vortex&#x3a;&#x2f;&#x2f;tsc&#x2f;tscssi0101&#x2f;RMS&#x3a;dev_teac_payroll.ini&#x40;1965&#x3a;192.168.130.1&#x21;VTX4</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
-      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
       <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
     </attributes>
   </connection>
@@ -254,185 +332,12 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Split Fields</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
-  <hop> <from>Stream lookup</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
-  <hop> <from>CSV file input</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
-  <hop> <from>PAY_ASEBP</from><to>Filter rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filter rows</from><to>Split Fields</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filter rows</from><to>Add constants</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants</from><to>Transaction Constants</to><enabled>Y</enabled> </hop>
-  <hop> <from>Transaction Constants</from><to>Text file output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Grid Pay Rates</from><to>Merge Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Most Recent Grids</from><to>Merge Join</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge Join</from><to>Text file output</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>Add constants</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>Code</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>Y</set_empty_string>
-      </field>
-      <field>
-        <name>Message</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>Y</set_empty_string>
-      </field>
-      <field>
-        <name>LOG_PAYROLL</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>Y</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>209</xloc>
-      <yloc>216</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>CSV file input</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <filename>&#x24;&#x7b;GROUP_CODE_LOOKUP_FILE&#x7d;</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>,</separator>
-    <enclosure>&#x22;</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <encoding/>
-    <fields>
-      <field>
-        <name>GROUP_CODE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-      </field>
-      <field>
-        <name>ASEBP_GROUP_CODE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>574</xloc>
-      <yloc>260</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Copy rows to result</name>
-    <type>RowsToResult</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>937</xloc>
-      <yloc>108</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Split Fields</send_true_to>
-<send_false_to>Add constants</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>EFFECTIVE_DATE</leftvalue>
-   <function>&#x3c;&#x3e;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text> </text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>209</xloc>
-      <yloc>108</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>PAY_ASEBP</name>
+    <name>Get Most Recent Grids</name>
     <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -442,24 +347,24 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>SOURCE_RMS</connection>
-    <sql>SELECT &#x2a; FROM PAY_ASEBP WHERE TRANSFER_FLAG&#x3d;&#x27;Y&#x27;</sql>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>Select &#x5b;Employer No_&#x5d;,&#xd;&#xa;		&#x5b;Position Code&#x5d;,&#xd;&#xa;		RIGHT&#x28;&#x27;000&#x27;&#x2b;RTRIM&#x28;REPLACE&#x28;&#x5b;Step&#x5d;,&#x27;CLASS &#x27;,&#x27;&#x27;&#x29;&#x29;,2&#x29; AS Step,&#xd;&#xa;		RIGHT&#x28;&#x27;000&#x27;&#x2b;RTRIM&#x28;&#x5b;Pay Level&#x5d;&#x29;,2&#x29; as &#x5b;Pay Level&#x5d;,&#xd;&#xa;		CONVERT&#x28;VarChar&#x28;20&#x29;,MAX&#x28;&#x5b;Grid Effective Date&#x5d;&#x29;,112&#x29; as EffectiveDate&#xd;&#xa;  	FROM &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;&#xd;&#xa;	Group by &#x5b;Employer No_&#x5d;,&#x5b;Position Code&#x5d;,&#x5b;Step&#x5d;,&#x5b;Pay Level&#x5d;&#xd;&#xa;	Order by 1,2,3,4</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
+    <variables_active>Y</variables_active>
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>27</xloc>
-      <yloc>108</yloc>
+      <xloc>84</xloc>
+      <yloc>37</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
+    <name>Get Grid Pay Rates</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -468,89 +373,53 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>      <field>        <name>GROUP_CODE</name>
-        <rename>SRB_GROUP_CODE</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>ASEBP_GROUP_CODE</name>
-        <rename>GROUP_CODE</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>Y</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>755</xloc>
-      <yloc>108</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Split Fields</name>
-    <type>FieldSplitter</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-   <splitfield>SALARY</splitfield>
-   <delimiter>.</delimiter>
-   <enclosure/>
-    <fields>      <field>        <name>SALARY</name>
-        <id/>
-        <idrem>N</idrem>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>both</trimtype>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>391</xloc>
-      <yloc>108</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Stream lookup</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>CSV file input</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>Y</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>GROUP_CODE</name>
-        <field>GROUP_CODE</field>
-      </key>
-      <value>
-        <name>ASEBP_GROUP_CODE</name>
-        <rename>ASEBP_GROUP_CODE</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
+    <connection>SOURCE_RDBMS</connection>
+    <sql>SELECT DISTINCT &#xd;&#xa;		&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;.&#x5b;Employer No_&#x5d;,&#xd;&#xa;		&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;.&#x5b;Position Code&#x5d;,&#xd;&#xa;		&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Position&#x5d;.&#x5b;Name&#x5d; as PositionDescription,&#xd;&#xa;		RIGHT&#x28;&#x27;000&#x27;&#x2b;RTRIM&#x28;REPLACE&#x28;&#x5b;Step&#x5d;,&#x27;CLASS &#x27;,&#x27;&#x27;&#x29;&#x29;,2&#x29; AS Step,&#xd;&#xa;		RIGHT&#x28;&#x27;000&#x27;&#x2b;RTRIM&#x28;&#x5b;Pay Level&#x5d;&#x29;,2&#x29; as &#x5b;Pay Level&#x5d;,&#xd;&#xa;		case When CHARINDEX&#x28;&#x27; &#x27;,&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;.&#x5b;Position Code&#x5d;,0&#x29; &#x3d; 0&#xd;&#xa;			Then &#xd;&#xa;				UPPER&#x28;LEFT&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;.&#x5b;Position Code&#x5d;,2&#x29;&#x29; &#xd;&#xa;			Else &#xd;&#xa;				LEFT&#x28;UPPER&#x28;LEFT&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;.&#x5b;Position Code&#x5d;,1&#x29; &#x2b;&#xd;&#xa;					SUBSTRING&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;.&#x5b;Position Code&#x5d;,&#xd;&#xa;					CHARINDEX&#x28;&#x27; &#x27;,&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;.&#x5b;Position Code&#x5d;,0&#x29;&#x2b;1,5&#x29;&#x29;,2&#x29;&#xd;&#xa;			end &#x2b;&#xd;&#xa;			RIGHT&#x28;&#x27;000&#x27;&#x2b;RTRIM&#x28;REPLACE&#x28;&#x5b;Step&#x5d;,&#x27;CLASS &#x27;,&#x27;&#x27;&#x29;&#x29;,2&#x29; &#x2b;&#xd;&#xa;			RIGHT&#x28;&#x27;000&#x27;&#x2b;RTRIM&#x28;&#x5b;Pay Level&#x5d;&#x29;,2&#x29; as gridcode,&#xd;&#xa;		&#x5b;Rate&#x5d;,&#xd;&#xa;		CONVERT&#x28;varchar&#x28;20&#x29;,&#x5b;Grid Effective Date&#x5d;,112&#x29; as &#x5b;Grid Effective Date&#x5d;,&#xd;&#xa;		CASE When &#x5b;Pay Cycles&#x5d; &#x3d; 0 OR &#x5b;Default Hours&#x5d; &#x3d; 0&#xd;&#xa;			THEN 1&#xd;&#xa;			ELSE &#x5b;Default Hours&#x5d; &#x2f; &#x5b;Pay Cycles&#x5d; &#xd;&#xa;			END as HoursPerCycle,&#xd;&#xa;		&#x27;&#x24;&#x7b;OUTPUT_PATH&#x7d;&#x27;&#x2b;REPLACE&#x28;RTRIM&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;.&#x5b;Employer No_&#x5d;&#x29;,&#x27; &#x27;,&#x27;&#x27;&#x29;&#x2b;&#x27;_Grid&#x27; as cOutFile&#xd;&#xa;	FROM &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;&#xd;&#xa;		LEFT JOIN &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Position&#x5d; ON&#xd;&#xa;			&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Position&#x5d;.&#x5b;Code&#x5d; &#x3d; &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;.&#x5b;Position Code&#x5d;&#xd;&#xa;		LEFT JOIN &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employer Position&#x5d; ON&#xd;&#xa;			&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employer Position&#x5d;.&#x5b;Employer No_&#x5d; &#x3d; &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;.&#x5b;Employer No_&#x5d;&#xd;&#xa;			AND&#xd;&#xa;			&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employer Position&#x5d;.&#x5b;Position Code&#x5d; &#x3d; &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Pay Grid Detail&#x5d;.&#x5b;Position Code&#x5d;&#xd;&#xa;	WHERE UPPER&#x28;LEFT&#x28;REPLACE&#x28;&#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Position&#x5d;.&#x5b;Name&#x5d;,&#x27; &#x27;,&#x27;&#x27;&#x29;,8&#x29;&#x29; &#x21;&#x3d; &#x27;DONOTUSE&#x27;&#xd;&#xa;	ORDER by 1,2,4,5,8&#xd;&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>573</xloc>
-      <yloc>108</yloc>
+      <xloc>85</xloc>
+      <yloc>111</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Merge Join</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>INNER</join_type>
+<step1>Get Most Recent Grids</step1>
+<step2>Get Grid Pay Rates</step2>
+    <keys_1>
+      <key>Employer No_</key>
+      <key>Position Code</key>
+      <key>Step</key>
+      <key>Pay Level</key>
+      <key>EffectiveDate</key>
+    </keys_1>
+    <keys_2>
+      <key>Employer No_</key>
+      <key>Position Code</key>
+      <key>Step</key>
+      <key>Pay Level</key>
+      <key>Grid Effective Date</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>287</xloc>
+      <yloc>65</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -566,32 +435,32 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <separator>&#x3b;</separator>
+    <separator>,</separator>
     <enclosure>&#x22;</enclosure>
-    <enclosure_forced>N</enclosure_forced>
+    <enclosure_forced>Y</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
+    <header>N</header>
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding/>
+    <encoding>windows-1252</encoding>
     <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
+    <fileNameInField>Y</fileNameInField>
+    <fileNameField>cOutFile</fileNameField>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>&#x24;&#x7b;WORK_DIRECTORY&#x7d;&#x5c;asebp-error-list-</name>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;GRID.csv</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>Y</append>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>csv</extention>
+      <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
       <add_date>N</add_date>
       <add_time>N</add_time>
-      <SpecifyFormat>Y</SpecifyFormat>
-      <date_time_format>yyyy-MM-dd</date_time_format>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
       <add_to_result_filenames>N</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
@@ -599,110 +468,118 @@
     </file>
     <fields>
       <field>
-        <name>LOG_PAYROLL</name>
-        <type>None</type>
+        <name>EffectiveDate</name>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>EMPLOYEE_NO</name>
-        <type>None</type>
+        <name>Step</name>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>ASEBP_ID</name>
-        <type>None</type>
+        <name>Pay Level</name>
+        <type>String</type>
         <format/>
         <currency/>
-        <decimal/>
-        <group/>
+        <decimal>.</decimal>
+        <group>,</group>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>Code</name>
-        <type>None</type>
-        <format/>
+        <name>Rate</name>
+        <type>BigNumber</type>
+        <format>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</format>
         <currency/>
-        <decimal/>
+        <decimal>.</decimal>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>Message</name>
-        <type>None</type>
+        <name>HoursPerCycle</name>
+        <type>Number</type>
+        <format>0.&#x23;&#x23;&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GridCode</name>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Position Code</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>PositionDescription</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Employer No_</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>209</xloc>
-      <yloc>432</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Transaction Constants</name>
-    <type>SetValueConstant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-   <usevar>Y</usevar>
-    <fields>
-      <field>
-        <name>Code</name>
-        <value>SRB-10</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>Message</name>
-        <value>The effective date is null.  Please set the effective date to correct this error.</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>LOG_PAYROLL</name>
-        <value>&#x24;&#x7b;ASEBP_PAYROLL&#x7d;</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>209</xloc>
-      <yloc>324</yloc>
+      <xloc>484</xloc>
+      <yloc>65</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

@@ -68,11 +68,11 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;07&#x2f;07 09&#x3a;34&#x3a;24.606</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;08&#x2f;13 10&#x3a;33&#x3a;08.679</modified_date>
+  <modified_date>2015&#x2f;12&#x2f;01 11&#x3a;05&#x3a;15.485</modified_date>
   </info>
   <notepads>
     <notepad>
-      <note>This transformation is for the 2014 ded history file.  &#xd;&#xa;It collects the special pay type from the dedbenmaster to determine if a particular &#xd;&#xa;deduction is pensionable&#x2f;group life&#x2f;union dues&#x2f;income continuance, etc.&#xd;&#xa;Then the file is merged with the Hist1DetailWrk file to collect the eligible amounts &#xd;&#xa;&#x28;stored in separate fields for each type&#x29;.&#xd;&#xa;Filters are then used to substitute the Elig Amount for the correct eligible amount from &#xd;&#xa;Hist1Detail.&#xd;&#xa;&#xd;&#xa;The files then are outputted to a new AADEDHIS file.</note>
+      <note>This transformation is for the 2015 ded history file.  &#xd;&#xa;It collects the special pay type from the dedbenmaster to determine if a particular &#xd;&#xa;deduction is pensionable&#x2f;group life&#x2f;union dues&#x2f;income continuance, etc.&#xd;&#xa;Then the file is merged with the Hist1DetailWrk file to collect the eligible amounts &#xd;&#xa;&#x28;stored in separate fields for each type&#x29;.&#xd;&#xa;Filters are then used to substitute the Elig Amount for the correct eligible amount from &#xd;&#xa;Hist1Detail.&#xd;&#xa;&#xd;&#xa;The files then are outputted to a new AADEDHIS file.</note>
       <xloc>6</xloc>
       <yloc>371</yloc>
       <width>470</width>
@@ -223,7 +223,6 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>DedHist2014</from><to>Sort</to><enabled>Y</enabled> </hop>
   <hop> <from>DedBenMaster</from><to>Sort rows</to><enabled>Y</enabled> </hop>
   <hop> <from>GetMostRecentDed</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>GetMostRecentDed</to><enabled>Y</enabled> </hop>
@@ -250,6 +249,7 @@
   <hop> <from>Add value fields changing sequence</from><to>FilterPension</to><enabled>Y</enabled> </hop>
   <hop> <from>Stream lookup 2</from><to>Sort rows 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 4</from><to>Add value fields changing sequence</to><enabled>Y</enabled> </hop>
+  <hop> <from>DedHist2014</from><to>Sort</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>AADEDHIS2014</name>
@@ -1486,7 +1486,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;SOURCE_PATH&#x7d;aadedhis_2014.csv</filename>
+    <filename>&#x24;&#x7b;WORK_PATH&#x7d;aadedhis_2014Wrk.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -1674,7 +1674,7 @@
         <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
       </field>
       <field>
         <name>Field_016</name>
@@ -2111,8 +2111,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>410</xloc>
-      <yloc>137</yloc>
+      <xloc>481</xloc>
+      <yloc>133</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2144,7 +2144,7 @@
           <name>reference ID</name>
         </field>
         <field>
-          <name>DefOcc</name>
+          <name>Occ</name>
         </field>
         <field>
           <name>hist1_pay_period</name>
@@ -2225,7 +2225,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;OUTPUT_PATH&#x7d;Hist1DetailWrk.csv</filename>
+    <filename>&#x24;&#x7b;WORK_PATH&#x7d;Hist1Detail2014.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -2248,7 +2248,7 @@
         <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
       </field>
       <field>
         <name>hist1_employer_code</name>
@@ -2292,10 +2292,32 @@
         <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
       </field>
       <field>
         <name>hist1_pay_period</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+      </field>
+      <field>
+        <name>hist1_cheque_no</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_cheque_void</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -2339,9 +2361,229 @@
         <trim_type>none</trim_type>
       </field>
       <field>
+        <name>hist1_cheque_date</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_cheque_amount</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_cheque_type</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_cheque_cleared</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_portion</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_percent_time</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_cheque_clr_date</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_group</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_bank</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_bank_1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_bank_transit</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_bank_transit_1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_account</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_account_1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_net_pay</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_net_pay_1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_time</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_units</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_split_start</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_gross</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
         <name>hist1_icp_applicable</name>
         <type>Number</type>
-        <format>&#x23;.&#x23;&#x3b;&#x23;.&#x23;-</format>
+        <format>&#x23;.&#x23;&#x23;&#x3b;&#x23;.&#x23;&#x23;-</format>
         <currency/>
         <decimal/>
         <group/>
@@ -2352,7 +2594,7 @@
       <field>
         <name>hist1_taxable</name>
         <type>Number</type>
-        <format>&#x23;.&#x23;&#x3b;&#x23;.&#x23;-</format>
+        <format>&#x23;.&#x23;&#x23;&#x3b;&#x23;.&#x23;&#x23;-</format>
         <currency/>
         <decimal/>
         <group/>
@@ -2363,7 +2605,7 @@
       <field>
         <name>hist1_cpp_applicable</name>
         <type>Number</type>
-        <format>&#x23;.&#x23;&#x3b;&#x23;.&#x23;-</format>
+        <format>&#x23;.&#x23;&#x23;&#x3b;&#x23;.&#x23;&#x23;-</format>
         <currency/>
         <decimal/>
         <group/>
@@ -2374,7 +2616,7 @@
       <field>
         <name>hist1_uic_applicable</name>
         <type>Number</type>
-        <format>&#x23;.&#x23;&#x3b;&#x23;.&#x23;-</format>
+        <format>&#x23;.&#x23;&#x23;&#x3b;&#x23;.&#x23;&#x23;-</format>
         <currency/>
         <decimal/>
         <group/>
@@ -2385,7 +2627,7 @@
       <field>
         <name>hist1_uic_insurable</name>
         <type>Number</type>
-        <format>&#x23;.&#x23;&#x3b;&#x23;.&#x23;-</format>
+        <format>&#x23;.&#x23;&#x23;&#x3b;&#x23;.&#x23;&#x23;-</format>
         <currency/>
         <decimal/>
         <group/>
@@ -2396,7 +2638,7 @@
       <field>
         <name>hist1_vacation_pay</name>
         <type>Number</type>
-        <format>&#x23;.&#x23;&#x3b;&#x23;.&#x23;-</format>
+        <format>&#x23;.&#x23;&#x23;&#x3b;&#x23;.&#x23;&#x23;-</format>
         <currency/>
         <decimal/>
         <group/>
@@ -2407,7 +2649,7 @@
       <field>
         <name>hist1_group_life_appl</name>
         <type>Number</type>
-        <format>&#x23;.&#x23;&#x3b;&#x23;.&#x23;-</format>
+        <format>&#x23;.&#x23;&#x23;&#x3b;&#x23;.&#x23;&#x23;-</format>
         <currency/>
         <decimal/>
         <group/>
@@ -2418,7 +2660,7 @@
       <field>
         <name>hist1_pensionable</name>
         <type>Number</type>
-        <format>&#x23;.&#x23;&#x3b;&#x23;.&#x23;-</format>
+        <format>&#x23;.&#x23;&#x23;&#x3b;&#x23;.&#x23;&#x23;-</format>
         <currency/>
         <decimal/>
         <group/>
@@ -2429,7 +2671,18 @@
       <field>
         <name>hist1_union_dues_appl</name>
         <type>Number</type>
-        <format>&#x23;.&#x23;&#x3b;&#x23;.&#x23;-</format>
+        <format>&#x23;.&#x23;&#x23;&#x3b;&#x23;.&#x23;&#x23;-</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_deductions</name>
+        <type>String</type>
+        <format/>
         <currency/>
         <decimal/>
         <group/>
@@ -2440,13 +2693,156 @@
       <field>
         <name>hist1_taxable_deds</name>
         <type>Number</type>
-        <format>&#x23;.&#x23;&#x3b;&#x23;.&#x23;-</format>
+        <format>&#x23;.&#x23;&#x23;&#x3b;&#x23;.&#x23;&#x23;-</format>
         <currency/>
         <decimal/>
         <group/>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_tax_credit</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_cpp_ded</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_cpp_ben</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_uic_ded</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_pension_ded</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_income_tax</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_vacpay_monthly</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_vacation_time</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_grant_vacation</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_vacation_dols</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_grant_sick</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>hist1_sick_time</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>Occ</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
       </field>
       <field>
         <name>reference ID</name>
@@ -2457,18 +2853,7 @@
         <group/>
         <length>-1</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>DefOcc</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>both</trim_type>
       </field>
     </fields>
      <cluster_schema/>
@@ -2637,8 +3022,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>343</xloc>
-      <yloc>136</yloc>
+      <xloc>414</xloc>
+      <yloc>135</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2721,7 +3106,7 @@
         <presorted>N</presorted>
       </field>
       <field>
-        <name>DefOcc</name>
+        <name>Occ</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <presorted>N</presorted>
@@ -2773,7 +3158,7 @@
         <presorted>N</presorted>
       </field>
       <field>
-        <name>DefOcc</name>
+        <name>Occ</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <presorted>N</presorted>
@@ -2924,7 +3309,7 @@
       </key>
       <key>
         <name>JobClass</name>
-        <field>DefOcc</field>
+        <field>Occ</field>
       </key>
       <value>
         <name>hist1_pensionable</name>

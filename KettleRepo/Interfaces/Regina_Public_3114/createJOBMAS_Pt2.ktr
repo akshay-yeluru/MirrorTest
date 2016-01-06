@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;05&#x2f;11 10&#x3a;25&#x3a;36.314</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;09&#x2f;21 22&#x3a;41&#x3a;13.265</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;15 10&#x3a;34&#x3a;43.065</modified_date>
   </info>
   <notepads>
     <notepad>
@@ -178,9 +178,30 @@
     </notepad>
     <notepad>
       <note>Remove RETIRING record where another payroll rec exists.</note>
-      <xloc>659</xloc>
-      <yloc>1532</yloc>
+      <xloc>662</xloc>
+      <yloc>1740</yloc>
       <width>314</width>
+      <heigth>26</heigth>
+      <fontname>Segoe UI</fontname>
+      <fontsize>9</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
+    <notepad>
+      <note>Remove SUB12PLN where another payroll exists.</note>
+      <xloc>640</xloc>
+      <yloc>1337</yloc>
+      <width>263</width>
       <heigth>26</heigth>
       <fontname>Segoe UI</fontname>
       <fontsize>9</fontsize>
@@ -338,7 +359,6 @@
   <hop> <from>Filter rows 2</from><to>GRAT_TCH_Rem</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 2</from><to>FilterRTO_TERM</to><enabled>Y</enabled> </hop>
   <hop> <from>FilterRTO_TERM</from><to>Sort rows 3</to><enabled>Y</enabled> </hop>
-  <hop> <from>FilterRTO_TERM</from><to>Sort rows 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 3</from><to>Merge Rows &#x28;diff&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 4</from><to>Merge Rows &#x28;diff&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Merge Rows &#x28;diff&#x29;</from><to>Sort rows 5</to><enabled>Y</enabled> </hop>
@@ -363,7 +383,6 @@
   <hop> <from>Sort rows 13</from><to>Merge Rows &#x28;diff&#x29; 4</to><enabled>Y</enabled> </hop>
   <hop> <from>FilterSUMRREG</from><to>Sort rows 12</to><enabled>Y</enabled> </hop>
   <hop> <from>FilterSUMRREG</from><to>Sort rows 12 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Merge Rows &#x28;diff&#x29; 4</from><to>FilterRETIRING</to><enabled>Y</enabled> </hop>
   <hop> <from>FilterRETIRING</from><to>Sort rows 15</to><enabled>Y</enabled> </hop>
   <hop> <from>FilterRETIRING</from><to>Sort rows 14</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 14</from><to>Unique rows 2</to><enabled>Y</enabled> </hop>
@@ -381,6 +400,17 @@
   <hop> <from>Select values</from><to>PRJOBMASWrk2</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 4</from><to>Select values 3</to><enabled>Y</enabled> </hop>
   <hop> <from>SUBCL</from><to>PRJOBMASWrk2</to><enabled>Y</enabled> </hop>
+  <hop> <from>FilterRTO_TERM</from><to>Sort rows 4 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 4 2</from><to>Unique rows 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>Unique rows 3</from><to>Sort rows 4</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge Rows &#x28;diff&#x29; 4</from><to>FilterSUB12PLN</to><enabled>Y</enabled> </hop>
+  <hop> <from>FilterSUB12PLN</from><to>Sort rows 17</to><enabled>Y</enabled> </hop>
+  <hop> <from>FilterSUB12PLN</from><to>Sort rows 18</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 17</from><to>Unique rows 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Unique rows 2 2</from><to>Sort rows 19</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 19</from><to>Merge Rows &#x28;diff&#x29; 6</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 18</from><to>Merge Rows &#x28;diff&#x29; 6</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge Rows &#x28;diff&#x29; 6</from><to>FilterRETIRING</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -409,8 +439,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>703</xloc>
-      <yloc>1596</yloc>
+      <xloc>706</xloc>
+      <yloc>1804</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -520,8 +550,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>593</xloc>
-      <yloc>1596</yloc>
+      <xloc>596</xloc>
+      <yloc>1804</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -549,8 +579,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>749</xloc>
-      <yloc>1769</yloc>
+      <xloc>752</xloc>
+      <yloc>1977</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -607,8 +637,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>491</xloc>
-      <yloc>1315</yloc>
+      <xloc>494</xloc>
+      <yloc>1523</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -624,7 +654,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Sort rows 4</send_true_to>
+<send_true_to>Sort rows 4 2</send_true_to>
 <send_false_to>Sort rows 3</send_false_to>
     <compare>
 <condition>
@@ -638,6 +668,35 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>396</xloc>
       <yloc>259</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>FilterSUB12PLN</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Sort rows 17</send_true_to>
+<send_false_to>Sort rows 18</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>empjob_payroll</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>SUB12PLN</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>492</xloc>
+      <yloc>1269</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -711,7 +770,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;OUTPUT_PATH&#x7d;PRJOBMASWrk.csv</filename>
+    <filename>&#x24;&#x7b;WORK_PATH&#x7d;PRJOBMASWrk.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -719,7 +778,7 @@
     <enclosure>&#x22;</enclosure>
     <header>Y</header>
     <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
+    <lazy_conversion>N</lazy_conversion>
     <add_filename_result>N</add_filename_result>
     <parallel>N</parallel>
     <newline_possible>N</newline_possible>
@@ -1584,7 +1643,7 @@
     <fileNameField/>
     <create_parent_folder>N</create_parent_folder>
     <file>
-      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;RemovedGratTch.csv</name>
+      <name>&#x24;&#x7b;WORK_PATH&#x7d;RemovedGratTch.csv</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
@@ -2574,7 +2633,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;OUTPUT_PATH&#x7d;PRJOBMASWrk.csv</filename>
+    <filename>&#x24;&#x7b;WORK_PATH&#x7d;PRJOBMASWrk.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -3446,7 +3505,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>509</xloc>
+      <xloc>510</xloc>
       <yloc>339</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3566,8 +3625,38 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>595</xloc>
+      <yloc>1742</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Merge Rows &#x28;diff&#x29; 6</name>
+    <type>MergeRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <keys>
+      <key>empjob_Emp_code</key>
+    </keys>
+    <values>
+      <value>empjob_emp_code</value>
+    </values>
+<flag_field>FlagSUB12</flag_field>
+<reference>Sort rows 18</reference>
+<compare>Sort rows 19</compare>
+    <compare>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>592</xloc>
-      <yloc>1534</yloc>
+      <yloc>1450</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3597,7 +3686,7 @@
     <fileNameField/>
     <create_parent_folder>N</create_parent_folder>
     <file>
-      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;PRJOBMASWrk2.csv</name>
+      <name>&#x24;&#x7b;WORK_PATH&#x7d;PRJOBMASWrk2.csv</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
@@ -4602,8 +4691,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>898</xloc>
-      <yloc>1855</yloc>
+      <xloc>901</xloc>
+      <yloc>2063</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4950,8 +5039,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>837</xloc>
-      <yloc>1597</yloc>
+      <xloc>840</xloc>
+      <yloc>1805</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5298,8 +5387,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>750</xloc>
-      <yloc>1854</yloc>
+      <xloc>753</xloc>
+      <yloc>2062</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5642,8 +5731,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>591</xloc>
-      <yloc>1674</yloc>
+      <xloc>594</xloc>
+      <yloc>1882</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5990,8 +6079,8 @@
       </field>        <select_unspecified>N</select_unspecified>
     </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>655</xloc>
-      <yloc>1772</yloc>
+      <xloc>658</xloc>
+      <yloc>1980</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6246,8 +6335,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>493</xloc>
-      <yloc>1396</yloc>
+      <xloc>496</xloc>
+      <yloc>1604</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6280,8 +6369,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>591</xloc>
-      <yloc>1311</yloc>
+      <xloc>594</xloc>
+      <yloc>1519</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6314,8 +6403,116 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>491</xloc>
-      <yloc>1537</yloc>
+      <xloc>494</xloc>
+      <yloc>1745</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows 17</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>empjob_emp_code</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>empjob_payroll</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>490</xloc>
+      <yloc>1327</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows 18</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>empjob_emp_code</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>591</xloc>
+      <yloc>1270</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows 19</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>empjob_emp_code</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>493</xloc>
+      <yloc>1451</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6423,6 +6620,46 @@
     </step>
 
   <step>
+    <name>Sort rows 4 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>empjob_emp_code</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>empjob_payroll</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>293</xloc>
+      <yloc>292</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Sort rows 5</name>
     <type>SortRows</type>
     <description/>
@@ -6441,6 +6678,12 @@
       <compress_variable/>
       <unique_rows>N</unique_rows>
     <fields>
+      <field>
+        <name>empjob_emp_code</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -6537,6 +6780,18 @@
       <compress_variable/>
       <unique_rows>N</unique_rows>
     <fields>
+      <field>
+        <name>empjob_emp_code</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>empjob_payroll</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -6612,8 +6867,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>749</xloc>
-      <yloc>1678</yloc>
+      <xloc>752</xloc>
+      <yloc>1886</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6702,8 +6957,62 @@
         <case_insensitive>N</case_insensitive>
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>492</xloc>
-      <yloc>1467</yloc>
+      <xloc>495</xloc>
+      <yloc>1675</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Unique rows 2 2</name>
+    <type>Unique</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <count_rows>N</count_rows>
+      <count_field/>
+      <reject_duplicate_row>N</reject_duplicate_row>
+      <error_description/>
+    <fields>      <field>        <name>empjob_emp_code</name>
+        <case_insensitive>N</case_insensitive>
+        </field>      <field>        <name>empjob_payroll</name>
+        <case_insensitive>N</case_insensitive>
+        </field>      </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>493</xloc>
+      <yloc>1398</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Unique rows 3</name>
+    <type>Unique</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <count_rows>N</count_rows>
+      <count_field/>
+      <reject_duplicate_row>N</reject_duplicate_row>
+      <error_description/>
+    <fields>      <field>        <name>empjob_emp_code</name>
+        <case_insensitive>N</case_insensitive>
+        </field>      <field>        <name>empjob_payroll</name>
+        <case_insensitive>N</case_insensitive>
+        </field>      </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>298</xloc>
+      <yloc>362</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

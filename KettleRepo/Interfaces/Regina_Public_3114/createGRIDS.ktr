@@ -68,13 +68,13 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2015&#x2f;08&#x2f;13 11&#x3a;01&#x3a;33.806</modified_date>
+  <modified_date>2015&#x2f;10&#x2f;20 16&#x3a;21&#x3a;49.521</modified_date>
   </info>
   <notepads>
     <notepad>
       <note>This transformation creates the Salary GRIDS from the Regina data.  This is by pulling  &#xd;&#xa;information from the ClassMaster. &#xd;&#xa;&#x2a;  Process will only get the most recent record for each salary grid &#x28;Class &#x26; Scale&#x29;&#xd;&#xa;&#x2a;  Translation is done to create a SRB gridname &#x28;i.e. TE0405 based on the Classmaster&#x29;.  &#xd;&#xa;       If not a teacher grid, then 1st characters and last 3 characters of class are used for the 1st 4  &#xd;&#xa;       characters of the grid name.&#xd;&#xa;       For teacher grids &#x28;all those that start with the word CLASS&#x29;, we replace CLASS- with TE.&#xd;&#xa;   Examples&#xd;&#xa;       class &#x3d;CLASS-1 and class_step &#x3d; 1 becomes TE0101&#xd;&#xa;       class &#x3d; ACCT-CLK and class_step &#x3d; 1 becomes ACLK01&#xd;&#xa;&#xd;&#xa;&#x2a; All the teacher grids &#x28;T1 to T7&#x29; are designated with a TE0 as the 1st 3 characters.  &#xd;&#xa;&#x2a; Grid descriptions have the word &#x27;LEVEL&#x27; added to them unless they are Teacher Grids, &#xd;&#xa;   in which case we add the word &#x27;STEP&#x27; to the description&#xd;&#xa;</note>
-      <xloc>16</xloc>
-      <yloc>413</yloc>
+      <xloc>0</xloc>
+      <yloc>418</yloc>
       <width>510</width>
       <heigth>248</heigth>
       <fontname>Segoe UI</fontname>
@@ -1244,6 +1244,13 @@
    <function>&#x3d;</function>
    <rightvalue/>
    <value><name>constant</name><type>Number</type><text>0.0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x3b;-&#x23;.&#x23;</mask></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>class_start_date</leftvalue>
+   <function>&#x3c;&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>2015&#x2f;12&#x2f;31</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   </conditions>
  </condition>
     </compare>
@@ -1269,7 +1276,7 @@
     <fields>
       <field>
         <name>VariablePath</name>
-        <variable>&#x24;&#x7b;OUTPUT_PATH&#x7d;</variable>
+        <variable>&#x24;&#x7b;WORK_PATH&#x7d;</variable>
         <type>String</type>
         <format/>
         <currency/>
@@ -1523,7 +1530,7 @@
     <fileNameField>PayrollGridPath</fileNameField>
     <create_parent_folder>N</create_parent_folder>
     <file>
-      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;PRSTPTBL.csv</name>
+      <name>&#x24;&#x7b;WORK_PATH&#x7d;PRSTPTBL.csv</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>Y</do_not_open_new_file_init>
@@ -1956,7 +1963,7 @@
     <fileNameField>cOutFile</fileNameField>
     <create_parent_folder>N</create_parent_folder>
     <file>
-      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;PRSTPTBL.csv</name>
+      <name>&#x24;&#x7b;WORK_PATH&#x7d;PRSTPTBL.csv</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>Y</do_not_open_new_file_init>
@@ -2130,6 +2137,18 @@
         <length>-1</length>
         <precision>-1</precision>
       </field>
+      <field>
+        <name>SRBPayroll</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -2150,7 +2169,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;OUTPUT_PATH&#x7d;PayrollEmployeeJob.csv</filename>
+    <filename>&#x24;&#x7b;WORK_PATH&#x7d;PayrollEmployeeJob.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -2569,7 +2588,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;OUTPUT_PATH&#x7d;PayrollxRef.csv</filename>
+    <filename>&#x24;&#x7b;XREF_PATH&#x7d;PayrollxRef.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>

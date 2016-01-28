@@ -1,5 +1,5 @@
 call setPaths.bat
-SET SRB_WAREHOUSE_JOB=Interfaces/EJP/Job/atrieveHR to EJP ETL
+SET SRB_WAREHOUSE_JOB="Interfaces/EJP/Job/atrieveHR to EJP ETL"
 SET SRB_WAREHOUSE_PROPERTIES=ejp.properties
 SET SRB_WAREHOUSE_LOG=ejp.log
 

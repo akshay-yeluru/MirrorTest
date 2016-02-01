@@ -8,8 +8,13 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;05&#x2f;27 14&#x3a;54&#x3a;09.010</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;01&#x2f;28 11&#x3a;19&#x3a;07.756</modified_date>
+  <modified_date>2016&#x2f;02&#x2f;01 09&#x3a;36&#x3a;34.892</modified_date>
     <parameters>
+        <parameter>
+            <name>SRB_PROPERTIES_FILE_PARAM</name>
+            <default_value>null</default_value>
+            <description>Stores the location of the properties file</description>
+        </parameter>
     </parameters>
   <connection>
     <name>SCHOOLLOGIC_DB</name>
@@ -940,6 +945,19 @@
       <xloc>681</xloc>
       <yloc>90</yloc>
       </entry>
+    <entry>
+      <name>Write To Log</name>
+      <description/>
+      <type>WRITE_TO_LOG</type>
+      <logmessage>Could not find file at &#x24;&#x7b;SRB_PROPERTIES_FILE_PARAM&#x7d;</logmessage>
+      <loglevel>Basic</loglevel>
+      <logsubject>&#x24;&#x7b;SRB_PROPERTIES_FILE_PARAM&#x7d;</logsubject>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>235</xloc>
+      <yloc>176</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -1192,6 +1210,15 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Checks for cmd line param</from>
+      <to>Write To Log</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
       <unconditional>N</unconditional>
     </hop>
   </hops>

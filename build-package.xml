@@ -5,13 +5,12 @@
 	
 	  <!-- set global properties for this build -->
   <property name="target" value="missing-target"/>
-  <property name="release" location="C:/Users/SRB-Build/Release/${target}/SRBWarehouse"/>
-  <property name="webroot" location="C:/Users/SRB-Build/Apache/WebRoot/htdocs/${target}"/>
-  <!-- I tried to make the maven repo a property but it did not work correctly in the ant get task-->
+  <property name="release" location="F:/Release/${target}/SRBWarehouse"/>
+    <!-- I tried to make the maven repo a property but it did not work correctly in the ant get task-->
   <!--property name="maven-repo" location="http://10.143.102.215:8081/artifactory/simple"/-->
   
   
-    <target name="build" depends="clean,copy,writeProperties,zip,publish" description="Copy and Package Zip File"/>
+    <target name="build" depends="clean,copy,writeProperties,zip" description="Copy and Package Zip File"/>
 
     <target name="clean">
 		<mkdir dir="${release}"/>
@@ -50,8 +49,4 @@
         </propertyfile>
     </target>
 	
-    <target name="publish">
-        <copy file="${release}.zip" todir="${webroot}"/>
-        <copy file="${release}/warehouse-package.properties" tofile="${webroot}/warehouse-package.properties"/>
-    </target>
 </project>

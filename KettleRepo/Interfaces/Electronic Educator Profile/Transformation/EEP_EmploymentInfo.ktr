@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;04&#x2f;13 11&#x3a;02&#x3a;38.865</modified_date>
+  <modified_date>2016&#x2f;05&#x2f;05 16&#x3a;20&#x3a;38.748</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -233,7 +233,7 @@
     <server>dtl-grp-w12</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>SD38 FinanceFeb</database>
+    <database>ECACS</database>
     <port>1433</port>
     <username>tsc</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79ce10be86bcd9</password>
@@ -259,7 +259,7 @@
     <server>dtl-grp-w12</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>SD38HRPR2</database>
+    <database>SD38HRPR3</database>
     <port>1433</port>
     <username>tsc</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79ce10be86bcd9</password>
@@ -439,22 +439,55 @@
   <order>
   <hop> <from>EEP Master</from><to>Join Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Position Cross-Reference</from><to>Get Gov Position</to><enabled>Y</enabled> </hop>
-  <hop> <from>Parameters</from><to>Assessment Coordinator</to><enabled>Y</enabled> </hop>
-  <hop> <from>Assessment Coordinator</from><to>Get Coordinator</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Salary&#x2f;Grid</from><to>Join Salary to Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Info</from><to>Join Master</to><enabled>Y</enabled> </hop>
-  <hop> <from>Join Master</from><to>Join Salary to Master</to><enabled>Y</enabled> </hop>
-  <hop> <from>Join Salary to Master</from><to>Get Gov Position</to><enabled>Y</enabled> </hop>
   <hop> <from>Government Locations</from><to>Add Gov Location</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Gov Position</from><to>Add Gov Location</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Gov Location</from><to>Get Coordinator</to><enabled>Y</enabled> </hop>
   <hop> <from>Assignment Types</from><to>Add Contract Type</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Coordinator</from><to>Add Contract Type</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Contract Type</from><to>Is Coordinator&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Is Coordinator&#x3f;</from><to>Filter rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows</from><to>EmploymentInfo</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows</from><to>Errors EmploymentInfo</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Contract Type</from><to>Filter rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Gov Location</from><to>Is Coordinator&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is Coordinator&#x3f;</from><to>Add Contract Type</to><enabled>Y</enabled> </hop>
+  <hop> <from>Join Master</from><to>Get Gov Position 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Salary&#x2f;Grid</from><to>Get Gov Position 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Gov Position 2</from><to>Get Gov Position</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Add Contract Type</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Assignment Types</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>ASSIGN_TYPE</name>
+        <field>PRM_CODE</field>
+      </key>
+      <value>
+        <name>CONTRACTTYPE</name>
+        <rename>CONTRACTTYPE</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>877</xloc>
+      <yloc>182</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>Add Gov Location</name>
     <type>StreamLookup</type>
@@ -477,50 +510,48 @@
         <field>PRM_CODE</field>
       </key>
       <value>
-        <name>GOV_LOCATION</name>
-        <rename>GOV_LOCATION</rename>
+        <name>EMPLOYMENTLOCATION</name>
+        <rename>EMPLOYMENTLOCATION</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>EMPLOYERTYPE</name>
+        <rename>EMPLOYERTYPE</rename>
         <default/>
         <type>String</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>443</xloc>
-      <yloc>267</yloc>
+      <xloc>599</xloc>
+      <yloc>182</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Assessment Coordinator</name>
-    <type>FilterRows</type>
+    <name>Assignment Types</name>
+    <type>TableInput</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Get Coordinator</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>carea</leftvalue>
-   <function>CONTAINS</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>AssessCoord</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
+    <connection>SOURCE_RMS_HR</connection>
+    <sql>SELECT  PRM_CODE,&#xd;&#xa;		NEW_CODE as CONTRACTTYPE&#xd;&#xa;  FROM HR_TRANSLATION_CODE&#xd;&#xa;  WHERE FIELD_TYPE &#x3d; &#x27;ASSIGNMENT TYPE&#x27;&#xd;&#xa;  ORDER by PRM_CODE&#xd;&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>605</xloc>
-      <yloc>137</yloc>
+      <xloc>877</xloc>
+      <yloc>45</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -663,8 +694,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>26</xloc>
-      <yloc>137</yloc>
+      <xloc>182</xloc>
+      <yloc>45</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -681,7 +712,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS_HR</connection>
-    <sql>SELECT  DISTINCT &#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;RTRIM&#x28;ha.EMPLOYEE_NO&#x29;,&#x27;_&#x27;&#x29;,ha.START_DATE&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;ha.POSITION_CODE&#x29;&#x29; as ContractIdentifier,&#xd;&#xa;		ha.EMPLOYEE_NO,&#xd;&#xa;        ha.POSITION_CODE,&#xd;&#xa;		hatc.CODE as Assign_type,&#xd;&#xa;		hpc.BARGAINING_UNIT,&#xd;&#xa;		hal.LOCATION,&#xd;&#xa;		CASE WHEN hpc.HOURS_OR_FTE &#x3d; &#x27;F&#x27;&#xd;&#xa;			THEN ha.HOURS_FTE &#x2a; 100&#xd;&#xa;			ELSE &#x28;ha.HOURS_PER_DAY &#x2f; hpc.HOURS_PER_DAY&#x29; &#x2a; 100&#xd;&#xa;			END as FTE,&#xd;&#xa;        ha.HOURS_FTE,&#xd;&#xa;		ha.START_DATE,&#xd;&#xa;		ha.END_DATE,&#xd;&#xa;		CASE WHEN START_DATE &#x3c; &#x24;&#x7b;SCHOOL_START&#x7d;&#xd;&#xa;			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,7,2&#x29;&#x29; &#xd;&#xa;			ELSE CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.START_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,7,2&#x29;&#x29; &#xd;&#xa;			END AS STARTDATE,&#xd;&#xa;        CASE WHEN END_DATE &#x3c; &#x27;30000101&#x27;&#xd;&#xa; 			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.END_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,7,2&#x29;&#x29;&#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;            END AS ENDDATE,&#xd;&#xa;        LEAVE_REASON,&#xd;&#xa;		THE_KEY&#xd;&#xa;  FROM HR_ASSIGNMENTS ha&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_TYPE_CODE hatc ON hatc.CODE &#x3d; ha.ASSIGNMENT_TYPE&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa;        LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa; WHERE END_DATE &#x3e; &#x24;&#x7b;SCHOOL_START&#x7d; and hours_fte &#x3e; 0 and hal.LOCATION &#x3e; &#x27; &#x27;&#xd;&#xa; ORDER by ha.EMPLOYEE_NO,ha.POSITION_CODE&#xd;&#xa;</sql>
+    <sql>SELECT  DISTINCT &#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;RTRIM&#x28;ha.EMPLOYEE_NO&#x29;,&#x27;_&#x27;&#x29;,ha.START_DATE&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;ha.POSITION_CODE&#x29;&#x29; as ContractIdentifier,&#xd;&#xa;		ha.EMPLOYEE_NO,&#xd;&#xa;        ha.POSITION_CODE,&#xd;&#xa;		hatc.CODE as Assign_type,&#xd;&#xa;		CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27; &#x27;&#xd;&#xa;				THEN &#x27;01&#x27;&#xd;&#xa;				ELSE&#xd;&#xa;					CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;STF&#x27;&#xd;&#xa;						THEN &#x27;02&#x27;&#xd;&#xa;						ELSE &#xd;&#xa;							CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;LEADS&#x27;&#xd;&#xa;								THEN&#x27;03&#x27;&#xd;&#xa;								ELSE &#xd;&#xa;									CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;CUPE&#x27;&#xd;&#xa;										THEN&#x27;04&#x27;&#xd;&#xa;										ELSE &#xd;&#xa;											CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;SGEU&#x27;&#xd;&#xa;												THEN&#x27;04&#x27;&#xd;&#xa;												ELSE hpc.BARGAINING_UNIT&#xd;&#xa;												END&#xd;&#xa;										END			&#xd;&#xa;								END&#xd;&#xa;						END&#xd;&#xa;				END&#xd;&#xa;			as Affiliation,&#xd;&#xa;		hal.LOCATION,&#xd;&#xa;		CASE WHEN hpc.HOURS_OR_FTE &#x3d; &#x27;F&#x27;&#xd;&#xa;			THEN ha.HOURS_FTE &#x2a; 100&#xd;&#xa;			ELSE &#x28;ha.HOURS_PER_DAY &#x2f; hpc.HOURS_PER_DAY&#x29; &#x2a; 100&#xd;&#xa;			END as PercentTimeEmployed,&#xd;&#xa;        ha.HOURS_FTE,&#xd;&#xa;		ha.START_DATE,&#xd;&#xa;		ha.END_DATE,&#xd;&#xa;		CASE WHEN START_DATE &#x3c; &#x24;&#x7b;SCHOOL_START&#x7d;&#xd;&#xa;			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,7,2&#x29;&#x29; &#xd;&#xa;			ELSE CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.START_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,7,2&#x29;&#x29; &#xd;&#xa;			END AS STARTDATE,&#xd;&#xa;        CASE WHEN END_DATE &#x3c; &#x27;30000101&#x27;&#xd;&#xa; 			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.END_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,7,2&#x29;&#x29;&#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;            END AS ENDDATE,&#xd;&#xa;	    LEAVE_REASON as SeparationReason,&#xd;&#xa;		THE_KEY&#xd;&#xa;  FROM HR_ASSIGNMENTS ha&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_TYPE_CODE hatc ON hatc.CODE &#x3d; ha.ASSIGNMENT_TYPE&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa;        LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa; WHERE END_DATE &#x3e; &#x24;&#x7b;SCHOOL_START&#x7d; and hours_fte &#x3e; 0 and hal.LOCATION &#x3e; &#x27; &#x27;&#xd;&#xa; ORDER by ha.EMPLOYEE_NO,ha.POSITION_CODE&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -689,309 +720,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>137</xloc>
-      <yloc>27</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Coordinator</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Assessment Coordinator</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>POSITION_CODE</name>
-        <field>cParameters</field>
-      </key>
-      <value>
-        <name>cArea</name>
-        <rename>cArea</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>605</xloc>
-      <yloc>267</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Gov Position</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Position Cross-Reference</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>POSITION_CODE</name>
-        <field>SRB_POSITION</field>
-      </key>
-      <value>
-        <name>GOV_POSITION</name>
-        <rename>GOV_POSITION</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
-      <yloc>267</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Salary&#x2f;Grid</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>SOURCE_RMS_HR</connection>
-    <sql>SELECT employee_no,&#xd;&#xa;		salary_key,&#xd;&#xa;		salary_grid_code,&#xd;&#xa;        SUBSTRING&#x28;SALARY_GRID_CODE,3,2&#x29; AS CLASSIFICATION,&#xd;&#xa;        SUBSTRING&#x28;SALARY_GRID_CODE,5,2&#x29; AS STEP,&#xd;&#xa;		SALARY_BASE_AMT&#xd;&#xa;FROM hr_assignment_salary &#xd;&#xa;WHERE salary_end_date &#x3e; &#x24;&#x7b;SCHOOL_START&#x7d;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>26</xloc>
-      <yloc>267</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Government Locations</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>SOURCE_RMS_HR</connection>
-    <sql>SELECT  PRM_CODE,&#xd;&#xa;		NEW_CODE as Gov_Location&#xd;&#xa;  FROM HR_TRANSLATION_CODE&#xd;&#xa;  WHERE FIELD_TYPE &#x3d; &#x27;LOCATION&#x27;&#xd;&#xa;  ORDER by PRM_CODE&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>443</xloc>
-      <yloc>137</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Is Coordinator&#x3f;</name>
-    <type>Janino</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>IsCoord</field_name>
-<formula_string>cArea &#x3d;&#x3d;null &#x3f; &#x22;N&#x22; &#x3a; &#x22;Y&#x22;</formula_string>
-<value_type>String</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>897</xloc>
-      <yloc>268</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Join Master</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<join_type>INNER</join_type>
-<step1>Employee Info</step1>
-<step2>EEP Master</step2>
-    <keys_1>
-      <key>EMPLOYEE_NO</key>
-    </keys_1>
-    <keys_2>
-      <key>EMPLOYEE_NO</key>
-    </keys_2>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>137</xloc>
-      <yloc>137</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Join Salary to Master</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<join_type>LEFT OUTER</join_type>
-<step1>Join Master</step1>
-<step2>Get Salary&#x2f;Grid</step2>
-    <keys_1>
-      <key>EMPLOYEE_NO</key>
-      <key>THE_KEY</key>
-    </keys_1>
-    <keys_2>
-      <key>EMPLOYEE_NO</key>
-      <key>SALARY_KEY</key>
-    </keys_2>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>137</xloc>
-      <yloc>267</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Parameters</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <filename>&#x24;&#x7b;INPUT_PATH&#x7d;Parameters.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>,</separator>
-    <enclosure>&#x22;</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <encoding/>
-    <fields>
-      <field>
-        <name>cArea</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-      </field>
-      <field>
-        <name>cParameters</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-      </field>
-      <field>
-        <name>SubCode</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>605</xloc>
-      <yloc>11</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Position Cross-Reference</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>SOURCE_RMS_HR</connection>
-    <sql>Select PRM_CODE as SRB_Position, &#xd;&#xa;		NEW_CODE as Gov_Position &#xd;&#xa;	FROM HR_TRANSLATION_CODE &#xd;&#xa;	WHERE FIELD_TYPE &#x3d; &#x27;POSITION&#x27;&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
-      <yloc>137</yloc>
+      <xloc>43</xloc>
+      <yloc>182</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1064,7 +794,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>GOV_POSITION</name>
+        <name>EMPLOYMENTPOSITION</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1076,7 +806,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>GOV_LOCATION</name>
+        <name>EMPLOYMENTLOCATION</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1088,7 +818,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>FTE</name>
+        <name>PERCENTTIMEEMPLOYED</name>
         <type>Number</type>
         <format>000.&#x23;&#x23;&#x23;&#x23;&#x23;</format>
         <currency/>
@@ -1124,7 +854,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>LEAVE_REASON</name>
+        <name>SEPARATIONREASON</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1172,7 +902,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>BARGAINING_UNIT</name>
+        <name>AFFILIATION</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1184,7 +914,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>GOV_CONTRACT_TYPE</name>
+        <name>CONTRACTTYPE</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1196,7 +926,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>ISCOORD</name>
+        <name>AssessmentCoordinator</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1204,124 +934,38 @@
         <group/>
         <nullif/>
         <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>SALARY_BASE_AMT</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>EMPLOYERTYPE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1110</xloc>
-      <yloc>267</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add Contract Type</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Assignment Types</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>ASSIGN_TYPE</name>
-        <field>PRM_CODE</field>
-      </key>
-      <value>
-        <name>GOV_CONTRACT_TYPE</name>
-        <rename>GOV_CONTRACT_TYPE</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>767</xloc>
-      <yloc>267</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Assignment Types</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>SOURCE_RMS_HR</connection>
-    <sql>SELECT  PRM_CODE,&#xd;&#xa;		NEW_CODE as GOV_CONTRACT_TYPE&#xd;&#xa;  FROM HR_TRANSLATION_CODE&#xd;&#xa;  WHERE FIELD_TYPE &#x3d; &#x27;ASSIGNMENT TYPE&#x27;&#xd;&#xa;  ORDER by PRM_CODE&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>767</xloc>
-      <yloc>137</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Errors EmploymentInfo</send_true_to>
-<send_false_to>EmploymentInfo</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>GOV_CONTRACT_TYPE</leftvalue>
-   <function>IS NULL</function>
-   <rightvalue/>
-   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>GOV_POSITION</leftvalue>
-   <function>IS NULL</function>
-   <rightvalue/>
-   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>GOV_LOCATION</leftvalue>
-   <function>IS NULL</function>
-   <rightvalue/>
-   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>993</xloc>
-      <yloc>269</yloc>
+      <xloc>1006</xloc>
+      <yloc>316</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1394,7 +1038,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>GOV_POSITION</name>
+        <name>EMPLOYMENTPOSITION</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1406,7 +1050,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>GOV_LOCATION</name>
+        <name>EMPLOYMENTLOCATION</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1418,7 +1062,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>FTE</name>
+        <name>PERCENTTIMEEMPLOYED</name>
         <type>Number</type>
         <format>000.&#x23;&#x23;&#x23;&#x23;&#x23;</format>
         <currency/>
@@ -1454,7 +1098,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>LEAVE_REASON</name>
+        <name>SEPARATIONREASON</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1502,7 +1146,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>BARGAINING_UNIT</name>
+        <name>AFFILIATION</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1514,7 +1158,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>GOV_CONTRACT_TYPE</name>
+        <name>CONTRACTTYPE</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1526,7 +1170,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>ISCOORD</name>
+        <name>AssessmentCoordinator</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -1534,14 +1178,312 @@
         <group/>
         <nullif/>
         <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>SALARY_BASE_AMT</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>EMPLOYERTYPE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>989</xloc>
-      <yloc>372</yloc>
+      <xloc>737</xloc>
+      <yloc>316</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Errors EmploymentInfo</send_true_to>
+<send_false_to>EmploymentInfo</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>CONTRACTTYPE</leftvalue>
+   <function>IS NULL</function>
+   <rightvalue/>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
+   <function>IS NULL</function>
+   <rightvalue/>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>EMPLOYMENTLOCATION</leftvalue>
+   <function>IS NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>877</xloc>
+      <yloc>316</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Gov Position</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Position Cross-Reference</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>POSITION_CODE</name>
+        <field>SRB_POSITION</field>
+      </key>
+      <value>
+        <name>EMPLOYMENTPOSITION</name>
+        <rename>EMPLOYMENTPOSITION</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>ISCOORD</name>
+        <rename>ISCOORD</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>460</xloc>
+      <yloc>182</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Gov Position 2</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Get Salary&#x2f;Grid</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>EMPLOYEE_NO</name>
+        <field>EMPLOYEE_NO</field>
+      </key>
+      <key>
+        <name>THE_KEY</name>
+        <field>SALARY_KEY</field>
+      </key>
+      <value>
+        <name>SALARY_BASE_AMT</name>
+        <rename>SALARY_BASE_AMT</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>CLASSIFICATION</name>
+        <rename>CLASSIFICATION</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>STEP</name>
+        <rename>STEP</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>321</xloc>
+      <yloc>182</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Salary&#x2f;Grid</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>SOURCE_RMS_HR</connection>
+    <sql>SELECT hes.employee_no,&#xd;&#xa;       salary_key,&#xd;&#xa;       salary_grid_code,&#xd;&#xa;       CASE WHEN SUBSTRING&#x28;SALARY_GRID_CODE,3,2&#x29; &#x3e; &#x27; &#x27;&#xd;&#xa;            THEN SUBSTRING&#x28;SALARY_GRID_CODE,3,2&#x29;&#xd;&#xa;            ELSE &#x27;&#x27;&#xd;&#xa;            END&#xd;&#xa;         AS CLASSIFICATION,&#xd;&#xa;       CASE WHEN SUBSTRING&#x28;SALARY_GRID_CODE,5,2&#x29; &#x3e; &#x27; &#x27;&#xd;&#xa;            THEN CASE WHEN SUBSTRING&#x28;SALARY_GRID_CODE,5,2&#x29; &#x3e; &#x27;11&#x27;&#xd;&#xa;                      THEN &#x27;11&#x27;&#xd;&#xa;                      ELSE SUBSTRING&#x28;SALARY_GRID_CODE,5,2&#x29;&#xd;&#xa;                      END&#xd;&#xa;            ELSE &#x27;&#x27;&#xd;&#xa;            END&#xd;&#xa;         AS STEP,&#xd;&#xa;       SALARY_BASE_AMT&#xd;&#xa;FROM hr_employee_demographics hed LEFT JOIN hr_assignment_salary hes ON hes.Employee_no &#x3d; hed.employee_no&#xd;&#xa;WHERE salary_end_date &#x3e; &#x24;&#x7b;SCHOOL_START&#x7d;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>321</xloc>
+      <yloc>45</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Government Locations</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>SOURCE_RMS_HR</connection>
+    <sql>SELECT  PRM_CODE,&#xd;&#xa;		NEW_CODE as EmploymentLocation,&#xd;&#xa;		CASE WHEN SUBSTRING&#x28;RTRIM&#x28;NEW_CODE&#x29;,5,3&#x29; &#x3d; &#x27;000&#x27; THEN &#x27;01&#x27; ELSE &#x27;02&#x27; END as EmployerType&#xd;&#xa;  FROM HR_TRANSLATION_CODE&#xd;&#xa;  WHERE FIELD_TYPE &#x3d; &#x27;LOCATION&#x27;&#xd;&#xa;  ORDER by PRM_CODE&#xd;&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>599</xloc>
+      <yloc>45</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Is Coordinator&#x3f;</name>
+    <type>Janino</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <formula><field_name>AssessmentCoordinator</field_name>
+<formula_string>ISCOORD &#x21;&#x3d; null &#x26;&#x26; ISCOORD.indexOf&#x28;&#x22;Y&#x22;&#x29; &#x3e;-1 &#x3f; &#x22;Yes&#x22; &#x3a; &#x22;No&#x22;</formula_string>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>738</xloc>
+      <yloc>182</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Join Master</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>INNER</join_type>
+<step1>Employee Info</step1>
+<step2>EEP Master</step2>
+    <keys_1>
+      <key>EMPLOYEE_NO</key>
+    </keys_1>
+    <keys_2>
+      <key>EMPLOYEE_NO</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>182</xloc>
+      <yloc>182</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Position Cross-Reference</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>SOURCE_RMS_HR</connection>
+    <sql>Select PRM_CODE as SRB_Position, &#xd;&#xa;		USER_DEFINED_FIELD_04 as IsCoord,&#xd;&#xa;		NEW_CODE as EmploymentPosition &#xd;&#xa;	FROM HR_TRANSLATION_CODE, HR_POSITION_CODE&#xd;&#xa;	WHERE FIELD_TYPE &#x3d; &#x27;POSITION&#x27;&#xd;&#xa;		AND HR_POSITION_CODE.POSITION_CODE &#x3d; HR_TRANSLATION_CODE.PRM_CODE&#xd;&#xa;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>460</xloc>
+      <yloc>45</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

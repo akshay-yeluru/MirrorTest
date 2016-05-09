@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;05&#x2f;09 09&#x3a;38&#x3a;29.554</modified_date>
+  <modified_date>2016&#x2f;05&#x2f;09 14&#x3a;41&#x3a;13.781</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -282,23 +282,23 @@
   </connection>
   <connection>
     <name>SOURCE_RMS</name>
-    <server>dtl-grp-w12</server>
-    <type>MSSQL</type>
+    <server/>
+    <type>GENERIC</type>
     <access>Native</access>
-    <database>holyfamilySD30</database>
-    <port>1433</port>
-    <username>tsc</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce10be86bcd9</password>
+    <database/>
+    <port>-1</port>
+    <username/>
+    <password>Encrypted </password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
-      <attribute><code>EXTRA_OPTION_MSSQL.instance</code><attribute>sql2012</attribute></attribute>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;SOURCE_DRIVER&#x7d;</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;SOURCE_CONNECTION_URL&#x7d;</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>1433</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>-1</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
@@ -320,7 +320,7 @@
     <index_tablespace/>
     <attributes>
       <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>vortex.sql.vortexDriver</attribute></attribute>
-      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;vortex&#x3a;&#x2f;&#x2f;tsc&#x2f;tscssi0101&#x2f;RMS&#x3a;regina_conv_hr.ini&#x40;1965&#x3a;192.168.130.1&#x21;VTX4</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;vortex&#x3a;&#x2f;&#x2f;tsc&#x2f;tscssi0101&#x2f;RMS&#x3a;dev_teac_payroll.ini&#x40;1965&#x3a;192.168.130.1&#x21;VTX4</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
@@ -386,24 +386,23 @@
   </connection>
   <connection>
     <name>TARGET_RDBMS</name>
-    <server>DTL-GRP-W12</server>
-    <type>MSSQLNATIVE</type>
+    <server>&#x24;&#x7b;TARGET_HOST&#x7d;</server>
+    <type>GENERIC</type>
     <access>Native</access>
-    <database>holyfamilySD30</database>
-    <port>-1</port>
-    <username>tsc</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce10be86bcd9</password>
+    <database>&#x24;&#x7b;TARGET_DATABASE_NAME&#x7d;</database>
+    <port>&#x24;&#x7b;TARGET_PORT&#x7d;</port>
+    <username/>
+    <password>Encrypted </password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
-      <attribute><code>EXTRA_OPTION_MSSQL.instance</code><attribute>SQL2012</attribute></attribute>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;TARGET_DRIVER&#x7d;</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;TARGET_CONNECTION_URL&#x7d;</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>MSSQLUseIntegratedSecurity</code><attribute>false</attribute></attribute>
-      <attribute><code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>-1</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;TARGET_PORT&#x7d;</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
@@ -833,7 +832,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;INPUT_PATH&#x7d;Parameters.csv</filename>
+    <filename>&#x24;&#x7b;INPUT_PATH&#x7d;EEP_PARAMETERS.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -900,7 +899,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>SOURCE_RMS_HR</connection>
+    <connection>SOURCE_RMS</connection>
     <sql>SELECT	DISTINCT HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO,&#xd;&#xa;		HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_STATUS,&#xd;&#xa;		BARGAINING_UNIT,&#xd;&#xa;		EMPLOYEE_CATEGORY,&#xd;&#xa;		CERT_TYPE,&#xd;&#xa;		CERT_CLASS,&#xd;&#xa;		CERT_CODE,&#xd;&#xa;		CERT_NO as PersonId,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;BIRTH_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,7,2&#x29;&#x29; as BirthDate,&#xd;&#xa;		EXPIRY_DATE&#xd;&#xa;  FROM HR_EMPLOYEE_CERTIFICATION, HR_EMPLOYEE_DEMOGRAPHICS, HR_EMPLOYEE_INTERLINK&#xd;&#xa;  WHERE HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO&#xd;&#xa;	AND &#x28;EXPIRY_DATE &#x3e; &#x24;&#x7b;SCHOOL_START&#x7d; OR EXPIRY_DATE &#x3d; &#x27; &#x27;&#x29;&#xd;&#xa;	AND HR_EMPLOYEE_INTERLINK.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO&#xd;&#xa;	AND HR_EMPLOYEE_INTERLINK.PAYROLL_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;  ORDER by EMPLOYEE_STATUS, HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO, CERT_CLASS&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>

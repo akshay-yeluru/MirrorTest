@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;05&#x2f;06 10&#x3a;05&#x3a;54.938</modified_date>
+  <modified_date>2016&#x2f;05&#x2f;09 09&#x3a;38&#x3a;29.554</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -439,21 +439,22 @@
   <order>
   <hop> <from>Employee&#x2f;Certificate</from><to>Merge Join Status</to><enabled>Y</enabled> </hop>
   <hop> <from>Status</from><to>Merge Join Status</to><enabled>Y</enabled> </hop>
-  <hop> <from>Barg Unit</from><to>Merge Join Barg Unit</to><enabled>Y</enabled> </hop>
-  <hop> <from>Merge Join Status</from><to>Sort rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>Merge Join Barg Unit</to><enabled>Y</enabled> </hop>
-  <hop> <from>Merge Join Barg Unit</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Category</from><to>Merge Join Category</to><enabled>Y</enabled> </hop>
   <hop> <from>EEP Parameters</from><to>Status</to><enabled>Y</enabled> </hop>
-  <hop> <from>EEP Parameters</from><to>Barg Unit</to><enabled>Y</enabled> </hop>
+  <hop> <from>EEP Parameters</from><to>Category</to><enabled>Y</enabled> </hop>
   <hop> <from>EEP Parameters</from><to>Teaching Certificates</to><enabled>Y</enabled> </hop>
   <hop> <from>Teaching Certificates</from><to>Non Teaching Certificates</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows 2</from><to>Add Teach Certificate</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Teach Certificate</from><to>Add Non-Teach Cert</to><enabled>Y</enabled> </hop>
   <hop> <from>Teaching Certificates</from><to>Add Teach Certificate</to><enabled>Y</enabled> </hop>
   <hop> <from>Non Teaching Certificates</from><to>Add Non-Teach Cert</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Non-Teach Cert</from><to>Set Certificate Type</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Certificate Type</from><to>Create EEP Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Create EEP Master</from><to>Create PersonID</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 2</from><to>Add Teach Certificate</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge Join Status</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows</from><to>Merge Join Category</to><enabled>Y</enabled> </hop>
+  <hop> <from>Merge Join Category</from><to>Sort rows 2</to><enabled>N</enabled> </hop>
+  <hop> <from>Merge Join Status</from><to>Sort rows</to><enabled>N</enabled> </hop>
   </order>
   <step>
     <name>Add Non-Teach Cert</name>
@@ -528,7 +529,7 @@
     </step>
 
   <step>
-    <name>Barg Unit</name>
+    <name>Category</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -538,7 +539,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Merge Join Barg Unit</send_true_to>
+<send_true_to>Merge Join Category</send_true_to>
 <send_false_to/>
     <compare>
 <condition>
@@ -549,14 +550,14 @@
    <leftvalue>carea</leftvalue>
    <function>CONTAINS</function>
    <rightvalue/>
-   <value><name>constant</name><type>String</type><text>BargUnit</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+   <value><name>constant</name><type>String</type><text>Category</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   </conditions>
  </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>441</xloc>
-      <yloc>107</yloc>
+      <xloc>425</xloc>
+      <yloc>109</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -900,7 +901,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS_HR</connection>
-    <sql>SELECT	HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO,&#xd;&#xa;		HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_STATUS,&#xd;&#xa;		BARGAINING_UNIT,&#xd;&#xa;		CERT_TYPE,&#xd;&#xa;		CERT_CLASS,&#xd;&#xa;		CERT_CODE,&#xd;&#xa;		CERT_NO as PersonId,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;BIRTH_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,7,2&#x29;&#x29; as BirthDate,&#xd;&#xa;		EXPIRY_DATE&#xd;&#xa;  FROM HR_EMPLOYEE_CERTIFICATION, HR_EMPLOYEE_DEMOGRAPHICS&#xd;&#xa;  WHERE HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO&#xd;&#xa;	AND &#x28;EXPIRY_DATE &#x3e; &#x24;&#x7b;SCHOOL_START&#x7d; OR EXPIRY_DATE &#x3d; &#x27; &#x27;&#x29;&#xd;&#xa;  ORDER by EMPLOYEE_STATUS, HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO, CERT_CLASS&#xd;&#xa;</sql>
+    <sql>SELECT	DISTINCT HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO,&#xd;&#xa;		HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_STATUS,&#xd;&#xa;		BARGAINING_UNIT,&#xd;&#xa;		EMPLOYEE_CATEGORY,&#xd;&#xa;		CERT_TYPE,&#xd;&#xa;		CERT_CLASS,&#xd;&#xa;		CERT_CODE,&#xd;&#xa;		CERT_NO as PersonId,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;BIRTH_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,7,2&#x29;&#x29; as BirthDate,&#xd;&#xa;		EXPIRY_DATE&#xd;&#xa;  FROM HR_EMPLOYEE_CERTIFICATION, HR_EMPLOYEE_DEMOGRAPHICS, HR_EMPLOYEE_INTERLINK&#xd;&#xa;  WHERE HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO&#xd;&#xa;	AND &#x28;EXPIRY_DATE &#x3e; &#x24;&#x7b;SCHOOL_START&#x7d; OR EXPIRY_DATE &#x3d; &#x27; &#x27;&#x29;&#xd;&#xa;	AND HR_EMPLOYEE_INTERLINK.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO&#xd;&#xa;	AND HR_EMPLOYEE_INTERLINK.PAYROLL_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;  ORDER by EMPLOYEE_STATUS, HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO, CERT_CLASS&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -915,7 +916,7 @@
     </step>
 
   <step>
-    <name>Merge Join Barg Unit</name>
+    <name>Merge Join Category</name>
     <type>MergeJoin</type>
     <description/>
     <distribute>Y</distribute>
@@ -927,7 +928,7 @@
            </partitioning>
 <join_type>INNER</join_type>
 <step1>Sort rows</step1>
-<step2>Barg Unit</step2>
+<step2>Category</step2>
     <keys_1>
       <key>BARGAINING_UNIT</key>
     </keys_1>
@@ -936,8 +937,8 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>441</xloc>
-      <yloc>234</yloc>
+      <xloc>425</xloc>
+      <yloc>186</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -946,7 +947,7 @@
     <name>Merge Join Status</name>
     <type>MergeJoin</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -1059,8 +1060,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>317</xloc>
-      <yloc>234</yloc>
+      <xloc>313</xloc>
+      <yloc>184</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1093,7 +1094,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>563</xloc>
+      <xloc>556</xloc>
       <yloc>234</yloc>
       <draw>Y</draw>
       </GUI>

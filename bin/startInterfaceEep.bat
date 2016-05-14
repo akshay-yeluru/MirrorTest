@@ -1,5 +1,5 @@
 call setPaths.bat
-SET SRB_WAREHOUSE_JOB="Interfaces/Electronic Educator Profile/Job/EEP"
+SET SRB_WAREHOUSE_JOB=Interfaces/ElectronicEducatorProfile/Job/EEP
 SET SRB_WAREHOUSE_PROPERTIES=eep.properties
 SET SRB_WAREHOUSE_LOG=eep.log
 

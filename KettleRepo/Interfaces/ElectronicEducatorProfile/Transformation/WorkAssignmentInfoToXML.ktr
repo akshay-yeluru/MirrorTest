@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;04&#x2f;26 14&#x3a;53&#x3a;10.092</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;05&#x2f;17 09&#x3a;59&#x3a;52.443</modified_date>
+  <modified_date>2016&#x2f;05&#x2f;27 16&#x3a;32&#x3a;26.431</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -282,23 +282,23 @@
   </connection>
   <connection>
     <name>SOURCE_RMS</name>
-    <server/>
+    <server>dtl-grp-w12</server>
     <type>GENERIC</type>
     <access>Native</access>
-    <database/>
-    <port>-1</port>
-    <username/>
-    <password>Encrypted </password>
+    <database>holyfamilySD30</database>
+    <port>1433</port>
+    <username>tsc</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce10be86bcd9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
-      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;SOURCE_DRIVER&#x7d;</attribute></attribute>
-      <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;SOURCE_CONNECTION_URL&#x7d;</attribute></attribute>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>vortex.sql.vortexDriver</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;vortex&#x3a;&#x2f;&#x2f;tsc&#x2f;tscssi0101&#x2f;RMS&#x3a;regina_conv_hr.ini&#x40;1970&#x3a;titan.srb-es.com&#x21;VTX4</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>-1</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1433</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
@@ -437,7 +437,6 @@
   </connection>
   <order>
   <hop> <from>Replace in string</from><to>XML WorkAssignmentInfo</to><enabled>Y</enabled> </hop>
-  <hop> <from>xmlvalueWorkAssignment</from><to>Replace in string</to><enabled>Y</enabled> </hop>
   <hop> <from>WorkAssignment CSV file input</from><to>Add constants</to><enabled>Y</enabled> </hop>
   <hop> <from>StartDate</from><to>AdminTime&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>AdminTime&#x3f;</from><to>xmlvalueAdminWork</to><enabled>Y</enabled> </hop>
@@ -469,10 +468,24 @@
   <hop> <from>xmlvalueGovernance</from><to>xmlvalueWorkAssignment</to><enabled>Y</enabled> </hop>
   <hop> <from>xmlvalueStudentSupport</from><to>xmlvalueWorkAssignment</to><enabled>Y</enabled> </hop>
   <hop> <from>xmlvaluePlantOps 2 4</from><to>xmlvalueWorkAssignment</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants</from><to>WorkSiteIdentifier</to><enabled>Y</enabled> </hop>
   <hop> <from>WorkSiteIdentifier</from><to>ContractIdentifier</to><enabled>Y</enabled> </hop>
   <hop> <from>ContractIdentifier</from><to>PercentTimeEmployed</to><enabled>Y</enabled> </hop>
   <hop> <from>PercentTimeEmployed</from><to>StartDate</to><enabled>Y</enabled> </hop>
+  <hop> <from>xmlvalueDemographic</from><to>xmlvalueHomePhoneNumber</to><enabled>Y</enabled> </hop>
+  <hop> <from>xmlvalueEmail</from><to>xmlvalueDemographic</to><enabled>Y</enabled> </hop>
+  <hop> <from>xmlvalueHomePhoneNumber</from><to>Is there a mobile phone&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>xmlvalueMobilePhoneNumber</from><to>xmlvaluePersonInfo</to><enabled>Y</enabled> </hop>
+  <hop> <from>xmlvalueName</from><to>xmlvalueEmail</to><enabled>Y</enabled> </hop>
+  <hop> <from>xmlvaluePersonID</from><to>xmlvalueName</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is there a mobile phone&#x3f;</from><to>xmlvalueMobilePhoneNumber</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is there a mobile phone&#x3f;</from><to>Add constants 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants 2</from><to>xmlvaluePersonInfo</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants</from><to>Get Variables 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables 2</from><to>xmlvaluePersonID</to><enabled>Y</enabled> </hop>
+  <hop> <from>xmlvaluePersonInfo</from><to>WorkSiteIdentifier</to><enabled>Y</enabled> </hop>
+  <hop> <from>xmlvalueWorkAssignment</from><to>xmlvalueEventObject</to><enabled>Y</enabled> </hop>
+  <hop> <from>xmlvalueEventObject</from><to>xmlvalueObjectData</to><enabled>Y</enabled> </hop>
+  <hop> <from>xmlvalueObjectData</from><to>Replace in string</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -498,11 +511,47 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+      <field>
+        <name>EventObjectAction</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Add</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>EventObjectName</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>WorkAssignment</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>OrgInfo</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>73</xloc>
-      <yloc>103</yloc>
+      <yloc>111</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -530,8 +579,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
-      <yloc>19</yloc>
+      <xloc>787</xloc>
+      <yloc>28</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -572,8 +621,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>73</xloc>
-      <yloc>263</yloc>
+      <xloc>568</xloc>
+      <yloc>177</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -601,7 +650,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
+      <xloc>787</xloc>
       <yloc>214</yloc>
       <draw>Y</draw>
       </GUI>
@@ -630,8 +679,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
-      <yloc>474</yloc>
+      <xloc>787</xloc>
+      <yloc>462</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -659,8 +708,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
-      <yloc>149</yloc>
+      <xloc>787</xloc>
+      <yloc>152</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -688,8 +737,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
-      <yloc>84</yloc>
+      <xloc>787</xloc>
+      <yloc>90</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -717,8 +766,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
-      <yloc>279</yloc>
+      <xloc>787</xloc>
+      <yloc>276</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -759,8 +808,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>73</xloc>
-      <yloc>343</yloc>
+      <xloc>568</xloc>
+      <yloc>284</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -788,8 +837,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
-      <yloc>344</yloc>
+      <xloc>787</xloc>
+      <yloc>338</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -817,8 +866,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
-      <yloc>604</yloc>
+      <xloc>787</xloc>
+      <yloc>586</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -836,7 +885,7 @@
            </partitioning>
     <fields>
       <field>
-        <in_stream_name>xmlvalueWorkAssignment</in_stream_name>
+        <in_stream_name>xmlvalueObjectData</in_stream_name>
         <out_stream_name/>
         <use_regex>no</use_regex>
         <replace_string>amp&#x3b;</replace_string>
@@ -847,7 +896,7 @@
         <case_sensitive>no</case_sensitive>
       </field>
       <field>
-        <in_stream_name>xmlvalueWorkAssignment</in_stream_name>
+        <in_stream_name>xmlvalueObjectData</in_stream_name>
         <out_stream_name/>
         <use_regex>no</use_regex>
         <replace_string>&#x26;lt&#x3b;</replace_string>
@@ -858,7 +907,7 @@
         <case_sensitive>no</case_sensitive>
       </field>
       <field>
-        <in_stream_name>xmlvalueWorkAssignment</in_stream_name>
+        <in_stream_name>xmlvalueObjectData</in_stream_name>
         <out_stream_name/>
         <use_regex>no</use_regex>
         <replace_string>&#x26;gt&#x3b;</replace_string>
@@ -871,8 +920,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>871</xloc>
-      <yloc>285</yloc>
+      <xloc>1411</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -913,8 +962,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>73</xloc>
-      <yloc>423</yloc>
+      <xloc>568</xloc>
+      <yloc>391</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -942,8 +991,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
-      <yloc>539</yloc>
+      <xloc>787</xloc>
+      <yloc>524</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -971,8 +1020,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>281</xloc>
-      <yloc>409</yloc>
+      <xloc>787</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1079,6 +1128,369 @@
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>EMPLOYEE_NO</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>LASTNAME</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>FIRSTNAME</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>MIDDLENAME</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>GENDER</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EMAIL_TYPE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EMAIL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>PHONEFORMAT</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>HOMEPHONETYPE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>HOMEPHONE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>MOBILEPHONETYPE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>MOBILEPHONE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>STATUS</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EMPLOYEE_CATEGORY</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>ABORIGINAL</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POSITION_CODE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>ASSIGN_TYPE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>POSITIONTIME</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>LOCATION</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>HOURS_FTE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>START_DATE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>END_DATE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>SEPARATIONREASON</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EMPLOYEE_STATUS</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>BARGAINING_UNIT</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>CERT_TYPE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>CERT_CLASS</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>CERT_CODE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>PERSONID</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>BIRTHDATE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EXPIRY_DATE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>PersonidTYpe</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>EMPLOYMENTPOSITION</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -1124,8 +1536,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>73</xloc>
-      <yloc>183</yloc>
+      <xloc>568</xloc>
+      <yloc>70</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1174,7 +1586,7 @@
     </file>
     <fields>
       <field>
-        <name>xmlvalueWorkAssignment</name>
+        <name>xmlvalueObjectData</name>
         <type>None</type>
         <format/>
         <currency/>
@@ -1188,8 +1600,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1007</xloc>
-      <yloc>285</yloc>
+      <xloc>1411</xloc>
+      <yloc>383</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1244,8 +1656,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>489</xloc>
-      <yloc>19</yloc>
+      <xloc>972</xloc>
+      <yloc>28</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1300,8 +1712,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>489</xloc>
-      <yloc>474</yloc>
+      <xloc>972</xloc>
+      <yloc>462</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1356,8 +1768,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>489</xloc>
-      <yloc>149</yloc>
+      <xloc>972</xloc>
+      <yloc>152</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1412,8 +1824,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>489</xloc>
-      <yloc>84</yloc>
+      <xloc>972</xloc>
+      <yloc>90</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1468,7 +1880,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>489</xloc>
+      <xloc>972</xloc>
       <yloc>214</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1524,8 +1936,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>489</xloc>
-      <yloc>279</yloc>
+      <xloc>972</xloc>
+      <yloc>276</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1580,8 +1992,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>489</xloc>
-      <yloc>344</yloc>
+      <xloc>972</xloc>
+      <yloc>338</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1636,8 +2048,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>489</xloc>
-      <yloc>604</yloc>
+      <xloc>972</xloc>
+      <yloc>586</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1692,8 +2104,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>489</xloc>
-      <yloc>539</yloc>
+      <xloc>972</xloc>
+      <yloc>524</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1748,8 +2160,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>489</xloc>
-      <yloc>409</yloc>
+      <xloc>972</xloc>
+      <yloc>400</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1846,8 +2258,766 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>739</xloc>
-      <yloc>285</yloc>
+      <xloc>1195</xloc>
+      <yloc>391</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>xmlvalueDemographic</name>
+    <type>AddXML</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <encoding>UTF-8</encoding>
+    <valueName>xmlvalueDemographic</valueName>
+    <xml_repeat_element>Demographics</xml_repeat_element>
+    <file>
+      <omitXMLheader>Y</omitXMLheader>
+      <omitNullValues>N</omitNullValues>
+    </file>
+    <fields>
+      <field>
+        <name>GENDER</name>
+        <element>Gender</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>190</xloc>
+      <yloc>463</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>xmlvalueEmail</name>
+    <type>AddXML</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <encoding>UTF-8</encoding>
+    <valueName>xmlvalueEmail</valueName>
+    <xml_repeat_element>Email</xml_repeat_element>
+    <file>
+      <omitXMLheader>Y</omitXMLheader>
+      <omitNullValues>N</omitNullValues>
+    </file>
+    <fields>
+      <field>
+        <name>EMAIL</name>
+        <element>Email</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>EMAIL_TYPE</name>
+        <element>Type</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>Y</attribute>
+        <attributeParentName>Email</attributeParentName>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>73</xloc>
+      <yloc>463</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>xmlvalueHomePhoneNumber</name>
+    <type>AddXML</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <encoding>ISO-8859-1</encoding>
+    <valueName>xmlvalueHomePhoneNumber</valueName>
+    <xml_repeat_element>PhoneNumber</xml_repeat_element>
+    <file>
+      <omitXMLheader>Y</omitXMLheader>
+      <omitNullValues>N</omitNullValues>
+    </file>
+    <fields>
+      <field>
+        <name>PHONEFORMAT</name>
+        <element>Format</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>Y</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>HOMEPHONETYPE</name>
+        <element>Type</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>Y</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>HOMEPHONE</name>
+        <element>PhoneNumber</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>190</xloc>
+      <yloc>375</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>xmlvalueMobilePhoneNumber</name>
+    <type>AddXML</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <encoding>UTF-8</encoding>
+    <valueName>xmlvalueMobilePhoneNumber</valueName>
+    <xml_repeat_element>PhoneNumber</xml_repeat_element>
+    <file>
+      <omitXMLheader>Y</omitXMLheader>
+      <omitNullValues>N</omitNullValues>
+    </file>
+    <fields>
+      <field>
+        <name>PHONEFORMAT</name>
+        <element>Format</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>Y</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>MOBILEPHONETYPE</name>
+        <element>Type</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>Y</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>MOBILEPHONE</name>
+        <element>PhoneNumber</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>340</xloc>
+      <yloc>287</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>xmlvalueName</name>
+    <type>AddXML</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <encoding>UTF-8</encoding>
+    <valueName>xmlvalueName</valueName>
+    <xml_repeat_element>Name</xml_repeat_element>
+    <file>
+      <omitXMLheader>Y</omitXMLheader>
+      <omitNullValues>N</omitNullValues>
+    </file>
+    <fields>
+      <field>
+        <name>LASTNAME</name>
+        <element>LastName</element>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>FIRSTNAME</name>
+        <element>FirstName</element>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>MIDDLENAME</name>
+        <element>MiddleName</element>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>73</xloc>
+      <yloc>375</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>xmlvaluePersonID</name>
+    <type>AddXML</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <encoding>UTF-8</encoding>
+    <valueName>xmlvalueid</valueName>
+    <xml_repeat_element>PersonIdentification</xml_repeat_element>
+    <file>
+      <omitXMLheader>Y</omitXMLheader>
+      <omitNullValues>N</omitNullValues>
+    </file>
+    <fields>
+      <field>
+        <name>PERSONID</name>
+        <element>PersonId</element>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>BIRTHDATE</name>
+        <element>BirthDate</element>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>PersonidTYpe</name>
+        <element>Type</element>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>Y</attribute>
+        <attributeParentName>PersonId</attributeParentName>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>73</xloc>
+      <yloc>287</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>xmlvaluePersonInfo</name>
+    <type>AddXML</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <encoding>UTF-8</encoding>
+    <valueName>xmlvaluePersonInfo</valueName>
+    <xml_repeat_element>PersonInfo</xml_repeat_element>
+    <file>
+      <omitXMLheader>Y</omitXMLheader>
+      <omitNullValues>N</omitNullValues>
+    </file>
+    <fields>
+      <field>
+        <name>xmlvalueName</name>
+        <element>PersonInfo</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>xmlvalueEmail</name>
+        <element>PersonInfo</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>xmlvalueDemographic</name>
+        <element>PersonInfo</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>xmlvalueHomePhoneNumber</name>
+        <element>PersonInfo</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>xmlvalueMobilePhoneNumber</name>
+        <element>PersonInfo</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>340</xloc>
+      <yloc>70</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Is there a mobile phone&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>xmlvalueMobilePhoneNumber</send_true_to>
+<send_false_to>Add constants 2</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>MOBILEPHONE</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>191</xloc>
+      <yloc>287</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add constants 2</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>xmlvalueMobilePhoneNumber</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>191</xloc>
+      <yloc>199</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables 2</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>ead_sourceid</name>
+        <variable>&#x24;&#x7b;EAD_SOURCEID&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>both</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>73</xloc>
+      <yloc>199</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>xmlvalueEventObject</name>
+    <type>AddXML</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <encoding>UTF-8</encoding>
+    <valueName>xmlvalueEventObject</valueName>
+    <xml_repeat_element>EAD_EventObject</xml_repeat_element>
+    <file>
+      <omitXMLheader>Y</omitXMLheader>
+      <omitNullValues>N</omitNullValues>
+    </file>
+    <fields>
+      <field>
+        <name>EventObjectAction</name>
+        <element>Action</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>Y</attribute>
+        <attributeParentName>EAD_EventOjbect</attributeParentName>
+        </field>
+      <field>
+        <name>EventObjectName</name>
+        <element>ObjectName</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>Y</attribute>
+        <attributeParentName>EAD_EventOjbect</attributeParentName>
+        </field>
+      <field>
+        <name>OrgInfo</name>
+        <element>WorkAssignment</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName>EAD_EventOjbect</attributeParentName>
+        </field>
+      <field>
+        <name>EMPLOYEE_NO</name>
+        <element>RefID</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>Y</attribute>
+        <attributeParentName>WorkAssignment</attributeParentName>
+        </field>
+      <field>
+        <name>ead_sourceid</name>
+        <element>EmployerID</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>xmlvalueid</name>
+        <element>EAD_EventObject</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>xmlvaluePersonInfo</name>
+        <element>EAD_EventObject</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+      <field>
+        <name>xmlvalueWorkAssignment</name>
+        <element>EAD_EventObject</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1190</xloc>
+      <yloc>222</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>xmlvalueObjectData</name>
+    <type>AddXML</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <encoding>UTF-8</encoding>
+    <valueName>xmlvalueObjectData</valueName>
+    <xml_repeat_element>EAD_ObjectData</xml_repeat_element>
+    <file>
+      <omitXMLheader>Y</omitXMLheader>
+      <omitNullValues>N</omitNullValues>
+    </file>
+    <fields>
+      <field>
+        <name>xmlvalueEventObject</name>
+        <element>EAD_ObjectData</element>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <attribute>N</attribute>
+        <attributeParentName/>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1192</xloc>
+      <yloc>100</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

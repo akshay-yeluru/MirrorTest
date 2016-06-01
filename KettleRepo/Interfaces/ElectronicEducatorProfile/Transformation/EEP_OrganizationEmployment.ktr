@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;06&#x2f;01 09&#x3a;24&#x3a;09.159</modified_date>
+  <modified_date>2016&#x2f;06&#x2f;01 11&#x3a;25&#x3a;24.078</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -711,7 +711,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>SELECT  DISTINCT &#xd;&#xa;        hei.EMPLOYEE_NO,&#xd;&#xa;        hei.LAST_NAME as LASTNAME,&#xd;&#xa;        hei.FIRST_NAME as FIRSTNAME,&#xd;&#xa;        hei.MIDDLE_NAME as MIDDLENAME,&#xd;&#xa;        hed.GENDER,&#xd;&#xa;		CASE WHEN hea.EMPLOYEE_EMAIL &#x3e; &#x27; &#x27; THEN &#x27;Primary&#x27; ELSE &#x27;&#x27; END AS EMAIL_TYPE,&#xd;&#xa;        CASE WHEN hea.EMPLOYEE_EMAIL &#x3e; &#x27; &#x27;&#xd;&#xa;                THEN CASE WHEN hea.EMPLOYEE_EMAIL LIKE &#x27;&#x25;&#x40;&#x25;&#x27;&#xd;&#xa;                        THEN hea.EMPLOYEE_EMAIL&#xd;&#xa;                        ELSE CONCAT&#x28;RTRIM&#x28;hea.EMPLOYEE_EMAIL&#x29;,&#x27;&#x40;&#x24;&#x7b;DIST_DOMAIN&#x7d;&#x27;&#x29;&#xd;&#xa;                        END&#xd;&#xa;                END as EMAIL,&#xd;&#xa;        &#x27;Mailing&#x27; as ADDRESS_TYPE,&#xd;&#xa;        hed.ADDRESS_1 as Line1,&#xd;&#xa;        hed.ADDRESS_2 as Line2,&#xd;&#xa;        hed.CITY,&#xd;&#xa;        hed.PROVINCE as StatePr,&#xd;&#xa;        hed.POSTAL_CODE as PostalCode,&#xd;&#xa;        hed.COUNTRY,&#xd;&#xa;        &#x27;NA&#x27; as PHONEFORMAT,&#xd;&#xa;        &#x27;Home&#x27; as HOMEPHONETYPE,&#xd;&#xa;        CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;&#x27;&#x28;&#x27;,SUBSTRING&#x28;hed.PHONE_NO,1,3&#x29;&#x29;,&#x27;&#x29; &#x27;&#x29;,SUBSTRING&#x28;hed.Phone_no,4,3&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;hed.PHONE_NO,7,4&#x29;&#x29; as HOMEPHONE,&#xd;&#xa;        CASE WHEN hed.PHONE_NO_2 &#x3e; &#x27; &#x27;&#xd;&#xa;                THEN &#x27;Mobile&#x27;&#xd;&#xa;                END as MOBILEPHONETYPE,&#xd;&#xa;		CASE WHEN hed.PHONE_NO_2 &#x3e; &#x27; &#x27;&#xd;&#xa;				THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;&#x27;&#x28;&#x27;,SUBSTRING&#x28;hed.PHONE_NO_2,1,3&#x29;&#x29;,&#x27;&#x29; &#x27;&#x29;,SUBSTRING&#x28;hed.Phone_NO_2,4,3&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;hed.PHONE_NO_2,7,4&#x29;&#x29; &#xd;&#xa;				END as MOBILEPHONE,&#xd;&#xa;        hei.STATUS,&#xd;&#xa;        hei.EMPLOYEE_CATEGORY,&#xd;&#xa;        hed.&#x24;&#x7b;ABORIGINAL&#x7d; as ABORIGINAL,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;RTRIM&#x28;ha.EMPLOYEE_NO&#x29;,&#x27;_&#x27;&#x29;,ha.START_DATE&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;ha.POSITION_CODE&#x29;&#x29; as ContractIdentifier,&#xd;&#xa;		ha.EMPLOYEE_NO,&#xd;&#xa;        ha.POSITION_CODE,&#xd;&#xa;		hatc.CODE as Assign_type,&#xd;&#xa;		CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27; &#x27;&#xd;&#xa;				THEN &#x27;01&#x27;&#xd;&#xa;				ELSE&#xd;&#xa;					CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;STF&#x27;&#xd;&#xa;						THEN &#x27;02&#x27;&#xd;&#xa;						ELSE &#xd;&#xa;							CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;LEADS&#x27;&#xd;&#xa;								THEN&#x27;03&#x27;&#xd;&#xa;								ELSE &#xd;&#xa;									CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;CUPE&#x27;&#xd;&#xa;										THEN&#x27;04&#x27;&#xd;&#xa;										ELSE &#xd;&#xa;											CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;SGEU&#x27;&#xd;&#xa;												THEN&#x27;04&#x27;&#xd;&#xa;												ELSE hpc.BARGAINING_UNIT&#xd;&#xa;												END&#xd;&#xa;										END			&#xd;&#xa;								END&#xd;&#xa;						END&#xd;&#xa;				END&#xd;&#xa;			as Affiliation,&#xd;&#xa;		hal.LOCATION,&#xd;&#xa;		CASE WHEN hpc.HOURS_OR_FTE &#x3d; &#x27;F&#x27;&#xd;&#xa;			THEN ha.HOURS_FTE &#x2a; 100&#xd;&#xa;			ELSE &#x28;ha.HOURS_PER_DAY &#x2f; hpc.HOURS_PER_DAY&#x29; &#x2a; 100&#xd;&#xa;			END as PercentTimeEmployed,&#xd;&#xa;        ha.HOURS_FTE,&#xd;&#xa;		ha.START_DATE,&#xd;&#xa;		ha.END_DATE,&#xd;&#xa;		CASE WHEN START_DATE &#x3c; &#x24;&#x7b;SCHOOL_START&#x7d;&#xd;&#xa;			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,7,2&#x29;&#x29; &#xd;&#xa;			ELSE CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.START_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,7,2&#x29;&#x29; &#xd;&#xa;			END AS STARTDATE,&#xd;&#xa;        CASE WHEN END_DATE &#x3c; &#x27;30000101&#x27;&#xd;&#xa; 			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.END_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,7,2&#x29;&#x29;&#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;            END AS ENDDATE,&#xd;&#xa;	    LEAVE_REASON as SeparationReason,&#xd;&#xa;		THE_KEY&#xd;&#xa;  FROM HR_EMPLOYEE_DEMOGRAPHICS hed&#xd;&#xa;        LEFT JOIN HR_EMPLOYEE_INTERLINK hei ON hei.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;        LEFT JOIN HR_EMAIL_ADDRESS hea ON hea.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;		LEFT JOIN HR_ASSIGNMENTS ha ON ha.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_TYPE_CODE hatc ON hatc.CODE &#x3d; ha.ASSIGNMENT_TYPE&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa;        LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa; WHERE hei.PAYROLL_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;	AND END_DATE &#x3e; &#x24;&#x7b;SCHOOL_START&#x7d; and hours_fte &#x3e; 0 and hal.LOCATION &#x3e; &#x27; &#x27;&#xd;&#xa; ORDER by ha.EMPLOYEE_NO,ha.POSITION_CODE</sql>
+    <sql>SELECT  DISTINCT &#xd;&#xa;        hei.EMPLOYEE_NO,&#xd;&#xa;        hei.LAST_NAME as LASTNAME,&#xd;&#xa;        hei.FIRST_NAME as FIRSTNAME,&#xd;&#xa;        hei.MIDDLE_NAME as MIDDLENAME,&#xd;&#xa;        hed.GENDER,&#xd;&#xa;		CASE WHEN hea.EMPLOYEE_EMAIL &#x3e; &#x27; &#x27; THEN &#x27;Primary&#x27; ELSE &#x27;&#x27; END AS EMAIL_TYPE,&#xd;&#xa;        CASE WHEN hea.EMPLOYEE_EMAIL &#x3e; &#x27; &#x27;&#xd;&#xa;                THEN CASE WHEN hea.EMPLOYEE_EMAIL LIKE &#x27;&#x25;&#x40;&#x25;&#x27;&#xd;&#xa;                        THEN hea.EMPLOYEE_EMAIL&#xd;&#xa;                        ELSE CONCAT&#x28;RTRIM&#x28;hea.EMPLOYEE_EMAIL&#x29;,&#x27;&#x40;&#x24;&#x7b;DIST_DOMAIN&#x7d;&#x27;&#x29;&#xd;&#xa;                        END&#xd;&#xa;                END as EMAIL,&#xd;&#xa;        &#x27;Mailing&#x27; as ADDRESS_TYPE,&#xd;&#xa;        hed.ADDRESS_1 as Line1,&#xd;&#xa;        hed.ADDRESS_2 as Line2,&#xd;&#xa;        hed.CITY,&#xd;&#xa;        hed.PROVINCE as StatePr,&#xd;&#xa;        hed.POSTAL_CODE as PostalCode,&#xd;&#xa;        hed.COUNTRY,&#xd;&#xa;        &#x27;NA&#x27; as PHONEFORMAT,&#xd;&#xa;        &#x27;Home&#x27; as HOMEPHONETYPE,&#xd;&#xa;        CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;&#x27;&#x28;&#x27;,SUBSTRING&#x28;hed.PHONE_NO,1,3&#x29;&#x29;,&#x27;&#x29; &#x27;&#x29;,SUBSTRING&#x28;hed.Phone_no,4,3&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;hed.PHONE_NO,7,4&#x29;&#x29; as HOMEPHONE,&#xd;&#xa;        CASE WHEN hed.PHONE_NO_2 &#x3e; &#x27; &#x27;&#xd;&#xa;                THEN &#x27;Mobile&#x27;&#xd;&#xa;                END as MOBILEPHONETYPE,&#xd;&#xa;		CASE WHEN hed.PHONE_NO_2 &#x3e; &#x27; &#x27;&#xd;&#xa;				THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;&#x27;&#x28;&#x27;,SUBSTRING&#x28;hed.PHONE_NO_2,1,3&#x29;&#x29;,&#x27;&#x29; &#x27;&#x29;,SUBSTRING&#x28;hed.Phone_NO_2,4,3&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;hed.PHONE_NO_2,7,4&#x29;&#x29; &#xd;&#xa;				END as MOBILEPHONE,&#xd;&#xa;        hei.STATUS,&#xd;&#xa;        hei.EMPLOYEE_CATEGORY,&#xd;&#xa;        hed.&#x24;&#x7b;ABORIGINAL&#x7d; as ABORIGINAL,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;RTRIM&#x28;ha.EMPLOYEE_NO&#x29;,&#x27;_&#x27;&#x29;,ha.START_DATE&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;ha.POSITION_CODE&#x29;&#x29; as ContractIdentifier,&#xd;&#xa;		ha.EMPLOYEE_NO,&#xd;&#xa;        ha.POSITION_CODE,&#xd;&#xa;		hatc.CODE as Assign_type,&#xd;&#xa;		CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27; &#x27;&#xd;&#xa;				THEN &#x27;01&#x27;&#xd;&#xa;				ELSE&#xd;&#xa;					CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;STF&#x27; OR hpc.BARGAINING_UNIT &#x3d; &#x27;SECTA&#x27;&#xd;&#xa;						THEN &#x27;02&#x27;&#xd;&#xa;						ELSE &#xd;&#xa;							CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;LEADS&#x27;&#xd;&#xa;								THEN&#x27;03&#x27;&#xd;&#xa;								ELSE &#xd;&#xa;									CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;CUPE&#x27;&#xd;&#xa;										THEN&#x27;04&#x27;&#xd;&#xa;										ELSE &#xd;&#xa;											CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;SGEU&#x27;&#xd;&#xa;												THEN&#x27;04&#x27;&#xd;&#xa;												ELSE hpc.BARGAINING_UNIT&#xd;&#xa;												END&#xd;&#xa;										END			&#xd;&#xa;								END&#xd;&#xa;						END&#xd;&#xa;				END&#xd;&#xa;			as Affiliation,&#xd;&#xa;		hal.LOCATION,&#xd;&#xa;		CASE WHEN hpc.HOURS_OR_FTE &#x3d; &#x27;F&#x27;&#xd;&#xa;			THEN ha.HOURS_FTE &#x2a; 100&#xd;&#xa;			ELSE &#x28;ha.HOURS_PER_DAY &#x2f; hpc.HOURS_PER_DAY&#x29; &#x2a; 100&#xd;&#xa;			END as PercentTimeEmployed,&#xd;&#xa;        ha.HOURS_FTE,&#xd;&#xa;		ha.START_DATE,&#xd;&#xa;		ha.END_DATE,&#xd;&#xa;		CASE WHEN START_DATE &#x3c; &#x24;&#x7b;SCHOOL_START&#x7d;&#xd;&#xa;			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,7,2&#x29;&#x29; &#xd;&#xa;			ELSE CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.START_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,7,2&#x29;&#x29; &#xd;&#xa;			END AS STARTDATE,&#xd;&#xa;        CASE WHEN END_DATE &#x3c; &#x27;30000101&#x27;&#xd;&#xa; 			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.END_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,7,2&#x29;&#x29;&#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;            END AS ENDDATE,&#xd;&#xa;	    LEAVE_REASON as SeparationReason,&#xd;&#xa;		THE_KEY&#xd;&#xa;  FROM HR_EMPLOYEE_DEMOGRAPHICS hed&#xd;&#xa;        LEFT JOIN HR_EMPLOYEE_INTERLINK hei ON hei.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;        LEFT JOIN HR_EMAIL_ADDRESS hea ON hea.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;		LEFT JOIN HR_ASSIGNMENTS ha ON ha.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_TYPE_CODE hatc ON hatc.CODE &#x3d; ha.ASSIGNMENT_TYPE&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa;        LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa; WHERE hei.PAYROLL_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;	AND END_DATE &#x3e; &#x24;&#x7b;SCHOOL_START&#x7d; and hours_fte &#x3e; 0 and hal.LOCATION &#x3e; &#x27; &#x27;&#xd;&#xa; ORDER by ha.EMPLOYEE_NO,ha.POSITION_CODE</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -726,8 +726,8 @@
     </step>
 
   <step>
-    <name>Is data missing&#x3f;</name>
-    <type>FilterRows</type>
+    <name>Errors &#x28;Missing data&#x29;</name>
+    <type>ExcelOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -736,38 +736,172 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Errors &#x28;Missing data&#x29;</send_true_to>
-<send_false_to>OrganizationEmployment</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>CONTRACTTYPE</leftvalue>
-   <function>IS NULL</function>
-   <rightvalue/>
-   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-   <function>IS NULL</function>
-   <rightvalue/>
-   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>EMPLOYMENTLOCATION</leftvalue>
-   <function>IS NULL</function>
-   <rightvalue/>
-   </condition>
-  </conditions>
- </condition>
-    </compare>
+    <header>Y</header>
+    <footer>N</footer>
+    <encoding/>
+    <append>N</append>
+    <add_to_result_filenames>N</add_to_result_filenames>
+    <file>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;Finished_Errors_OrganizationEmployment</name>
+      <extention>xls</extention>
+      <do_not_open_newfile_init>N</do_not_open_newfile_init>
+      <create_parent_folder>N</create_parent_folder>
+      <split>N</split>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <sheetname>Sheet1</sheetname>
+      <autosizecolums>N</autosizecolums>
+      <nullisblank>N</nullisblank>
+      <protect_sheet>N</protect_sheet>
+      <password>Encrypted </password>
+      <splitevery>0</splitevery>
+      <usetempfiles>N</usetempfiles>
+      <tempdirectory/>
+      </file>
+    <template>
+      <enabled>N</enabled>
+      <append>N</append>
+      <filename>template.xls</filename>
+    </template>
+    <fields>
+      <field>
+        <name>EMPLOYEE_NO</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>LASTNAME</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>FIRSTNAME</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>CERT_CLASS</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>PERSONID</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>PersonidTYpe</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>CONTRACTIDENTIFIER</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>ASSIGN_TYPE</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>CONTRACTTYPE</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>POSITION_CODE</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>EMPLOYMENTPOSITION</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>AFFILIATION</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>LOCATION</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>EMPLOYMENTLOCATION</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>PERCENTTIMEEMPLOYED</name>
+        <type>BigNumber</type>
+        <format/>
+      </field>
+      <field>
+        <name>HOURS_FTE</name>
+        <type>BigNumber</type>
+        <format/>
+      </field>
+      <field>
+        <name>STARTDATE</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>ENDDATE</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>SEPARATIONREASON</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>SALARY_BASE_AMT</name>
+        <type>BigNumber</type>
+        <format/>
+      </field>
+      <field>
+        <name>ISCOORD</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>EMPLOYERTYPE</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>AssessmentCoordinator</name>
+        <type>String</type>
+        <format/>
+      </field>
+    </fields>
+    <custom>
+    <header_font_name>arial</header_font_name>
+    <header_font_size>10</header_font_size>
+    <header_font_bold>N</header_font_bold>
+    <header_font_italic>N</header_font_italic>
+    <header_font_underline>no</header_font_underline>
+    <header_font_orientation>horizontal</header_font_orientation>
+    <header_font_color>black</header_font_color>
+    <header_background_color>none</header_background_color>
+    <header_row_height>255</header_row_height>
+    <header_alignment>left</header_alignment>
+    <header_image/>
+    <row_font_name>arial</row_font_name>
+    <row_font_size>10</row_font_size>
+    <row_font_color>black</row_font_color>
+    <row_background_color>none</row_background_color>
+      </custom>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>877</xloc>
+      <xloc>732</xloc>
       <yloc>309</yloc>
       <draw>Y</draw>
       </GUI>
@@ -879,7 +1013,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>SELECT  PRM_CODE,&#xd;&#xa;		NEW_CODE as EmploymentLocation,&#xd;&#xa;		CASE WHEN SUBSTRING&#x28;RTRIM&#x28;NEW_CODE&#x29;,5,3&#x29; &#x3d; &#x27;000&#x27; THEN &#x27;01&#x27; ELSE &#x27;02&#x27; END as EmployerType&#xd;&#xa;  FROM HR_TRANSLATION_CODE&#xd;&#xa;  WHERE FIELD_TYPE &#x3d; &#x27;LOCATION&#x27;&#xd;&#xa;  ORDER by PRM_CODE&#xd;&#xa;</sql>
+    <sql>SELECT  PRM_CODE,&#xd;&#xa;		NEW_CODE as EmploymentLocation,&#xd;&#xa;		CASE WHEN SUBSTRING&#x28;RTRIM&#x28;NEW_CODE&#x29;,5,3&#x29; &#x3d; &#x27;000&#x27; OR SUBSTRING&#x28;RTRIM&#x28;NEW_CODE&#x29;,5,3&#x29; &#x3d; &#x27;500&#x27; THEN &#x27;01&#x27; ELSE &#x27;02&#x27; END as EmployerType&#xd;&#xa;  FROM HR_TRANSLATION_CODE&#xd;&#xa;  WHERE FIELD_TYPE &#x3d; &#x27;LOCATION&#x27;&#xd;&#xa;  ORDER by PRM_CODE&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -915,6 +1049,54 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>732</xloc>
       <yloc>182</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Is data missing&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Errors &#x28;Missing data&#x29;</send_true_to>
+<send_false_to>OrganizationEmployment</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>CONTRACTTYPE</leftvalue>
+   <function>IS NULL</function>
+   <rightvalue/>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
+   <function>IS NULL</function>
+   <rightvalue/>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>EMPLOYMENTLOCATION</leftvalue>
+   <function>IS NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>877</xloc>
+      <yloc>309</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1503,188 +1685,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>321</xloc>
       <yloc>45</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Errors &#x28;Missing data&#x29;</name>
-    <type>ExcelOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <encoding/>
-    <append>N</append>
-    <add_to_result_filenames>N</add_to_result_filenames>
-    <file>
-      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;Finished_Errors_OrganizationEmployment</name>
-      <extention>xls</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>N</create_parent_folder>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>Sheet1</sheetname>
-      <autosizecolums>N</autosizecolums>
-      <nullisblank>N</nullisblank>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
-      </file>
-    <template>
-      <enabled>N</enabled>
-      <append>N</append>
-      <filename>template.xls</filename>
-    </template>
-    <fields>
-      <field>
-        <name>EMPLOYEE_NO</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>LASTNAME</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>FIRSTNAME</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>CERT_CLASS</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>PERSONID</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>PersonidTYpe</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>CONTRACTIDENTIFIER</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>ASSIGN_TYPE</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>CONTRACTTYPE</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>POSITION_CODE</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>EMPLOYMENTPOSITION</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>AFFILIATION</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>LOCATION</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>EMPLOYMENTLOCATION</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>PERCENTTIMEEMPLOYED</name>
-        <type>BigNumber</type>
-        <format/>
-      </field>
-      <field>
-        <name>HOURS_FTE</name>
-        <type>BigNumber</type>
-        <format/>
-      </field>
-      <field>
-        <name>STARTDATE</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>ENDDATE</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>SEPARATIONREASON</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>SALARY_BASE_AMT</name>
-        <type>BigNumber</type>
-        <format/>
-      </field>
-      <field>
-        <name>ISCOORD</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>EMPLOYERTYPE</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>AssessmentCoordinator</name>
-        <type>String</type>
-        <format/>
-      </field>
-    </fields>
-    <custom>
-    <header_font_name>arial</header_font_name>
-    <header_font_size>10</header_font_size>
-    <header_font_bold>N</header_font_bold>
-    <header_font_italic>N</header_font_italic>
-    <header_font_underline>no</header_font_underline>
-    <header_font_orientation>horizontal</header_font_orientation>
-    <header_font_color>black</header_font_color>
-    <header_background_color>none</header_background_color>
-    <header_row_height>255</header_row_height>
-    <header_alignment>left</header_alignment>
-    <header_image/>
-    <row_font_name>arial</row_font_name>
-    <row_font_size>10</row_font_size>
-    <row_font_color>black</row_font_color>
-    <row_background_color>none</row_background_color>
-      </custom>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>732</xloc>
-      <yloc>309</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

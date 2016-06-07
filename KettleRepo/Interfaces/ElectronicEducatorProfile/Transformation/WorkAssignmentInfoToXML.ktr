@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2016&#x2f;04&#x2f;26 14&#x3a;53&#x3a;10.092</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;06&#x2f;06 14&#x3a;35&#x3a;24.627</modified_date>
+  <modified_date>2016&#x2f;06&#x2f;06 15&#x3a;42&#x3a;19.843</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -436,7 +436,6 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Replace in string</from><to>XML WorkAssignmentInfo</to><enabled>Y</enabled> </hop>
   <hop> <from>StartDate</from><to>AdminTime&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>AdminTime&#x3f;</from><to>xmlvalueAdminWork</to><enabled>Y</enabled> </hop>
   <hop> <from>K12TeachTime&#x3f;</from><to>xmlvalueK12Teacher</to><enabled>Y</enabled> </hop>
@@ -491,6 +490,8 @@
   <hop> <from>Add constants 2 2</from><to>xmlvalueDemographic</to><enabled>Y</enabled> </hop>
   <hop> <from>xmlvalueName</from><to>Is there an email</to><enabled>Y</enabled> </hop>
   <hop> <from>Is there an email</from><to>xmlvalueEmail 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Replace in string</from><to>XML WorkAssignmentInfo 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>XML WorkAssignmentInfo 2</from><to>XML WorkAssignmentInfo</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -1809,7 +1810,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1411</xloc>
-      <yloc>383</yloc>
+      <yloc>528</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1834,7 +1835,7 @@
     </file>
     <fields>
       <field>
-        <name>ElementString</name>
+        <name>PERCENTTIMEEMPLOYED</name>
         <element>AdminTime</element>
         <type>None</type>
         <format/>
@@ -2002,7 +2003,7 @@
     </file>
     <fields>
       <field>
-        <name>ElementString</name>
+        <name>PERCENTTIMEEMPLOYED</name>
         <element>GovernanceTime</element>
         <type>None</type>
         <format/>
@@ -2128,7 +2129,7 @@
     </file>
     <fields>
       <field>
-        <name>ElementString</name>
+        <name>PERCENTTIMEEMPLOYED</name>
         <element>K12Supervisory</element>
         <type>None</type>
         <format/>
@@ -2184,7 +2185,7 @@
     </file>
     <fields>
       <field>
-        <name>ElementString</name>
+        <name>PERCENTTIMEEMPLOYED</name>
         <element>K12TeacherTime</element>
         <type>None</type>
         <format/>
@@ -2195,39 +2196,11 @@
         <length>-1</length>
         <precision>-1</precision>
         <attribute>N</attribute>
-        <attributeParentName/>
+        <attributeParentName> </attributeParentName>
         </field>
       <field>
         <name>ASSIGNMENTTIMECODE</name>
         <element>Code</element>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <attribute>Y</attribute>
-        <attributeParentName>K12TeacherTime</attributeParentName>
-        </field>
-      <field>
-        <name>TimeWorked</name>
-        <element>K12TeacherTime</element>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <attribute>N</attribute>
-        <attributeParentName/>
-        </field>
-      <field>
-        <name>PERCENTTIMEEMPLOYED</name>
-        <element/>
         <type>None</type>
         <format/>
         <currency/>
@@ -2268,7 +2241,7 @@
     </file>
     <fields>
       <field>
-        <name>ElementString</name>
+        <name>PERCENTTIMEEMPLOYED</name>
         <element>ExternalServiceTime</element>
         <type>None</type>
         <format/>
@@ -2324,7 +2297,7 @@
     </file>
     <fields>
       <field>
-        <name>ElementString</name>
+        <name>PERCENTTIMEEMPLOYED</name>
         <element>LibraryTime</element>
         <type>None</type>
         <format/>
@@ -2730,7 +2703,7 @@
     </file>
     <fields>
       <field>
-        <name>ElementString</name>
+        <name>PERCENTTIMEEMPLOYED</name>
         <element>PlantOpsTime</element>
         <type>None</type>
         <format/>
@@ -2786,7 +2759,7 @@
     </file>
     <fields>
       <field>
-        <name>ElementString</name>
+        <name>PERCENTTIMEEMPLOYED</name>
         <element>PreKTime</element>
         <type>None</type>
         <format/>
@@ -2842,7 +2815,7 @@
     </file>
     <fields>
       <field>
-        <name>ElementString</name>
+        <name>PERCENTTIMEEMPLOYED</name>
         <element>StudentSupportTime</element>
         <type>None</type>
         <format/>
@@ -2898,7 +2871,7 @@
     </file>
     <fields>
       <field>
-        <name>ElementString</name>
+        <name>PERCENTTIMEEMPLOYED</name>
         <element>TransAdminTime</element>
         <type>None</type>
         <format/>
@@ -2924,20 +2897,6 @@
         <precision>-1</precision>
         <attribute>Y</attribute>
         <attributeParentName>TransAdminTime</attributeParentName>
-        </field>
-      <field>
-        <name>PERCENTTIMEEMPLOYED</name>
-        <element/>
-        <type>None</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <attribute>N</attribute>
-        <attributeParentName/>
         </field>
     </fields>
      <cluster_schema/>
@@ -3263,6 +3222,70 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>189</xloc>
       <yloc>584</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>XML WorkAssignmentInfo 2</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>UTF-8</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;XML_40WorkAssignmentInfo</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>xml</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>xmlvalueObjectData</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1413</xloc>
+      <yloc>391</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

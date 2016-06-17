@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;06&#x2f;09 11&#x3a;28&#x3a;36.681</modified_date>
+  <modified_date>2016&#x2f;06&#x2f;17 15&#x3a;24&#x3a;54.451</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -438,7 +438,6 @@
   <order>
   <hop> <from>EEP Master</from><to>Join Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Position Cross-Reference</from><to>Get Gov Position</to><enabled>Y</enabled> </hop>
-  <hop> <from>Employee Info</from><to>Join Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Government Locations</from><to>Add Gov Location</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Gov Position</from><to>Add Gov Location</to><enabled>Y</enabled> </hop>
   <hop> <from>Assignment Types</from><to>Add Contract Type</to><enabled>Y</enabled> </hop>
@@ -448,9 +447,16 @@
   <hop> <from>Salary&#x2f;Grid Data</from><to>Get Salary&#x2f;Grid</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Salary&#x2f;Grid</from><to>Get Gov Position</to><enabled>Y</enabled> </hop>
   <hop> <from>Is data missing&#x3f;</from><to>Errors &#x28;Missing data&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Is data missing&#x3f;</from><to>OrganizationEmployment</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Contract Type</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>Is data missing&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Employee Info</from><to>Join Master</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Contract Type</from><to>Sort rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows</from><to>Group by</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows</from><to>Unique rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Unique rows</from><to>Get Salary&#x2f;FTE</to><enabled>Y</enabled> </hop>
+  <hop> <from>Group by</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>Get Salary&#x2f;FTE</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is data missing&#x3f;</from><to>Add sequence</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add sequence</from><to>OrganizationEmployment</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Salary&#x2f;FTE</from><to>Is data missing&#x3f;</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Contract Type</name>
@@ -482,8 +488,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>877</xloc>
-      <yloc>182</yloc>
+      <xloc>1013</xloc>
+      <yloc>179</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -524,8 +530,37 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>599</xloc>
-      <yloc>182</yloc>
+      <xloc>735</xloc>
+      <yloc>179</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add sequence</name>
+    <type>Sequence</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <valuename>refid</valuename>
+      <use_database>N</use_database>
+      <connection/>
+      <schema/>
+      <seqname>SEQ_</seqname>
+      <use_counter>Y</use_counter>
+      <counter_name/>
+      <start_at>1</start_at>
+      <increment_by>1</increment_by>
+      <max_value>999999999</max_value>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1144</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -550,8 +585,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>877</xloc>
-      <yloc>45</yloc>
+      <xloc>1013</xloc>
+      <yloc>39</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -694,8 +729,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>182</xloc>
-      <yloc>45</yloc>
+      <xloc>318</xloc>
+      <yloc>39</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -712,7 +747,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>SELECT  DISTINCT &#xd;&#xa;        hei.EMPLOYEE_NO,&#xd;&#xa;        hei.LAST_NAME as LASTNAME,&#xd;&#xa;        hei.FIRST_NAME as FIRSTNAME,&#xd;&#xa;        hei.MIDDLE_NAME as MIDDLENAME,&#xd;&#xa;        hed.GENDER,&#xd;&#xa;		CASE WHEN hea.EMPLOYEE_EMAIL &#x3e; &#x27; &#x27; THEN &#x27;Primary&#x27; ELSE &#x27;&#x27; END AS EMAIL_TYPE,&#xd;&#xa;        CASE WHEN hea.EMPLOYEE_EMAIL &#x3e; &#x27; &#x27;&#xd;&#xa;                THEN CASE WHEN hea.EMPLOYEE_EMAIL LIKE &#x27;&#x25;&#x40;&#x25;&#x27;&#xd;&#xa;                        THEN hea.EMPLOYEE_EMAIL&#xd;&#xa;                        ELSE CONCAT&#x28;RTRIM&#x28;hea.EMPLOYEE_EMAIL&#x29;,&#x27;&#x40;&#x24;&#x7b;DIST_DOMAIN&#x7d;&#x27;&#x29;&#xd;&#xa;                        END&#xd;&#xa;                END as EMAIL,&#xd;&#xa;        &#x27;Mailing&#x27; as ADDRESS_TYPE,&#xd;&#xa;        hed.ADDRESS_1 as Line1,&#xd;&#xa;        hed.ADDRESS_2 as Line2,&#xd;&#xa;        hed.CITY,&#xd;&#xa;        hed.PROVINCE as StatePr,&#xd;&#xa;        hed.POSTAL_CODE as PostalCode,&#xd;&#xa;        hed.COUNTRY,&#xd;&#xa;        &#x27;NA&#x27; as PHONEFORMAT,&#xd;&#xa;        &#x27;Home&#x27; as HOMEPHONETYPE,&#xd;&#xa;        CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;&#x27;&#x28;&#x27;,SUBSTRING&#x28;hed.PHONE_NO,1,3&#x29;&#x29;,&#x27;&#x29; &#x27;&#x29;,SUBSTRING&#x28;hed.Phone_no,4,3&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;hed.PHONE_NO,7,4&#x29;&#x29; as HOMEPHONE,&#xd;&#xa;        CASE WHEN hed.PHONE_NO_2 &#x3e; &#x27; &#x27;&#xd;&#xa;                THEN &#x27;Mobile&#x27;&#xd;&#xa;                END as MOBILEPHONETYPE,&#xd;&#xa;		CASE WHEN hed.PHONE_NO_2 &#x3e; &#x27; &#x27;&#xd;&#xa;				THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;&#x27;&#x28;&#x27;,SUBSTRING&#x28;hed.PHONE_NO_2,1,3&#x29;&#x29;,&#x27;&#x29; &#x27;&#x29;,SUBSTRING&#x28;hed.Phone_NO_2,4,3&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;hed.PHONE_NO_2,7,4&#x29;&#x29; &#xd;&#xa;				END as MOBILEPHONE,&#xd;&#xa;        hei.STATUS,&#xd;&#xa;        hei.EMPLOYEE_CATEGORY,&#xd;&#xa;        hed.&#x24;&#x7b;ABORIGINAL&#x7d; as ABORIGINAL,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;RTRIM&#x28;ha.EMPLOYEE_NO&#x29;,&#x27;_&#x27;&#x29;,ha.START_DATE&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;hal.LOCATION&#x29;&#x29;,RTRIM&#x28;ha.Department&#x29;&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;ha.POSITION_CODE&#x29;&#x29; as ContractIdentifier,&#xd;&#xa;		ha.EMPLOYEE_NO,&#xd;&#xa;        ha.POSITION_CODE,&#xd;&#xa;		hatc.CODE as Assign_type,&#xd;&#xa;		CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27; &#x27;&#xd;&#xa;				THEN &#x27;01&#x27;&#xd;&#xa;				ELSE&#xd;&#xa;					CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;STF&#x27; OR hpc.BARGAINING_UNIT &#x3d; &#x27;SECTA&#x27;&#xd;&#xa;						THEN &#x27;02&#x27;&#xd;&#xa;						ELSE &#xd;&#xa;							CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;LEADS&#x27;&#xd;&#xa;								THEN &#x27;03&#x27;&#xd;&#xa;								ELSE &#xd;&#xa;									CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;CUPE&#x27; OR hpc.BARGAINING_UNIT &#x3d; &#x27;3766&#x27; OR hpc.BARGAINING_UNIT &#x3d; &#x27;650&#x27;&#xd;&#xa;										THEN &#x27;04&#x27;&#xd;&#xa;										ELSE &#xd;&#xa;											CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;SGEU&#x27;&#xd;&#xa;												THEN &#x27;04&#x27;&#xd;&#xa;												ELSE &#x27;01&#x27;&#xd;&#xa;												END&#xd;&#xa;										END			&#xd;&#xa;								END&#xd;&#xa;						END&#xd;&#xa;				END&#xd;&#xa;			as Affiliation,&#xd;&#xa;		hal.LOCATION,&#xd;&#xa;		CASE WHEN hpc.HOURS_OR_FTE &#x3d; &#x27;F&#x27;&#xd;&#xa;			THEN ROUND&#x28;ha.HOURS_FTE &#x2a; 100,0&#x29;&#xd;&#xa;			ELSE ROUND&#x28;&#x28;ha.HOURS_PER_DAY &#x2f; hpc.HOURS_PER_DAY&#x29; &#x2a; 100,0&#x29;&#xd;&#xa;			END as PercentTimeEmployed,&#xd;&#xa;        ha.HOURS_FTE,&#xd;&#xa;		ha.START_DATE,&#xd;&#xa;		ha.END_DATE,&#xd;&#xa;		CASE WHEN START_DATE &#x3c; &#x24;&#x7b;SCHOOL_START&#x7d;&#xd;&#xa;			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,7,2&#x29;&#x29; &#xd;&#xa;			ELSE CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.START_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,7,2&#x29;&#x29; &#xd;&#xa;			END AS STARTDATE,&#xd;&#xa;        CASE WHEN END_DATE &#x3c; &#x27;30000101&#x27;&#xd;&#xa; 			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.END_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,7,2&#x29;&#x29;&#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;            END AS ENDDATE,&#xd;&#xa;	    LEAVE_REASON as SeparationReason,&#xd;&#xa;		THE_KEY&#xd;&#xa;  FROM HR_EMPLOYEE_DEMOGRAPHICS hed&#xd;&#xa;        LEFT JOIN HR_EMPLOYEE_INTERLINK hei ON hei.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;        LEFT JOIN HR_EMAIL_ADDRESS hea ON hea.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;		LEFT JOIN HR_ASSIGNMENTS ha ON ha.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_TYPE_CODE hatc ON hatc.CODE &#x3d; ha.ASSIGNMENT_TYPE&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa;        LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa; WHERE hei.PAYROLL_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;	AND END_DATE &#x3e; &#x24;&#x7b;SCHOOL_START&#x7d; &#xd;&#xa;	AND hours_fte &#x3e; 0 &#xd;&#xa;	AND hal.LOCATION &#x3e; &#x27; &#x27;&#xd;&#xa; ORDER by ha.EMPLOYEE_NO,ha.POSITION_CODE</sql>
+    <sql>SELECT  DISTINCT &#xd;&#xa;        hei.EMPLOYEE_NO,&#xd;&#xa;        hei.LAST_NAME as LASTNAME,&#xd;&#xa;        hei.FIRST_NAME as FIRSTNAME,&#xd;&#xa;        hei.MIDDLE_NAME as MIDDLENAME,&#xd;&#xa;        hed.GENDER,&#xd;&#xa;		CASE WHEN hea.EMPLOYEE_EMAIL &#x3e; &#x27; &#x27; THEN &#x27;Primary&#x27; ELSE &#x27;&#x27; END AS EMAIL_TYPE,&#xd;&#xa;        CASE WHEN hea.EMPLOYEE_EMAIL &#x3e; &#x27; &#x27;&#xd;&#xa;                THEN CASE WHEN hea.EMPLOYEE_EMAIL LIKE &#x27;&#x25;&#x40;&#x25;&#x27;&#xd;&#xa;                        THEN hea.EMPLOYEE_EMAIL&#xd;&#xa;                        ELSE CONCAT&#x28;RTRIM&#x28;hea.EMPLOYEE_EMAIL&#x29;,&#x27;&#x24;&#x7b;DISTRICT_DOMAIN&#x7d;&#x27;&#x29;&#xd;&#xa;                        END&#xd;&#xa;                END as EMAIL,&#xd;&#xa;        &#x27;Mailing&#x27; as ADDRESS_TYPE,&#xd;&#xa;        hed.ADDRESS_1 as Line1,&#xd;&#xa;        hed.ADDRESS_2 as Line2,&#xd;&#xa;        hed.CITY,&#xd;&#xa;        hed.PROVINCE as StatePr,&#xd;&#xa;        hed.POSTAL_CODE as PostalCode,&#xd;&#xa;        hed.COUNTRY,&#xd;&#xa;        &#x27;NA&#x27; as PHONEFORMAT,&#xd;&#xa;        &#x27;Home&#x27; as HOMEPHONETYPE,&#xd;&#xa;        CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;&#x27;&#x28;&#x27;,SUBSTRING&#x28;hed.PHONE_NO,1,3&#x29;&#x29;,&#x27;&#x29; &#x27;&#x29;,SUBSTRING&#x28;hed.Phone_no,4,3&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;hed.PHONE_NO,7,4&#x29;&#x29; as HOMEPHONE,&#xd;&#xa;        CASE WHEN hed.PHONE_NO_2 &#x3e; &#x27; &#x27;&#xd;&#xa;                THEN &#x27;Mobile&#x27;&#xd;&#xa;                END as MOBILEPHONETYPE,&#xd;&#xa;		CASE WHEN hed.PHONE_NO_2 &#x3e; &#x27; &#x27;&#xd;&#xa;				THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;&#x27;&#x28;&#x27;,SUBSTRING&#x28;hed.PHONE_NO_2,1,3&#x29;&#x29;,&#x27;&#x29; &#x27;&#x29;,SUBSTRING&#x28;hed.Phone_NO_2,4,3&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;hed.PHONE_NO_2,7,4&#x29;&#x29; &#xd;&#xa;				END as MOBILEPHONE,&#xd;&#xa;        hei.STATUS,&#xd;&#xa;        hei.EMPLOYEE_CATEGORY,&#xd;&#xa;        hed.&#x24;&#x7b;ABORIGINAL&#x7d; as ABORIGINAL,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;RTRIM&#x28;ha.EMPLOYEE_NO&#x29;,&#x27;_&#x27;&#x29;,ha.START_DATE&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;ha.POSITION_CODE&#x29;&#x29;,RTRIM&#x28;hatc.CODE&#x29;&#x29; as ContractIdentifier,&#xd;&#xa; 		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;RTRIM&#x28;ha.EMPLOYEE_NO&#x29;,&#x27;_&#x27;&#x29;,ha.START_DATE&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;hal.LOCATION&#x29;&#x29;,RTRIM&#x28;ha.Department&#x29;&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;ha.POSITION_CODE&#x29;&#x29; as ContractIdentifier1,&#xd;&#xa;        ha.POSITION_CODE,&#xd;&#xa;		hatc.CODE as Assign_type,&#xd;&#xa;		CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27; &#x27;&#xd;&#xa;				THEN &#x27;01&#x27;&#xd;&#xa;				ELSE&#xd;&#xa;					CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;STF&#x27; OR hpc.BARGAINING_UNIT &#x3d; &#x27;SECTA&#x27;&#xd;&#xa;						THEN &#x27;02&#x27;&#xd;&#xa;						ELSE &#xd;&#xa;							CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;LEADS&#x27;&#xd;&#xa;								THEN &#x27;03&#x27;&#xd;&#xa;								ELSE &#xd;&#xa;									CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;CUPE&#x27; OR hpc.BARGAINING_UNIT &#x3d; &#x27;3766&#x27; OR hpc.BARGAINING_UNIT &#x3d; &#x27;650&#x27;&#xd;&#xa;										THEN &#x27;04&#x27;&#xd;&#xa;										ELSE &#xd;&#xa;											CASE WHEN hpc.BARGAINING_UNIT &#x3d; &#x27;SGEU&#x27;&#xd;&#xa;												THEN &#x27;04&#x27;&#xd;&#xa;												ELSE &#x27;01&#x27;&#xd;&#xa;												END&#xd;&#xa;										END			&#xd;&#xa;								END&#xd;&#xa;						END&#xd;&#xa;				END&#xd;&#xa;			as Affiliation,&#xd;&#xa;		hal.LOCATION,&#xd;&#xa;		CASE WHEN hpc.HOURS_OR_FTE &#x3d; &#x27;F&#x27;&#xd;&#xa;			THEN ROUND&#x28;ha.HOURS_FTE &#x2a; 100,0&#x29;&#xd;&#xa;			ELSE ROUND&#x28;&#x28;ha.HOURS_PER_DAY &#x2f; hpc.HOURS_PER_DAY&#x29; &#x2a; 100,0&#x29;&#xd;&#xa;			END as PercentTimeEmployed,&#xd;&#xa;        ha.HOURS_FTE,&#xd;&#xa;		ha.START_DATE,&#xd;&#xa;		ha.END_DATE,&#xd;&#xa;		CASE WHEN START_DATE &#x3c; &#x24;&#x7b;SCHOOL_START&#x7d;&#xd;&#xa;			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,7,2&#x29;&#x29; &#xd;&#xa;			ELSE CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.START_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,7,2&#x29;&#x29; &#xd;&#xa;			END AS STARTDATE,&#xd;&#xa;        CASE WHEN END_DATE &#x3c; &#x27;30000101&#x27;&#xd;&#xa; 			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.END_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,7,2&#x29;&#x29;&#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;            END AS ENDDATE,&#xd;&#xa;	    LEAVE_REASON as SeparationReason,&#xd;&#xa;		THE_KEY&#xd;&#xa;  FROM HR_EMPLOYEE_DEMOGRAPHICS hed&#xd;&#xa;        LEFT JOIN HR_EMPLOYEE_INTERLINK hei ON hei.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;        LEFT JOIN HR_EMAIL_ADDRESS hea ON hea.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;		LEFT JOIN HR_ASSIGNMENTS ha ON ha.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_TYPE_CODE hatc ON hatc.CODE &#x3d; ha.ASSIGNMENT_TYPE&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa;        LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa; WHERE hei.PAYROLL_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;	AND START_DATE &#x3c;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;&#xd;&#xa; 	AND END_DATE &#x3e;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;&#xd;&#xa;	AND hours_fte &#x3e; 0 &#xd;&#xa;	AND hal.LOCATION &#x3e; &#x27; &#x27;&#xd;&#xa; ORDER by ha.EMPLOYEE_NO,ha.POSITION_CODE, START_DATE,END_DATE</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -720,8 +755,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>43</xloc>
-      <yloc>182</yloc>
+      <xloc>165</xloc>
+      <yloc>179</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -902,8 +937,8 @@
       </custom>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>734</xloc>
-      <yloc>421</yloc>
+      <xloc>1005</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -944,8 +979,58 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>460</xloc>
-      <yloc>182</yloc>
+      <xloc>596</xloc>
+      <yloc>179</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Salary&#x2f;FTE</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Select values</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>EMPLOYEE_NO</name>
+        <field>EMPLOYEE_NO</field>
+      </key>
+      <key>
+        <name>EMPLOYMENTPOSITION</name>
+        <field>EMPLOYMENTPOSITION</field>
+      </key>
+      <key>
+        <name>CONTRACTTYPE</name>
+        <field>CONTRACTTYPE</field>
+      </key>
+      <value>
+        <name>SALARY_BASE_AMT</name>
+        <rename>Salary</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>PERCENTTIMEEMPLOYED</name>
+        <rename>PercentEmployed</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1144</xloc>
+      <yloc>333</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -996,8 +1081,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>321</xloc>
-      <yloc>182</yloc>
+      <xloc>457</xloc>
+      <yloc>179</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1014,7 +1099,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>SELECT  PRM_CODE,&#xd;&#xa;		NEW_CODE as EmploymentLocation,&#xd;&#xa;		CASE WHEN SUBSTRING&#x28;RTRIM&#x28;NEW_CODE&#x29;,4,4&#x29; &#x3d; &#x27;0000&#x27; OR SUBSTRING&#x28;RTRIM&#x28;NEW_CODE&#x29;,4,4&#x29; &#x3d; &#x27;0500&#x27; THEN &#x27;01&#x27; ELSE &#x27;02&#x27; END as EmployerType&#xd;&#xa;  FROM HR_TRANSLATION_CODE&#xd;&#xa;  WHERE FIELD_TYPE &#x3d; &#x27;LOCATION&#x27;&#xd;&#xa;  ORDER by PRM_CODE&#xd;&#xa;</sql>
+    <sql>SELECT  PRM_CODE,&#xd;&#xa;		NEW_CODE as EmploymentLocation,&#xd;&#xa;		CASE WHEN SUBSTRING&#x28;RTRIM&#x28;NEW_CODE&#x29;,4,4&#x29; &#x3d; &#x27;0000&#x27; OR SUBSTRING&#x28;RTRIM&#x28;NEW_CODE&#x29;,4,4&#x29; &#x3d; &#x27;0500&#x27; THEN &#x27;01&#x27; ELSE &#x27;01&#x27; END as EmployerType&#xd;&#xa;  FROM HR_TRANSLATION_CODE&#xd;&#xa;  WHERE FIELD_TYPE &#x3d; &#x27;LOCATION&#x27;&#xd;&#xa;  ORDER by PRM_CODE&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1022,8 +1107,60 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>599</xloc>
-      <yloc>45</yloc>
+      <xloc>735</xloc>
+      <yloc>39</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Group by</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <all_rows>N</all_rows>
+      <ignore_aggregate>N</ignore_aggregate>
+      <field_ignore/>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>grp</prefix>
+      <add_linenr>N</add_linenr>
+      <linenr_fieldname/>
+      <give_back_row>N</give_back_row>
+      <group>
+        <field>
+          <name>EMPLOYEE_NO</name>
+        </field>
+        <field>
+          <name>EMPLOYMENTPOSITION</name>
+        </field>
+        <field>
+          <name>CONTRACTTYPE</name>
+        </field>
+      </group>
+      <fields>
+        <field>
+          <aggregate>PERCENTTIMEEMPLOYED</aggregate>
+          <subject>PERCENTTIMEEMPLOYED</subject>
+          <type>SUM</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>SALARY_BASE_AMT</aggregate>
+          <subject>SALARY_BASE_AMT</subject>
+          <type>SUM</type>
+          <valuefield/>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1287</xloc>
+      <yloc>180</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1048,8 +1185,8 @@
 </formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>732</xloc>
-      <yloc>182</yloc>
+      <xloc>868</xloc>
+      <yloc>179</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1066,7 +1203,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Errors &#x28;Missing data&#x29;</send_true_to>
-<send_false_to>OrganizationEmployment</send_false_to>
+<send_false_to>Add sequence</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -1096,8 +1233,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>879</xloc>
-      <yloc>421</yloc>
+      <xloc>1144</xloc>
+      <yloc>419</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1124,8 +1261,8 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>182</xloc>
-      <yloc>182</yloc>
+      <xloc>318</xloc>
+      <yloc>179</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1247,8 +1384,8 @@
       </field>
       <field>
         <name>PERCENTTIMEEMPLOYED</name>
-        <type>String</type>
-        <format/>
+        <type>Number</type>
+        <format>&#x23;&#x23;&#x23;</format>
         <currency/>
         <decimal>.</decimal>
         <group/>
@@ -1486,90 +1623,6 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>ADDRESS_TYPE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>LINE1</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>LINE2</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>CITY</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>STATEPR</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>POSTALCODE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>COUNTRY</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
         <name>PHONEFORMAT</name>
         <type>String</type>
         <format/>
@@ -1629,11 +1682,23 @@
         <length>-1</length>
         <precision>-1</precision>
       </field>
+      <field>
+        <name>refid</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1039</xloc>
-      <yloc>421</yloc>
+      <xloc>1286</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1658,8 +1723,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>460</xloc>
-      <yloc>45</yloc>
+      <xloc>596</xloc>
+      <yloc>39</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1684,8 +1749,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>321</xloc>
-      <yloc>45</yloc>
+      <xloc>457</xloc>
+      <yloc>39</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1694,7 +1759,7 @@
     <name>Select values</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -1734,8 +1799,83 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>878</xloc>
-      <yloc>295</yloc>
+      <xloc>1287</xloc>
+      <yloc>337</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>EMPLOYEE_NO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>EMPLOYMENTPOSITION</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>CONTRACTTYPE</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1144</xloc>
+      <yloc>179</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Unique rows</name>
+    <type>Unique</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <count_rows>N</count_rows>
+      <count_field/>
+      <reject_duplicate_row>N</reject_duplicate_row>
+      <error_description/>
+    <fields>      <field>        <name>EMPLOYEE_NO</name>
+        <case_insensitive>N</case_insensitive>
+        </field>      <field>        <name>EMPLOYMENTPOSITION</name>
+        <case_insensitive>N</case_insensitive>
+        </field>      <field>        <name>CONTRACTTYPE</name>
+        <case_insensitive>N</case_insensitive>
+        </field>      </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1144</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

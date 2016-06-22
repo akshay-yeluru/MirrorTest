@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;06&#x2f;19 08&#x3a;12&#x3a;59.356</modified_date>
+  <modified_date>2016&#x2f;06&#x2f;21 11&#x3a;37&#x3a;14.975</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -444,8 +444,6 @@
   <hop> <from>Is TimeCode filled&#x3f; 2</from><to>Errors &#x28;No TimeCodes&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Is Location &#x26; TimeCode filled&#x3f;</from><to>Employees ByPassed</to><enabled>Y</enabled> </hop>
   <hop> <from>Employees ByPassed</from><to>Is TimeCode filled&#x3f; 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>EEP Parameters</from><to>Time Allotments</to><enabled>Y</enabled> </hop>
-  <hop> <from>Join Master</from><to>Get Gov Position</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Gov Location</from><to>Add Contract Type</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Contract Type</from><to>Put Time Type&#x2f;Code</to><enabled>Y</enabled> </hop>
   <hop> <from>Count by Location&#x2f;Position</from><to>Get Gov Position 2</to><enabled>Y</enabled> </hop>
@@ -508,10 +506,10 @@
   <hop> <from>Select values 3</from><to>Set Supervisory to String</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Gov Position</from><to>Add Gov Location</to><enabled>Y</enabled> </hop>
   <hop> <from>Put Time Type&#x2f;Code</from><to>Get Alternate TimeCode</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set Position Type 2</from><to>Add constants 3</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set Position Type 2</from><to>Set Position Type</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set Position Type</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants 3</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is this K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;</from><to>Position Type &#x3d; Teaching</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is this K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;</from><to>Position Type &#x3d; PostionTime</to><enabled>Y</enabled> </hop>
+  <hop> <from>Position Type &#x3d; PostionTime</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Position Type &#x3d; Teaching</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Record Counter</from><to>Is there a Level &#x25;</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 3</from><to>Record Counter</to><enabled>Y</enabled> </hop>
   <hop> <from>FTE by Position</from><to>Add Position FTE</to><enabled>Y</enabled> </hop>
@@ -521,7 +519,7 @@
   <hop> <from>Calculator 3 2</from><to>Sort rows 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Calculator 2</from><to>Calculator 3 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Calculator 3 3</from><to>Calculator 3 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Is Location &#x26; TimeCode filled&#x3f;</from><to>Set Position Type 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is Location &#x26; TimeCode filled&#x3f;</from><to>Is this K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>Is this a K12Teach time&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>Emp FTE by Location</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>FTE by Position</to><enabled>Y</enabled> </hop>
@@ -531,8 +529,14 @@
   <hop> <from>Add constants 2 2</from><to>Sort rows 2 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>Sort rows 2 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Location PrepTime</from><to>Get Alternate TimeCode</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set  Prep numeric</from><to>Is Location &#x26; TimeCode filled&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Alternate TimeCode</from><to>Set  Prep numeric</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is Location Prep&#x25; over 1&#x3f;</from><to>Divide by 100</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set  Prep numeric</from><to>Is Location Prep&#x25; over 1&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Join Master</from><to>Add constants 4</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants 4</from><to>Get Gov Position</to><enabled>Y</enabled> </hop>
+  <hop> <from>Divide by 100</from><to>Is Location &#x26; TimeCode filled&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is Location Prep&#x25; over 1&#x3f;</from><to>Divide by 1</to><enabled>Y</enabled> </hop>
+  <hop> <from>Divide by 1</from><to>Is Location &#x26; TimeCode filled&#x3f;</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Admin FTE</name>
@@ -1558,7 +1562,7 @@
     </step>
 
   <step>
-    <name>Add constants 3</name>
+    <name>Add constants 4</name>
     <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
@@ -1570,13 +1574,25 @@
            </partitioning>
     <fields>
       <field>
-        <name>PositionType</name>
-        <type>String</type>
+        <name>onehundred</name>
+        <type>Number</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
-        <nullif>TEACHING</nullif>
+        <nullif>100</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>one</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>1</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1584,8 +1600,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1289</xloc>
-      <yloc>204</yloc>
+      <xloc>294</xloc>
+      <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1745,7 +1761,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>692</xloc>
-      <yloc>831</yloc>
+      <yloc>762</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1778,7 +1794,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>929</xloc>
-      <yloc>831</yloc>
+      <yloc>762</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1811,7 +1827,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>692</xloc>
-      <yloc>900</yloc>
+      <yloc>831</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1844,7 +1860,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>810</xloc>
-      <yloc>900</yloc>
+      <yloc>831</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1877,7 +1893,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>929</xloc>
-      <yloc>900</yloc>
+      <yloc>831</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2501,6 +2517,72 @@
     </step>
 
   <step>
+    <name>Divide by 1</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>AltTimePercentP</field_name>
+<calc_type>DIVIDE</calc_type>
+<field_a>alttp1</field_a>
+<field_b>one</field_b>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>5</value_length>
+<value_precision>4</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1387</xloc>
+      <yloc>111</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Divide by 100</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>AltTimePercentP</field_name>
+<calc_type>DIVIDE</calc_type>
+<field_a>alttp1</field_a>
+<field_b>onehundred</field_b>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>5</value_length>
+<value_precision>4</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1255</xloc>
+      <yloc>111</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>EEP Master</name>
     <type>CsvInput</type>
     <description/>
@@ -2640,73 +2722,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>213</xloc>
       <yloc>206</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>EEP Parameters</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <filename>&#x24;&#x7b;INPUT_PATH&#x7d;EEP_PARAMETERS.csv</filename>
-    <filename_field/>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>,</separator>
-    <enclosure>&#x22;</enclosure>
-    <header>Y</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>N</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <encoding/>
-    <fields>
-      <field>
-        <name>TimeCodeToBeSplit</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-      </field>
-      <field>
-        <name>TimeCodeAlternate</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-      </field>
-      <field>
-        <name>AltTimePercentP</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>both</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1483</xloc>
-      <yloc>556</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2994,8 +3009,8 @@
       </custom>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1474</xloc>
-      <yloc>8</yloc>
+      <xloc>1505</xloc>
+      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3171,8 +3186,8 @@
       </custom>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1474</xloc>
-      <yloc>204</yloc>
+      <xloc>1505</xloc>
+      <yloc>404</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3415,7 +3430,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>376</xloc>
+      <xloc>375</xloc>
       <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3880,7 +3895,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Set Position Type 2</send_true_to>
+<send_true_to>Is this K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;</send_true_to>
 <send_false_to>Employees ByPassed</send_false_to>
     <compare>
 <condition>
@@ -3918,7 +3933,53 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1327</xloc>
+      <xloc>1324</xloc>
+      <yloc>206</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Is Location Prep&#x25; over 1&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Divide by 100</send_true_to>
+<send_false_to>Divide by 1</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <conditions>
+    <condition>
+     <negated>N</negated>
+     <leftvalue>alttp1</leftvalue>
+     <function>IS NOT NULL</function>
+     <rightvalue/>
+     <value><name>constant</name><type>String</type><text>K12TEACHER</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
+    <condition>
+     <negated>N</negated>
+     <operator>AND</operator>
+     <leftvalue>alttp1</leftvalue>
+     <function>&#x3e;</function>
+     <rightvalue/>
+     <value><name>constant</name><type>Number</type><text>1.0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x3b;-&#x23;.&#x23;</mask></value>     </condition>
+    </conditions>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1317</xloc>
       <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3973,8 +4034,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1474</xloc>
-      <yloc>105</yloc>
+      <xloc>1505</xloc>
+      <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4008,7 +4069,48 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>810</xloc>
-      <yloc>831</yloc>
+      <yloc>762</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Is this K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Position Type &#x3d; Teaching</send_true_to>
+<send_false_to>Position Type &#x3d; PostionTime</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>ASSIGNMENTTIMETYPE</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>K12TEACHER</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>ASSIGNMENTTIMECODE</leftvalue>
+   <function>&#x3c;&#x3e;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>04</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1324</xloc>
+      <yloc>296</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4331,6 +4433,65 @@
     </step>
 
   <step>
+    <name>Position Type &#x3d; PostionTime</name>
+    <type>Janino</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <formula><field_name>POSITIONTYPE</field_name>
+<formula_string>ASSIGNMENTTIMETYPE &#x3d;&#x3d; null &#x3f; &#x22;TEACHING&#x22; &#x3a; POSITIONTIME</formula_string>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1172</xloc>
+      <yloc>345</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Position Type &#x3d; Teaching</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>PositionType</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>TEACHING</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1172</xloc>
+      <yloc>247</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Put Time Type&#x2f;Code</name>
     <type>StreamLookup</type>
     <description/>
@@ -4400,7 +4561,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>810</xloc>
-      <yloc>762</yloc>
+      <yloc>693</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4697,9 +4858,9 @@
            </partitioning>
     <fields>        <select_unspecified>N</select_unspecified>
       <meta>        <name>AltTP</name>
-        <rename>AltTimePercentP</rename>
-        <type>BigNumber</type>
-        <length>9</length>
+        <rename>alttp1</rename>
+        <type>Number</type>
+        <length>6</length>
         <precision>5</precision>
         <conversion_mask/>
         <date_format_lenient>false</date_format_lenient>
@@ -4713,75 +4874,8 @@
         <storage_type>normal</storage_type>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1173</xloc>
+      <xloc>1168</xloc>
       <yloc>8</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set Position Type</name>
-    <type>Janino</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>POSITIONTYPE</field_name>
-<formula_string>ASSIGNMENTTIMETYPE &#x3d;&#x3d; null &#x3f; &#x22;TEACHING&#x22; &#x3a; POSITIONTIME</formula_string>
-<value_type>String</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1373</xloc>
-      <yloc>204</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set Position Type 2</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Add constants 3</send_true_to>
-<send_false_to>Set Position Type</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>ASSIGNMENTTIMETYPE</leftvalue>
-   <function>&#x3d;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>K12TEACHER</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>ASSIGNMENTTIMECODE</leftvalue>
-   <function>&#x3c;&#x3e;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>04</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1327</xloc>
-      <yloc>105</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4948,8 +5042,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1330</xloc>
-      <yloc>294</yloc>
+      <xloc>1021</xloc>
+      <yloc>296</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5094,40 +5188,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>810</xloc>
       <yloc>624</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Time Allotments</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to/>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>TimeCodeToBeSplit</leftvalue>
-   <function>STARTS WITH</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>K12</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1486</xloc>
-      <yloc>457</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

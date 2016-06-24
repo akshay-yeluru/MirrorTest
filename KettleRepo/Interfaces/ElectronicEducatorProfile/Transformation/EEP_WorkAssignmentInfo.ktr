@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;06&#x2f;23 16&#x3a;02&#x3a;26.526</modified_date>
+  <modified_date>2016&#x2f;06&#x2f;24 09&#x3a;13&#x3a;45.525</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -615,6 +615,42 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>702</xloc>
       <yloc>8</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add Contract Type 2</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Assignment Types</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>ASSIGN_TYPE</name>
+        <field>PRM_CODE</field>
+      </key>
+      <value>
+        <name>CONTRACTTYPE</name>
+        <rename>CONTRACTTYPE</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>702</xloc>
+      <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1714,7 +1750,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>SELECT DISTINCT &#xd;&#xa;		hr_assignments.employee_no,&#xd;&#xa;        assignment_key,&#xd;&#xa;        level,&#xd;&#xa;        user_Field_01 as TimePercentP&#xd;&#xa;    FROM hr_assignments,hr_assignment_subject,hr_subject_level_code&#xd;&#xa;    WHERE hr_assignments.payroll_id &#x3d; &#x27;TEAC&#x27;&#xd;&#xa;	    AND START_DATE &#x3c; &#x24;&#x7b;SCHOOL_END&#x7d;&#xd;&#xa;		AND END_DATE &#x3e; &#x24;&#x7b;SCHOOL_START&#x7d;&#xd;&#xa;        AND hr_assignment_subject.employee_no &#x3d; hr_assignments.employee_no&#xd;&#xa;		AND hr_assignment_subject.assignment_key &#x3d; hr_assignments.The_key&#xd;&#xa;		AND level &#x3e; &#x27; &#x27;&#xd;&#xa;		AND hr_subject_level_code.Code &#x3d; hr_assignment_subject.Level&#xd;&#xa;		AND user_Field_01 &#x3e; &#x27; &#x27;</sql>
+    <sql>SELECT DISTINCT &#xd;&#xa;		hr_assignments.employee_no,&#xd;&#xa;        assignment_key,&#xd;&#xa;        level,&#xd;&#xa;        user_Field_01 as TimePercentP&#xd;&#xa;    FROM hr_assignments,hr_assignment_subject,hr_subject_level_code&#xd;&#xa;    WHERE hr_assignments.payroll_id &#x3d; &#x27;TEAC&#x27;&#xd;&#xa;    	AND START_DATE &#x3c;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;&#xd;&#xa;		AND END_DATE &#x3e;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;	&#xd;&#xa;        AND hr_assignment_subject.employee_no &#x3d; hr_assignments.employee_no&#xd;&#xa;		AND hr_assignment_subject.assignment_key &#x3d; hr_assignments.The_key&#xd;&#xa;		AND level &#x3e; &#x27; &#x27;&#xd;&#xa;		AND hr_subject_level_code.Code &#x3d; hr_assignment_subject.Level&#xd;&#xa;		AND user_Field_01 &#x3e; &#x27; &#x27;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -3560,6 +3596,32 @@
     </step>
 
   <step>
+    <name>Get Supervisory Positions</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>SOURCE_RMS</connection>
+    <sql>select position_code AS Super_Position&#xd;&#xa;	from hr_position_code &#xd;&#xa;	where user_defined_field_02 &#x3d; &#x27;K12TEACH04&#x27;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>213</xloc>
+      <yloc>205</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Government Locations</name>
     <type>TableInput</type>
     <description/>
@@ -4027,6 +4089,48 @@
     </step>
 
   <step>
+    <name>Is Location &#x26;Contract Type&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Sort rows</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>EMPLOYMENTLOCATION</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>CONTRACTTYPE</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>865</xloc>
+      <yloc>297</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Is Location Prep&#x25; over 1&#x3f;</name>
     <type>FilterRows</type>
     <description/>
@@ -4347,6 +4451,34 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>213</xloc>
       <yloc>8</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Join Master 2</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<join_type>INNER</join_type>
+<step1>Count Location&#x2f;Position</step1>
+<step2>Get Supervisory Positions</step2>
+    <keys_1>
+      <key>SUPERVISOR_POSITION</key>
+    </keys_1>
+    <keys_2>
+      <key>SUPER_POSITION</key>
+    </keys_2>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>213</xloc>
+      <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5347,138 +5479,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1268</xloc>
       <yloc>762</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add Contract Type 2</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Assignment Types</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>ASSIGN_TYPE</name>
-        <field>PRM_CODE</field>
-      </key>
-      <value>
-        <name>CONTRACTTYPE</name>
-        <rename>CONTRACTTYPE</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>702</xloc>
-      <yloc>297</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Is Location &#x26;Contract Type&#x3f;</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Sort rows</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>EMPLOYMENTLOCATION</leftvalue>
-   <function>IS NOT NULL</function>
-   <rightvalue/>
-   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>CONTRACTTYPE</leftvalue>
-   <function>IS NOT NULL</function>
-   <rightvalue/>
-   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>865</xloc>
-      <yloc>297</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Supervisory Positions</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>SOURCE_RMS</connection>
-    <sql>select position_code AS Super_Position&#xd;&#xa;	from hr_position_code &#xd;&#xa;	where user_defined_field_02 &#x3d; &#x27;K12TEACH04&#x27;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>213</xloc>
-      <yloc>205</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Join Master 2</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<join_type>INNER</join_type>
-<step1>Count Location&#x2f;Position</step1>
-<step2>Get Supervisory Positions</step2>
-    <keys_1>
-      <key>SUPERVISOR_POSITION</key>
-    </keys_1>
-    <keys_2>
-      <key>SUPER_POSITION</key>
-    </keys_2>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>213</xloc>
-      <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

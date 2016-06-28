@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;06&#x2f;28 13&#x3a;21&#x3a;46.874</modified_date>
+  <modified_date>2016&#x2f;06&#x2f;28 17&#x3a;32&#x3a;49.433</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -468,10 +468,8 @@
   <hop> <from>Admin FTE</from><to>Group by 8</to><enabled>Y</enabled> </hop>
   <hop> <from>Non-Teaching Headcount</from><to>Group by 9</to><enabled>Y</enabled> </hop>
   <hop> <from>Is this a K12Teach time&#x3f;</from><to>K12TeacherTime 04&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Is there a Level &#x25;</from><to>Calc Prep by Level&#x25;</to><enabled>Y</enabled> </hop>
   <hop> <from>Emp FTE by Location</from><to>Add Total FTE at location</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Grade Level</from><to>Add Total FTE at location</to><enabled>Y</enabled> </hop>
-  <hop> <from>Assignment Grade Levels</from><to>Select values 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 2</from><to>Add Grade Level</to><enabled>Y</enabled> </hop>
   <hop> <from>Group by</from><to>Add Full Time Educ</to><enabled>Y</enabled> </hop>
   <hop> <from>Group by 9</from><to>Add Non Teaching HC</to><enabled>Y</enabled> </hop>
@@ -496,7 +494,6 @@
   <hop> <from>K12TeacherTime 04&#x3f;</from><to>Add Full Time Educ</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Non Teaching HC</from><to>Add constants</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants</from><to>Sort rows 2 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Calc Prep by Level&#x25;</from><to>Calc Teach by Level&#x25;</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Info</from><to>Join Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Supervisory to String</from><to>Select values</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2 2</from><to>Select values 3</to><enabled>Y</enabled> </hop>
@@ -523,17 +520,12 @@
   <hop> <from>Add constants 2 2</from><to>Sort rows 2 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>Sort rows 2 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Location PrepTime</from><to>Alternate TimeCode</to><enabled>Y</enabled> </hop>
-  <hop> <from>Alternate TimeCode</from><to>Set  Prep numeric</to><enabled>Y</enabled> </hop>
   <hop> <from>Is Location Prep&#x25; over 1&#x3f;</from><to>Divide by 100</to><enabled>Y</enabled> </hop>
   <hop> <from>Set  Prep numeric</from><to>Is Location Prep&#x25; over 1&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Join Master</from><to>Add constants 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants 4</from><to>Get Gov Position</to><enabled>Y</enabled> </hop>
   <hop> <from>Is Location Prep&#x25; over 1&#x3f;</from><to>Divide by 1</to><enabled>Y</enabled> </hop>
   <hop> <from>Is there a Level &#x25;</from><to>Is there a Location&#x25;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Is there a Location&#x25;</from><to>Set Prep to 0</to><enabled>Y</enabled> </hop>
-  <hop> <from>Is there a Location&#x25;</from><to>Set Prep by Location&#x25;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set Prep by Location&#x25;</from><to>Set Teach by Location&#x25;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set Prep to 0</from><to>Set Teach to FTE</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Teach to FTE</from><to>Get real TeachTime</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Gov Location 2</from><to>Add Contract Type 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Assignment Types</from><to>Add Contract Type 2</to><enabled>Y</enabled> </hop>
@@ -546,6 +538,15 @@
   <hop> <from>Location &#x26; TimeCode&#x3f;</from><to>Alternate TimeCode</to><enabled>Y</enabled> </hop>
   <hop> <from>Divide by 100</from><to>K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Divide by 1</from><to>K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is there a Level &#x25;</from><to>Calc Teach by Level&#x25;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is there a Location&#x25;</from><to>Set Teach by Location&#x25;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is there a Location&#x25;</from><to>Set Teach to FTE</to><enabled>Y</enabled> </hop>
+  <hop> <from>Alternate TimeCode</from><to>Concat Fields</to><enabled>Y</enabled> </hop>
+  <hop> <from>Concat Fields</from><to>Set  Prep numeric</to><enabled>Y</enabled> </hop>
+  <hop> <from>Assignment Grade Levels</from><to>Add Contract Type 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Assignment Types</from><to>Add Contract Type 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Contract Type 2 2</from><to>Concat Fields 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Concat Fields 2</from><to>Select values 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Admin FTE</name>
@@ -650,7 +651,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>720</xloc>
-      <yloc>297</yloc>
+      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -711,6 +712,10 @@
       <key>
         <name>EMPLOYMENTLOCATION</name>
         <field>EMPLOYMENTLOCATION</field>
+      </key>
+      <key>
+        <name>POSITION_CODE</name>
+        <field>SUPERVISOR_POSITION</field>
       </key>
       <value>
         <name>K12Supervisory01</name>
@@ -878,7 +883,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>586</xloc>
-      <yloc>297</yloc>
+      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -901,8 +906,8 @@
     <integer_pair>N</integer_pair>
     <lookup>
       <key>
-        <name>EMPLOYEE_NO</name>
-        <field>EMPLOYEE_NO</field>
+        <name>CONTRACTIDENTIFIER</name>
+        <field>CONTRACTIDENTIFIER</field>
       </key>
       <key>
         <name>THE_KEY</name>
@@ -917,8 +922,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>645</xloc>
-      <yloc>557</yloc>
+      <xloc>766</xloc>
+      <yloc>486</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1085,20 +1090,16 @@
     <integer_pair>N</integer_pair>
     <lookup>
       <key>
-        <name>EMPLOYEE_NO</name>
-        <field>EMPLOYEE_NO</field>
+        <name>CONTRACTIDENTIFIER</name>
+        <field>CONTRACTIDENTIFIER</field>
       </key>
       <key>
         <name>EMPLOYMENTLOCATION</name>
         <field>EMPLOYMENTLOCATION</field>
       </key>
       <key>
-        <name>ASSIGNMENTTIMETYPE</name>
-        <field>ASSIGNMENTTIMETYPE</field>
-      </key>
-      <key>
-        <name>ASSIGNMENTTIMECODE</name>
-        <field>ASSIGNMENTTIMECODE</field>
+        <name>POSITIONTYPE</name>
+        <field>POSITIONTYPE</field>
       </key>
       <value>
         <name>FTEATPOSITION</name>
@@ -1133,16 +1134,12 @@
     <integer_pair>N</integer_pair>
     <lookup>
       <key>
-        <name>EMPLOYEE_NO</name>
-        <field>EMPLOYEE_NO</field>
+        <name>CONTRACTIDENTIFIER</name>
+        <field>CONTRACTIDENTIFIER</field>
       </key>
       <key>
         <name>EMPLOYMENTLOCATION</name>
         <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
-        <name>POSITIONTYPE</name>
-        <field>POSITIONTYPE</field>
       </key>
       <value>
         <name>PERCENTTIMEEMPLOYED</name>
@@ -1153,8 +1150,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>900</xloc>
-      <yloc>557</yloc>
+      <xloc>901</xloc>
+      <yloc>486</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1220,20 +1217,8 @@
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>K12PrepTime02</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
         <name>K12TeachtimeA</name>
-        <type>BigNumber</type>
+        <type>Integer</type>
         <format/>
         <currency/>
         <decimal/>
@@ -1245,7 +1230,7 @@
       </field>
       <field>
         <name>K12Teachtime02</name>
-        <type>BigNumber</type>
+        <type>Integer</type>
         <format/>
         <currency/>
         <decimal/>
@@ -1454,18 +1439,6 @@
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
-        <name>K12PrepTime02</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
         <name>K12TeachTimeA</name>
         <type>String</type>
         <format/>
@@ -1654,6 +1627,18 @@
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
       </field>
+      <field>
+        <name>pointfournine</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>.49</nullif>
+        <length>4</length>
+        <precision>2</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -1750,7 +1735,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>SELECT DISTINCT &#xd;&#xa;		hr_assignments.employee_no,&#xd;&#xa;        assignment_key,&#xd;&#xa;        level,&#xd;&#xa;        user_Field_01 as TimePercentP&#xd;&#xa;    FROM hr_assignments,hr_assignment_subject,hr_subject_level_code&#xd;&#xa;    WHERE hr_assignments.payroll_id &#x3d; &#x27;TEAC&#x27;&#xd;&#xa;    	AND START_DATE &#x3c;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;&#xd;&#xa;		AND END_DATE &#x3e;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;	&#xd;&#xa;        AND hr_assignment_subject.employee_no &#x3d; hr_assignments.employee_no&#xd;&#xa;		AND hr_assignment_subject.assignment_key &#x3d; hr_assignments.The_key&#xd;&#xa;		AND level &#x3e; &#x27; &#x27;&#xd;&#xa;		AND hr_subject_level_code.Code &#x3d; hr_assignment_subject.Level&#xd;&#xa;		AND user_Field_01 &#x3e; &#x27; &#x27;</sql>
+    <sql>SELECT DISTINCT &#xd;&#xa;		CONCAT&#x28;RTRIM&#x28;hr_assignments.employee_no&#x29;,&#x27;_&#x27;&#x29; as ContractIdentifier1,&#xd;&#xa;        assignment_key,&#xd;&#xa;        level,&#xd;&#xa;		ASSIGNMENT_TYPE as Assign_type,&#xd;&#xa;        user_Field_01 as TimePercentP&#xd;&#xa;    FROM hr_assignments,hr_assignment_subject,hr_subject_level_code&#xd;&#xa;    WHERE hr_assignments.payroll_id &#x3d; &#x27;TEAC&#x27;&#xd;&#xa;    	AND START_DATE &#x3c;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;&#xd;&#xa;		AND END_DATE &#x3e;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;	&#xd;&#xa;        AND hr_assignment_subject.employee_no &#x3d; hr_assignments.employee_no&#xd;&#xa;		AND hr_assignment_subject.assignment_key &#x3d; hr_assignments.The_key&#xd;&#xa;		AND level &#x3e; &#x27; &#x27;&#xd;&#xa;		AND hr_subject_level_code.Code &#x3d; hr_assignment_subject.Level&#xd;&#xa;		AND user_Field_01 &#x3e; &#x27; &#x27;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1758,8 +1743,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>645</xloc>
-      <yloc>693</yloc>
+      <xloc>988</xloc>
+      <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1791,39 +1776,6 @@
     </step>
 
   <step>
-    <name>Calc Prep by Level&#x25;</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <calculation><field_name>K12PrepTime02</field_name>
-<calc_type>MULTIPLY</calc_type>
-<field_a>FTEATLOCATION</field_a>
-<field_b>TimePercentP</field_b>
-<field_c/>
-<value_type>BigNumber</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>645</xloc>
-      <yloc>762</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Calc Teach by Level&#x25;</name>
     <type>Calculator</type>
     <description/>
@@ -1839,7 +1791,7 @@
 <field_a>FTEATPOSITION</field_a>
 <field_b>TimePercentP</field_b>
 <field_c/>
-<value_type>BigNumber</value_type>
+<value_type>Integer</value_type>
 <value_length>-1</value_length>
 <value_precision>-1</value_precision>
 <remove>N</remove>
@@ -1851,7 +1803,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>645</xloc>
-      <yloc>900</yloc>
+      <yloc>902</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1868,7 +1820,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>select ha.Employee_no,&#xd;&#xa;		Location,&#xd;&#xa;      	Position_code,&#xd;&#xa;		ha.Assignment_type as Assign_type,&#xd;&#xa;		hpc.Supervisor_position,&#xd;&#xa;		SUM&#x28;CASE WHEN hpc.HOURS_OR_FTE &#x3d; &#x27;F&#x27;&#xd;&#xa;                  THEN ha.HOURS_FTE&#xd;&#xa;                  ELSE &#x28;ha.HOURS_PER_DAY &#x2f; hpc.HOURS_PER_DAY&#x29;&#xd;&#xa;                  END&#x29;&#xd;&#xa;		    as FTE,&#xd;&#xa;       SUM&#x28;1&#x29; as HeadCount&#xd;&#xa;    FROM hr_assignments ha&#xd;&#xa;		LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa; 		LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa;		LEFT JOIN HR_employee_interlink hei ON hei.employee_no &#x3d; ha.employee_no&#xd;&#xa;    WHERE START_DATE &#x3c;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;&#xd;&#xa;		AND END_DATE &#x3e;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;	&#xd;&#xa;		AND location &#x3e; &#x27; &#x27;&#xd;&#xa;		AND hei.Status &#x3d; &#x27;A&#x27;&#xd;&#xa;		AND hei.Payroll_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;	GROUP BY ha.Employee_no,Location, Position_code, ha.Assignment_type, hpc.Supervisor_position&#xd;&#xa;	ORDER BY hpc.Supervisor_position, ha.Employee_no, Location, Position_code&#xd;&#xa;</sql>
+    <sql>select ha.Employee_no,&#xd;&#xa;		Location,&#xd;&#xa;      	Position_code,&#xd;&#xa;		ha.Assignment_type as Assign_type,&#xd;&#xa;		hpc.Supervisor_position,&#xd;&#xa;		SUM&#x28;CASE WHEN hpc.HOURS_OR_FTE &#x3d; &#x27;F&#x27;&#xd;&#xa;                  THEN ha.HOURS_FTE&#xd;&#xa;                  ELSE &#x28;ha.HOURS_PER_DAY &#x2f; hpc.HOURS_PER_DAY&#x29;&#xd;&#xa;                  END&#x29;&#xd;&#xa;		    as FTE,&#xd;&#xa;       SUM&#x28;1&#x29; as HeadCount&#xd;&#xa;    FROM hr_assignments ha&#xd;&#xa;		LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa; 		LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa;		LEFT JOIN HR_employee_interlink hei ON hei.employee_no &#x3d; ha.employee_no&#xd;&#xa;    WHERE START_DATE &#x3c;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;&#xd;&#xa;		AND END_DATE &#x3e;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;	&#xd;&#xa;		AND location &#x3e; &#x27; &#x27;&#xd;&#xa;		AND hei.Status &#x3d; &#x27;A&#x27;&#xd;&#xa;		AND hei.Payroll_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;		AND hpc.Supervisor_position &#x3e; &#x27; &#x27;&#xd;&#xa;	GROUP BY ha.Employee_no,Location, Position_code, ha.Assignment_type, hpc.Supervisor_position&#xd;&#xa;	ORDER BY hpc.Supervisor_position, ha.Employee_no, Location, Position_code&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1877,7 +1829,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>50</xloc>
-      <yloc>297</yloc>
+      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2114,13 +2066,10 @@
       <give_back_row>N</give_back_row>
       <group>
         <field>
-          <name>EMPLOYEE_NO</name>
+          <name>CONTRACTIDENTIFIER</name>
         </field>
         <field>
           <name>EMPLOYMENTLOCATION</name>
-        </field>
-        <field>
-          <name>POSITIONTYPE</name>
         </field>
       </group>
       <fields>
@@ -2139,7 +2088,7 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>900</xloc>
+      <xloc>1035</xloc>
       <yloc>486</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2157,7 +2106,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>SELECT  DISTINCT &#xd;&#xa;		RTRIM&#x28;ha.EMPLOYEE_NO&#x29; as ContractIdentifier,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;RTRIM&#x28;ha.EMPLOYEE_NO&#x29;,&#x27;_&#x27;&#x29;,ha.START_DATE&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;ha.POSITION_CODE&#x29;&#x29;,RTRIM&#x28;hatc.CODE&#x29;&#x29; as ContractIdentifier2,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;RTRIM&#x28;ha.EMPLOYEE_NO&#x29;,&#x27;_&#x27;&#x29;,ha.START_DATE&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;hal.LOCATION&#x29;&#x29;,RTRIM&#x28;ha.Department&#x29;&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;ha.POSITION_CODE&#x29;&#x29; as ContractIdentifier1,&#xd;&#xa;        hei.EMPLOYEE_NO,&#xd;&#xa;        hei.LAST_NAME as LASTNAME,&#xd;&#xa;        hei.FIRST_NAME as FIRSTNAME,&#xd;&#xa;        hei.MIDDLE_NAME as MIDDLENAME,&#xd;&#xa;        hed.GENDER,&#xd;&#xa;		CASE WHEN hea.EMPLOYEE_EMAIL &#x3e; &#x27; &#x27; THEN &#x27;Primary&#x27; ELSE &#x27;&#x27; END AS EMAIL_TYPE,&#xd;&#xa;        CASE WHEN hea.EMPLOYEE_EMAIL &#x3e; &#x27; &#x27;&#xd;&#xa;                THEN CASE WHEN hea.EMPLOYEE_EMAIL LIKE &#x27;&#x25;&#x40;&#x25;&#x27;&#xd;&#xa;                        THEN hea.EMPLOYEE_EMAIL&#xd;&#xa;                        ELSE CONCAT&#x28;RTRIM&#x28;hea.EMPLOYEE_EMAIL&#x29;,&#x27;&#x24;&#x7b;DISTRICT_DOMAIN&#x7d;&#x27;&#x29;&#xd;&#xa;                        END&#xd;&#xa;                END as EMAIL,&#xd;&#xa;        &#x27;NA&#x27; as PHONEFORMAT,&#xd;&#xa;        &#x27;Home&#x27; as HOMEPHONETYPE,&#xd;&#xa;        CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;&#x27;&#x28;&#x27;,SUBSTRING&#x28;hed.PHONE_NO,1,3&#x29;&#x29;,&#x27;&#x29; &#x27;&#x29;,SUBSTRING&#x28;hed.Phone_no,4,3&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;hed.PHONE_NO,7,4&#x29;&#x29; as HOMEPHONE,&#xd;&#xa;        CASE WHEN hed.PHONE_NO_2 &#x3e; &#x27; &#x27;&#xd;&#xa;                THEN &#x27;Mobile&#x27;&#xd;&#xa;                END as MOBILEPHONETYPE,&#xd;&#xa;		CASE WHEN hed.PHONE_NO_2 &#x3e; &#x27; &#x27;&#xd;&#xa;				THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;&#x27;&#x28;&#x27;,SUBSTRING&#x28;hed.PHONE_NO_2,1,3&#x29;&#x29;,&#x27;&#x29; &#x27;&#x29;,SUBSTRING&#x28;hed.Phone_NO_2,4,3&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;hed.PHONE_NO_2,7,4&#x29;&#x29; &#xd;&#xa;				END as MOBILEPHONE,&#xd;&#xa;        hei.STATUS,&#xd;&#xa;        hei.EMPLOYEE_CATEGORY,&#xd;&#xa;        hed.&#x24;&#x7b;ABORIGINAL&#x7d; as ABORIGINAL,&#xd;&#xa;        ha.POSITION_CODE,&#xd;&#xa;		hatc.CODE as Assign_type,&#xd;&#xa;		&#x24;&#x7b;TIMECODE&#x7d; as PositionTime,&#xd;&#xa;		hal.LOCATION,&#xd;&#xa;		CASE WHEN hpc.HOURS_OR_FTE &#x3d; &#x27;F&#x27;&#xd;&#xa;			THEN ROUND&#x28;ha.HOURS_FTE &#x2a; 100,0&#x29;&#xd;&#xa;			ELSE ROUND&#x28;&#x28;ha.HOURS_PER_DAY &#x2f; hpc.HOURS_PER_DAY&#x29; &#x2a; 100,0&#x29;&#xd;&#xa;			END as PercentTimeEmployed,&#xd;&#xa;        ha.HOURS_FTE,&#xd;&#xa;		ha.START_DATE,&#xd;&#xa;		ha.END_DATE,&#xd;&#xa;		CASE WHEN START_DATE &#x3c; &#x24;&#x7b;SCHOOL_START&#x7d;&#xd;&#xa;			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,7,2&#x29;&#x29; &#xd;&#xa;			ELSE CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.START_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,7,2&#x29;&#x29; &#xd;&#xa;			END AS STARTDATE,&#xd;&#xa;        CASE WHEN END_DATE &#x3c; &#x27;30000101&#x27;&#xd;&#xa; 			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.END_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,7,2&#x29;&#x29;&#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;            END AS ENDDATE,&#xd;&#xa;	    LEAVE_REASON as SeparationReason,&#xd;&#xa;		THE_KEY&#xd;&#xa;  FROM HR_EMPLOYEE_DEMOGRAPHICS hed&#xd;&#xa;        LEFT JOIN HR_EMPLOYEE_INTERLINK hei ON hei.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;        LEFT JOIN HR_EMAIL_ADDRESS hea ON hea.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;		LEFT JOIN HR_ASSIGNMENTS ha ON ha.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_TYPE_CODE hatc ON hatc.CODE &#x3d; ha.ASSIGNMENT_TYPE&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa;        LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa; WHERE hei.PAYROLL_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;	AND START_DATE &#x3c;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;&#xd;&#xa;	AND END_DATE &#x3e;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;	&#xd;&#xa;	AND hours_fte &#x3e; 0 &#xd;&#xa;	AND hal.LOCATION &#x3e; &#x27; &#x27;&#xd;&#xa; ORDER by ha.EMPLOYEE_NO,ha.POSITION_CODE,START_DATE,END_DATE</sql>
+    <sql>SELECT  DISTINCT &#xd;&#xa;		CONCAT&#x28;RTRIM&#x28;ha.EMPLOYEE_NO&#x29;,&#x27;_&#x27;&#x29; as ContractIdentifier1,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;RTRIM&#x28;ha.EMPLOYEE_NO&#x29;,&#x27;_&#x27;&#x29;,ha.START_DATE&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;ha.POSITION_CODE&#x29;&#x29;,RTRIM&#x28;hatc.CODE&#x29;&#x29; as ContractIdentifier2,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;RTRIM&#x28;ha.EMPLOYEE_NO&#x29;,&#x27;_&#x27;&#x29;,ha.START_DATE&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;hal.LOCATION&#x29;&#x29;,RTRIM&#x28;ha.Department&#x29;&#x29;,&#x27;_&#x27;&#x29;,RTRIM&#x28;ha.POSITION_CODE&#x29;&#x29; as ContractIdentifier3,&#xd;&#xa;        hei.EMPLOYEE_NO,&#xd;&#xa;        hei.LAST_NAME as LASTNAME,&#xd;&#xa;        hei.FIRST_NAME as FIRSTNAME,&#xd;&#xa;        hei.MIDDLE_NAME as MIDDLENAME,&#xd;&#xa;        hed.GENDER,&#xd;&#xa;		CASE WHEN hea.EMPLOYEE_EMAIL &#x3e; &#x27; &#x27; THEN &#x27;Primary&#x27; ELSE &#x27;&#x27; END AS EMAIL_TYPE,&#xd;&#xa;        CASE WHEN hea.EMPLOYEE_EMAIL &#x3e; &#x27; &#x27;&#xd;&#xa;                THEN CASE WHEN hea.EMPLOYEE_EMAIL LIKE &#x27;&#x25;&#x40;&#x25;&#x27;&#xd;&#xa;                        THEN hea.EMPLOYEE_EMAIL&#xd;&#xa;                        ELSE CONCAT&#x28;RTRIM&#x28;hea.EMPLOYEE_EMAIL&#x29;,&#x27;&#x24;&#x7b;DISTRICT_DOMAIN&#x7d;&#x27;&#x29;&#xd;&#xa;                        END&#xd;&#xa;                END as EMAIL,&#xd;&#xa;        &#x27;NA&#x27; as PHONEFORMAT,&#xd;&#xa;        &#x27;Home&#x27; as HOMEPHONETYPE,&#xd;&#xa;        CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;&#x27;&#x28;&#x27;,SUBSTRING&#x28;hed.PHONE_NO,1,3&#x29;&#x29;,&#x27;&#x29; &#x27;&#x29;,SUBSTRING&#x28;hed.Phone_no,4,3&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;hed.PHONE_NO,7,4&#x29;&#x29; as HOMEPHONE,&#xd;&#xa;        CASE WHEN hed.PHONE_NO_2 &#x3e; &#x27; &#x27;&#xd;&#xa;                THEN &#x27;Mobile&#x27;&#xd;&#xa;                END as MOBILEPHONETYPE,&#xd;&#xa;		CASE WHEN hed.PHONE_NO_2 &#x3e; &#x27; &#x27;&#xd;&#xa;				THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;&#x27;&#x28;&#x27;,SUBSTRING&#x28;hed.PHONE_NO_2,1,3&#x29;&#x29;,&#x27;&#x29; &#x27;&#x29;,SUBSTRING&#x28;hed.Phone_NO_2,4,3&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;hed.PHONE_NO_2,7,4&#x29;&#x29; &#xd;&#xa;				END as MOBILEPHONE,&#xd;&#xa;        hei.STATUS,&#xd;&#xa;        hei.EMPLOYEE_CATEGORY,&#xd;&#xa;        hed.&#x24;&#x7b;ABORIGINAL&#x7d; as ABORIGINAL,&#xd;&#xa;        ha.POSITION_CODE,&#xd;&#xa;		hatc.CODE as Assign_type,&#xd;&#xa;		&#x24;&#x7b;TIMECODE&#x7d; as PositionTime,&#xd;&#xa;		hal.LOCATION,&#xd;&#xa;		CASE WHEN hpc.HOURS_OR_FTE &#x3d; &#x27;F&#x27;&#xd;&#xa;			THEN ROUND&#x28;ha.HOURS_FTE &#x2a; 100,0&#x29;&#xd;&#xa;			ELSE ROUND&#x28;&#x28;ha.HOURS_PER_DAY &#x2f; hpc.HOURS_PER_DAY&#x29; &#x2a; 100,0&#x29;&#xd;&#xa;			END as PercentTimeEmployed,&#xd;&#xa;        ha.HOURS_FTE,&#xd;&#xa;		ha.START_DATE,&#xd;&#xa;		ha.END_DATE,&#xd;&#xa;		CASE WHEN START_DATE &#x3c; &#x24;&#x7b;SCHOOL_START&#x7d;&#xd;&#xa;			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;&#x24;&#x7b;SCHOOL_START&#x7d;,7,2&#x29;&#x29; &#xd;&#xa;			ELSE CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.START_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.START_DATE,7,2&#x29;&#x29; &#xd;&#xa;			END AS STARTDATE,&#xd;&#xa;        CASE WHEN END_DATE &#x3c; &#x27;30000101&#x27;&#xd;&#xa; 			THEN CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;ha.END_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;ha.END_DATE,7,2&#x29;&#x29;&#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;            END AS ENDDATE,&#xd;&#xa;	    LEAVE_REASON as SeparationReason,&#xd;&#xa;		THE_KEY&#xd;&#xa;  FROM HR_EMPLOYEE_DEMOGRAPHICS hed&#xd;&#xa;        LEFT JOIN HR_EMPLOYEE_INTERLINK hei ON hei.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;        LEFT JOIN HR_EMAIL_ADDRESS hea ON hea.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;		LEFT JOIN HR_ASSIGNMENTS ha ON ha.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_TYPE_CODE hatc ON hatc.CODE &#x3d; ha.ASSIGNMENT_TYPE&#xd;&#xa;        LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa;        LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa; WHERE hei.PAYROLL_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;	AND START_DATE &#x3c;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;&#xd;&#xa;	AND END_DATE &#x3e;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;	&#xd;&#xa;	AND hours_fte &#x3e; 0 &#xd;&#xa;	AND hal.LOCATION &#x3e; &#x27; &#x27;&#xd;&#xa; ORDER by ha.EMPLOYEE_NO,ha.POSITION_CODE,START_DATE,END_DATE</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2546,16 +2495,13 @@
       <give_back_row>N</give_back_row>
       <group>
         <field>
-          <name>EMPLOYEE_NO</name>
+          <name>CONTRACTIDENTIFIER</name>
         </field>
         <field>
           <name>EMPLOYMENTLOCATION</name>
         </field>
         <field>
-          <name>ASSIGNMENTTIMETYPE</name>
-        </field>
-        <field>
-          <name>ASSIGNMENTTIMECODE</name>
+          <name>POSITIONTYPE</name>
         </field>
       </group>
       <fields>
@@ -2568,7 +2514,7 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1021</xloc>
+      <xloc>1035</xloc>
       <yloc>624</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2800,7 +2746,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>452</xloc>
-      <yloc>297</yloc>
+      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2817,7 +2763,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>select position_code AS Super_Position&#xd;&#xa;	from hr_position_code &#xd;&#xa;	where user_defined_field_02 &#x3d; &#x27;K12TEACH04&#x27;&#xd;&#xa;		and position_code &#x3d; &#x27;&#x24;&#x7b;PRINCIPAL&#x7d;&#x27;</sql>
+    <sql>select position_code AS Super_Position&#xd;&#xa;	from hr_position_code &#xd;&#xa;	where user_defined_field_02 &#x3d; &#x27;K12TEACH04&#x27;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2826,7 +2772,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>184</xloc>
-      <yloc>206</yloc>
+      <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2847,7 +2793,7 @@
 <field_a>FTEATPOSITION</field_a>
 <field_b>K12TeachTimeA</field_b>
 <field_c/>
-<value_type>BigNumber</value_type>
+<value_type>Integer</value_type>
 <value_length>-1</value_length>
 <value_precision>-1</value_precision>
 <remove>N</remove>
@@ -2859,7 +2805,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>765</xloc>
-      <yloc>900</yloc>
+      <yloc>902</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2938,6 +2884,9 @@
       <group>
         <field>
           <name>EMPLOYMENTLOCATION</name>
+        </field>
+        <field>
+          <name>SUPERVISOR_POSITION</name>
         </field>
       </group>
       <fields>
@@ -3312,7 +3261,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>854</xloc>
+      <xloc>479</xloc>
       <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3358,7 +3307,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1390</xloc>
+      <xloc>1389</xloc>
       <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3430,7 +3379,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Calc Prep by Level&#x25;</send_true_to>
+<send_true_to>Calc Teach by Level&#x25;</send_true_to>
 <send_false_to>Is there a Location&#x25;</send_false_to>
     <compare>
 <condition>
@@ -3471,8 +3420,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Set Prep by Location&#x25;</send_true_to>
-<send_false_to>Set Prep to 0</send_false_to>
+<send_true_to>Set Teach by Location&#x25;</send_true_to>
+<send_false_to>Set Teach to FTE</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -3495,7 +3444,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>967</xloc>
+      <xloc>1020</xloc>
       <yloc>762</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3558,7 +3507,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>184</xloc>
-      <yloc>8</yloc>
+      <yloc>7</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3586,7 +3535,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>184</xloc>
-      <yloc>297</yloc>
+      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4059,7 +4008,7 @@
       <resultfieldName>poscounter</resultfieldName>
     <fields>
       <field>
-        <name>EMPLOYEE_NO</name>
+        <name>CONTRACTIDENTIFIER</name>
         </field>
       <field>
         <name>EMPLOYMENTLOCATION</name>
@@ -4117,8 +4066,8 @@
            <schema_name/>
            </partitioning>
     <fields>        <select_unspecified>N</select_unspecified>
-      <meta>        <name>TIMEPERCENTp</name>
-        <rename>TIMEPERCENTp</rename>
+      <meta>        <name>TIMEPERCENTP</name>
+        <rename>TIMEPERCENTP</rename>
         <type>BigNumber</type>
         <length>7</length>
         <precision>4</precision>
@@ -4134,8 +4083,8 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>645</xloc>
-      <yloc>624</yloc>
+      <xloc>766</xloc>
+      <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4384,74 +4333,8 @@
         <storage_type>normal</storage_type>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1256</xloc>
+      <xloc>1300</xloc>
       <yloc>8</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set Prep by Location&#x25;</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <calculation><field_name>K12PrepTime02</field_name>
-<calc_type>MULTIPLY</calc_type>
-<field_a>FTEATLOCATION</field_a>
-<field_b>AltTimePercentP</field_b>
-<field_c/>
-<value_type>BigNumber</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>900</xloc>
-      <yloc>826</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set Prep to 0</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <calculation><field_name>K12PrepTime02</field_name>
-<calc_type>COPY_FIELD</calc_type>
-<field_a>zero</field_a>
-<field_b/>
-<field_c/>
-<value_type>BigNumber</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1035</xloc>
-      <yloc>826</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4554,7 +4437,7 @@
 <field_a>FTEATPOSITION</field_a>
 <field_b>AltTimePercentP</field_b>
 <field_c/>
-<value_type>BigNumber</value_type>
+<value_type>Integer</value_type>
 <value_length>-1</value_length>
 <value_precision>-1</value_precision>
 <remove>N</remove>
@@ -4566,7 +4449,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>765</xloc>
-      <yloc>826</yloc>
+      <yloc>831</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4587,7 +4470,7 @@
 <field_a>FTEATPOSITION</field_a>
 <field_b/>
 <field_c/>
-<value_type>BigNumber</value_type>
+<value_type>Integer</value_type>
 <value_length>-1</value_length>
 <value_precision>-1</value_precision>
 <remove>N</remove>
@@ -4598,8 +4481,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1035</xloc>
-      <yloc>900</yloc>
+      <xloc>1076</xloc>
+      <yloc>902</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4664,7 +4547,7 @@
       <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>EMPLOYEE_NO</name>
+        <name>CONTRACTIDENTIFIER</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <presorted>N</presorted>
@@ -4676,7 +4559,7 @@
         <presorted>N</presorted>
       </field>
       <field>
-        <name>ASSIGNMENTTIMETYPE</name>
+        <name>POSITIONTYPE</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <presorted>N</presorted>
@@ -4684,8 +4567,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1390</xloc>
-      <yloc>417</yloc>
+      <xloc>1392</xloc>
+      <yloc>488</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4756,7 +4639,7 @@
       <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>EMPLOYEE_NO</name>
+        <name>CONTRACTIDENTIFIER</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <presorted>N</presorted>
@@ -4808,7 +4691,7 @@
       <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>EMPLOYEE_NO</name>
+        <name>CONTRACTIDENTIFIER</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <presorted>N</presorted>
@@ -4849,7 +4732,7 @@
       <count_field/>
       <reject_duplicate_row>N</reject_duplicate_row>
       <error_description/>
-    <fields>      <field>        <name>EMPLOYEE_NO</name>
+    <fields>      <field>        <name>CONTRACTIDENTIFIER</name>
         <case_insensitive>Y</case_insensitive>
         </field>      <field>        <name>EMPLOYMENTLOCATION</name>
         <case_insensitive>Y</case_insensitive>
@@ -5353,7 +5236,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>K12PrepTime02</name>
+        <name>K12TeachTimeA</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -5441,6 +5324,204 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1460</xloc>
       <yloc>762</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Concat Fields</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>CONTRACTIDENTIFIER1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>CONTRACTTYPE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+<targetFieldName>CONTRACTIDENTIFIER</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1211</xloc>
+      <yloc>8</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add Contract Type 2 2</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Assignment Types</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>ASSIGN_TYPE</name>
+        <field>PRM_CODE</field>
+      </key>
+      <value>
+        <name>CONTRACTTYPE</name>
+        <rename>CONTRACTTYPE</rename>
+        <default/>
+        <type>String</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>854</xloc>
+      <yloc>206</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Concat Fields 2</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>CONTRACTIDENTIFIER1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>CONTRACTTYPE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+<targetFieldName>CONTRACTIDENTIFIER</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>854</xloc>
+      <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

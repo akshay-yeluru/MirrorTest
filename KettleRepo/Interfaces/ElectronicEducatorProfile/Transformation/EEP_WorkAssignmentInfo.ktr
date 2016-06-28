@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;06&#x2f;28 09&#x3a;19&#x3a;56.649</modified_date>
+  <modified_date>2016&#x2f;06&#x2f;28 13&#x3a;21&#x3a;46.874</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -437,15 +437,15 @@
   </connection>
   <order>
   <hop> <from>EEP Master</from><to>Join Master</to><enabled>Y</enabled> </hop>
-  <hop> <from>Government Time Codes</from><to>Put Time Type&#x2f;Code</to><enabled>Y</enabled> </hop>
+  <hop> <from>Government Time Codes</from><to>Add TimeType&#x2f;Code</to><enabled>Y</enabled> </hop>
   <hop> <from>Government Locations</from><to>Add Gov Location</to><enabled>Y</enabled> </hop>
   <hop> <from>Position Cross-Reference</from><to>Get Gov Position</to><enabled>Y</enabled> </hop>
   <hop> <from>Assignment Types</from><to>Add Contract Type</to><enabled>Y</enabled> </hop>
-  <hop> <from>Is TimeCode filled&#x3f; 2</from><to>Errors &#x28;No TimeCodes&#x29;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Location &#x26; TimeCode filled&#x3f;</from><to>Employees ByPassed</to><enabled>Y</enabled> </hop>
-  <hop> <from>Employees ByPassed</from><to>Is TimeCode filled&#x3f; 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is TimeCode filled&#x3f;</from><to>Errors &#x28;No TimeCodes&#x29;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Location &#x26; TimeCode&#x3f;</from><to>Employees ByPassed</to><enabled>Y</enabled> </hop>
+  <hop> <from>Employees ByPassed</from><to>Is TimeCode filled&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Gov Location</from><to>Add Contract Type</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Contract Type</from><to>Put Time Type&#x2f;Code</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Contract Type</from><to>Add TimeType&#x2f;Code</to><enabled>Y</enabled> </hop>
   <hop> <from>Position Cross-Reference</from><to>Get Gov Position 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Government Locations</from><to>Add Gov Location 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Gov Position 2</from><to>Add Gov Location 2</to><enabled>Y</enabled> </hop>
@@ -502,7 +502,6 @@
   <hop> <from>Sort rows 2 2</from><to>Select values 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 3</from><to>Set Supervisory to String</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Gov Position</from><to>Add Gov Location</to><enabled>Y</enabled> </hop>
-  <hop> <from>Put Time Type&#x2f;Code</from><to>Get Alternate TimeCode</to><enabled>Y</enabled> </hop>
   <hop> <from>K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;&#x3f;</from><to>Position Type &#x3d; Teaching</to><enabled>Y</enabled> </hop>
   <hop> <from>K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;&#x3f;</from><to>Position Type &#x3d; PostionTime</to><enabled>Y</enabled> </hop>
   <hop> <from>Position Type &#x3d; PostionTime</from><to>Sort rows 2</to><enabled>Y</enabled> </hop>
@@ -515,7 +514,6 @@
   <hop> <from>Calc Teach by Level&#x25;</from><to>Get real TeachTime</to><enabled>Y</enabled> </hop>
   <hop> <from>Get real TeachTime</from><to>Sort rows 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Teach by Location&#x25;</from><to>Get real TeachTime</to><enabled>Y</enabled> </hop>
-  <hop> <from>Location &#x26; TimeCode filled&#x3f;</from><to>K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>Is this a K12Teach time&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>Emp FTE by Location</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>FTE by Position</to><enabled>Y</enabled> </hop>
@@ -524,15 +522,13 @@
   <hop> <from>Sort rows 2 3</from><to>Unique rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants 2 2</from><to>Sort rows 2 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values</from><to>Sort rows 2 3</to><enabled>Y</enabled> </hop>
-  <hop> <from>Location PrepTime</from><to>Get Alternate TimeCode</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Alternate TimeCode</from><to>Set  Prep numeric</to><enabled>Y</enabled> </hop>
+  <hop> <from>Location PrepTime</from><to>Alternate TimeCode</to><enabled>Y</enabled> </hop>
+  <hop> <from>Alternate TimeCode</from><to>Set  Prep numeric</to><enabled>Y</enabled> </hop>
   <hop> <from>Is Location Prep&#x25; over 1&#x3f;</from><to>Divide by 100</to><enabled>Y</enabled> </hop>
   <hop> <from>Set  Prep numeric</from><to>Is Location Prep&#x25; over 1&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Join Master</from><to>Add constants 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants 4</from><to>Get Gov Position</to><enabled>Y</enabled> </hop>
-  <hop> <from>Divide by 100</from><to>Location &#x26; TimeCode filled&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Is Location Prep&#x25; over 1&#x3f;</from><to>Divide by 1</to><enabled>Y</enabled> </hop>
-  <hop> <from>Divide by 1</from><to>Location &#x26; TimeCode filled&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Is there a Level &#x25;</from><to>Is there a Location&#x25;</to><enabled>Y</enabled> </hop>
   <hop> <from>Is there a Location&#x25;</from><to>Set Prep to 0</to><enabled>Y</enabled> </hop>
   <hop> <from>Is there a Location&#x25;</from><to>Set Prep by Location&#x25;</to><enabled>Y</enabled> </hop>
@@ -546,6 +542,10 @@
   <hop> <from>Count Location&#x2f;Position</from><to>Join Master 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Join Master 2</from><to>Get Gov Position 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Supervisory Positions</from><to>Join Master 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add TimeType&#x2f;Code</from><to>Location &#x26; TimeCode&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Location &#x26; TimeCode&#x3f;</from><to>Alternate TimeCode</to><enabled>Y</enabled> </hop>
+  <hop> <from>Divide by 100</from><to>K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Divide by 1</from><to>K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;&#x3f;</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Admin FTE</name>
@@ -613,7 +613,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>702</xloc>
+      <xloc>720</xloc>
       <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
@@ -649,7 +649,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>702</xloc>
+      <xloc>720</xloc>
       <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
@@ -835,7 +835,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>539</xloc>
+      <xloc>586</xloc>
       <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
@@ -877,7 +877,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>539</xloc>
+      <xloc>586</xloc>
       <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1657,7 +1657,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>294</xloc>
+      <xloc>318</xloc>
       <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1784,7 +1784,7 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>702</xloc>
+      <xloc>720</xloc>
       <yloc>111</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1909,8 +1909,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1387</xloc>
-      <yloc>111</yloc>
+      <xloc>1482</xloc>
+      <yloc>113</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1942,8 +1942,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1255</xloc>
-      <yloc>111</yloc>
+      <xloc>1308</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2007,29 +2007,7 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>CERT_TYPE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
         <name>CERT_CLASS</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>CERT_CODE</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -2062,17 +2040,6 @@
         <trim_type>none</trim_type>
       </field>
       <field>
-        <name>EXPIRY_DATE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
         <name>PersonidTYpe</name>
         <type>String</type>
         <format/>
@@ -2086,7 +2053,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>213</xloc>
+      <xloc>184</xloc>
       <yloc>111</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2375,8 +2342,8 @@
       </custom>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1505</xloc>
-      <yloc>206</yloc>
+      <xloc>988</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2552,8 +2519,8 @@
       </custom>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1505</xloc>
-      <yloc>404</yloc>
+      <xloc>1122</xloc>
+      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2731,7 +2698,7 @@
     </step>
 
   <step>
-    <name>Get Alternate TimeCode</name>
+    <name>Alternate TimeCode</name>
     <type>StreamLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -2760,7 +2727,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1019</xloc>
+      <xloc>1122</xloc>
       <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2796,7 +2763,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>375</xloc>
+      <xloc>452</xloc>
       <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2832,7 +2799,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>376</xloc>
+      <xloc>452</xloc>
       <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2850,7 +2817,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>select position_code AS Super_Position&#xd;&#xa;	from hr_position_code &#xd;&#xa;	where user_defined_field_02 &#x3d; &#x27;K12TEACH04&#x27;</sql>
+    <sql>select position_code AS Super_Position&#xd;&#xa;	from hr_position_code &#xd;&#xa;	where user_defined_field_02 &#x3d; &#x27;K12TEACH04&#x27;&#xd;&#xa;		and position_code &#x3d; &#x27;&#x24;&#x7b;PRINCIPAL&#x7d;&#x27;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2858,8 +2825,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>213</xloc>
-      <yloc>205</yloc>
+      <xloc>184</xloc>
+      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2917,7 +2884,7 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>539</xloc>
+      <xloc>586</xloc>
       <yloc>111</yloc>
       <draw>Y</draw>
       </GUI>
@@ -2943,7 +2910,7 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>865</xloc>
+      <xloc>854</xloc>
       <yloc>111</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3345,7 +3312,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>865</xloc>
+      <xloc>854</xloc>
       <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3391,14 +3358,14 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1317</xloc>
+      <xloc>1390</xloc>
       <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Is TimeCode filled&#x3f; 2</name>
+    <name>Is TimeCode filled&#x3f;</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -3446,8 +3413,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1505</xloc>
-      <yloc>297</yloc>
+      <xloc>988</xloc>
+      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3590,7 +3557,7 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>213</xloc>
+      <xloc>184</xloc>
       <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3618,7 +3585,7 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>213</xloc>
+      <xloc>184</xloc>
       <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3664,7 +3631,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>645</xloc>
+      <xloc>647</xloc>
       <yloc>417</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3705,14 +3672,14 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1324</xloc>
-      <yloc>296</yloc>
+      <xloc>1390</xloc>
+      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Location &#x26; TimeCode filled&#x3f;</name>
+    <name>Location &#x26; TimeCode&#x3f;</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -3722,7 +3689,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;&#x3f;</send_true_to>
+<send_true_to>Alternate TimeCode</send_true_to>
 <send_false_to>Employees ByPassed</send_false_to>
     <compare>
 <condition>
@@ -3760,8 +3727,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1324</xloc>
-      <yloc>206</yloc>
+      <xloc>988</xloc>
+      <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3786,8 +3753,8 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1019</xloc>
-      <yloc>111</yloc>
+      <xloc>1122</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3969,7 +3936,7 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>376</xloc>
+      <xloc>452</xloc>
       <yloc>111</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3995,8 +3962,8 @@
 </formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1172</xloc>
-      <yloc>296</yloc>
+      <xloc>1482</xloc>
+      <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4028,14 +3995,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1172</xloc>
-      <yloc>206</yloc>
+      <xloc>1308</xloc>
+      <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Put Time Type&#x2f;Code</name>
+    <name>Add TimeType&#x2f;Code</name>
     <type>StreamLookup</type>
     <description/>
     <distribute>N</distribute>
@@ -4070,7 +4037,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>865</xloc>
+      <xloc>854</xloc>
       <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
@@ -4417,7 +4384,7 @@
         <storage_type>normal</storage_type>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1168</xloc>
+      <xloc>1256</xloc>
       <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
@@ -4717,8 +4684,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1021</xloc>
-      <yloc>296</yloc>
+      <xloc>1390</xloc>
+      <yloc>417</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5183,18 +5150,6 @@
       </field>
       <field>
         <name>BIRTHDATE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>EXPIRY_DATE</name>
         <type>String</type>
         <format/>
         <currency/>

@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;06&#x2f;27 12&#x3a;55&#x3a;00.957</modified_date>
+  <modified_date>2016&#x2f;06&#x2f;28 09&#x3a;19&#x3a;56.649</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -533,9 +533,9 @@
   <hop> <from>Divide by 100</from><to>Location &#x26; TimeCode filled&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Is Location Prep&#x25; over 1&#x3f;</from><to>Divide by 1</to><enabled>Y</enabled> </hop>
   <hop> <from>Divide by 1</from><to>Location &#x26; TimeCode filled&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Is there a Level &#x25;</from><to>Is there a Level &#x25; 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Is there a Level &#x25; 2</from><to>Set Prep to 0</to><enabled>Y</enabled> </hop>
-  <hop> <from>Is there a Level &#x25; 2</from><to>Set Prep by Location&#x25;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is there a Level &#x25;</from><to>Is there a Location&#x25;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is there a Location&#x25;</from><to>Set Prep to 0</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is there a Location&#x25;</from><to>Set Prep by Location&#x25;</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Prep by Location&#x25;</from><to>Set Teach by Location&#x25;</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Prep to 0</from><to>Set Teach to FTE</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Teach to FTE</from><to>Get real TeachTime</to><enabled>Y</enabled> </hop>
@@ -3464,7 +3464,7 @@
            <schema_name/>
            </partitioning>
 <send_true_to>Calc Prep by Level&#x25;</send_true_to>
-<send_false_to>Is there a Level &#x25; 2</send_false_to>
+<send_false_to>Is there a Location&#x25;</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -3494,7 +3494,7 @@
     </step>
 
   <step>
-    <name>Is there a Level &#x25; 2</name>
+    <name>Is there a Location&#x25;</name>
     <type>FilterRows</type>
     <description/>
     <distribute>Y</distribute>
@@ -3516,6 +3516,13 @@
    <function>IS NOT NULL</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>K12TEACHER</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>AltTimePercentP</leftvalue>
+   <function>&#x3e;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>Number</type><text>0.0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x3b;-&#x23;.&#x23;</mask></value>   </condition>
   </conditions>
  </condition>
     </compare>

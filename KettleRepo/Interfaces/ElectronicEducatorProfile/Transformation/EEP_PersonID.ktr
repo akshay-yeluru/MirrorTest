@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;06&#x2f;27 09&#x3a;27&#x3a;10.836</modified_date>
+  <modified_date>2016&#x2f;06&#x2f;28 13&#x3a;16&#x3a;47.740</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -645,31 +645,7 @@
         <precision>-1</precision>
       </field>
       <field>
-        <name>CERT_TYPE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
         <name>CERT_CLASS</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>CERT_CODE</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -694,18 +670,6 @@
       </field>
       <field>
         <name>BIRTHDATE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>both</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>EXPIRY_DATE</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -831,6 +795,52 @@
     </step>
 
   <step>
+    <name>Employee Certificated&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Create EEP Master</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <conditions>
+    <condition>
+     <negated>N</negated>
+     <leftvalue>Code1</leftvalue>
+     <function>IS NOT NULL</function>
+     <rightvalue>EMPNO</rightvalue>
+     </condition>
+    <condition>
+     <negated>N</negated>
+     <operator>OR</operator>
+     <leftvalue>Code2</leftvalue>
+     <function>IS NOT NULL</function>
+     <rightvalue/>
+     </condition>
+    </conditions>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1368</xloc>
+      <yloc>229</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Employee&#x2f;Certificate</name>
     <type>TableInput</type>
     <description/>
@@ -842,7 +852,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>SELECT	DISTINCT HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO,&#xd;&#xa;		HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_STATUS,&#xd;&#xa;		BARGAINING_UNIT,&#xd;&#xa;		EMPLOYEE_CATEGORY,&#xd;&#xa;		CERT_TYPE,&#xd;&#xa;		CERT_CLASS,&#xd;&#xa;		CERT_CODE,&#xd;&#xa;		CERT_NO as PersonId,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;BIRTH_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,7,2&#x29;&#x29; as BirthDate,&#xd;&#xa;		EXPIRY_DATE,&#xd;&#xa;		CASE WHEN &#x27;X&#x24;&#x7b;EMPLOYEENO&#x7d;&#x27; &#x3d; &#x27;X&#x27; THEN HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO ELSE RTRIM&#x28;&#x27;&#x24;&#x7b;EMPLOYEENO&#x7d; &#x27;&#x29; END as Empno &#xd;&#xa;  FROM HR_EMPLOYEE_CERTIFICATION, HR_EMPLOYEE_DEMOGRAPHICS, HR_EMPLOYEE_INTERLINK&#xd;&#xa;  WHERE HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO&#xd;&#xa;	AND &#x28;EXPIRY_DATE &#x3e; &#x24;&#x7b;SCHOOL_START&#x7d; OR EXPIRY_DATE &#x3d; &#x27; &#x27;&#x29;&#xd;&#xa;	AND HR_EMPLOYEE_INTERLINK.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO&#xd;&#xa;	AND HR_EMPLOYEE_INTERLINK.PAYROLL_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;	AND CERT_NO &#x3e; &#x27; &#x27;&#xd;&#xa;  ORDER by EMPLOYEE_STATUS, HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO, CERT_CLASS&#xd;&#xa;</sql>
+    <sql>SELECT	DISTINCT HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO,&#xd;&#xa;		HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_STATUS,&#xd;&#xa;		BARGAINING_UNIT,&#xd;&#xa;		EMPLOYEE_CATEGORY,&#xd;&#xa;		CERT_CLASS,&#xd;&#xa;		CERT_NO as PersonId,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;BIRTH_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,7,2&#x29;&#x29; as BirthDate,&#xd;&#xa;		CASE WHEN &#x27;X&#x24;&#x7b;EMPLOYEENO&#x7d;&#x27; &#x3d; &#x27;X&#x27; THEN HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO ELSE RTRIM&#x28;&#x27;&#x24;&#x7b;EMPLOYEENO&#x7d; &#x27;&#x29; END as Empno &#xd;&#xa;  FROM HR_EMPLOYEE_CERTIFICATION, HR_EMPLOYEE_DEMOGRAPHICS, HR_EMPLOYEE_INTERLINK&#xd;&#xa;  WHERE HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO&#xd;&#xa;	AND &#x28;EXPIRY_DATE &#x3e; &#x24;&#x7b;CURRENT_DATE&#x7d; OR EXPIRY_DATE &#x3d; &#x27; &#x27;&#x29;&#xd;&#xa;	AND HR_EMPLOYEE_INTERLINK.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO&#xd;&#xa;	AND HR_EMPLOYEE_INTERLINK.PAYROLL_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;	AND CERT_NO &#x3e; &#x27; &#x27;&#xd;&#xa;  ORDER by EMPLOYEE_STATUS, HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO, CERT_CLASS&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -1274,52 +1284,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>892</xloc>
       <yloc>10</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Employee Certificated&#x3f;</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Create EEP Master</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <conditions>
-    <condition>
-     <negated>N</negated>
-     <leftvalue>Code1</leftvalue>
-     <function>IS NOT NULL</function>
-     <rightvalue>EMPNO</rightvalue>
-     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>OR</operator>
-     <leftvalue>Code2</leftvalue>
-     <function>IS NOT NULL</function>
-     <rightvalue/>
-     </condition>
-    </conditions>
-   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1368</xloc>
-      <yloc>229</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

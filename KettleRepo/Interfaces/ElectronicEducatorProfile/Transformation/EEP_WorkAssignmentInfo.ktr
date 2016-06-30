@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;06&#x2f;29 08&#x3a;31&#x3a;18.466</modified_date>
+  <modified_date>2016&#x2f;06&#x2f;30 14&#x3a;12&#x3a;32.165</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -458,7 +458,7 @@
   <hop> <from>Sort rows</from><to>Admin FTE</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Non-Teaching Headcount</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Part Time VP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Full Time Educator</from><to>Group by</to><enabled>Y</enabled> </hop>
+  <hop> <from>Full Time Educator</from><to>Group by 1</to><enabled>Y</enabled> </hop>
   <hop> <from>Part Time Educator </from><to>Group by 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Educator FTE</from><to>Group by 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Full Time VP</from><to>Group by 4</to><enabled>Y</enabled> </hop>
@@ -469,7 +469,7 @@
   <hop> <from>Non-Teaching Headcount</from><to>Group by 9</to><enabled>Y</enabled> </hop>
   <hop> <from>Emp FTE by Location</from><to>Add Total FTE at location</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 2</from><to>Add Grade Level</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by</from><to>Add Full Time Educ</to><enabled>Y</enabled> </hop>
+  <hop> <from>Group by 1</from><to>Add Full Time Educ</to><enabled>Y</enabled> </hop>
   <hop> <from>Group by 9</from><to>Add Non Teaching HC</to><enabled>Y</enabled> </hop>
   <hop> <from>Group by 8</from><to>Add Admin FTE</to><enabled>Y</enabled> </hop>
   <hop> <from>Group by 7</from><to>Add PartTime AP</to><enabled>Y</enabled> </hop>
@@ -521,9 +521,6 @@
   <hop> <from>Add Gov Location 2</from><to>Add Contract Type 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Assignment Types</from><to>Add Contract Type 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Contract Type 2</from><to>Is Location &#x26;Contract Type&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Is Location &#x26;Contract Type&#x3f;</from><to>Sort rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>Count Location&#x2f;Position</from><to>Join Master 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Join Master 2</from><to>Get Gov Position 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Supervisory Positions</from><to>Join Master 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Add TimeType&#x2f;Code</from><to>Location &#x26; TimeCode&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Location &#x26; TimeCode&#x3f;</from><to>Alternate TimeCode</to><enabled>Y</enabled> </hop>
@@ -549,6 +546,22 @@
   <hop> <from>Sort rows 2</from><to>Emp FTE by Location</to><enabled>Y</enabled> </hop>
   <hop> <from>Is this a K12Teach time&#x3f;</from><to>Add Total FTE at location</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Total FTE at location</from><to>K12TeacherTime 04&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add 100</from><to>Hours or FTE &#x3d; F&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Hours or FTE &#x3d; F&#x3f;</from><to>Hours</to><enabled>Y</enabled> </hop>
+  <hop> <from>Hours or FTE &#x3d; F&#x3f;</from><to>FTE</to><enabled>Y</enabled> </hop>
+  <hop> <from>FTE</from><to>Get Gov Position 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Hours</from><to>Get Gov Position 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Count Location&#x2f;Position</from><to>Join Master 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Join Master 2</from><to>Add 100</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 4</from><to>Group by loc&#x2f;pos&#x2f;emp</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 4 2</from><to>Group by loc&#x2f;type&#x2f;emp</to><enabled>Y</enabled> </hop>
+  <hop> <from>Group by loc&#x2f;type&#x2f;emp</from><to>Add GroupFTE</to><enabled>Y</enabled> </hop>
+  <hop> <from>Group by loc&#x2f;pos&#x2f;emp</from><to>Add GroupFTE</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add GroupFTE</from><to>Sort rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Is Location &#x26;Contract Type&#x3f;</from><to>Set Position Type</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set Position Type</from><to>Sort rows 4</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set Position Type</from><to>Sort rows 4 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add GroupFTE</from><to>Text file output 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Admin FTE</name>
@@ -585,7 +598,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>525</xloc>
-      <yloc>900</yloc>
+      <yloc>1042</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -733,7 +746,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>526</xloc>
-      <yloc>555</yloc>
+      <yloc>697</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -749,7 +762,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <from>Group by</from>
+    <from>Group by 1</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>N</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -773,7 +786,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>526</xloc>
-      <yloc>417</yloc>
+      <yloc>559</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -813,7 +826,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>526</xloc>
-      <yloc>624</yloc>
+      <yloc>766</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -853,7 +866,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>525</xloc>
-      <yloc>762</yloc>
+      <yloc>904</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -927,12 +940,6 @@
         <default/>
         <type>String</type>
       </value>
-      <value>
-        <name>EMPLOYERTYPE</name>
-        <rename>EMPLOYERTYPE</rename>
-        <default/>
-        <type>String</type>
-      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -977,7 +984,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>766</xloc>
-      <yloc>486</yloc>
+      <yloc>628</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1017,7 +1024,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>525</xloc>
-      <yloc>973</yloc>
+      <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1057,7 +1064,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>525</xloc>
-      <yloc>831</yloc>
+      <yloc>973</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1097,7 +1104,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>526</xloc>
-      <yloc>486</yloc>
+      <yloc>628</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1137,7 +1144,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>525</xloc>
-      <yloc>693</yloc>
+      <yloc>835</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1185,7 +1192,51 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>900</xloc>
-      <yloc>624</yloc>
+      <yloc>766</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add Position FTE 2</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>FTE by PositionType</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>CONTRACTIDENTIFIER</name>
+        <field>CONTRACTIDENTIFIER</field>
+      </key>
+      <key>
+        <name>EMPLOYMENTLOCATION</name>
+        <field>EMPLOYMENTLOCATION</field>
+      </key>
+      <key>
+        <name>POSITIONTYPE</name>
+        <field>POSITIONTYPE</field>
+      </key>
+      <value>
+        <name>FTEATPOSITION</name>
+        <rename>FTEATPOSITION</rename>
+        <default/>
+        <type>Number</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>900</xloc>
+      <yloc>699</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1267,7 +1318,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>900</xloc>
-      <yloc>417</yloc>
+      <yloc>559</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1396,7 +1447,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>645</xloc>
-      <yloc>973</yloc>
+      <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1525,7 +1576,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>645</xloc>
-      <yloc>486</yloc>
+      <yloc>628</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1774,7 +1825,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1172</xloc>
-      <yloc>624</yloc>
+      <yloc>766</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1872,7 +1923,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1364</xloc>
-      <yloc>762</yloc>
+      <yloc>904</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1899,14 +1950,14 @@
    <conditions>
     <condition>
      <negated>N</negated>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
+     <leftvalue>EP</leftvalue>
      <function>&#x3d;</function>
      <rightvalue/>
      <value><name>constant</name><type>String</type><text>04</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
     <condition>
      <negated>N</negated>
      <operator>OR</operator>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
+     <leftvalue>EP</leftvalue>
      <function>&#x3d;</function>
      <rightvalue/>
      <value><name>constant</name><type>String</type><text>05</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
@@ -1918,7 +1969,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>300</xloc>
-      <yloc>900</yloc>
+      <yloc>1042</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2095,7 +2146,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>698</xloc>
-      <yloc>900</yloc>
+      <yloc>1042</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2258,32 +2309,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>854</xloc>
       <yloc>297</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Count Location&#x2f;Position</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>SOURCE_RMS</connection>
-    <sql>select ha.Employee_no,&#xd;&#xa;		Location,&#xd;&#xa;      	Position_code,&#xd;&#xa;		ha.Assignment_type as Assign_type,&#xd;&#xa;		hpc.Supervisor_position,&#xd;&#xa;		SUM&#x28;CASE WHEN hpc.HOURS_OR_FTE &#x3d; &#x27;F&#x27;&#xd;&#xa;                  THEN ha.HOURS_FTE&#xd;&#xa;                  ELSE &#x28;ha.HOURS_PER_DAY &#x2f; hpc.HOURS_PER_DAY&#x29;&#xd;&#xa;                  END&#x29;&#xd;&#xa;		    as FTE,&#xd;&#xa;       SUM&#x28;1&#x29; as HeadCount&#xd;&#xa;    FROM hr_assignments ha&#xd;&#xa;		LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa; 		LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa;		LEFT JOIN HR_employee_interlink hei ON hei.employee_no &#x3d; ha.employee_no&#xd;&#xa;    WHERE START_DATE &#x3c;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;&#xd;&#xa;		AND END_DATE &#x3e;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;	&#xd;&#xa;		AND location &#x3e; &#x27; &#x27;&#xd;&#xa;		AND hei.Status &#x3d; &#x27;A&#x27;&#xd;&#xa;		AND hei.Payroll_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;		AND hpc.Supervisor_position &#x3e; &#x27; &#x27;&#xd;&#xa;	GROUP BY ha.Employee_no,Location, Position_code, ha.Assignment_type, hpc.Supervisor_position&#xd;&#xa;	ORDER BY hpc.Supervisor_position, ha.Employee_no, Location, Position_code&#xd;&#xa;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>50</xloc>
-      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2484,7 +2509,7 @@
  <conditions>
   <condition>
    <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
+   <leftvalue>EP</leftvalue>
    <function>IN LIST</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>01&#x3b;02&#x3b;04&#x3b;05&#x3b;10&#x3b;11&#x3b;12&#x3b;13&#x3b;14&#x3b;15&#x3b;16</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
@@ -2494,7 +2519,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>300</xloc>
-      <yloc>555</yloc>
+      <yloc>697</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2543,7 +2568,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1035</xloc>
-      <yloc>486</yloc>
+      <yloc>628</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2919,6 +2944,52 @@
     </step>
 
   <step>
+    <name>FTE by PositionType</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <all_rows>N</all_rows>
+      <ignore_aggregate>N</ignore_aggregate>
+      <field_ignore/>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>grp</prefix>
+      <add_linenr>N</add_linenr>
+      <linenr_fieldname/>
+      <give_back_row>N</give_back_row>
+      <group>
+        <field>
+          <name>CONTRACTIDENTIFIER</name>
+        </field>
+        <field>
+          <name>EMPLOYMENTLOCATION</name>
+        </field>
+        <field>
+          <name>POSITIONTYPE</name>
+        </field>
+      </group>
+      <fields>
+        <field>
+          <aggregate>FTEATPOSITION</aggregate>
+          <subject>PERCENTTIMEEMPLOYED</subject>
+          <type>SUM</type>
+          <valuefield/>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1035</xloc>
+      <yloc>699</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>FTE by TimeAllotment</name>
     <type>GroupBy</type>
     <description/>
@@ -2962,7 +3033,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1035</xloc>
-      <yloc>624</yloc>
+      <yloc>766</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2986,14 +3057,14 @@
  <conditions>
   <condition>
    <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
+   <leftvalue>EP</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>04</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>AND</operator>
-   <leftvalue>FTE</leftvalue>
+   <leftvalue>GroupFTE</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
    <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
@@ -3003,7 +3074,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>300</xloc>
-      <yloc>762</yloc>
+      <yloc>904</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3019,7 +3090,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Group by</send_true_to>
+<send_true_to>Group by 1</send_true_to>
 <send_false_to/>
     <compare>
 <condition>
@@ -3027,14 +3098,14 @@
  <conditions>
   <condition>
    <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
+   <leftvalue>EP</leftvalue>
    <function>IN LIST</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>01&#x3b;02&#x3b;04&#x3b;05&#x3b;10&#x3b;11&#x3b;12&#x3b;13&#x3b;14&#x3b;15&#x3b;16</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>AND</operator>
-   <leftvalue>FTE</leftvalue>
+   <leftvalue>GroupFTE</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
    <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
@@ -3044,7 +3115,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>300</xloc>
-      <yloc>417</yloc>
+      <yloc>559</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3068,14 +3139,14 @@
  <conditions>
   <condition>
    <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
+   <leftvalue>EP</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>05</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>AND</operator>
-   <leftvalue>FTE</leftvalue>
+   <leftvalue>GroupFTE</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
    <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
@@ -3085,7 +3156,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>300</xloc>
-      <yloc>624</yloc>
+      <yloc>766</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3149,7 +3220,7 @@
       </key>
       <value>
         <name>EMPLOYMENTPOSITION</name>
-        <rename>EMPLOYMENTPOSITION</rename>
+        <rename>EP</rename>
         <default/>
         <type>String</type>
       </value>
@@ -3182,7 +3253,7 @@
     <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>184</xloc>
+      <xloc>61</xloc>
       <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3241,7 +3312,7 @@
     </step>
 
   <step>
-    <name>Group by</name>
+    <name>Group by 1</name>
     <type>GroupBy</type>
     <description/>
     <distribute>Y</distribute>
@@ -3278,7 +3349,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>407</xloc>
-      <yloc>417</yloc>
+      <yloc>559</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3321,7 +3392,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>407</xloc>
-      <yloc>486</yloc>
+      <yloc>628</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3364,7 +3435,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>407</xloc>
-      <yloc>555</yloc>
+      <yloc>697</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3407,7 +3478,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>407</xloc>
-      <yloc>624</yloc>
+      <yloc>766</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3450,7 +3521,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>407</xloc>
-      <yloc>693</yloc>
+      <yloc>835</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3493,7 +3564,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>407</xloc>
-      <yloc>762</yloc>
+      <yloc>904</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3536,7 +3607,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>407</xloc>
-      <yloc>831</yloc>
+      <yloc>973</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3579,7 +3650,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>407</xloc>
-      <yloc>900</yloc>
+      <yloc>1042</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3622,7 +3693,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>407</xloc>
-      <yloc>973</yloc>
+      <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3638,7 +3709,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Sort rows</send_true_to>
+<send_true_to>Set Position Type</send_true_to>
 <send_false_to/>
     <compare>
 <condition>
@@ -3663,8 +3734,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>479</xloc>
-      <yloc>297</yloc>
+      <xloc>586</xloc>
+      <yloc>275</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3806,7 +3877,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>765</xloc>
-      <yloc>762</yloc>
+      <yloc>904</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3847,7 +3918,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>902</xloc>
-      <yloc>831</yloc>
+      <yloc>973</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3881,7 +3952,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1172</xloc>
-      <yloc>417</yloc>
+      <yloc>559</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3936,7 +4007,7 @@
     </keys_2>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>184</xloc>
+      <xloc>61</xloc>
       <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
@@ -3983,7 +4054,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>647</xloc>
-      <yloc>417</yloc>
+      <yloc>559</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4125,21 +4196,104 @@
 <send_false_to/>
     <compare>
 <condition>
- <negated>Y</negated>
+ <negated>N</negated>
  <conditions>
   <condition>
    <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-   <function>IN LIST</function>
+   <operator>AND</operator>
+   <conditions>
+    <condition>
+     <negated>N</negated>
+     <leftvalue>EP</leftvalue>
+     <function>&#x3c;&#x3e;</function>
+     <rightvalue/>
+     <value><name>constant</name><type>String</type><text>01</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
+    <condition>
+     <negated>N</negated>
+     <operator>AND</operator>
+     <leftvalue>EP</leftvalue>
+     <function>&#x3c;&#x3e;</function>
+     <rightvalue/>
+     <value><name>constant</name><type>String</type><text>02</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
+    <condition>
+     <negated>N</negated>
+     <operator>AND</operator>
+     <leftvalue>EP</leftvalue>
+     <function>&#x3c;&#x3e;</function>
+     <rightvalue/>
+     <value><name>constant</name><type>String</type><text>04</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
+    <condition>
+     <negated>N</negated>
+     <operator>AND</operator>
+     <leftvalue>EP</leftvalue>
+     <function>&#x3c;&#x3e;</function>
+     <rightvalue/>
+     <value><name>constant</name><type>String</type><text>05</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
+    <condition>
+     <negated>N</negated>
+     <operator>AND</operator>
+     <leftvalue>EP</leftvalue>
+     <function>&#x3c;&#x3e;</function>
+     <rightvalue/>
+     <value><name>constant</name><type>String</type><text>10</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
+    <condition>
+     <negated>N</negated>
+     <operator>AND</operator>
+     <leftvalue>EP</leftvalue>
+     <function>&#x3c;&#x3e;</function>
+     <rightvalue/>
+     <value><name>constant</name><type>String</type><text>11</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
+    <condition>
+     <negated>N</negated>
+     <operator>AND</operator>
+     <leftvalue>EP</leftvalue>
+     <function>&#x3c;&#x3e;</function>
+     <rightvalue/>
+     <value><name>constant</name><type>String</type><text>12</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
+    <condition>
+     <negated>N</negated>
+     <operator>AND</operator>
+     <leftvalue>EP</leftvalue>
+     <function>&#x3c;&#x3e;</function>
+     <rightvalue/>
+     <value><name>constant</name><type>String</type><text>13</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
+    <condition>
+     <negated>N</negated>
+     <operator>AND</operator>
+     <leftvalue>EP</leftvalue>
+     <function>&#x3c;&#x3e;</function>
+     <rightvalue/>
+     <value><name>constant</name><type>String</type><text>14</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
+    <condition>
+     <negated>N</negated>
+     <operator>AND</operator>
+     <leftvalue>EP</leftvalue>
+     <function>&#x3c;&#x3e;</function>
+     <rightvalue/>
+     <value><name>constant</name><type>String</type><text>15</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
+    <condition>
+     <negated>N</negated>
+     <operator>AND</operator>
+     <leftvalue>EP</leftvalue>
+     <function>&#x3c;&#x3e;</function>
+     <rightvalue/>
+     <value><name>constant</name><type>String</type><text>16</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
+    </conditions>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>EP</leftvalue>
+   <function>IS NOT NULL</function>
    <rightvalue/>
-   <value><name>constant</name><type>String</type><text>01,02,04,05,10,11,12,13,14,15,16</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+   </condition>
   </conditions>
  </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>300</xloc>
-      <yloc>973</yloc>
+      <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4163,14 +4317,14 @@
  <conditions>
   <condition>
    <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
+   <leftvalue>EP</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>04</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>AND</operator>
-   <leftvalue>FTE</leftvalue>
+   <leftvalue>GroupFTE</leftvalue>
    <function>&#x3c;</function>
    <rightvalue/>
    <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
@@ -4180,7 +4334,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>300</xloc>
-      <yloc>831</yloc>
+      <yloc>973</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4204,14 +4358,14 @@
  <conditions>
   <condition>
    <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
+   <leftvalue>EP</leftvalue>
    <function>IN LIST</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>01&#x3b;02&#x3b;04&#x3b;05&#x3b;10&#x3b;11&#x3b;12&#x3b;13&#x3b;14&#x3b;15&#x3b;16</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>AND</operator>
-   <leftvalue>FTE</leftvalue>
+   <leftvalue>GroupFTE</leftvalue>
    <function>&#x3c;</function>
    <rightvalue/>
    <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
@@ -4221,7 +4375,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>300</xloc>
-      <yloc>486</yloc>
+      <yloc>628</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4245,14 +4399,14 @@
  <conditions>
   <condition>
    <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
+   <leftvalue>EP</leftvalue>
    <function>&#x3d;</function>
    <rightvalue/>
    <value><name>constant</name><type>String</type><text>05</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
   <condition>
    <negated>N</negated>
    <operator>AND</operator>
-   <leftvalue>FTE</leftvalue>
+   <leftvalue>GroupFTE</leftvalue>
    <function>&#x3c;</function>
    <rightvalue/>
    <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
@@ -4262,7 +4416,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>300</xloc>
-      <yloc>693</yloc>
+      <yloc>835</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4380,7 +4534,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>765</xloc>
-      <yloc>693</yloc>
+      <yloc>835</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4409,7 +4563,7 @@
       </remove>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1167</xloc>
-      <yloc>973</yloc>
+      <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4704,7 +4858,7 @@
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>899</xloc>
-      <yloc>973</yloc>
+      <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4821,7 +4975,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1033</xloc>
-      <yloc>973</yloc>
+      <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4910,7 +5064,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>825</xloc>
-      <yloc>900</yloc>
+      <yloc>1042</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4998,8 +5152,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>952</xloc>
-      <yloc>900</yloc>
+      <xloc>973</xloc>
+      <yloc>1043</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5030,7 +5184,13 @@
         <presorted>N</presorted>
       </field>
       <field>
-        <name>EMPLOYMENTPOSITION</name>
+        <name>POSITIONTYPE</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>EP</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <presorted>N</presorted>
@@ -5039,7 +5199,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>194</xloc>
-      <yloc>417</yloc>
+      <yloc>559</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5091,7 +5251,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1392</xloc>
-      <yloc>486</yloc>
+      <yloc>628</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5137,7 +5297,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>765</xloc>
-      <yloc>973</yloc>
+      <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5189,7 +5349,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1172</xloc>
-      <yloc>762</yloc>
+      <yloc>904</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5235,7 +5395,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>765</xloc>
-      <yloc>624</yloc>
+      <yloc>766</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5266,7 +5426,7 @@
         </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1268</xloc>
-      <yloc>762</yloc>
+      <yloc>904</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5870,14 +6030,356 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1460</xloc>
-      <yloc>762</yloc>
+      <yloc>904</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Add Position FTE 2</name>
-    <type>StreamLookup</type>
+    <name>Count Location&#x2f;Position</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>SOURCE_RMS</connection>
+    <sql>select ha.Employee_no,&#xd;&#xa;		Location,&#xd;&#xa;      	Position_code,&#xd;&#xa;		ha.Assignment_type as Assign_type,&#xd;&#xa;		hpc.Supervisor_position,&#xd;&#xa;		hpc.HOURS_OR_FTE,&#xd;&#xa;		ha.hours_fte,&#xd;&#xa;		ha.hours_per_day &#x2a; 100 as hpd,&#xd;&#xa;		hpc.hours_per_day &#x2a; 100 as hpd_pc,&#xd;&#xa;		ha.hours_fte &#x2a; 100 as alt_fte,&#xd;&#xa;       1 as HeadCount&#xd;&#xa;    FROM hr_assignments ha&#xd;&#xa;		LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa; 		LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa;		LEFT JOIN HR_employee_interlink hei ON hei.employee_no &#x3d; ha.employee_no&#xd;&#xa;    WHERE START_DATE &#x3c;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;&#xd;&#xa;		AND END_DATE &#x3e;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;	&#xd;&#xa;		AND location &#x3e; &#x27; &#x27;&#xd;&#xa;		AND hei.Status &#x3d; &#x27;A&#x27;&#xd;&#xa;		AND hei.Payroll_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;		AND hpc.Supervisor_position &#x3e; &#x27; &#x27;&#xd;&#xa;	ORDER BY hpc.Supervisor_position, ha.Employee_no, Location, Position_code</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>Y</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>61</xloc>
+      <yloc>111</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add 100</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>onehundred</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>100</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>141</xloc>
+      <yloc>206</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Hours or FTE &#x3d; F&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>FTE</send_true_to>
+<send_false_to>Hours</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>HOURS_OR_FTE</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>F</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>225</xloc>
+      <yloc>206</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Hours</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>real_fte</field_name>
+<calc_type>COPY_FIELD</calc_type>
+<field_a>ALT_FTE</field_a>
+<field_b/>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>4</value_length>
+<value_precision>3</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>fte</field_name>
+<calc_type>DIVIDE</calc_type>
+<field_a>HPD</field_a>
+<field_b>HPD_PC</field_b>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>4</value_length>
+<value_precision>3</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>330</xloc>
+      <yloc>262</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>FTE</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>real_fte</field_name>
+<calc_type>DIVIDE</calc_type>
+<field_a>ALT_FTE</field_a>
+<field_b>onehundred</field_b>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>4</value_length>
+<value_precision>3</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name>FTE</field_name>
+<calc_type>COPY_FIELD</calc_type>
+<field_a>real_fte</field_a>
+<field_b/>
+<field_c/>
+<value_type>Number</value_type>
+<value_length>4</value_length>
+<value_precision>3</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>330</xloc>
+      <yloc>162</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Text file output 2</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator>,</separator>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>Y</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;location_fte_all</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>EMPLOYMENTLOCATION</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>SUPERVISOR_POSITION</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>EP</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>SRB_POSITION</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>EMPLOYEE_NO</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>HEADCOUNT</name>
+        <type>Integer</type>
+        <format>0</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>FTE</name>
+        <type>Number</type>
+        <format>0.&#x23;&#x23;&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>POSITIONTYPE</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GroupFTE</name>
+        <type>Number</type>
+        <format>0.&#x23;&#x23;&#x23;&#x23;&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>62</xloc>
+      <yloc>474</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows 4</name>
+    <type>SortRows</type>
     <description/>
     <distribute>N</distribute>
     <custom_distribution/>
@@ -5886,44 +6388,46 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <from>FTE by PositionType</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>CONTRACTIDENTIFIER</name>
-        <field>CONTRACTIDENTIFIER</field>
-      </key>
-      <key>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
         <name>EMPLOYMENTLOCATION</name>
-        <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
-        <name>POSITIONTYPE</name>
-        <field>POSITIONTYPE</field>
-      </key>
-      <value>
-        <name>FTEATPOSITION</name>
-        <rename>FTEATPOSITION</rename>
-        <default/>
-        <type>Number</type>
-      </value>
-    </lookup>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>EP</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>EMPLOYEE_NO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>900</xloc>
-      <yloc>557</yloc>
+      <xloc>333</xloc>
+      <yloc>339</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>FTE by PositionType</name>
+    <name>Group by loc&#x2f;pos&#x2f;emp</name>
     <type>GroupBy</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -5937,30 +6441,220 @@
       <prefix>grp</prefix>
       <add_linenr>N</add_linenr>
       <linenr_fieldname/>
-      <give_back_row>N</give_back_row>
+      <give_back_row>Y</give_back_row>
       <group>
-        <field>
-          <name>CONTRACTIDENTIFIER</name>
-        </field>
         <field>
           <name>EMPLOYMENTLOCATION</name>
         </field>
         <field>
-          <name>POSITIONTYPE</name>
+          <name>SUPERVISOR_POSITION</name>
+        </field>
+        <field>
+          <name>EP</name>
+        </field>
+        <field>
+          <name>EMPLOYEE_NO</name>
         </field>
       </group>
       <fields>
         <field>
-          <aggregate>FTEATPOSITION</aggregate>
-          <subject>PERCENTTIMEEMPLOYED</subject>
+          <aggregate>POSITIONTYPE</aggregate>
+          <subject>POSITIONTYPE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>SRB_POSITION</aggregate>
+          <subject>POSITION_CODE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>HEADCOUNT</aggregate>
+          <subject>HEADCOUNT</subject>
+          <type>COUNT_DISTINCT</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>FTE</aggregate>
+          <subject>FTE</subject>
           <type>SUM</type>
           <valuefield/>
         </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1035</xloc>
-      <yloc>557</yloc>
+      <xloc>194</xloc>
+      <yloc>385</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort rows 4 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>EMPLOYMENTLOCATION</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>POSITIONTYPE</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>EMPLOYEE_NO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>452</xloc>
+      <yloc>385</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set Position Type</name>
+    <type>Janino</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <formula><field_name>POSITIONTYPE</field_name>
+<formula_string>EP &#x21;&#x3d; null &#x26;&#x26; &#x28;EP.indexOf&#x28;&#x22;01&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EP.indexOf&#x28;&#x22;02&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EP.indexOf&#x28;&#x22;04&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EP.indexOf&#x28;&#x22;05&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EP.indexOf&#x28;&#x22;10&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EP.indexOf&#x28;&#x22;11&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EP.indexOf&#x28;&#x22;12&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EP.indexOf&#x28;&#x22;13&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EP.indexOf&#x28;&#x22;14&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EP.indexOf&#x28;&#x22;15&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EP.indexOf&#x28;&#x22;16&#x22;&#x29; &#x3e; - 1&#x29; &#x3f; &#x22;TEACHING&#x22; &#x3a; EP</formula_string>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>452</xloc>
+      <yloc>299</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Group by loc&#x2f;type&#x2f;emp</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <all_rows>N</all_rows>
+      <ignore_aggregate>N</ignore_aggregate>
+      <field_ignore/>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>grp</prefix>
+      <add_linenr>N</add_linenr>
+      <linenr_fieldname/>
+      <give_back_row>Y</give_back_row>
+      <group>
+        <field>
+          <name>EMPLOYMENTLOCATION</name>
+        </field>
+        <field>
+          <name>SUPERVISOR_POSITION</name>
+        </field>
+        <field>
+          <name>POSITIONTYPE</name>
+        </field>
+        <field>
+          <name>EMPLOYEE_NO</name>
+        </field>
+      </group>
+      <fields>
+        <field>
+          <aggregate>GroupFTE</aggregate>
+          <subject>FTE</subject>
+          <type>SUM</type>
+          <valuefield/>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>452</xloc>
+      <yloc>474</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add GroupFTE</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Group by loc&#x2f;type&#x2f;emp</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>EMPLOYMENTLOCATION</name>
+        <field>EMPLOYMENTLOCATION</field>
+      </key>
+      <key>
+        <name>SUPERVISOR_POSITION</name>
+        <field>SUPERVISOR_POSITION</field>
+      </key>
+      <key>
+        <name>EMPLOYEE_NO</name>
+        <field>EMPLOYEE_NO</field>
+      </key>
+      <key>
+        <name>POSITIONTYPE</name>
+        <field>POSITIONTYPE</field>
+      </key>
+      <value>
+        <name>GroupFTE</name>
+        <rename>GroupFTE</rename>
+        <default/>
+        <type>Number</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>194</xloc>
+      <yloc>474</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

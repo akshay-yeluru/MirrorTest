@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;04 08&#x3a;05&#x3a;55.158</modified_date>
+  <modified_date>2016&#x2f;07&#x2f;05 14&#x3a;21&#x3a;56.395</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -457,12 +457,10 @@
   <hop> <from>Sort rows</from><to>Part Time AP</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Admin FTE</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Non-Teaching Headcount</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>Part Time VP</to><enabled>Y</enabled> </hop>
   <hop> <from>Full Time Educator</from><to>Group by 1</to><enabled>Y</enabled> </hop>
   <hop> <from>Part Time Educator </from><to>Group by 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Educator FTE</from><to>Group by 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Full Time VP</from><to>Group by 4</to><enabled>Y</enabled> </hop>
-  <hop> <from>Part Time VP</from><to>Group by 5</to><enabled>Y</enabled> </hop>
   <hop> <from>Full Time AP</from><to>Group by 6</to><enabled>Y</enabled> </hop>
   <hop> <from>Part Time AP</from><to>Group by 7</to><enabled>Y</enabled> </hop>
   <hop> <from>Admin FTE</from><to>Group by 8</to><enabled>Y</enabled> </hop>
@@ -561,6 +559,8 @@
   <hop> <from>Is Location &#x26;Contract Type&#x3f;</from><to>Set Position Type</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Position Type</from><to>Sort rows 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Position Type</from><to>Sort rows 4 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows</from><to>Part Time VP</to><enabled>Y</enabled> </hop>
+  <hop> <from>Part Time VP</from><to>Group by 5</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add 100</name>
@@ -1218,7 +1218,7 @@
         <name>K12Supervisory06</name>
         <rename>K12Supervisory06</rename>
         <default/>
-        <type>BigNumber</type>
+        <type>Integer</type>
       </value>
     </lookup>
      <cluster_schema/>
@@ -4719,47 +4719,6 @@
     </step>
 
   <step>
-    <name>Part Time VP</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Group by 5</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>EP</leftvalue>
-   <function>&#x3d;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>05</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>GroupFTE</leftvalue>
-   <function>&#x3c;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>300</xloc>
-      <yloc>835</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Position Cross-Reference</name>
     <type>TableInput</type>
     <description/>
@@ -6487,6 +6446,47 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1460</xloc>
       <yloc>904</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Part Time VP</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Group by 5</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>EP</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>05</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>AND</operator>
+   <leftvalue>GroupFTE</leftvalue>
+   <function>&#x3c;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>300</xloc>
+      <yloc>835</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

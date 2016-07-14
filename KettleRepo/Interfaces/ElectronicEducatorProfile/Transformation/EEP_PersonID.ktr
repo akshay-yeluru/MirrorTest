@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;06&#x2f;30 07&#x3a;45&#x3a;04.138</modified_date>
+  <modified_date>2016&#x2f;07&#x2f;11 15&#x3a;04&#x3a;44.976</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -454,13 +454,13 @@
   <hop> <from>Filter Employees</from><to>Merge Join Status</to><enabled>Y</enabled> </hop>
   <hop> <from>District Domain</from><to>Set District Domain Variables</to><enabled>Y</enabled> </hop>
   <hop> <from>Get System Info</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>Set Current Date Variable</to><enabled>N</enabled> </hop>
+  <hop> <from>Select values</from><to>Set Current Date Variable</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Certificate Type</from><to>Employee Certificated&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Certificated&#x3f;</from><to>Create EEP Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>Unique rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Unique rows</from><to>Add Teach Certificate</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get System Info</from><to>Set Date to June 21, 2016</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set Date to June 21, 2016</from><to>Set Current Date Variable</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get System Info</from><to>Set Date to June 21, 2016</to><enabled>N</enabled> </hop>
+  <hop> <from>Set Date to June 21, 2016</from><to>Set Current Date Variable</to><enabled>N</enabled> </hop>
   </order>
   <step>
     <name>Add Non-Teach Cert</name>
@@ -1128,6 +1128,39 @@
     </step>
 
   <step>
+    <name>Set Date to June 21, 2016</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>Current_date</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>20160621</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>208</xloc>
+      <yloc>481</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Set District Domain Variables</name>
     <type>SetVariable</type>
     <description/>
@@ -1318,39 +1351,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>651</xloc>
       <yloc>229</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set Date to June 21, 2016</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>Current_date</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>20160621</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>208</xloc>
-      <yloc>481</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

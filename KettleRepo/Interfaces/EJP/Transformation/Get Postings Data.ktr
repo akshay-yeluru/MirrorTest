@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2015&#x2f;06&#x2f;17 12&#x3a;23&#x3a;12.139</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;06&#x2f;21 10&#x3a;35&#x3a;47.909</modified_date>
+  <modified_date>2016&#x2f;08&#x2f;11 10&#x3a;33&#x3a;21.501</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -204,12 +204,12 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>HR_POSTING</from><to>Filter Control Chars</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter Control Chars</from><to>Escape Fields</to><enabled>Y</enabled> </hop>
   <hop> <from>Format Dates</from><to>Copy rows to result</to><enabled>Y</enabled> </hop>
   <hop> <from>Map Values</from><to>Format Dates</to><enabled>Y</enabled> </hop>
   <hop> <from>Escape Fields</from><to>Replace Empty Closing Date and Time</to><enabled>Y</enabled> </hop>
   <hop> <from>Replace Empty Closing Date and Time</from><to>Map Values</to><enabled>Y</enabled> </hop>
+  <hop> <from>HR_POSTING</from><to>Filter Control Chars</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Copy rows to result</name>
@@ -439,6 +439,26 @@
         <rename/>
         <length>-2</length>
         <precision>-2</precision>
+      </field>      <field>        <name>HiringManager1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>HiringManager2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>HiringManager3</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>HiringManager4</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>HiringManager5</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>
       <meta>        <name>PostingDate</name>
         <rename>PostingDate</rename>
@@ -490,7 +510,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>select&#xd;&#xa;         POSTING_NO&#xd;&#xa;        ,POSTING_DESCRIPTION&#xd;&#xa;        ,DESCRIPTION AS POSTING_TYPE&#xd;&#xa;        ,FILLED&#xd;&#xa;        ,EXTERNAL_POSTING_DATE&#xd;&#xa;        ,EXTERNAL_POSTING_CLOSE_DATE&#xd;&#xa;        ,EXTERNAL_POSTING_CLOSE_TIME&#xd;&#xa;        ,COMMENT1&#xd;&#xa;        ,COMMENT2&#xd;&#xa;        ,COMMENT3&#xd;&#xa;        ,COMMENT4&#xd;&#xa;        ,COMMENT5&#xd;&#xa;        ,EXTERNAL_POSTING_CATEGORY&#xd;&#xa;        ,EXTERNAL_POSTING_CATEGORY as EXTERNAL_POSTING_CATEGORY_DESC&#xd;&#xa;&#xd;&#xa;from     HR_POSTING&#xd;&#xa;         left join HR_POSTING_TYPE_CODE on &#x28;POSTING_TYPE &#x3d; CODE&#x29;&#xd;&#xa;&#xd;&#xa;where    EXTERNAL_POSTING_FLAG &#x3d; &#x27;Y&#x27; and EXTERNAL_POSTING_DATE &#x3c;&#x3e; &#x27; &#x27;&#xd;&#xa;</sql>
+    <sql>select&#xd;&#xa;         POSTING_NO&#xd;&#xa;        ,POSTING_DESCRIPTION&#xd;&#xa;        ,DESCRIPTION AS POSTING_TYPE&#xd;&#xa;        ,FILLED&#xd;&#xa;        ,EXTERNAL_POSTING_DATE&#xd;&#xa;        ,EXTERNAL_POSTING_CLOSE_DATE&#xd;&#xa;        ,EXTERNAL_POSTING_CLOSE_TIME&#xd;&#xa;        ,COMMENT1&#xd;&#xa;        ,COMMENT2&#xd;&#xa;        ,COMMENT3&#xd;&#xa;        ,COMMENT4&#xd;&#xa;        ,COMMENT5&#xd;&#xa;		,HIRING_MANAGER_01&#xd;&#xa;		,HIRING_MANAGER_02&#xd;&#xa;		,HIRING_MANAGER_03&#xd;&#xa;		,HIRING_MANAGER_04&#xd;&#xa;		,HIRING_MANAGER_05&#xd;&#xa;        ,EXTERNAL_POSTING_CATEGORY&#xd;&#xa;        ,EXTERNAL_POSTING_CATEGORY as EXTERNAL_POSTING_CATEGORY_DESC&#xd;&#xa;&#xd;&#xa;from     HR_POSTING&#xd;&#xa;         left join HR_POSTING_TYPE_CODE on &#x28;POSTING_TYPE &#x3d; CODE&#x29;&#xd;&#xa;&#xd;&#xa;where    EXTERNAL_POSTING_FLAG &#x3d; &#x27;Y&#x27; and EXTERNAL_POSTING_DATE &#x3c;&#x3e; &#x27; &#x27;&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -569,6 +589,26 @@
         <precision>-2</precision>
       </field>      <field>        <name>FILLED</name>
         <rename>Filled</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>HIRING_MANAGER_01</name>
+        <rename>HiringManager1</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>HIRING_MANAGER_02</name>
+        <rename>HiringManager2</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>HIRING_MANAGER_03</name>
+        <rename>HiringManager3</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>HIRING_MANAGER_04</name>
+        <rename>HiringManager4</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>HIRING_MANAGER_05</name>
+        <rename>HiringManager5</rename>
         <length>-2</length>
         <precision>-2</precision>
       </field>        <select_unspecified>N</select_unspecified>

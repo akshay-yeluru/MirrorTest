@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;08&#x2f;29 14&#x3a;40&#x3a;55.960</modified_date>
+  <modified_date>2016&#x2f;09&#x2f;09 13&#x3a;22&#x3a;23.652</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -233,7 +233,7 @@
     <server>dtl-grp-w12</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>ECACS</database>
+    <database>PrairieSouth_NAV2009R2_PROD</database>
     <port>1433</port>
     <username>tsc</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79ce10be86bcd9</password>
@@ -468,7 +468,7 @@
   <hop> <from>Emp FTE by Location</from><to>Add Total FTE at location</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 2</from><to>Add Grade Level</to><enabled>Y</enabled> </hop>
   <hop> <from>Group by 1</from><to>Add Full Time Educ</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by 9</from><to>Add Non Teaching HC</to><enabled>Y</enabled> </hop>
+  <hop> <from>Group by 9</from><to>Non Teaching HC</to><enabled>Y</enabled> </hop>
   <hop> <from>Group by 8</from><to>Add Admin FTE</to><enabled>Y</enabled> </hop>
   <hop> <from>Group by 7</from><to>Add PartTime AP</to><enabled>Y</enabled> </hop>
   <hop> <from>Group by 6</from><to>Add Fulltime AP</to><enabled>Y</enabled> </hop>
@@ -483,16 +483,14 @@
   <hop> <from>Add PartTime VP</from><to>Add Fulltime AP</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Fulltime AP</from><to>Add PartTime AP</to><enabled>Y</enabled> </hop>
   <hop> <from>Add PartTime AP</from><to>Add Admin FTE</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Admin FTE</from><to>Add Non Teaching HC</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Admin FTE</from><to>Non Teaching HC</to><enabled>Y</enabled> </hop>
   <hop> <from>K12TeacherTime 04&#x3f;</from><to>Add constants 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants 2</from><to>Add Grade Level</to><enabled>Y</enabled> </hop>
   <hop> <from>Is this a K12Teach time&#x3f;</from><to>Add constants 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>K12TeacherTime 04&#x3f;</from><to>Add Full Time Educ</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Non Teaching HC</from><to>Add constants</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants</from><to>Sort rows 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Non Teaching HC</from><to>Constants</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Info</from><to>Join Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Supervisory to String</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values 3</from><to>Set Supervisory to String</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Gov Position</from><to>Add Gov Location</to><enabled>Y</enabled> </hop>
   <hop> <from>K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;&#x3f;</from><to>Position Type &#x3d; Teaching</to><enabled>Y</enabled> </hop>
   <hop> <from>K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;&#x3f;</from><to>Position Type &#x3d; PostionTime</to><enabled>Y</enabled> </hop>
@@ -536,9 +534,9 @@
   <hop> <from>FTE by PositionType</from><to>Add Position FTE 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>FTE by PositionType</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Position FTE 2</from><to>Add Position FTE</to><enabled>Y</enabled> </hop>
-  <hop> <from>Calc Teach by Level&#x25;</from><to>Sort rows 2 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set Teach by Location&#x25;</from><to>Sort rows 2 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set Teach to FTE</from><to>Sort rows 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calc Teach by Level&#x25;</from><to>Sort em</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set Teach by Location&#x25;</from><to>Sort em</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set Teach to FTE</from><to>Sort em</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Grade Level</from><to>Add Position FTE 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>Emp FTE by Location</to><enabled>Y</enabled> </hop>
   <hop> <from>Is this a K12Teach time&#x3f;</from><to>Add Total FTE at location</to><enabled>Y</enabled> </hop>
@@ -560,11 +558,23 @@
   <hop> <from>Set Position Type</from><to>Sort rows 4 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>Part Time VP</to><enabled>Y</enabled> </hop>
   <hop> <from>Part Time VP</from><to>Group by 5</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows 2 2</from><to>Group by loc&#x2f;type&#x2f;emp 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by loc&#x2f;type&#x2f;emp 2</from><to>Calc Prep Time</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows 2 2</from><to>Set Prep Time</to><enabled>Y</enabled> </hop>
-  <hop> <from>Calc Prep Time</from><to>Set Prep Time</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort em</from><to>Set Prep Time</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Prep Time</from><to>Select values 3</to><enabled>Y</enabled> </hop>
+  <hop> <from>Constants</from><to>NonTeach Time</to><enabled>Y</enabled> </hop>
+  <hop> <from>NonTeach Time</from><to>Sort em</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort em</from><to>Calculator</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator</from><to>Filter rows 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows 2</from><to>Calculator 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows 2</from><to>Calculator 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator 2</from><to>Group by</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator 2 2</from><to>Group by</to><enabled>Y</enabled> </hop>
+  <hop> <from>Group by</from><to>Set Prep Time</to><enabled>Y</enabled> </hop>
+  <hop> <from>Sort rows 2 3</from><to>Group by 10</to><enabled>N</enabled> </hop>
+  <hop> <from>Group by 10</from><to>Add refid</to><enabled>N</enabled> </hop>
+  <hop> <from>Set Prep Time</from><to>Group by 10 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Group by 10 2</from><to>Set Prep Time 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 3</from><to>Set Prep Time 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set Prep Time 2</from><to>Set Supervisory to String</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add 100</name>
@@ -1074,46 +1084,6 @@
     </step>
 
   <step>
-    <name>Add Non Teaching HC</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Group by 9</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>EMPLOYMENTLOCATION</name>
-        <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
-        <name>POSITION_CODE</name>
-        <field>SUPERVISOR_POSITION</field>
-      </key>
-      <value>
-        <name>K12Supervisory10</name>
-        <rename>K12Supervisory10</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>525</xloc>
-      <yloc>1115</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Add PartTime AP</name>
     <type>StreamLookup</type>
     <description/>
@@ -1396,142 +1366,13 @@
         <name>PERCENTTIMEEMPLOYED</name>
         <rename>FTEATLOCATION</rename>
         <default/>
-        <type>Number</type>
+        <type>Integer</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>900</xloc>
+      <xloc>960</xloc>
       <yloc>559</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add constants</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>TimePercentP</name>
-        <type>BigNumber</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>FTEATPOSITION</name>
-        <type>BigNumber</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>FTEATTIMEALLOT</name>
-        <type>BigNumber</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>Poscounter</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>K12PrepWork</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>5</length>
-        <precision>2</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>K12PrepTime</name>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>K12TeachTime</name>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>K12PosPrepWork</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>5</length>
-        <precision>2</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>K12PosPrepTime</name>
-        <type>Integer</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>645</xloc>
-      <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1810,6 +1651,18 @@
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
+        <name>K12TeachTimeSum</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
         <name>K12Super1</name>
         <type>String</type>
         <format/>
@@ -1984,6 +1837,18 @@
         <nullif>.49</nullif>
         <length>4</length>
         <precision>2</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>K12NonTeachTime</name>
+        <type>BigNumber</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>0</nullif>
+        <length>3</length>
+        <precision>0</precision>
         <set_empty_string>N</set_empty_string>
       </field>
     </fields>
@@ -2405,6 +2270,135 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>854</xloc>
       <yloc>297</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>TimePercentP</name>
+        <type>BigNumber</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>FTEATPOSITION</name>
+        <type>BigNumber</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>FTEATTIMEALLOT</name>
+        <type>BigNumber</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Poscounter</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>K12PrepWork</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>5</length>
+        <precision>2</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>K12PrepTime</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>K12TeachTime</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>0</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>K12PosPrepWork</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>5</length>
+        <precision>2</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>K12PosPrepTime</name>
+        <type>Integer</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>605</xloc>
+      <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4096,7 +4090,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>586</xloc>
-      <yloc>275</yloc>
+      <yloc>299</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4543,6 +4537,46 @@
     </step>
 
   <step>
+    <name>Non Teaching HC</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Group by 9</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>EMPLOYMENTLOCATION</name>
+        <field>EMPLOYMENTLOCATION</field>
+      </key>
+      <key>
+        <name>POSITION_CODE</name>
+        <field>SUPERVISOR_POSITION</field>
+      </key>
+      <value>
+        <name>K12Supervisory10</name>
+        <rename>K12Supervisory10</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>525</xloc>
+      <yloc>1115</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Non-Teaching Headcount</name>
     <type>FilterRows</type>
     <description/>
@@ -4654,6 +4688,31 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>300</xloc>
+      <yloc>1115</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>NonTeach Time</name>
+    <type>SetValueField</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>K12NonTeachTime</name>
+        <replaceby>PERCENTTIMEEMPLOYED</replaceby>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>685</xloc>
       <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
@@ -4942,7 +5001,22 @@
       </remove>      <remove>        <name>K12Supervisory08</name>
       </remove>      <remove>        <name>K12Supervisory09</name>
       </remove>      <remove>        <name>K12Supervisory10</name>
-      </remove>    </fields>     <cluster_schema/>
+      </remove>      <meta>        <name>K12TeachTimeSum</name>
+        <rename>K12TeachTimeSum</rename>
+        <type>String</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1172</xloc>
       <yloc>1009</yloc>
@@ -4989,7 +5063,7 @@
     <name>Select values 3</name>
     <type>SelectValues</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -5239,8 +5313,8 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1035</xloc>
-      <yloc>1115</yloc>
+      <xloc>1027</xloc>
+      <yloc>1117</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5302,6 +5376,46 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>452</xloc>
       <yloc>299</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set Prep Time</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Group by</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>N</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>EMPLOYEE_NO</name>
+        <field>EMPLOYEE_NO</field>
+      </key>
+      <key>
+        <name>EMPLOYMENTLOCATION</name>
+        <field>EMPLOYMENTLOCATION</field>
+      </key>
+      <value>
+        <name>K12PrepTimeSum</name>
+        <rename>K12PrepTimeSum</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>900</xloc>
+      <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5382,8 +5496,8 @@
 </formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1172</xloc>
-      <yloc>1114</yloc>
+      <xloc>1250</xloc>
+      <yloc>1111</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5401,7 +5515,7 @@
            </partitioning>
        <calculation><field_name>K12PrepWork</field_name>
 <calc_type>MULTIPLY</calc_type>
-<field_a>FTEATTIMEALLOT</field_a>
+<field_a>PERCENTTIMEEMPLOYED</field_a>
 <field_b>AltTimePercentP</field_b>
 <field_c/>
 <value_type>Number</value_type>
@@ -5429,7 +5543,7 @@
 </calculation>
        <calculation><field_name>K12TeachTime</field_name>
 <calc_type>SUBTRACT</calc_type>
-<field_a>FTEATTIMEALLOT</field_a>
+<field_a>PERCENTTIMEEMPLOYED</field_a>
 <field_b>K12PrepTime</field_b>
 <field_c/>
 <value_type>Integer</value_type>
@@ -5567,6 +5681,52 @@
     </step>
 
   <step>
+    <name>Sort em</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>EMPLOYEE_NO</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>POSITIONTYPE</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>CONTRACTTYPE</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>765</xloc>
+      <yloc>1115</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Sort rows</name>
     <type>SortRows</type>
     <description/>
@@ -5660,52 +5820,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1392</xloc>
       <yloc>628</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Sort rows 2 2</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>EMPLOYEE_NO</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>POSITIONTYPE</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>CONTRACTTYPE</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>765</xloc>
-      <yloc>1115</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6526,6 +6640,18 @@
         <length>-1</length>
         <precision>-1</precision>
       </field>
+      <field>
+        <name>K12TeachTimeSum</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -6536,56 +6662,36 @@
     </step>
 
   <step>
-    <name>Group by loc&#x2f;type&#x2f;emp 2</name>
-    <type>GroupBy</type>
+    <name>Filter rows 2</name>
+    <type>FilterRows</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>Y</give_back_row>
-      <group>
-        <field>
-          <name>EMPLOYEE_NO</name>
-        </field>
-        <field>
-          <name>EMPLOYMENTLOCATION</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>SumTeachTime</aggregate>
-          <subject>K12TeachTime</subject>
-          <type>SUM</type>
-          <valuefield/>
-        </field>
-        <field>
-          <aggregate>FTELOCATION</aggregate>
-          <subject>FTEATLOCATION</subject>
-          <type>FIRST</type>
-          <valuefield/>
-        </field>
-      </fields>
+<send_true_to>Calculator 2</send_true_to>
+<send_false_to>Calculator 2 2</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>TotTime</leftvalue>
+ <function>&#x3e;</function>
+ <rightvalue>FTEATTIMEALLOT</rightvalue>
+ </condition>
+    </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>764</xloc>
-      <yloc>1207</yloc>
+      <xloc>762</xloc>
+      <yloc>1272</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Calc Prep Time</name>
+    <name>Calculator</name>
     <type>Calculator</type>
     <description/>
     <distribute>Y</distribute>
@@ -6595,10 +6701,43 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <calculation><field_name>K12PrepTimeSumA</field_name>
+       <calculation><field_name>TotTime</field_name>
+<calc_type>ADD</calc_type>
+<field_a>K12PrepTime</field_a>
+<field_b>K12TeachTime</field_b>
+<field_c/>
+<value_type>None</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>767</xloc>
+      <yloc>1190</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calculator 2</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>K12PrepTimeSum</field_name>
 <calc_type>SUBTRACT</calc_type>
-<field_a>FTELOCATION</field_a>
-<field_b>SumTeachTime</field_b>
+<field_a>K12PrepTime</field_a>
+<field_b>one</field_b>
 <field_c/>
 <value_type>Integer</value_type>
 <value_length>-1</value_length>
@@ -6609,9 +6748,28 @@
 <grouping_symbol/>
 <currency_symbol/>
 </calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>850</xloc>
+      <yloc>1220</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calculator 2 2</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
        <calculation><field_name>K12PrepTimeSum</field_name>
-<calc_type>ROUND_1</calc_type>
-<field_a>K12PrepTimeSumA</field_a>
+<calc_type>COPY_FIELD</calc_type>
+<field_a>K12PrepTime</field_a>
 <field_b/>
 <field_c/>
 <value_type>Integer</value_type>
@@ -6625,14 +6783,590 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>900</xloc>
-      <yloc>1207</yloc>
+      <xloc>849</xloc>
+      <yloc>1295</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Set Prep Time</name>
+    <name>Group by</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <all_rows>N</all_rows>
+      <ignore_aggregate>N</ignore_aggregate>
+      <field_ignore/>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>grp</prefix>
+      <add_linenr>N</add_linenr>
+      <linenr_fieldname/>
+      <give_back_row>N</give_back_row>
+      <group>
+        <field>
+          <name>EMPLOYEE_NO</name>
+        </field>
+        <field>
+          <name>EMPLOYMENTLOCATION</name>
+        </field>
+        <field>
+          <name>POSITIONTYPE</name>
+        </field>
+      </group>
+      <fields>
+        <field>
+          <aggregate>K12PrepTimeSum</aggregate>
+          <subject>K12PrepTimeSum</subject>
+          <type>SUM</type>
+          <valuefield>sum</valuefield>
+        </field>
+        <field>
+          <aggregate>K12TeachTime1</aggregate>
+          <subject>K12TeachTime</subject>
+          <type>SUM</type>
+          <valuefield/>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>946</xloc>
+      <yloc>1247</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Group by 10</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <all_rows>N</all_rows>
+      <ignore_aggregate>N</ignore_aggregate>
+      <field_ignore/>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>grp</prefix>
+      <add_linenr>N</add_linenr>
+      <linenr_fieldname/>
+      <give_back_row>N</give_back_row>
+      <group>
+        <field>
+          <name>CONTRACTIDENTIFIER</name>
+        </field>
+        <field>
+          <name>EMPLOYMENTLOCATION</name>
+        </field>
+        <field>
+          <name>ASSIGNMENTTIMETYPE</name>
+        </field>
+        <field>
+          <name>ASSIGNMENTTIMECODE</name>
+        </field>
+      </group>
+      <fields>
+        <field>
+          <aggregate>CONTRACTIDENTIFIER1</aggregate>
+          <subject>CONTRACTIDENTIFIER1</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>CONTRACTIDENTIFIER2</aggregate>
+          <subject>CONTRACTIDENTIFIER2</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>CONTRACTIDENTIFIER3</aggregate>
+          <subject>CONTRACTIDENTIFIER3</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>EMPLOYEE_NO</aggregate>
+          <subject>EMPLOYEE_NO</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>LASTNAME</aggregate>
+          <subject>LASTNAME</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>FIRSTNAME</aggregate>
+          <subject>FIRSTNAME</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>MIDDLENAME</aggregate>
+          <subject>MIDDLENAME</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>GENDER</aggregate>
+          <subject>GENDER</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>EMAIL_TYPE</aggregate>
+          <subject>EMAIL_TYPE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>EMAIL</aggregate>
+          <subject>EMAIL</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>PHONEFORMAT</aggregate>
+          <subject>PHONEFORMAT</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>HOMEPHONETYPE</aggregate>
+          <subject>HOMEPHONETYPE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>HOMEPHONE</aggregate>
+          <subject>HOMEPHONE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>MOBILEPHONETYPE</aggregate>
+          <subject>MOBILEPHONETYPE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>MOBILEPHONE</aggregate>
+          <subject>MOBILEPHONE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>STATUS</aggregate>
+          <subject>STATUS</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>EMPLOYEE_CATEGORY</aggregate>
+          <subject>EMPLOYEE_CATEGORY</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>ABORIGINAL</aggregate>
+          <subject>ABORIGINAL</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>POSITION_CODE</aggregate>
+          <subject>POSITION_CODE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>ASSIGN_TYPE</aggregate>
+          <subject>ASSIGN_TYPE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>POSITIONTIME</aggregate>
+          <subject>POSITIONTIME</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>LOCATION</aggregate>
+          <subject>LOCATION</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>PERCENTTIMEEMPLOYED</aggregate>
+          <subject>PERCENTTIMEEMPLOYED</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>HOURS_FTE</aggregate>
+          <subject>HOURS_FTE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>START_DATE</aggregate>
+          <subject>START_DATE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>END_DATE</aggregate>
+          <subject>END_DATE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>STARTDATE</aggregate>
+          <subject>STARTDATE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>ENDDATE</aggregate>
+          <subject>ENDDATE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>SEPARATIONREASON</aggregate>
+          <subject>SEPARATIONREASON</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>THE_KEY</aggregate>
+          <subject>THE_KEY</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>EMPLOYEE_NO_1</aggregate>
+          <subject>EMPLOYEE_NO_1</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>EMPLOYEE_STATUS</aggregate>
+          <subject>EMPLOYEE_STATUS</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>BARGAINING_UNIT</aggregate>
+          <subject>BARGAINING_UNIT</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>CERT_CLASS</aggregate>
+          <subject>CERT_CLASS</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>PERSONID</aggregate>
+          <subject>PERSONID</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>BIRTHDATE</aggregate>
+          <subject>BIRTHDATE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>PersonidTYpe</aggregate>
+          <subject>PersonidTYpe</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>onehundred</aggregate>
+          <subject>onehundred</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>one</aggregate>
+          <subject>one</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>zero</aggregate>
+          <subject>zero</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>pointfournine</aggregate>
+          <subject>pointfournine</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12NonTeachTime</aggregate>
+          <subject>K12NonTeachTime</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>EMPLOYMENTPOSITION</aggregate>
+          <subject>EMPLOYMENTPOSITION</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>EMPLOYMENTLOCATION</aggregate>
+          <subject>EMPLOYMENTLOCATION</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>EMPLOYERTYPE</aggregate>
+          <subject>EMPLOYERTYPE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>CONTRACTTYPE</aggregate>
+          <subject>CONTRACTTYPE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>ASSIGNMENTTIMETYPE</aggregate>
+          <subject>ASSIGNMENTTIMETYPE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>ASSIGNMENTTIMECODE</aggregate>
+          <subject>ASSIGNMENTTIMECODE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>alttp1</aggregate>
+          <subject>alttp1</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>CONTRACTIDENTIFIER</aggregate>
+          <subject>CONTRACTIDENTIFIER</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>AltTimePercentP</aggregate>
+          <subject>AltTimePercentP</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>POSITIONTYPE</aggregate>
+          <subject>POSITIONTYPE</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>FTEATLOCATION</aggregate>
+          <subject>FTEATLOCATION</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>TimePercentP</aggregate>
+          <subject>TimePercentP</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>FTEATPOSITION</aggregate>
+          <subject>FTEATPOSITION</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>FTEATTIMEALLOT</aggregate>
+          <subject>FTEATTIMEALLOT</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>PosCounter</aggregate>
+          <subject>PosCounter</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12PrepWork</aggregate>
+          <subject>K12PrepWork</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12PrepTime</aggregate>
+          <subject>K12PrepTime</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12TeachTime</aggregate>
+          <subject>K12TeachTime</subject>
+          <type>SUM</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12PosPrepWork</aggregate>
+          <subject>K12PosPrepWork</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12PosPrepTime</aggregate>
+          <subject>K12PosPrepTime</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12PrepTimeSum</aggregate>
+          <subject>K12PrepTimeSum</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12Super1</aggregate>
+          <subject>K12Super1</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12Super2</aggregate>
+          <subject>K12Super2</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12Super3</aggregate>
+          <subject>K12Super3</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12Super5</aggregate>
+          <subject>K12Super5</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12Super6</aggregate>
+          <subject>K12Super6</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12Super7</aggregate>
+          <subject>K12Super7</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12Super8</aggregate>
+          <subject>K12Super8</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12Super9</aggregate>
+          <subject>K12Super9</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+        <field>
+          <aggregate>K12Super10</aggregate>
+          <subject>K12Super10</subject>
+          <type>LAST_INCL_NULL</type>
+          <valuefield/>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1287</xloc>
+      <yloc>1022</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Group by 10 2</name>
+    <type>GroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <all_rows>N</all_rows>
+      <ignore_aggregate>N</ignore_aggregate>
+      <field_ignore/>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>grp</prefix>
+      <add_linenr>N</add_linenr>
+      <linenr_fieldname/>
+      <give_back_row>N</give_back_row>
+      <group>
+        <field>
+          <name>EMPLOYEE_NO</name>
+        </field>
+        <field>
+          <name>EMPLOYMENTLOCATION</name>
+        </field>
+        <field>
+          <name>ASSIGNMENTTIMETYPE</name>
+        </field>
+        <field>
+          <name>ASSIGNMENTTIMECODE</name>
+        </field>
+      </group>
+      <fields>
+        <field>
+          <aggregate>K12TeachTimeSum</aggregate>
+          <subject>K12TeachTime</subject>
+          <type>SUM</type>
+          <valuefield/>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1006</xloc>
+      <yloc>1208</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set Prep Time 2</name>
     <type>StreamLookup</type>
     <description/>
     <distribute>N</distribute>
@@ -6642,7 +7376,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <from>Calc Prep Time</from>
+    <from>Group by 10 2</from>
     <input_sorted>N</input_sorted>
     <preserve_memory>N</preserve_memory>
     <sorted_list>N</sorted_list>
@@ -6656,17 +7390,25 @@
         <name>EMPLOYMENTLOCATION</name>
         <field>EMPLOYMENTLOCATION</field>
       </key>
+      <key>
+        <name>ASSIGNMENTTIMETYPE</name>
+        <field>ASSIGNMENTTIMETYPE</field>
+      </key>
+      <key>
+        <name>ASSIGNMENTTIMECODE</name>
+        <field>ASSIGNMENTTIMECODE</field>
+      </key>
       <value>
-        <name>K12PrepTimeSum</name>
-        <rename>K12PrepTimeSum</rename>
+        <name>K12TeachTimeSum</name>
+        <rename>K12TeachTimeSum</rename>
         <default/>
         <type>Integer</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>900</xloc>
-      <yloc>1115</yloc>
+      <xloc>1091</xloc>
+      <yloc>1208</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

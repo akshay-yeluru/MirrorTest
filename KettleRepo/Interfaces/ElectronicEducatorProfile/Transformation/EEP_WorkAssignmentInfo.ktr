@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;09&#x2f;22 14&#x3a;07&#x3a;44.118</modified_date>
+  <modified_date>2016&#x2f;09&#x2f;29 11&#x3a;18&#x3a;20.127</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -259,7 +259,7 @@
     <server>dtl-grp-w12</server>
     <type>MSSQL</type>
     <access>Native</access>
-    <database>ECACS</database>
+    <database>PrairieSouth_NAV2009R2_PROD</database>
     <port>1433</port>
     <username>tsc</username>
     <password>Encrypted 2be98afc86aa7f2e4cb79ce10be86bcd9</password>
@@ -488,7 +488,6 @@
   <hop> <from>Add constants 2</from><to>Add Grade Level</to><enabled>Y</enabled> </hop>
   <hop> <from>Is this a K12Teach time&#x3f;</from><to>Add constants 2 2</to><enabled>Y</enabled> </hop>
   <hop> <from>K12TeacherTime 04&#x3f;</from><to>Add Full Time Educ</to><enabled>Y</enabled> </hop>
-  <hop> <from>Non Teaching HC</from><to>Constants</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Info</from><to>Join Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Supervisory to String</from><to>Select values</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Gov Position</from><to>Add Gov Location</to><enabled>Y</enabled> </hop>
@@ -556,8 +555,8 @@
   <hop> <from>Part Time VP</from><to>Group by 5</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort em</from><to>Set Prep Time</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Prep Time</from><to>Select values 3</to><enabled>Y</enabled> </hop>
-  <hop> <from>Constants</from><to>NonTeach Time</to><enabled>Y</enabled> </hop>
-  <hop> <from>NonTeach Time</from><to>Sort em</to><enabled>Y</enabled> </hop>
+  <hop> <from>Constants</from><to>Set NotTeach to &#x25;Employed</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set NotTeach to &#x25;Employed</from><to>Sort em</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort em</from><to>Calculator</to><enabled>Y</enabled> </hop>
   <hop> <from>Calculator</from><to>Filter rows 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter rows 2</from><to>Calculator 2</to><enabled>Y</enabled> </hop>
@@ -581,6 +580,9 @@
   <hop> <from>School Based&#x3f;</from><to>Concat Fields 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Concat Fields 4</from><to>Set  Prep numeric</to><enabled>Y</enabled> </hop>
   <hop> <from>Concat Fields &#x28;W&#x29;</from><to>Set  Prep numeric</to><enabled>Y</enabled> </hop>
+  <hop> <from>Non Teaching HC</from><to>Prep Time only Teachers&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Prep Time only Teachers&#x3f;</from><to>Constants</to><enabled>Y</enabled> </hop>
+  <hop> <from>Prep Time only Teachers&#x3f;</from><to>Add Grade Level</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add 100</name>
@@ -644,7 +646,7 @@
         <name>K12Supervisory09</name>
         <rename>K12Supervisory09</rename>
         <default/>
-        <type>BigNumber</type>
+        <type>Number</type>
       </value>
     </lookup>
      <cluster_schema/>
@@ -792,7 +794,7 @@
         <name>K12Supervisory03</name>
         <rename>K12Supervisory03</rename>
         <default> </default>
-        <type>BigNumber</type>
+        <type>Number</type>
       </value>
     </lookup>
      <cluster_schema/>
@@ -1035,8 +1037,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>766</xloc>
-      <yloc>628</yloc>
+      <xloc>749</xloc>
+      <yloc>698</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1251,7 +1253,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>900</xloc>
+      <xloc>864</xloc>
       <yloc>766</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1295,7 +1297,7 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>900</xloc>
+      <xloc>865</xloc>
       <yloc>699</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1421,14 +1423,14 @@
       </field>
       <field>
         <name>K12Supervisory03</name>
-        <type>BigNumber</type>
+        <type>Number</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
+        <length>6</length>
+        <precision>3</precision>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
@@ -1481,14 +1483,14 @@
       </field>
       <field>
         <name>K12Supervisory09</name>
-        <type>BigNumber</type>
+        <type>Number</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <length>-1</length>
-        <precision>-1</precision>
+        <length>6</length>
+        <precision>3</precision>
         <set_empty_string>N</set_empty_string>
       </field>
       <field>
@@ -1968,6 +1970,12 @@
         <default/>
         <type>Number</type>
       </value>
+      <value>
+        <name>PREPTIMEALL</name>
+        <rename>PREPTIMEALL</rename>
+        <default/>
+        <type>String</type>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -1993,7 +2001,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1172</xloc>
-      <yloc>1195</yloc>
+      <yloc>1400</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2133,8 +2141,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>698</xloc>
-      <yloc>1042</yloc>
+      <xloc>781</xloc>
+      <yloc>1141</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2166,8 +2174,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>767</xloc>
-      <yloc>1190</yloc>
+      <xloc>781</xloc>
+      <yloc>1395</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2199,8 +2207,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>839</xloc>
-      <yloc>1327</yloc>
+      <xloc>853</xloc>
+      <yloc>1532</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2232,8 +2240,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>839</xloc>
-      <yloc>1226</yloc>
+      <xloc>853</xloc>
+      <yloc>1431</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2456,6 +2464,18 @@
         <precision>-1</precision>
       </field>
       <field>
+        <name>EmploymentPosition</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
         <name>CONTRACTTYPE</name>
         <type>String</type>
         <format/>
@@ -2604,8 +2624,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>605</xloc>
-      <yloc>1118</yloc>
+      <xloc>525</xloc>
+      <yloc>1323</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3460,8 +3480,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>767</xloc>
-      <yloc>1272</yloc>
+      <xloc>781</xloc>
+      <yloc>1477</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3719,8 +3739,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1036</xloc>
-      <yloc>1263</yloc>
+      <xloc>1050</xloc>
+      <yloc>1477</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3832,9 +3852,6 @@
         <field>
           <name>CONTRACTTYPE</name>
         </field>
-        <field>
-          <name>POSITIONTYPE</name>
-        </field>
       </group>
       <fields>
         <field>
@@ -3852,8 +3869,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>908</xloc>
-      <yloc>1263</yloc>
+      <xloc>922</xloc>
+      <yloc>1477</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4604,7 +4621,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1172</xloc>
-      <yloc>1263</yloc>
+      <yloc>1477</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4644,8 +4661,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>765</xloc>
-      <yloc>904</yloc>
+      <xloc>864</xloc>
+      <yloc>1039</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4685,8 +4702,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>902</xloc>
-      <yloc>904</yloc>
+      <xloc>939</xloc>
+      <yloc>1141</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4935,7 +4952,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>SELECT  LOCATION_NO,&#xd;&#xa;        CASE WHEN substring&#x28;user_def_field,1,1&#x29; NOT IN &#x28;&#x27;1&#x27;,&#x27;2&#x27;,&#x27;3&#x27;,&#x27;4&#x27;,&#x27;5&#x27;,&#x27;6&#x27;,&#x27;7&#x27;,&#x27;8&#x27;,&#x27;9&#x27;,&#x27;0&#x27;,&#x27;.&#x27;&#x29; THEN &#x27;0&#x27; ELSE USER_DEF_FIELD END AS AltTP&#xd;&#xa;  FROM HR_LOCATION&#xd;&#xa;  ORDER by LOCATION_NO&#xd;&#xa;</sql>
+    <sql>SELECT  LOCATION_NO,&#xd;&#xa;		CASE WHEN SUBSTRING&#x28;user_def_field,1,3&#x29; &#x3d; &#x27;ALL&#x27;&#xd;&#xa;			THEN &#x27;Y&#x27;&#xd;&#xa;			ELSE &#x27;N&#x27;&#xd;&#xa;			END AS PrepTimeAll,&#xd;&#xa;        CASE WHEN SUBSTRING&#x28;LTRIM&#x28;RTRIM&#x28;REPLACE&#x28;user_def_field,&#x27;ALL&#x27;,&#x27;&#x27;&#x29;&#x29;&#x29;,1,1&#x29; NOT IN &#x28;&#x27;1&#x27;,&#x27;2&#x27;,&#x27;3&#x27;,&#x27;4&#x27;,&#x27;5&#x27;,&#x27;6&#x27;,&#x27;7&#x27;,&#x27;8&#x27;,&#x27;9&#x27;,&#x27;0&#x27;,&#x27;.&#x27;&#x29; &#xd;&#xa;			THEN &#x27;0&#x27; &#xd;&#xa;			ELSE LTRIM&#x28;RTRIM&#x28;REPLACE&#x28;user_def_field,&#x27;ALL&#x27;,&#x27;&#x27;&#x29;&#x29;&#x29; &#xd;&#xa;			END AS AltTP&#xd;&#xa;  FROM HR_LOCATION&#xd;&#xa;  ORDER by LOCATION_NO&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -5101,31 +5118,6 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>300</xloc>
-      <yloc>1118</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>NonTeach Time</name>
-    <type>SetValueField</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>K12NonTeachTime</name>
-        <replaceby>PERCENTTIMEEMPLOYED</replaceby>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>685</xloc>
       <yloc>1118</yloc>
       <draw>Y</draw>
       </GUI>
@@ -5361,6 +5353,35 @@
     </step>
 
   <step>
+    <name>Prep Time only Teachers&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Constants</send_true_to>
+<send_false_to>Add Grade Level</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>PREPTIMEALL</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>N</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>661</xloc>
+      <yloc>1117</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Record Counter</name>
     <type>FieldsChangeSequence</type>
     <description/>
@@ -5387,8 +5408,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>765</xloc>
-      <yloc>835</yloc>
+      <xloc>864</xloc>
+      <yloc>955</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5422,7 +5443,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1392</xloc>
-      <yloc>11</yloc>
+      <yloc>8</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5466,7 +5487,7 @@
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1172</xloc>
-      <yloc>972</yloc>
+      <yloc>1039</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5500,7 +5521,7 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>766</xloc>
+      <xloc>749</xloc>
       <yloc>385</yloc>
       <draw>Y</draw>
       </GUI>
@@ -5562,7 +5583,7 @@
         <decimal_symbol/>
         <grouping_symbol/>
         <currency_symbol/>
-        <storage_type>normal</storage_type>
+        <storage_type/>
       </meta>      <meta>        <name>K12Supervisory05</name>
         <rename>K12Supervisory05</rename>
         <type>String</type>
@@ -5760,8 +5781,8 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1036</xloc>
-      <yloc>1118</yloc>
+      <xloc>1050</xloc>
+      <yloc>1323</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5797,6 +5818,31 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1393</xloc>
       <yloc>144</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set NotTeach to &#x25;Employed</name>
+    <type>SetValueField</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>K12NonTeachTime</name>
+        <replaceby>PERCENTTIMEEMPLOYED</replaceby>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>661</xloc>
+      <yloc>1323</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5865,8 +5911,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>908</xloc>
-      <yloc>1118</yloc>
+      <xloc>922</xloc>
+      <yloc>1323</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5918,7 +5964,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1172</xloc>
-      <yloc>1118</yloc>
+      <yloc>1323</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6000,7 +6046,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1172</xloc>
-      <yloc>1048</yloc>
+      <yloc>1141</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6088,8 +6134,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>825</xloc>
-      <yloc>1042</yloc>
+      <xloc>868</xloc>
+      <yloc>1225</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6177,8 +6223,8 @@
 </calculation>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>973</xloc>
-      <yloc>1043</yloc>
+      <xloc>983</xloc>
+      <yloc>1227</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6202,8 +6248,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1298</xloc>
-      <yloc>1238</yloc>
+      <xloc>1312</xloc>
+      <yloc>1443</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6248,8 +6294,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>767</xloc>
-      <yloc>1118</yloc>
+      <xloc>781</xloc>
+      <yloc>1323</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6450,8 +6496,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>765</xloc>
-      <yloc>766</yloc>
+      <xloc>864</xloc>
+      <yloc>867</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

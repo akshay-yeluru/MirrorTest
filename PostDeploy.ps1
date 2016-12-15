@@ -49,7 +49,6 @@ If (Test-Path $RebuildSchemaAllFile){
 	'cmd /c rebuildSchemaPayrollHumanResourcesWarehouse.bat' | Out-File $RebuildSchemaAllFile -Append -Encoding ASCII
 	'cmd /c rebuildSchemaPayrollWarehouse.bat' | Out-File $RebuildSchemaAllFile -Append -Encoding ASCII
 	'cmd /c rebuildSchemaReceivablesWarehouse.bat' | Out-File $RebuildSchemaAllFile -Append -Encoding ASCII
-	'cmd /c startFinanceBootstrap.bat' | Out-File $RebuildSchemaAllFile -Append -Encoding ASCII
 }
 
 Write-Host 'RebuildSchemaAllFile: ' $RebuildSchemaAllFile

@@ -6,9 +6,9 @@ param(  [string]$UtilitiesDirectory,
 $PdiHomeDirectory = Join-Path $UtilitiesDirectory 'pdi-ce-5.1.0.0-752\data-integration' 
 $WarehouseHomeDirectory = Join-Path $UtilitiesDirectory 'warehousePDI\SRBWarehouse'
 $WarehouseClientDirectory = Join-Path $UtilitiesDirectory "warehousePDI\$ClientDirectory"
-$JavaLibClasspath = 'SET JAVA_LIB_CLASSPATH=%SRB_WAREHOUSE_HOME%\lib\jtds-1.2.jar;%SRB_WAREHOUSE_HOME%\lib\log4j-1.2.12.jar;%SRB_WAREHOUSE_HOME%\lib\SRBWarehouseSchemaBuilder-0.0.1-SNAPSHOT.jar;%SRB_WAREHOUSE_HOME%\lib\vortex_2006_02_28.jar'
+$JavaLibClasspath = 'SET JAVA_LIB_CLASSPATH=%SRB_WAREHOUSE_HOME%\lib\jtds-1.2.jar;%SRB_WAREHOUSE_HOME%\lib\log4j-1.2.12.jar;%SRB_WAREHOUSE_HOME%\lib\SRBWarehouseSchemaBuilder-0.0.1-SNAPSHOT.jar;%SRB_WAREHOUSE_HOME%\lib\vortex-2006.02.28.jar'
 
-$SetPathFile = Join-Path $WarehouseClientDirectory 'bin\setPath.bat'
+$SetPathFile = Join-Path $WarehouseClientDirectory 'bin\setPaths.bat'
 		
 If (Test-Path $SetPathFile){
 	Remove-Item $SetPathFile

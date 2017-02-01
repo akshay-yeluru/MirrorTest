@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;10&#x2f;31 10&#x3a;57&#x3a;49.819</modified_date>
+  <modified_date>2016&#x2f;11&#x2f;29 10&#x3a;26&#x3a;13.043</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -473,6 +473,7 @@
   <hop> <from>Add constants 2 2 2</from><to>Unique rows 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants 2 2 2</from><to>Unique rows 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants 2 2 2</from><to>Unique rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Import - Employee Certificates</from><to>Import - Employee Certificates 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants 2 2 2</name>
@@ -555,7 +556,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RDBMS</connection>
-    <sql>SELECT &#x5b;Employee No_&#x5d; as Employee,&#xd;&#xa;		RTRIM&#x28;&#x5b;Last Name&#x5d;&#x29;&#x2b;&#x27;, &#x27;&#x2b;&#x5b;First Name&#x5d; as Employee_name,&#xd;&#xa;		&#x5b;Effective Date&#x5d; as EffectiveDate,&#xd;&#xa;		CASE WHEN &#x5b;Date 1 Value&#x5d; &#x3e; &#x27;1950-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Date 1 Value&#x5d;,112&#x29;&#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;			END as IssueDate1,&#xd;&#xa;		CASE WHEN &#x5b;Date 2 Value&#x5d; &#x3e; &#x27;1950-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Date 2 Value&#x5d;,112&#x29;&#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;			END as ExpiryDate2,&#xd;&#xa;		&#x5b;Text 1 Value&#x5d; as Certificate_no,&#xd;&#xa;		&#x5b;Code 1 Value&#x5d;&#x2b;LTRIM&#x28;RTRIM&#x28;&#x5b;Code 2 Value&#x5d;&#x29;&#x2b;&#x27; &#x27;&#x29;&#x2b;&#x5b;Text 2 Value&#x5d; as Certificate_Comment,&#xd;&#xa;		&#x5b;Text 2 Value&#x5d; as Text2,&#xd;&#xa;		&#x5b;Code 1 Value&#x5d; as Code1,&#xd;&#xa;		&#x5b;Code 2 Value&#x5d; as Code2,&#xd;&#xa;		&#x27;UNKNOWN&#x27; as Institute,&#xd;&#xa;		CASE WHEN &#x5b;Additional Info_ Class Code&#x5d; &#x3d; &#x27;DOCS&#x27; OR &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;PROVISIONAL&#x27; or &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;PROBATIONARY&#x27;&#xd;&#xa;			THEN &#x27;TEACHER&#x27;&#xd;&#xa;			ELSE &#x27;CERT&#x27; &#xd;&#xa;			END as Certificate_Type,&#xd;&#xa;		CASE WHEN &#x5b;Additional Info_ Class Code&#x5d; &#x3d; &#x27;DOCS&#x27; OR &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;PROVISIONAL&#x27; or &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;PROBATIONARY&#x27;&#xd;&#xa;			THEN &#x27;TCERT&#x27;&#xd;&#xa;			ELSE &#x5b;Additional Info_ Class Code&#x5d; &#xd;&#xa;			END as Certificate_class,&#xd;&#xa;		CASE WHEN &#x5b;Additional Info_ Class Code&#x5d; &#x3d; &#x27;DOCS&#x27; and &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;CERT&#x27;&#xd;&#xa;			THEN &#x27;PROF A&#x27;&#xd;&#xa;			ELSE &#x5b;Additional Info_ Class Detail&#x5d; &#xd;&#xa;			END as Certificate_code,&#xd;&#xa; 		CHAR&#x28;39&#x29; AS Quote,&#xd;&#xa;		&#x27;,&#x27; AS Comma,&#xd;&#xa;		SPACE&#x28;1&#x29; as EmptyString,&#xd;&#xa;		CHAR&#x28;13&#x29;&#x2b;CHAR&#x28;10&#x29; as CRLF,&#xd;&#xa;		&#x27;GO&#x27; as GO&#xd;&#xa;FROM &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee Additional Info_&#x5d;&#xd;&#xa;		LEFT JOIN &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee&#x5d;&#xd;&#xa;			ON &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee&#x5d;.&#x5b;No_&#x5d; &#x3d; &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee Additional Info_&#x5d;.&#x5b;Employee No_&#x5d;&#xd;&#xa;WHERE &#x28;&#x5b;Additional Info_ Class Code&#x5d; &#x3d; &#x27;DOCS&#x27; AND &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;CERT&#x27; AND &#x5b;Text 1 Value&#x5d; &#x3e; &#x27; &#x27;&#x29;&#xd;&#xa;	OR &#x5b;Additional Info_ Class Code&#x5d; &#x3d; &#x27;CERT&#x27;&#xd;&#xa;ORDER BY &#x5b;Employee No_&#x5d;</sql>
+    <sql>SELECT &#x5b;Employee No_&#x5d; as Employee,&#xd;&#xa;		RTRIM&#x28;&#x5b;Last Name&#x5d;&#x29;&#x2b;&#x27;, &#x27;&#x2b;&#x5b;First Name&#x5d; as Employee_name,&#xd;&#xa;		&#x5b;Effective Date&#x5d; as EffectiveDate,&#xd;&#xa;		CASE WHEN &#x5b;Date 1 Value&#x5d; &#x3e; &#x27;1950-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Date 1 Value&#x5d;,112&#x29;&#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;			END as IssueDate1,&#xd;&#xa;		CASE WHEN &#x5b;Date 2 Value&#x5d; &#x3e; &#x27;1950-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Date 2 Value&#x5d;,112&#x29;&#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;			END as ExpiryDate2,&#xd;&#xa;		&#x5b;Text 1 Value&#x5d; as Certificate_no,&#xd;&#xa;		&#x5b;Code 1 Value&#x5d;&#x2b;LTRIM&#x28;RTRIM&#x28;&#x5b;Code 2 Value&#x5d;&#x29;&#x2b;&#x27; &#x27;&#x29;&#x2b;&#x5b;Text 2 Value&#x5d; as Certificate_Comment,&#xd;&#xa;		&#x5b;Text 2 Value&#x5d; as Text2,&#xd;&#xa;		&#x5b;Code 1 Value&#x5d; as Code1,&#xd;&#xa;		&#x5b;Code 2 Value&#x5d; as Code2,&#xd;&#xa;		&#x27;UNKNOWN&#x27; as Institute,&#xd;&#xa;		CASE WHEN &#x5b;Additional Info_ Class Code&#x5d; &#x3d; &#x27;DOCS&#x27; OR &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;PROVISIONAL&#x27; or &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;PROBATIONARY&#x27;&#xd;&#xa;			THEN &#x27;CERT&#x27;&#xd;&#xa;			ELSE &#x27;CERT&#x27; &#xd;&#xa;			END as Certificate_Type,&#xd;&#xa;		CASE WHEN &#x5b;Additional Info_ Class Code&#x5d; &#x3d; &#x27;DOCS&#x27; OR &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;PROVISIONAL&#x27; or &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;PROBATIONARY&#x27;&#xd;&#xa;			THEN &#x27;TCERT&#x27;&#xd;&#xa;			ELSE &#x5b;Additional Info_ Class Code&#x5d; &#xd;&#xa;			END as Certificate_class,&#xd;&#xa;		CASE WHEN &#x5b;Additional Info_ Class Code&#x5d; &#x3d; &#x27;DOCS&#x27; and &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;CERT&#x27;&#xd;&#xa;			THEN &#x27;PROFA&#x27;&#xd;&#xa;			ELSE CASE when &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;FIRST&#x2f;CPR&#x27;&#xd;&#xa;				THEN &#x27;FCPR&#x27;&#xd;&#xa;				ELSE CASE when &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;PROBATIONARY&#x27;&#xd;&#xa;					THEN &#x27;PROB&#x27;&#xd;&#xa;					ELSE CASE when &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;PROVISIONAL&#x27;&#xd;&#xa;						THEN &#x27;PROV&#x27;&#xd;&#xa;						ELSE CASE when &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;CERTIFICATE&#x27;&#xd;&#xa;							THEN &#x27;CERT&#x27;&#xd;&#xa;							ELSE &#x5b;Additional Info_ Class Detail&#x5d; &#xd;&#xa;							END&#xd;&#xa;						END  &#xd;&#xa;					END&#xd;&#xa;				END&#xd;&#xa;			END as Certificate_code,&#xd;&#xa;		&#x5b;Additional Info_ Class Code&#x5d; as Navision_Class_Code,&#xd;&#xa;		&#x5b;Additional Info_ Class Detail&#x5d; as Navision_Class_Detail,&#xd;&#xa; 		CHAR&#x28;39&#x29; AS Quote,&#xd;&#xa;		&#x27;,&#x27; AS Comma,&#xd;&#xa;		SPACE&#x28;1&#x29; as EmptyString,&#xd;&#xa;		CHAR&#x28;13&#x29;&#x2b;CHAR&#x28;10&#x29; as CRLF,&#xd;&#xa;		&#x27;GO&#x27; as GO&#xd;&#xa;FROM &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee Additional Info_&#x5d;&#xd;&#xa;		LEFT JOIN &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee&#x5d;&#xd;&#xa;			ON &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee&#x5d;.&#x5b;No_&#x5d; &#x3d; &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee Additional Info_&#x5d;.&#x5b;Employee No_&#x5d;&#xd;&#xa;WHERE &#x28;&#x5b;Additional Info_ Class Code&#x5d; &#x3d; &#x27;DOCS&#x27; AND &#x5b;Additional Info_ Class Detail&#x5d; &#x3d; &#x27;CERT&#x27; AND &#x5b;Text 1 Value&#x5d; &#x3e; &#x27; &#x27;&#x29;&#xd;&#xa;	OR &#x5b;Additional Info_ Class Code&#x5d; &#x3d; &#x27;CERT&#x27;&#xd;&#xa;ORDER BY &#x5b;Employee No_&#x5d;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -705,6 +706,18 @@
         <group/>
         <nullif/>
         <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Certificate_Comment</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
         <length>-1</length>
         <precision>-1</precision>
       </field>
@@ -2023,6 +2036,178 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>513</xloc>
       <yloc>261</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Import - Employee Certificates 2</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator>,</separator>
+    <enclosure>&#x22;</enclosure>
+    <enclosure_forced>Y</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>Y</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>windows-1252</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField>coutput</fileNameField>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;RPT_&#x24;&#x7b;CUSTNO&#x7d;_Certificates</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>csv</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>N</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>Employee</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Employee_name</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Navision_Class_Code</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Navision_Class_Detail</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Certificate_no</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Certificate_type</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Certificate_code</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>IssueDate1</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>ExpiryDate2</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Certificate_Comment</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>854</xloc>
+      <yloc>43</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

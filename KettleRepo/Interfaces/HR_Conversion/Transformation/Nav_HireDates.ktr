@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;10&#x2f;31 10&#x3a;59&#x3a;59.377</modified_date>
+  <modified_date>2016&#x2f;11&#x2f;14 15&#x3a;33&#x3a;38.760</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -463,7 +463,12 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Employee Hire Dates</from><to>Text file output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Employee Hire Dates</from><to>Add constants 2 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants 2 2 2</from><to>Concat Fields 2 3 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Concat Fields 2 3 2 2</from><to>Concat Fields 2 3 2 2 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Concat Fields 2 3 2 2 2</from><to>Filter rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows</from><to>SQL-Hire_Records</to><enabled>Y</enabled> </hop>
+  <hop> <from>SQL-Hire_Records</from><to>Microsoft Excel Output</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Employee Hire Dates</name>
@@ -477,7 +482,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RDBMS</connection>
-    <sql>SELECT &#x5b;Employee No_&#x5d; as Employee,&#xd;&#xa;		RTRIM&#x28;&#x5b;Last Name&#x5d;&#x29;&#x2b;&#x27;, &#x27;&#x2b;&#x5b;First Name&#x5d; as Employee_name,&#xd;&#xa;		&#x5b;Status&#x5d; as Employee_Status,&#xd;&#xa;		CASE WHEN &#x5b;Employment Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Employment Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as Employment_Date,&#xd;&#xa;		CASE WHEN &#x5b;Original Date of Hire&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Original Date of Hire&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as Original_Hire_Date,&#xd;&#xa;		CASE WHEN &#x5b;Effective Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Effective Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as Start_Date,&#xd;&#xa;		CASE WHEN &#x5b;Termination Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Termination Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as Termination_Date,&#xd;&#xa;		CASE WHEN &#x5b;End Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;End Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as End_Date,&#xd;&#xa;		&#x5b;Grounds for Term_ Code&#x5d; as Termination_Code,&#xd;&#xa;		&#x5b;End Reason Code&#x5d; as End_Reason,&#xd;&#xa;		CASE WHEN &#x5b;Inactive Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Inactive Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as Inactive_Date,&#xd;&#xa;		&#x5b;Cause of Inactivity Code&#x5d; as InactiveCode,&#xd;&#xa;		CASE WHEN &#x5b;Seniority Start Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Seniority Start Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as Seniority_Start_date,&#xd;&#xa;		CASE WHEN &#x5b;Secondary Seniority Start Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Secondary Seniority Start Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as Secondary_Seniority_Start_Date,&#xd;&#xa;		CASE WHEN &#x5b;Seniority Effective Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Seniority Effective Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as Seniority_Effective_date,&#xd;&#xa;		CASE WHEN &#x5b;First Status Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;First Status Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as First_Status,&#xd;&#xa;		CASE WHEN &#x5b;Second Status Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Second Status Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as Second_Status,&#xd;&#xa;		CASE WHEN &#x5b;Third Status Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Third Status Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as Third_status,&#xd;&#xa; 		CHAR&#x28;39&#x29; AS Quote,&#xd;&#xa;		&#x27;,&#x27; AS Comma,&#xd;&#xa;		SPACE&#x28;1&#x29; as EmptyString,&#xd;&#xa;		CHAR&#x28;13&#x29;&#x2b;CHAR&#x28;10&#x29; as CRLF,&#xd;&#xa;		&#x27;GO&#x27; as GO&#xd;&#xa;FROM &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee&#x5d;&#xd;&#xa;		LEFT JOIN &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee Assignment&#x5d;&#xd;&#xa;			ON &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee&#x5d;.&#x5b;No_&#x5d; &#x3d; &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee Assignment&#x5d;.&#x5b;Employee No_&#x5d;&#xd;&#xa;WHERE &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee&#x5d;.&#x5b;No_&#x5d; &#x3e; &#x27; &#x27;&#xd;&#xa;	and &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee Assignment&#x5d;.&#x5b;Employee No_&#x5d; &#x3e; &#x27; &#x27;&#xd;&#xa;ORDER BY &#x5b;Employee No_&#x5d;</sql>
+    <sql>SELECT &#x5b;No_&#x5d; as Employee,&#xd;&#xa;		&#x5b;Last Name&#x5d; as Last_Name,&#xd;&#xa;		&#x5b;First Name&#x5d; as First_name,&#xd;&#xa;		RTRIM&#x28;&#x5b;Last Name&#x5d;&#x29;&#x2b;&#x27;, &#x27;&#x2b;&#x5b;First Name&#x5d; as Employee_name,&#xd;&#xa;		&#x5b;Status&#x5d; as Employee_Status,&#xd;&#xa;		CASE WHEN &#x5b;Employment Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Employment Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE CASE WHEN &#x5b;Original Date of Hire&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;					THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Original Date of Hire&#x5d;,112&#x29; &#xd;&#xa;					ELSE &#x28;SELECT ISNULL&#x28;CONVERT&#x28;VARCHAR&#x28;10&#x29;,MIN&#x28;&#x5b;Effective Date&#x5d;&#x29;,112&#x29;,&#x27; &#x27;&#x29; from &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee Assignment&#x5d; where &#x5b;Employee No_&#x5d; &#x3d; &#x5b;No_&#x5d; and &#x5b;Effective Date&#x5d; &#x3e; &#x27;1900-01-01&#x27; &#x29;&#xd;&#xa;					END&#xd;&#xa;			END as Employment,&#xd;&#xa;		CASE WHEN &#x5b;Employment Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Employment Date&#x5d;,111&#x29; &#xd;&#xa;			ELSE CASE WHEN &#x5b;Original Date of Hire&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;					THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Original Date of Hire&#x5d;,111&#x29; &#xd;&#xa;					ELSE &#x28;SELECT ISNULL&#x28;CONVERT&#x28;VARCHAR&#x28;10&#x29;,MIN&#x28;&#x5b;Effective Date&#x5d;&#x29;,111&#x29;,&#x27; &#x27;&#x29; from &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee Assignment&#x5d; where &#x5b;Employee No_&#x5d; &#x3d; &#x5b;No_&#x5d; and &#x5b;Effective Date&#x5d; &#x3e; &#x27;1900-01-01&#x27; &#x29;&#xd;&#xa;					END&#xd;&#xa;			END as Employment_Date,&#xd;&#xa;		CASE WHEN &#x5b;Original Date of Hire&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Original Date of Hire&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as Original_Hire_Date,&#xd;&#xa;		CASE WHEN &#x5b;Termination Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Termination Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#xd;&#xa;				CASE WHEN &#x5b;Status&#x5d; &#x3d; 0&#xd;&#xa;					THEN &#x27; &#x27;&#xd;&#xa;					ELSE &#x28;SELECT ISNULL&#x28;CONVERT&#x28;VARCHAR&#x28;10&#x29;,MAX&#x28;&#x5b;End Date&#x5d;&#x29;,112&#x29;,&#x27; &#x27;&#x29; as Assignment_End from &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee Assignment&#x5d; where &#x5b;Employee No_&#x5d; &#x3d; &#x5b;No_&#x5d; and &#x5b;End Date&#x5d; &#x3e; &#x27;1900-01-01&#x27; &#x29;&#xd;&#xa;					END&#xd;&#xa;			END as Termination,&#xd;&#xa;		CASE WHEN &#x5b;Termination Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Termination Date&#x5d;,111&#x29; &#xd;&#xa;			ELSE &#xd;&#xa;				CASE WHEN &#x5b;Status&#x5d; &#x3d; 0&#xd;&#xa;					THEN &#x27; &#x27;&#xd;&#xa;					ELSE &#x28;SELECT ISNULL&#x28;CONVERT&#x28;VARCHAR&#x28;10&#x29;,MAX&#x28;&#x5b;End Date&#x5d;&#x29;,111&#x29;,&#x27; &#x27;&#x29; as Assignment_End from &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee Assignment&#x5d; where &#x5b;Employee No_&#x5d; &#x3d; &#x5b;No_&#x5d; and &#x5b;End Date&#x5d; &#x3e; &#x27;1900-01-01&#x27; &#x29;&#xd;&#xa;					END&#xd;&#xa;			END as Termination_Date,&#xd;&#xa;		CASE WHEN &#x5b;Grounds for Term_ Code&#x5d; &#x3e; &#x27; &#x27;&#xd;&#xa;			THEN &#x5b;Grounds for Term_ Code&#x5d; &#xd;&#xa;			ELSE &#x27; &#x27;&#xd;&#xa;			END as Termination_Code,&#xd;&#xa;		CASE WHEN &#x5b;Inactive Date&#x5d; &#x3e; &#x27;1900-01-01&#x27;&#xd;&#xa;			THEN CONVERT&#x28;VARCHAR&#x28;10&#x29;,&#x5b;Inactive Date&#x5d;,112&#x29; &#xd;&#xa;			ELSE &#x27;&#x27;&#xd;&#xa;			END as Inactive_Date,&#xd;&#xa;		&#x5b;Cause of Inactivity Code&#x5d; as InactiveCode,&#xd;&#xa; 		CHAR&#x28;39&#x29; AS Quote,&#xd;&#xa;		&#x27;,&#x27; AS Comma,&#xd;&#xa;		SPACE&#x28;1&#x29; as EmptyString,&#xd;&#xa;		CHAR&#x28;13&#x29;&#x2b;CHAR&#x28;10&#x29; as CRLF,&#xd;&#xa;		&#x27;GO&#x27; as GO&#xd;&#xa;FROM &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee&#x5d;&#xd;&#xa;WHERE &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee&#x5d;.&#x5b;No_&#x5d; &#x3e; &#x27; &#x27; and &#x5b;&#x24;&#x7b;DBPREFIX&#x7d;Employee&#x5d;.&#x5b;Last Name&#x5d; &#x3e; &#x27; &#x27; &#xd;&#xa;ORDER BY &#x5b;No_&#x5d;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -486,14 +491,191 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>78</xloc>
-      <yloc>44</yloc>
+      <yloc>43</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Text file output</name>
-    <type>TextFileOutput</type>
+    <name>Add constants 2 2 2</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>Part1a</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Insert into hr_employee_hire &#x28;Status,Employee_no,hire_date,termination_date,previous_name,last_name,first_name,</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>End_Bracket</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>&#x29;</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Delete_hire</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Delete from hr_employee_hire where employee_no &#x3d; </nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>MiddleName_To_CurrentSenCode_05</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,&#x27; &#x27;,</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>contract_fte</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>0,</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Empty_Field</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>&#x27; &#x27;,</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Hire_Type</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>&#x27;ORG&#x27;,</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Hire_Type_Indicator</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>&#x27;O&#x27;</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Part1b</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>middle_name,bargaining_unit,Date_01,Date_02,Date_03,Date_04,Date_05,Date_06,Date_07,Date_08,Date_09,Date_10,</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Part1c</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Flag_yn_01,Flag_yn_02,Flag_yn_03,Flag_yn_04,Flag_yn_05,Flag_yn_06,Flag_yn_07,Flag_yn_08,Flag_yn_09,Flag_yn_10,</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Part1d</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>File_no_01,File_no_02,File_no_03,File_no_04,File_no_05,File_no_06,File_no_07,File_no_08,File_no_09,File_no_10,</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Part1e</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Current_sen_bank_01,Current_sen_bank_02,Current_sen_bank_03,Current_sen_bank_04,Current_sen_bank_05,Current_sen_code_01,Current_sen_code_02,Current_sen_code_03,Current_sen_code_04,Current_sen_code_05,</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>Part1f</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>hire_type,contract_fte,term_type,hire_timestamp,user_id,misc_date,misc_flag_yn,misc_file_no,hire_type_indicator&#x29; Values &#x28;&#x27;N&#x27;,</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>249</xloc>
+      <yloc>43</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Concat Fields 2 3 2 2</name>
+    <type>ConcatFields</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -502,11 +684,11 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <separator>,</separator>
-    <enclosure>&#x22;</enclosure>
-    <enclosure_forced>Y</enclosure_forced>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
+    <header>N</header>
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
@@ -516,11 +698,11 @@
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;Employee_Hire_Dates</name>
+      <name>file</name>
       <is_command>N</is_command>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>csv</extention>
+      <extention>txt</extention>
       <append>N</append>
       <split>N</split>
       <haspartno>N</haspartno>
@@ -535,7 +717,199 @@
     </file>
     <fields>
       <field>
+        <name>Part1a</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Part1b</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Part1c</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Part1d</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Part1e</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Part1f</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>CRLF</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
         <name>Employee</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Comma</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Employment</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Comma</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Termination</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -543,7 +917,43 @@
         <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>20</length>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Comma</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
@@ -554,80 +964,176 @@
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>62</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>Employee_Status</name>
-        <type>Integer</type>
-        <format>&#x23;&#x3b;-&#x23;</format>
-        <currency/>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>9</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>Employment_Date</name>
+        <name>Quote</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>Original_Hire_Date</name>
+        <name>Comma</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>Start_Date</name>
+        <name>Quote</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>Termination_Date</name>
+        <name>Last_Name</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>End_Date</name>
+        <name>Quote</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Comma</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>First_name</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Comma</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>MiddleName_To_CurrentSenCode_05</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Hire_Type</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>contract_fte</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
@@ -639,11 +1145,200 @@
         <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>10</length>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>End_Reason</name>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Comma</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Empty_Field</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Empty_Field</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Empty_Field</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Empty_Field</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Empty_Field</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Hire_Type_Indicator</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>End_Bracket</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+<targetFieldName>SQLString1</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>420</xloc>
+      <yloc>43</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>SQL-Hire_Records</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding>windows-1252</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField>coutput</fileNameField>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;SQL_&#x24;&#x7b;CUSTNO&#x7d;_Hire_Records</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
+      <extention>sql</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>N</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>SQLString2</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>CRLF</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>GO</name>
         <type>String</type>
         <format/>
         <currency/>
@@ -651,110 +1346,310 @@
         <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>10</length>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>Inactive_Date</name>
-        <type>String</type>
+        <name>CRLF</name>
+        <type>None</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>10</length>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>InactiveCode</name>
+        <name>SQLString1</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>Seniority_Start_date</name>
-        <type>String</type>
+        <name>CRLF</name>
+        <type>None</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
         <trim_type>none</trim_type>
-        <length>10</length>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
       <field>
-        <name>Secondary_Seniority_Start_Date</name>
+        <name>GO</name>
         <type>String</type>
         <format/>
         <currency/>
         <decimal/>
         <group/>
         <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Seniority_Effective_date</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>First_Status</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Second_Status</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Third_status</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
+        <trim_type>both</trim_type>
+        <length>-1</length>
         <precision>-1</precision>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>349</xloc>
+      <xloc>591</xloc>
+      <yloc>265</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Concat Fields 2 3 2 2 2</name>
+    <type>ConcatFields</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding/>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>file</name>
+      <is_command>N</is_command>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery>0</splitevery>
+    </file>
+    <fields>
+      <field>
+        <name>Delete_hire</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Employee</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Quote</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>both</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+<targetFieldName>SQLString2</targetFieldName>
+<targetFieldLength>0</targetFieldLength>
+<removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>591</xloc>
       <yloc>43</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>SQL-Hire_Records</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>Employment_Date</leftvalue>
+   <function>&#x3e;</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>&#x27; &#x27;</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  <condition>
+   <negated>Y</negated>
+   <operator>AND</operator>
+   <leftvalue>Employee_name</leftvalue>
+   <function>CONTAINS</function>
+   <rightvalue/>
+   <value><name>constant</name><type>String</type><text>DO NOT USE</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>591</xloc>
+      <yloc>147</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Microsoft Excel Output</name>
+    <type>ExcelOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <header>Y</header>
+    <footer>N</footer>
+    <encoding/>
+    <append>N</append>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <file>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;Employee_Hire_Dates</name>
+      <extention>xls</extention>
+      <do_not_open_newfile_init>N</do_not_open_newfile_init>
+      <create_parent_folder>N</create_parent_folder>
+      <split>N</split>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <sheetname>Sheet1</sheetname>
+      <autosizecolums>N</autosizecolums>
+      <nullisblank>N</nullisblank>
+      <protect_sheet>N</protect_sheet>
+      <password>Encrypted </password>
+      <splitevery>0</splitevery>
+      <usetempfiles>N</usetempfiles>
+      <tempdirectory/>
+      </file>
+    <template>
+      <enabled>N</enabled>
+      <append>N</append>
+      <filename>template.xls</filename>
+    </template>
+    <fields>
+      <field>
+        <name>Employee</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>Employee_name</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>Employment_Date</name>
+        <type>Date</type>
+        <format/>
+      </field>
+      <field>
+        <name>Termination_Date</name>
+        <type>Date</type>
+        <format/>
+      </field>
+      <field>
+        <name>Termination_Code</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>Hire_Type</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>Hire_Type_Indicator</name>
+        <type>String</type>
+        <format/>
+      </field>
+    </fields>
+    <custom>
+    <header_font_name>arial</header_font_name>
+    <header_font_size>10</header_font_size>
+    <header_font_bold>Y</header_font_bold>
+    <header_font_italic>N</header_font_italic>
+    <header_font_underline>no</header_font_underline>
+    <header_font_orientation>horizontal</header_font_orientation>
+    <header_font_color>black</header_font_color>
+    <header_background_color>none</header_background_color>
+    <header_row_height>255</header_row_height>
+    <header_alignment>left</header_alignment>
+    <header_image/>
+    <row_font_name>arial</row_font_name>
+    <row_font_size>10</row_font_size>
+    <row_font_color>black</row_font_color>
+    <row_background_color>none</row_background_color>
+      </custom>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>738</xloc>
+      <yloc>265</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

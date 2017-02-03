@@ -63,8 +63,8 @@ Write-Host 'RebuildSchemaAllFile: ' $RebuildSchemaAllFile
 
 Write-Host 'Start Warehouse Upgrade'
 
-#$ServerUtilitiesDirectory = $OctopusParameters['Server.Utilities.Directory']
-$ServerUtilitiesDirectory = 'C:\Utilities'
+$ServerUtilitiesDirectory = $OctopusParameters['Server.Utilities.Directory']
+#$ServerUtilitiesDirectory = 'C:\Utilities'
 
 $WarehouseDirectoryName = Join-Path $ServerUtilitiesDirectory 'warehousePDI'
 

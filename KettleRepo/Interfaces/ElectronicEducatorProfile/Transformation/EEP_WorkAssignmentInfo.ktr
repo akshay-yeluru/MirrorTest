@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;10&#x2f;25 11&#x3a;38&#x3a;16.540</modified_date>
+  <modified_date>2017&#x2f;03&#x2f;02 10&#x3a;40&#x3a;10.255</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -100,23 +100,23 @@
   </connection>
   <connection>
     <name>GREATPLAINS2_DB</name>
-    <server>&#x24;&#x7b;TARGET_HOST&#x7d;</server>
-    <type>GENERIC</type>
+    <server>dtl-grp-w12</server>
+    <type>MSSQL</type>
     <access>Native</access>
-    <database>&#x24;&#x7b;TARGET_DATABASE_NAME&#x7d;</database>
-    <port>&#x24;&#x7b;TARGET_PORT&#x7d;</port>
-    <username/>
-    <password>Encrypted </password>
+    <database>DSFM_BIEN</database>
+    <port>1433</port>
+    <username>tsc</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce10be86bcd9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
-      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;SOURCE_DRIVER&#x7d;</attribute></attribute>
-      <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;SOURCE2_CONNECTION_URL&#x7d;</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MSSQL.instance</code><attribute>sql2012</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;TARGET_PORT&#x7d;</attribute></attribute>
+      <attribute><code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1433</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
@@ -126,23 +126,23 @@
   </connection>
   <connection>
     <name>GREATPLAINS3_DB</name>
-    <server>&#x24;&#x7b;TARGET_HOST&#x7d;</server>
-    <type>GENERIC</type>
+    <server>dtl-grp-w12</server>
+    <type>MSSQL</type>
     <access>Native</access>
-    <database>&#x24;&#x7b;TARGET_DATABASE_NAME&#x7d;</database>
-    <port>&#x24;&#x7b;TARGET_PORT&#x7d;</port>
-    <username/>
-    <password>Encrypted </password>
+    <database>DSFM_CAP</database>
+    <port>1433</port>
+    <username>tsc</username>
+    <password>Encrypted 2be98afc86aa7f2e4cb79ce10be86bcd9</password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
-      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;SOURCE_DRIVER&#x7d;</attribute></attribute>
-      <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;SOURCE3_CONNECTION_URL&#x7d;</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MSSQL.instance</code><attribute>sql2012</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>&#x24;&#x7b;TARGET_PORT&#x7d;</attribute></attribute>
+      <attribute><code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1433</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>N</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
@@ -469,48 +469,9 @@
   <hop> <from>Assignment Types</from><to>Add Contract Type</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Gov Location</from><to>Add Contract Type</to><enabled>Y</enabled> </hop>
   <hop> <from>Add Contract Type</from><to>Add TimeType&#x2f;Code</to><enabled>Y</enabled> </hop>
-  <hop> <from>Position Cross-Reference</from><to>Get Gov Position 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Government Locations</from><to>Add Gov Location 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Gov Position 2</from><to>Add Gov Location 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>Full Time Educator</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>Part Time Educator </to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>Educator FTE</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>Full Time VP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>Full Time AP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>Part Time AP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>Admin FTE</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>Non-Teaching Headcount</to><enabled>Y</enabled> </hop>
-  <hop> <from>Full Time Educator</from><to>Group by 1</to><enabled>Y</enabled> </hop>
-  <hop> <from>Part Time Educator </from><to>Group by 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Educator FTE</from><to>Group by 3</to><enabled>Y</enabled> </hop>
-  <hop> <from>Full Time VP</from><to>Group by 4</to><enabled>Y</enabled> </hop>
-  <hop> <from>Full Time AP</from><to>Group by 6</to><enabled>Y</enabled> </hop>
-  <hop> <from>Part Time AP</from><to>Group by 7</to><enabled>Y</enabled> </hop>
-  <hop> <from>Admin FTE</from><to>Group by 8</to><enabled>Y</enabled> </hop>
-  <hop> <from>Non-Teaching Headcount</from><to>Group by 9</to><enabled>Y</enabled> </hop>
   <hop> <from>Emp FTE by Location</from><to>Add Total FTE at location</to><enabled>Y</enabled> </hop>
   <hop> <from>Select values 2</from><to>Add Grade Level</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by 1</from><to>Add Full Time Educ</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by 9</from><to>Non Teaching HC</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by 8</from><to>Add Admin FTE</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by 7</from><to>Add PartTime AP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by 6</from><to>Add Fulltime AP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by 5</from><to>Add PartTime VP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by 4</from><to>Add Full Time VP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by 3</from><to>Add Educator FTE</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by 2</from><to>Add PartTime Educator</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Full Time Educ</from><to>Add PartTime Educator</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add PartTime Educator</from><to>Add Educator FTE</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Educator FTE</from><to>Add Full Time VP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Full Time VP</from><to>Add PartTime VP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add PartTime VP</from><to>Add Fulltime AP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Fulltime AP</from><to>Add PartTime AP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add PartTime AP</from><to>Add Admin FTE</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Admin FTE</from><to>Non Teaching HC</to><enabled>Y</enabled> </hop>
-  <hop> <from>K12TeacherTime 04&#x3f;</from><to>Add constants 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants 2</from><to>Add Grade Level</to><enabled>Y</enabled> </hop>
   <hop> <from>Is this a K12Teach time&#x3f;</from><to>Add constants 2 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>K12TeacherTime 04&#x3f;</from><to>Add Full Time Educ</to><enabled>Y</enabled> </hop>
   <hop> <from>Employee Info</from><to>Join Master</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Supervisory to String</from><to>Select values</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Gov Position</from><to>Add Gov Location</to><enabled>Y</enabled> </hop>
@@ -534,10 +495,6 @@
   <hop> <from>Add constants 4</from><to>Get Gov Position</to><enabled>Y</enabled> </hop>
   <hop> <from>Is Location Prep&#x25; over 1&#x3f;</from><to>Divide by 1</to><enabled>Y</enabled> </hop>
   <hop> <from>Is there a Level &#x25;</from><to>Is there a Location&#x25;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Gov Location 2</from><to>Add Contract Type 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Assignment Types</from><to>Add Contract Type 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Contract Type 2</from><to>Is Location &#x26;Contract Type&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Supervisory Positions</from><to>Join Master 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Add TimeType&#x2f;Code</from><to>Location &#x26; TimeCode&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Location &#x26; TimeCode&#x3f;</from><to>Alternate TimeCode</to><enabled>Y</enabled> </hop>
   <hop> <from>Divide by 100</from><to>K12teacher &#x28;and &#x3c;&#x3e; 04&#x29;&#x3f;</to><enabled>Y</enabled> </hop>
@@ -558,24 +515,6 @@
   <hop> <from>Add Grade Level</from><to>Add Position FTE 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows 2</from><to>Emp FTE by Location</to><enabled>Y</enabled> </hop>
   <hop> <from>Is this a K12Teach time&#x3f;</from><to>Add Total FTE at location</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add Total FTE at location</from><to>K12TeacherTime 04&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add 100</from><to>Hours or FTE &#x3d; F&#x3f;</to><enabled>Y</enabled> </hop>
-  <hop> <from>Hours or FTE &#x3d; F&#x3f;</from><to>Hours</to><enabled>Y</enabled> </hop>
-  <hop> <from>Hours or FTE &#x3d; F&#x3f;</from><to>FTE</to><enabled>Y</enabled> </hop>
-  <hop> <from>FTE</from><to>Get Gov Position 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Hours</from><to>Get Gov Position 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Count Location&#x2f;Position</from><to>Join Master 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Join Master 2</from><to>Add 100</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows 4</from><to>Group by loc&#x2f;pos&#x2f;emp</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows 4 2</from><to>Group by loc&#x2f;type&#x2f;emp</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by loc&#x2f;type&#x2f;emp</from><to>Add GroupFTE</to><enabled>Y</enabled> </hop>
-  <hop> <from>Group by loc&#x2f;pos&#x2f;emp</from><to>Add GroupFTE</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add GroupFTE</from><to>Sort rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>Is Location &#x26;Contract Type&#x3f;</from><to>Set Position Type</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set Position Type</from><to>Sort rows 4</to><enabled>Y</enabled> </hop>
-  <hop> <from>Set Position Type</from><to>Sort rows 4 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Sort rows</from><to>Part Time VP</to><enabled>Y</enabled> </hop>
-  <hop> <from>Part Time VP</from><to>Group by 5</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort em</from><to>Set Prep Time</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Prep Time</from><to>Select values 3</to><enabled>Y</enabled> </hop>
   <hop> <from>Constants</from><to>Set NotTeach to &#x25;Employed</to><enabled>Y</enabled> </hop>
@@ -603,7 +542,6 @@
   <hop> <from>School Based&#x3f;</from><to>Concat Fields 4</to><enabled>Y</enabled> </hop>
   <hop> <from>Concat Fields 4</from><to>Set  Prep numeric</to><enabled>Y</enabled> </hop>
   <hop> <from>Concat Fields &#x28;W&#x29;</from><to>Set  Prep numeric</to><enabled>Y</enabled> </hop>
-  <hop> <from>Non Teaching HC</from><to>Prep Time only Teachers&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Prep Time only Teachers&#x3f;</from><to>Constants</to><enabled>Y</enabled> </hop>
   <hop> <from>Prep Time only Teachers&#x3f;</from><to>Add Grade Level</to><enabled>Y</enabled> </hop>
   <hop> <from>Is TimeCode Not Mapped&#x3f;</from><to>TimeType Errmsg</to><enabled>Y</enabled> </hop>
@@ -622,80 +560,11 @@
   <hop> <from>TimeType Errmsg</from><to>Sort by Position</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort by Position</from><to>Unique Positions</to><enabled>Y</enabled> </hop>
   <hop> <from>Unique Positions</from><to>No TimeCodes</to><enabled>Y</enabled> </hop>
+  <hop> <from>K12TeacherTime 04&#x3f;</from><to>Prep Time only Teachers&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add Total FTE at location</from><to>Add constants 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants 2</from><to>K12TeacherTime 04&#x3f;</to><enabled>Y</enabled> </hop>
+  <hop> <from>K12TeacherTime 04&#x3f;</from><to>Add Grade Level</to><enabled>Y</enabled> </hop>
   </order>
-  <step>
-    <name>Add 100</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>onehundred</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>100</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>141</xloc>
-      <yloc>206</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add Admin FTE</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Group by 8</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>EMPLOYMENTLOCATION</name>
-        <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
-        <name>POSITION_CODE</name>
-        <field>SUPERVISOR_POSITION</field>
-      </key>
-      <value>
-        <name>K12Supervisory09</name>
-        <rename>K12Supervisory09</rename>
-        <default/>
-        <type>Number</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>525</xloc>
-      <yloc>1042</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step>
     <name>Add Contract Type</name>
     <type>StreamLookup</type>
@@ -733,42 +602,6 @@
     </step>
 
   <step>
-    <name>Add Contract Type 2</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Assignment Types</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>ASSIGN_TYPE</name>
-        <field>PRM_CODE</field>
-      </key>
-      <value>
-        <name>CONTRACTTYPE</name>
-        <rename>CONTRACTTYPE</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>720</xloc>
-      <yloc>206</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Add Contract Type 2 2</name>
     <type>StreamLookup</type>
     <description/>
@@ -798,168 +631,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>854</xloc>
-      <yloc>299</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add Educator FTE</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Group by 3</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>EMPLOYMENTLOCATION</name>
-        <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
-        <name>POSITION_CODE</name>
-        <field>SUPERVISOR_POSITION</field>
-      </key>
-      <value>
-        <name>K12Supervisory03</name>
-        <rename>K12Supervisory03</rename>
-        <default> </default>
-        <type>Number</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>526</xloc>
-      <yloc>697</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add Full Time Educ</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Group by 1</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>EMPLOYMENTLOCATION</name>
-        <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
-        <name>POSITION_CODE</name>
-        <field>SUPERVISOR_POSITION</field>
-      </key>
-      <value>
-        <name>K12Supervisory01</name>
-        <rename>K12Supervisory01</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>526</xloc>
-      <yloc>559</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add Full Time VP</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Group by 4</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>EMPLOYMENTLOCATION</name>
-        <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
-        <name>POSITION_CODE</name>
-        <field>SUPERVISOR_POSITION</field>
-      </key>
-      <value>
-        <name>K12Supervisory05</name>
-        <rename>K12Supervisory05</rename>
-        <default> </default>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>526</xloc>
-      <yloc>766</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add Fulltime AP</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Group by 6</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>EMPLOYMENTLOCATION</name>
-        <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
-        <name>POSITION_CODE</name>
-        <field>SUPERVISOR_POSITION</field>
-      </key>
-      <value>
-        <name>K12Supervisory07</name>
-        <rename>K12Supervisory07</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>525</xloc>
-      <yloc>904</yloc>
+      <xloc>720</xloc>
+      <yloc>207</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1007,42 +680,6 @@
     </step>
 
   <step>
-    <name>Add Gov Location 2</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Government Locations</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>LOCATION</name>
-        <field>PRM_CODE</field>
-      </key>
-      <value>
-        <name>EMPLOYMENTLOCATION</name>
-        <rename>EMPLOYMENTLOCATION</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>586</xloc>
-      <yloc>206</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Add Grade Level</name>
     <type>StreamLookup</type>
     <description/>
@@ -1076,176 +713,8 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>749</xloc>
+      <xloc>720</xloc>
       <yloc>698</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add GroupFTE</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Group by loc&#x2f;type&#x2f;emp</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>EMPLOYMENTLOCATION</name>
-        <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
-        <name>SUPERVISOR_POSITION</name>
-        <field>SUPERVISOR_POSITION</field>
-      </key>
-      <key>
-        <name>EMPLOYEE_NO</name>
-        <field>EMPLOYEE_NO</field>
-      </key>
-      <key>
-        <name>POSITIONTYPE</name>
-        <field>POSITIONTYPE</field>
-      </key>
-      <value>
-        <name>GroupFTE</name>
-        <rename>GroupFTE</rename>
-        <default/>
-        <type>Number</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>194</xloc>
-      <yloc>474</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add PartTime AP</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Group by 7</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>EMPLOYMENTLOCATION</name>
-        <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
-        <name>POSITION_CODE</name>
-        <field>SUPERVISOR_POSITION</field>
-      </key>
-      <value>
-        <name>K12Supervisory08</name>
-        <rename>K12Supervisory08</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>525</xloc>
-      <yloc>973</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add PartTime Educator</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Group by 2</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>EMPLOYMENTLOCATION</name>
-        <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
-        <name>POSITION_CODE</name>
-        <field>SUPERVISOR_POSITION</field>
-      </key>
-      <value>
-        <name>K12Supervisory02</name>
-        <rename>K12Supervisory02</rename>
-        <default> </default>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>526</xloc>
-      <yloc>628</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add PartTime VP</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Group by 5</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>EMPLOYMENTLOCATION</name>
-        <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
-        <name>POSITION_CODE</name>
-        <field>SUPERVISOR_POSITION</field>
-      </key>
-      <value>
-        <name>K12Supervisory06</name>
-        <rename>K12Supervisory06</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>525</xloc>
-      <yloc>835</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1547,8 +1016,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>645</xloc>
-      <yloc>628</yloc>
+      <xloc>525</xloc>
+      <yloc>559</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1937,52 +1406,6 @@
     </step>
 
   <step>
-    <name>Admin FTE</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Group by 8</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <conditions>
-    <condition>
-     <negated>N</negated>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3d;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>04</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>OR</operator>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3d;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>05</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    </conditions>
-   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>300</xloc>
-      <yloc>1042</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Alternate TimeCode</name>
     <type>StreamLookup</type>
     <description/>
@@ -2072,6 +1495,40 @@
     </step>
 
   <step>
+    <name>Assignment Type Mapped&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Location Mapped</send_true_to>
+<send_false_to>Set Type Errmsg</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>CONTRACTTYPE</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>988</xloc>
+      <yloc>171</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Assignment Types</name>
     <type>TableInput</type>
     <description/>
@@ -2083,7 +1540,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>SELECT  PRM_CODE,&#xd;&#xa;		NEW_CODE as CONTRACTTYPE&#xd;&#xa;  FROM HR_TRANSLATION_CODE&#xd;&#xa;  WHERE FIELD_TYPE &#x3d; &#x27;ASSIGNMENT TYPE&#x27;&#xd;&#xa;  ORDER by PRM_CODE&#xd;&#xa;</sql>
+    <sql>SELECT  PRM_CODE,&#xd;&#xa;		NEW_CODE as CONTRACTTYPE&#xd;&#xa;  FROM HR_TRANSLATION_CODE&#xd;&#xa;  WHERE FIELD_TYPE &#x3d; &#x27;ASSIGNMENT TYPE&#x27;&#xd;&#xa;	AND NOT SUBSTRING&#x28;NEW_CODE,1,1&#x29; IN &#x28;&#x27;T&#x27;,&#x27;X&#x27;,&#x27;S&#x27;,&#x27;E&#x27;&#x29;&#xd;&#xa;  ORDER by PRM_CODE&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -2441,8 +1898,8 @@
     </ConcatFields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>854</xloc>
-      <yloc>385</yloc>
+      <xloc>720</xloc>
+      <yloc>315</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2670,32 +2127,6 @@
     </step>
 
   <step>
-    <name>Count Location&#x2f;Position</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>SOURCE_RMS</connection>
-    <sql>select ha.Employee_no,&#xd;&#xa;		Location,&#xd;&#xa;      	Position_code,&#xd;&#xa;		ha.Assignment_type as Assign_type,&#xd;&#xa;		hpc.Supervisor_position,&#xd;&#xa;		hpc.HOURS_OR_FTE,&#xd;&#xa;		ha.hours_fte,&#xd;&#xa;		ha.hours_per_day &#x2a; 100 as hpd,&#xd;&#xa;		hpc.hours_per_day &#x2a; 100 as hpd_pc,&#xd;&#xa;		ha.hours_fte &#x2a; 100 as alt_fte,&#xd;&#xa;       1 as HeadCount&#xd;&#xa;    FROM hr_assignments ha&#xd;&#xa;		LEFT JOIN HR_ASSIGNMENT_LOCATIONS hal ON hal.THE_KEY &#x3d; ha.THE_KEY&#xd;&#xa; 		LEFT JOIN HR_POSITION_CODE hpc ON hpc.POSITION_CODE &#x3d; ha.POSITION_CODE&#xd;&#xa;		LEFT JOIN HR_employee_interlink hei ON hei.employee_no &#x3d; ha.employee_no&#xd;&#xa;    WHERE START_DATE &#x3c;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;&#xd;&#xa;		AND END_DATE &#x3e;&#x3d; &#x24;&#x7b;CURRENT_DATE&#x7d;	&#xd;&#xa;		AND location &#x3e; &#x27; &#x27;&#xd;&#xa;		AND hei.Status &#x3d; &#x27;A&#x27;&#xd;&#xa;		AND hei.Payroll_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;		AND hpc.Supervisor_position &#x3e; &#x27; &#x27;&#xd;&#xa;	ORDER BY hpc.Supervisor_position, ha.Employee_no, Location, Position_code</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>61</xloc>
-      <yloc>111</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Divide by 1</name>
     <type>Calculator</type>
     <description/>
@@ -2873,40 +2304,6 @@
     </step>
 
   <step>
-    <name>Educator FTE</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Group by 3</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-   <function>IN LIST</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>01&#x3b;02&#x3b;04&#x3b;05&#x3b;10&#x3b;11&#x3b;12&#x3b;13&#x3b;14&#x3b;15&#x3b;16</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>300</xloc>
-      <yloc>697</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Emp FTE by Location</name>
     <type>GroupBy</type>
     <description/>
@@ -2982,7 +2379,7 @@
     </step>
 
   <step>
-    <name>No TimeCodes</name>
+    <name>Errors &#x28;Missing data&#x29;</name>
     <type>ExcelOutput</type>
     <description/>
     <distribute>Y</distribute>
@@ -2996,9 +2393,9 @@
     <footer>N</footer>
     <encoding/>
     <append>N</append>
-    <add_to_result_filenames>Y</add_to_result_filenames>
+    <add_to_result_filenames>N</add_to_result_filenames>
     <file>
-      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;Finished_No_TimeAllotment_WorkAssignmentInfo</name>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;Finished_EmployeesBypassed_WorkAssignment</name>
       <extention>xls</extention>
       <do_not_open_newfile_init>N</do_not_open_newfile_init>
       <create_parent_folder>N</create_parent_folder>
@@ -3023,6 +2420,31 @@
     </template>
     <fields>
       <field>
+        <name>EMPLOYEE_NO</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>LASTNAME</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>FIRSTNAME</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>PERSONID</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>PERCENTTIMEEMPLOYED</name>
+        <type>BigNumber</type>
+        <format>&#x23;.&#x23;&#x23;&#x23;&#x23;</format>
+      </field>
+      <field>
         <name>POSITION_CODE</name>
         <type>String</type>
         <format/>
@@ -3033,7 +2455,32 @@
         <format/>
       </field>
       <field>
+        <name>LOCATION</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>EMPLOYMENTLOCATION</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>ASSIGN_TYPE</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>CONTRACTTYPE</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
         <name>ASSIGNMENTTIMETYPE</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>ASSIGNMENTTIMECODE</name>
         <type>String</type>
         <format/>
       </field>
@@ -3057,55 +2504,8 @@
       </custom>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1214</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>FTE</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <calculation><field_name>real_fte</field_name>
-<calc_type>DIVIDE</calc_type>
-<field_a>ALT_FTE</field_a>
-<field_b>onehundred</field_b>
-<field_c/>
-<value_type>Number</value_type>
-<value_length>4</value_length>
-<value_precision>3</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-       <calculation><field_name>FTE</field_name>
-<calc_type>COPY_FIELD</calc_type>
-<field_a>real_fte</field_a>
-<field_b/>
-<field_c/>
-<value_type>Number</value_type>
-<value_length>4</value_length>
-<value_precision>3</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>330</xloc>
-      <yloc>162</yloc>
+      <xloc>989</xloc>
+      <yloc>489</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3264,129 +2664,6 @@
     </step>
 
   <step>
-    <name>Full Time AP</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Group by 6</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-   <function>&#x3d;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>04</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>GroupFTE</leftvalue>
-   <function>&#x3e;&#x3d;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>300</xloc>
-      <yloc>904</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Full Time Educator</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Group by 1</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-   <function>IN LIST</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>01&#x3b;02&#x3b;04&#x3b;05&#x3b;10&#x3b;11&#x3b;12&#x3b;13&#x3b;14&#x3b;15&#x3b;16</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>GroupFTE</leftvalue>
-   <function>&#x3e;&#x3d;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>300</xloc>
-      <yloc>559</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Full Time VP</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Group by 4</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-   <function>&#x3d;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>05</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>GroupFTE</leftvalue>
-   <function>&#x3e;&#x3d;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>300</xloc>
-      <yloc>766</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Get Gov Position</name>
     <type>StreamLookup</type>
     <description/>
@@ -3418,42 +2695,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>452</xloc>
       <yloc>8</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Gov Position 2</name>
-    <type>StreamLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <from>Position Cross-Reference</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>POSITION_CODE</name>
-        <field>SRB_POSITION</field>
-      </key>
-      <value>
-        <name>EMPLOYMENTPOSITION</name>
-        <rename>EMPLOYMENTPOSITION</rename>
-        <default/>
-        <type>String</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>452</xloc>
-      <yloc>206</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3518,32 +2759,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1050</xloc>
       <yloc>1477</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Supervisory Positions</name>
-    <type>TableInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>SOURCE_RMS</connection>
-    <sql>select position_code AS Super_Position&#xd;&#xa;	from hr_position_code &#xd;&#xa;	where user_defined_field_02 &#x3d; &#x27;K12TEACH04&#x27;</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>Y</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>61</xloc>
-      <yloc>297</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -3648,627 +2863,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>922</xloc>
       <yloc>1477</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by 1</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>Y</give_back_row>
-      <group>
-        <field>
-          <name>EMPLOYMENTLOCATION</name>
-        </field>
-        <field>
-          <name>SUPERVISOR_POSITION</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>K12Supervisory01</aggregate>
-          <subject>HEADCOUNT</subject>
-          <type>SUM</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>407</xloc>
-      <yloc>559</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by 2</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>Y</give_back_row>
-      <group>
-        <field>
-          <name>EMPLOYMENTLOCATION</name>
-        </field>
-        <field>
-          <name>SUPERVISOR_POSITION</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>K12Supervisory02</aggregate>
-          <subject>HEADCOUNT</subject>
-          <type>SUM</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>407</xloc>
-      <yloc>628</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by 3</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>Y</give_back_row>
-      <group>
-        <field>
-          <name>EMPLOYMENTLOCATION</name>
-        </field>
-        <field>
-          <name>SUPERVISOR_POSITION</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>K12Supervisory03</aggregate>
-          <subject>FTE</subject>
-          <type>SUM</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>407</xloc>
-      <yloc>697</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by 4</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>Y</give_back_row>
-      <group>
-        <field>
-          <name>EMPLOYMENTLOCATION</name>
-        </field>
-        <field>
-          <name>SUPERVISOR_POSITION</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>K12Supervisory05</aggregate>
-          <subject>HEADCOUNT</subject>
-          <type>SUM</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>407</xloc>
-      <yloc>766</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by 5</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>N</give_back_row>
-      <group>
-        <field>
-          <name>EMPLOYMENTLOCATION</name>
-        </field>
-        <field>
-          <name>SUPERVISOR_POSITION</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>K12Supervisory06</aggregate>
-          <subject>HEADCOUNT</subject>
-          <type>SUM</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>407</xloc>
-      <yloc>835</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by 6</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>N</give_back_row>
-      <group>
-        <field>
-          <name>EMPLOYMENTLOCATION</name>
-        </field>
-        <field>
-          <name>SUPERVISOR_POSITION</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>K12Supervisory07</aggregate>
-          <subject>HEADCOUNT</subject>
-          <type>SUM</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>407</xloc>
-      <yloc>904</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by 7</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>N</give_back_row>
-      <group>
-        <field>
-          <name>EMPLOYMENTLOCATION</name>
-        </field>
-        <field>
-          <name>SUPERVISOR_POSITION</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>K12Supervisory08</aggregate>
-          <subject>HEADCOUNT</subject>
-          <type>SUM</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>407</xloc>
-      <yloc>973</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by 8</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>N</give_back_row>
-      <group>
-        <field>
-          <name>EMPLOYMENTLOCATION</name>
-        </field>
-        <field>
-          <name>SUPERVISOR_POSITION</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>K12Supervisory09</aggregate>
-          <subject>FTE</subject>
-          <type>SUM</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>407</xloc>
-      <yloc>1042</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by 9</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>N</give_back_row>
-      <group>
-        <field>
-          <name>EMPLOYMENTLOCATION</name>
-        </field>
-        <field>
-          <name>SUPERVISOR_POSITION</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>K12Supervisory10</aggregate>
-          <subject>HEADCOUNT</subject>
-          <type>SUM</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>407</xloc>
-      <yloc>1118</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by loc&#x2f;pos&#x2f;emp</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>Y</give_back_row>
-      <group>
-        <field>
-          <name>EMPLOYMENTLOCATION</name>
-        </field>
-        <field>
-          <name>SUPERVISOR_POSITION</name>
-        </field>
-        <field>
-          <name>EMPLOYMENTPOSITION</name>
-        </field>
-        <field>
-          <name>EMPLOYEE_NO</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>POSITIONTYPE</aggregate>
-          <subject>POSITIONTYPE</subject>
-          <type>LAST_INCL_NULL</type>
-          <valuefield/>
-        </field>
-        <field>
-          <aggregate>SRB_POSITION</aggregate>
-          <subject>POSITION_CODE</subject>
-          <type>LAST_INCL_NULL</type>
-          <valuefield/>
-        </field>
-        <field>
-          <aggregate>HEADCOUNT</aggregate>
-          <subject>HEADCOUNT</subject>
-          <type>COUNT_DISTINCT</type>
-          <valuefield/>
-        </field>
-        <field>
-          <aggregate>FTE</aggregate>
-          <subject>FTE</subject>
-          <type>SUM</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>194</xloc>
-      <yloc>385</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Group by loc&#x2f;type&#x2f;emp</name>
-    <type>GroupBy</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <all_rows>N</all_rows>
-      <ignore_aggregate>N</ignore_aggregate>
-      <field_ignore/>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>grp</prefix>
-      <add_linenr>N</add_linenr>
-      <linenr_fieldname/>
-      <give_back_row>Y</give_back_row>
-      <group>
-        <field>
-          <name>EMPLOYMENTLOCATION</name>
-        </field>
-        <field>
-          <name>SUPERVISOR_POSITION</name>
-        </field>
-        <field>
-          <name>POSITIONTYPE</name>
-        </field>
-        <field>
-          <name>EMPLOYEE_NO</name>
-        </field>
-      </group>
-      <fields>
-        <field>
-          <aggregate>GroupFTE</aggregate>
-          <subject>FTE</subject>
-          <type>SUM</type>
-          <valuefield/>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>452</xloc>
-      <yloc>474</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Hours</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <calculation><field_name>real_fte</field_name>
-<calc_type>COPY_FIELD</calc_type>
-<field_a>ALT_FTE</field_a>
-<field_b/>
-<field_c/>
-<value_type>Number</value_type>
-<value_length>4</value_length>
-<value_precision>3</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-       <calculation><field_name>fte</field_name>
-<calc_type>DIVIDE</calc_type>
-<field_a>HPD</field_a>
-<field_b>HPD_PC</field_b>
-<field_c/>
-<value_type>Number</value_type>
-<value_length>4</value_length>
-<value_precision>3</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>330</xloc>
-      <yloc>262</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Hours or FTE &#x3d; F&#x3f;</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>FTE</send_true_to>
-<send_false_to>Hours</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>HOURS_OR_FTE</leftvalue>
- <function>&#x3d;</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>F</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>225</xloc>
-      <yloc>206</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Is Location &#x26;Contract Type&#x3f;</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Set Position Type</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>EMPLOYMENTLOCATION</leftvalue>
-   <function>IS NOT NULL</function>
-   <rightvalue/>
-   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>CONTRACTTYPE</leftvalue>
-   <function>IS NOT NULL</function>
-   <rightvalue/>
-   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>586</xloc>
-      <yloc>299</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4527,34 +3121,6 @@
     </step>
 
   <step>
-    <name>Join Master 2</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<join_type>INNER</join_type>
-<step1>Count Location&#x2f;Position</step1>
-<step2>Get Supervisory Positions</step2>
-    <keys_1>
-      <key>SUPERVISOR_POSITION</key>
-    </keys_1>
-    <keys_2>
-      <key>SUPER_POSITION</key>
-    </keys_2>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>61</xloc>
-      <yloc>206</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>K12TeacherTime 04&#x3f;</name>
     <type>FilterRows</type>
     <description/>
@@ -4565,8 +3131,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Add Full Time Educ</send_true_to>
-<send_false_to>Add constants 2</send_false_to>
+<send_true_to>Prep Time only Teachers&#x3f;</send_true_to>
+<send_false_to>Add Grade Level</send_false_to>
     <compare>
 <condition>
  <negated>N</negated>
@@ -4594,8 +3160,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>647</xloc>
-      <yloc>559</yloc>
+      <xloc>525</xloc>
+      <yloc>698</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -4697,6 +3263,41 @@
     </step>
 
   <step>
+    <name>Location Mapped</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Position Mapped&#x3f;</send_true_to>
+<send_false_to>Set Location Errmsg</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>EMPLOYMENTLOCATION</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>988</xloc>
+      <yloc>255</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Location PrepTime</name>
     <type>TableInput</type>
     <description/>
@@ -4723,302 +3324,83 @@
     </step>
 
   <step>
-    <name>Non Teaching HC</name>
-    <type>StreamLookup</type>
+    <name>No TimeCodes</name>
+    <type>ExcelOutput</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <from>Group by 9</from>
-    <input_sorted>N</input_sorted>
-    <preserve_memory>N</preserve_memory>
-    <sorted_list>N</sorted_list>
-    <integer_pair>N</integer_pair>
-    <lookup>
-      <key>
-        <name>EMPLOYMENTLOCATION</name>
-        <field>EMPLOYMENTLOCATION</field>
-      </key>
-      <key>
+    <header>Y</header>
+    <footer>N</footer>
+    <encoding/>
+    <append>N</append>
+    <add_to_result_filenames>Y</add_to_result_filenames>
+    <file>
+      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;Finished_No_TimeAllotment_WorkAssignmentInfo</name>
+      <extention>xls</extention>
+      <do_not_open_newfile_init>N</do_not_open_newfile_init>
+      <create_parent_folder>N</create_parent_folder>
+      <split>N</split>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <sheetname>Sheet1</sheetname>
+      <autosizecolums>Y</autosizecolums>
+      <nullisblank>N</nullisblank>
+      <protect_sheet>N</protect_sheet>
+      <password>Encrypted </password>
+      <splitevery>0</splitevery>
+      <usetempfiles>N</usetempfiles>
+      <tempdirectory/>
+      </file>
+    <template>
+      <enabled>N</enabled>
+      <append>N</append>
+      <filename>template.xls</filename>
+    </template>
+    <fields>
+      <field>
         <name>POSITION_CODE</name>
-        <field>SUPERVISOR_POSITION</field>
-      </key>
-      <value>
-        <name>K12Supervisory10</name>
-        <rename>K12Supervisory10</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>EMPLOYMENTPOSITION</name>
+        <type>String</type>
+        <format/>
+      </field>
+      <field>
+        <name>ASSIGNMENTTIMETYPE</name>
+        <type>String</type>
+        <format/>
+      </field>
+    </fields>
+    <custom>
+    <header_font_name>arial</header_font_name>
+    <header_font_size>9</header_font_size>
+    <header_font_bold>Y</header_font_bold>
+    <header_font_italic>N</header_font_italic>
+    <header_font_underline>no</header_font_underline>
+    <header_font_orientation>horizontal</header_font_orientation>
+    <header_font_color>black</header_font_color>
+    <header_background_color>none</header_background_color>
+    <header_row_height>255</header_row_height>
+    <header_alignment>left</header_alignment>
+    <header_image/>
+    <row_font_name>arial</row_font_name>
+    <row_font_size>8</row_font_size>
+    <row_font_color>black</row_font_color>
+    <row_background_color>none</row_background_color>
+      </custom>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>525</xloc>
-      <yloc>1118</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Non-Teaching Headcount</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Group by 9</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <conditions>
-    <condition>
-     <negated>N</negated>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3c;&#x3e;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>01</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>AND</operator>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3c;&#x3e;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>02</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>AND</operator>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3c;&#x3e;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>04</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>AND</operator>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3c;&#x3e;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>05</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>AND</operator>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3c;&#x3e;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>10</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>AND</operator>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3c;&#x3e;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>11</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>AND</operator>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3c;&#x3e;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>12</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>AND</operator>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3c;&#x3e;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>13</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>AND</operator>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3c;&#x3e;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>14</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>AND</operator>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3c;&#x3e;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>15</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>AND</operator>
-     <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-     <function>&#x3c;&#x3e;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>String</type><text>16</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>     </condition>
-    <condition>
-     <negated>N</negated>
-     <operator>AND</operator>
-     <leftvalue>GroupFTE</leftvalue>
-     <function>&#x3e;</function>
-     <rightvalue/>
-     <value><name>constant</name><type>Number</type><text>0.0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x3b;-&#x23;.&#x23;</mask></value>     </condition>
-    </conditions>
-   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>300</xloc>
-      <yloc>1118</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Part Time AP</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Group by 7</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-   <function>&#x3d;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>04</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>GroupFTE</leftvalue>
-   <function>&#x3c;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>GroupFTE</leftvalue>
-   <function>&#x3e;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>Number</type><text>0.0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x3b;-&#x23;.&#x23;</mask></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>300</xloc>
-      <yloc>973</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Part Time Educator </name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Group by 2</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-   <function>IN LIST</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>01&#x3b;02&#x3b;04&#x3b;05&#x3b;10&#x3b;11&#x3b;12&#x3b;13&#x3b;14&#x3b;15&#x3b;16</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>GroupFTE</leftvalue>
-   <function>&#x3c;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>GroupFTE</leftvalue>
-   <function>&#x3e;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>Number</type><text>0.0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x3b;-&#x23;.&#x23;</mask></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>300</xloc>
-      <yloc>628</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Part Time VP</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Group by 5</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-   <function>&#x3d;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>String</type><text>05</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>GroupFTE</leftvalue>
-   <function>&#x3c;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>BigNumber</type><text>1</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x3b;-&#x23;.&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;&#x23;</mask></value>   </condition>
-  <condition>
-   <negated>N</negated>
-   <operator>AND</operator>
-   <leftvalue>GroupFTE</leftvalue>
-   <function>&#x3e;</function>
-   <rightvalue/>
-   <value><name>constant</name><type>Number</type><text>0.0</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask>&#x23;.&#x23;&#x3b;-&#x23;.&#x23;</mask></value>   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>300</xloc>
-      <yloc>835</yloc>
+      <xloc>1214</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5045,6 +3427,41 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>452</xloc>
       <yloc>111</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Position Mapped&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Is TimeCode Not Mapped&#x3f;</send_true_to>
+<send_false_to>Set Postion Errmsg</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
+   <function>IS NOT NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>988</xloc>
+      <yloc>339</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5131,7 +3548,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>661</xloc>
+      <xloc>525</xloc>
       <yloc>1117</yloc>
       <draw>Y</draw>
       </GUI>
@@ -5277,8 +3694,8 @@
         <storage_type/>
       </meta>    </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>749</xloc>
-      <yloc>385</yloc>
+      <xloc>720</xloc>
+      <yloc>431</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -5579,6 +3996,34 @@
     </step>
 
   <step>
+    <name>Set Location Errmsg</name>
+    <type>SetValueConstant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <usevar>N</usevar>
+    <fields>
+      <field>
+        <name>EMPLOYMENTLOCATION</name>
+        <value>Location not mapped to MOE Location</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1122</xloc>
+      <yloc>255</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Set NotTeach to &#x25;Employed</name>
     <type>SetValueField</type>
     <description/>
@@ -5604,27 +4049,29 @@
     </step>
 
   <step>
-    <name>Set Position Type</name>
-    <type>Janino</type>
+    <name>Set Postion Errmsg</name>
+    <type>SetValueConstant</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-       <formula><field_name>POSITIONTYPE</field_name>
-<formula_string>EMPLOYMENTPOSITION &#x21;&#x3d; null &#x26;&#x26; &#x28;EMPLOYMENTPOSITION.indexOf&#x28;&#x22;01&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EMPLOYMENTPOSITION.indexOf&#x28;&#x22;02&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EMPLOYMENTPOSITION.indexOf&#x28;&#x22;04&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EMPLOYMENTPOSITION.indexOf&#x28;&#x22;05&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EMPLOYMENTPOSITION.indexOf&#x28;&#x22;10&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EMPLOYMENTPOSITION.indexOf&#x28;&#x22;11&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EMPLOYMENTPOSITION.indexOf&#x28;&#x22;12&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EMPLOYMENTPOSITION.indexOf&#x28;&#x22;13&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EMPLOYMENTPOSITION.indexOf&#x28;&#x22;14&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EMPLOYMENTPOSITION.indexOf&#x28;&#x22;15&#x22;&#x29; &#x3e; - 1 &#x7c;&#x7c; EMPLOYMENTPOSITION.indexOf&#x28;&#x22;16&#x22;&#x29; &#x3e; - 1&#x29; &#x3f; &#x22;TEACHING&#x22; &#x3a; EMPLOYMENTPOSITION</formula_string>
-<value_type>String</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
+   <usevar>N</usevar>
+    <fields>
+      <field>
+        <name>EMPLOYMENTPOSITION</name>
+        <value>Position not mapped to MOE Position</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>452</xloc>
-      <yloc>299</yloc>
+      <xloc>1122</xloc>
+      <yloc>339</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6011,6 +4458,74 @@
     </step>
 
   <step>
+    <name>Set Type Errmsg</name>
+    <type>SetValueConstant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <usevar>N</usevar>
+    <fields>
+      <field>
+        <name>CONTRACTTYPE</name>
+        <value>Assignment Type not mapped to MOE Contract Type</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1122</xloc>
+      <yloc>172</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Sort by Position</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <sort_size>1000000</sort_size>
+      <free_memory/>
+      <compress>N</compress>
+      <compress_variable/>
+      <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>POSITION_CODE</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+      <field>
+        <name>EMPLOYMENTPOSITION</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1122</xloc>
+      <yloc>489</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Sort em</name>
     <type>SortRows</type>
     <description/>
@@ -6052,52 +4567,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>781</xloc>
       <yloc>1323</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>EMPLOYMENTLOCATION</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>POSITIONTYPE</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>EMPLOYMENTPOSITION</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>194</xloc>
-      <yloc>559</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6259,8 +4728,8 @@
     </step>
 
   <step>
-    <name>Sort rows 4</name>
-    <type>SortRows</type>
+    <name>TimeType Errmsg</name>
+    <type>SetValueConstant</type>
     <description/>
     <distribute>N</distribute>
     <custom_distribution/>
@@ -6269,83 +4738,46 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>N</unique_rows>
+   <usevar>N</usevar>
     <fields>
       <field>
-        <name>EMPLOYMENTLOCATION</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>EMPLOYMENTPOSITION</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>EMPLOYEE_NO</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-    </fields>
+        <name>AssignmentTimeType</name>
+        <value>Position not mapped to an MOE Time Allotment</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>333</xloc>
-      <yloc>339</yloc>
+      <xloc>1122</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Sort rows 4 2</name>
-    <type>SortRows</type>
+    <name>Unique Positions</name>
+    <type>Unique</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>EMPLOYMENTLOCATION</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>POSITIONTYPE</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>EMPLOYEE_NO</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-     <cluster_schema/>
+      <count_rows>N</count_rows>
+      <count_field/>
+      <reject_duplicate_row>N</reject_duplicate_row>
+      <error_description/>
+    <fields>      <field>        <name>POSITION_CODE</name>
+        <case_insensitive>N</case_insensitive>
+        </field>      <field>        <name>EMPLOYMENTPOSITION</name>
+        <case_insensitive>N</case_insensitive>
+        </field>      </fields>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>452</xloc>
-      <yloc>385</yloc>
+      <xloc>1214</xloc>
+      <yloc>489</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -6993,421 +5425,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1468</xloc>
       <yloc>1052</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>TimeType Errmsg</name>
-    <type>SetValueConstant</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-   <usevar>N</usevar>
-    <fields>
-      <field>
-        <name>AssignmentTimeType</name>
-        <value>Position not mapped to an MOE Time Allotment</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1122</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Assignment Type Mapped&#x3f;</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Location Mapped</send_true_to>
-<send_false_to>Set Type Errmsg</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>CONTRACTTYPE</leftvalue>
-   <function>IS NOT NULL</function>
-   <rightvalue/>
-   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>988</xloc>
-      <yloc>171</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Location Mapped</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Position Mapped&#x3f;</send_true_to>
-<send_false_to>Set Location Errmsg</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>EMPLOYMENTLOCATION</leftvalue>
-   <function>IS NOT NULL</function>
-   <rightvalue/>
-   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>988</xloc>
-      <yloc>255</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Position Mapped&#x3f;</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Is TimeCode Not Mapped&#x3f;</send_true_to>
-<send_false_to>Set Postion Errmsg</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <operator>OR</operator>
-   <leftvalue>EMPLOYMENTPOSITION</leftvalue>
-   <function>IS NOT NULL</function>
-   <rightvalue/>
-   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>988</xloc>
-      <yloc>339</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set Type Errmsg</name>
-    <type>SetValueConstant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-   <usevar>N</usevar>
-    <fields>
-      <field>
-        <name>CONTRACTTYPE</name>
-        <value>Assignment Type not mapped to MOE Contract Type</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1122</xloc>
-      <yloc>172</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set Location Errmsg</name>
-    <type>SetValueConstant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-   <usevar>N</usevar>
-    <fields>
-      <field>
-        <name>EMPLOYMENTLOCATION</name>
-        <value>Location not mapped to MOE Location</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1122</xloc>
-      <yloc>255</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set Postion Errmsg</name>
-    <type>SetValueConstant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-   <usevar>N</usevar>
-    <fields>
-      <field>
-        <name>EMPLOYMENTPOSITION</name>
-        <value>Position not mapped to MOE Position</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1122</xloc>
-      <yloc>339</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Errors &#x28;Missing data&#x29;</name>
-    <type>ExcelOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <encoding/>
-    <append>N</append>
-    <add_to_result_filenames>N</add_to_result_filenames>
-    <file>
-      <name>&#x24;&#x7b;OUTPUT_PATH&#x7d;Finished_EmployeesBypassed_WorkAssignment</name>
-      <extention>xls</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>N</create_parent_folder>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>Sheet1</sheetname>
-      <autosizecolums>Y</autosizecolums>
-      <nullisblank>N</nullisblank>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
-      </file>
-    <template>
-      <enabled>N</enabled>
-      <append>N</append>
-      <filename>template.xls</filename>
-    </template>
-    <fields>
-      <field>
-        <name>EMPLOYEE_NO</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>LASTNAME</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>FIRSTNAME</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>PERSONID</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>PERCENTTIMEEMPLOYED</name>
-        <type>BigNumber</type>
-        <format>&#x23;.&#x23;&#x23;&#x23;&#x23;</format>
-      </field>
-      <field>
-        <name>POSITION_CODE</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>EMPLOYMENTPOSITION</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>LOCATION</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>EMPLOYMENTLOCATION</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>ASSIGN_TYPE</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>CONTRACTTYPE</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>ASSIGNMENTTIMETYPE</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>ASSIGNMENTTIMECODE</name>
-        <type>String</type>
-        <format/>
-      </field>
-    </fields>
-    <custom>
-    <header_font_name>arial</header_font_name>
-    <header_font_size>9</header_font_size>
-    <header_font_bold>Y</header_font_bold>
-    <header_font_italic>N</header_font_italic>
-    <header_font_underline>no</header_font_underline>
-    <header_font_orientation>horizontal</header_font_orientation>
-    <header_font_color>black</header_font_color>
-    <header_background_color>none</header_background_color>
-    <header_row_height>255</header_row_height>
-    <header_alignment>left</header_alignment>
-    <header_image/>
-    <row_font_name>arial</row_font_name>
-    <row_font_size>8</row_font_size>
-    <row_font_color>black</row_font_color>
-    <row_background_color>none</row_background_color>
-      </custom>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>989</xloc>
-      <yloc>489</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Sort by Position</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
-      <prefix>out</prefix>
-      <sort_size>1000000</sort_size>
-      <free_memory/>
-      <compress>N</compress>
-      <compress_variable/>
-      <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>POSITION_CODE</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-      <field>
-        <name>EMPLOYMENTPOSITION</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1122</xloc>
-      <yloc>489</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Unique Positions</name>
-    <type>Unique</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <count_rows>N</count_rows>
-      <count_field/>
-      <reject_duplicate_row>N</reject_duplicate_row>
-      <error_description/>
-    <fields>      <field>        <name>POSITION_CODE</name>
-        <case_insensitive>N</case_insensitive>
-        </field>      <field>        <name>EMPLOYMENTPOSITION</name>
-        <case_insensitive>N</case_insensitive>
-        </field>      </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1214</xloc>
-      <yloc>489</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

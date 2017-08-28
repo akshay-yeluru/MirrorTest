@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2017&#x2f;06&#x2f;07 10&#x3a;10&#x3a;23.759</modified_date>
+  <modified_date>2017&#x2f;08&#x2f;28 08&#x3a;44&#x3a;25.907</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -852,6 +852,35 @@
     </step>
 
   <step>
+    <name>Current Prior to SSD&#x3f;</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Set Current Date to SSD</send_true_to>
+<send_false_to>Set Current Date to Today</send_false_to>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>Current_Date</leftvalue>
+ <function>&#x3c;</function>
+ <rightvalue>SSD</rightvalue>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>708</xloc>
+      <yloc>355</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>District Domain</name>
     <type>TableInput</type>
     <description/>
@@ -1229,7 +1258,35 @@
     </step>
 
   <step>
-    <name>Set Date to June 21, 2016</name>
+    <name>Set Current Date to Today</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <field_name>Current_Date</field_name>
+        <variable_name>CURRENT_DATE</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
+        </field>
+      </fields>
+    <use_formatting>Y</use_formatting>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>839</xloc>
+      <yloc>411</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set Date to Feb 1, 2018</name>
     <type>Constant</type>
     <description/>
     <distribute>Y</distribute>
@@ -1247,7 +1304,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>20170201</nullif>
+        <nullif>20180201</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -1437,8 +1494,8 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>928</xloc>
-      <yloc>10</yloc>
+      <xloc>931</xloc>
+      <yloc>9</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1493,63 +1550,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>318</xloc>
       <yloc>355</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Current Prior to SSD&#x3f;</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Set Current Date to SSD</send_true_to>
-<send_false_to>Set Current Date to Today</send_false_to>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>Current_Date</leftvalue>
- <function>&#x3c;</function>
- <rightvalue>SSD</rightvalue>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>708</xloc>
-      <yloc>355</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set Current Date to Today</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <field_name>Current_Date</field_name>
-        <variable_name>CURRENT_DATE</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-        </field>
-      </fields>
-    <use_formatting>Y</use_formatting>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>839</xloc>
-      <yloc>411</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

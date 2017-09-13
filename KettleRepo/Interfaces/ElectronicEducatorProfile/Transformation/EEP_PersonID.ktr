@@ -68,7 +68,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;11&#x2f;04 09&#x3a;09&#x3a;49.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2017&#x2f;08&#x2f;28 08&#x3a;44&#x3a;25.907</modified_date>
+  <modified_date>2017&#x2f;09&#x2f;01 14&#x3a;43&#x3a;21.240</modified_date>
   </info>
   <notepads>
   </notepads>
@@ -313,14 +313,14 @@
     <access>Native</access>
     <database>holyfamilySD30</database>
     <port>1433</port>
-    <username>tsc</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79ce10be86bcd9</password>
+    <username/>
+    <password>Encrypted </password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
     <attributes>
-      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>vortex.sql.vortexDriver</attribute></attribute>
-      <attribute><code>CUSTOM_URL</code><attribute>jdbc&#x3a;vortex&#x3a;&#x2f;&#x2f;tsc&#x2f;tscssi0101&#x2f;RMS&#x3a;regina_conv_hr.ini&#x40;1970&#x3a;titan.srb-es.com&#x21;VTX4</attribute></attribute>
+      <attribute><code>CUSTOM_DRIVER_CLASS</code><attribute>&#x24;&#x7b;SOURCE_DRIVER&#x7d;</attribute></attribute>
+      <attribute><code>CUSTOM_URL</code><attribute>&#x24;&#x7b;SOURCE_CONNECTION_URL&#x7d;</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
@@ -476,8 +476,6 @@
   <hop> <from>Sort rows</from><to>Merge Join Category</to><enabled>Y</enabled> </hop>
   <hop> <from>Merge Join Category</from><to>Sort rows 2</to><enabled>N</enabled> </hop>
   <hop> <from>Merge Join Status</from><to>Sort rows</to><enabled>N</enabled> </hop>
-  <hop> <from>Employee&#x2f;Certificate</from><to>Filter Employees</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filter Employees</from><to>Merge Join Status</to><enabled>Y</enabled> </hop>
   <hop> <from>Get System Info</from><to>Select values</to><enabled>Y</enabled> </hop>
   <hop> <from>Set Certificate Type</from><to>Certificated&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Certificated&#x3f;</from><to>Create EEP Master</to><enabled>Y</enabled> </hop>
@@ -492,6 +490,7 @@
   <hop> <from>Select values</from><to>Current Prior to SSD&#x3f;</to><enabled>Y</enabled> </hop>
   <hop> <from>Current Prior to SSD&#x3f;</from><to>Set Current Date to SSD</to><enabled>Y</enabled> </hop>
   <hop> <from>Current Prior to SSD&#x3f;</from><to>Set Current Date to Today</to><enabled>Y</enabled> </hop>
+  <hop> <from>Employee&#x2f;Certificate</from><to>Merge Join Status</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add Affiliation</name>
@@ -985,7 +984,7 @@
            <schema_name/>
            </partitioning>
     <connection>SOURCE_RMS</connection>
-    <sql>SELECT	DISTINCT HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO,&#xd;&#xa;		HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_STATUS,&#xd;&#xa;		CASE WHEN BARGAINING_UNIT &#x3d; &#x27; &#x27;&#xd;&#xa;			THEN &#x27;01&#x27;&#xd;&#xa;			ELSE BARGAINING_UNIT&#xd;&#xa;			END  as BARGAINING_UNIT,&#xd;&#xa;		EMPLOYEE_CATEGORY,&#xd;&#xa;		CERT_CLASS,&#xd;&#xa;		CERT_NO as PersonId,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;BIRTH_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,7,2&#x29;&#x29; as BirthDate,&#xd;&#xa;		CASE WHEN &#x27;X&#x24;&#x7b;EMPLOYEENO&#x7d;&#x27; &#x3d; &#x27;X&#x27; THEN HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO ELSE RTRIM&#x28;&#x27;&#x24;&#x7b;EMPLOYEENO&#x7d; &#x27;&#x29; END as Empno &#xd;&#xa;  FROM HR_EMPLOYEE_CERTIFICATION, HR_EMPLOYEE_DEMOGRAPHICS, HR_EMPLOYEE_INTERLINK&#xd;&#xa;  WHERE HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO&#xd;&#xa;	AND HR_EMPLOYEE_INTERLINK.EMPLOYEE_NO &#x3d; HR_EMPLOYEE_DEMOGRAPHICS.EMPLOYEE_NO&#xd;&#xa;	AND HR_EMPLOYEE_INTERLINK.PAYROLL_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;	AND CERT_NO &#x3e; &#x27; &#x27;&#xd;&#xa;  ORDER by EMPLOYEE_STATUS, HR_EMPLOYEE_CERTIFICATION.EMPLOYEE_NO, CERT_CLASS, EXPIRY_DATE&#xd;&#xa;</sql>
+    <sql>SELECT	DISTINCT hec.EMPLOYEE_NO,&#xd;&#xa;		hed.EMPLOYEE_STATUS,&#xd;&#xa;		CASE WHEN BARGAINING_UNIT &#x3d; &#x27; &#x27;&#xd;&#xa;			THEN &#x27;01&#x27;&#xd;&#xa;			ELSE BARGAINING_UNIT&#xd;&#xa;			END  as BARGAINING_UNIT,&#xd;&#xa;		EMPLOYEE_CATEGORY,&#xd;&#xa;		CERT_CLASS,&#xd;&#xa;		CERT_NO as PersonId,&#xd;&#xa;		CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;CONCAT&#x28;SUBSTRING&#x28;BIRTH_DATE,1,4&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,5,2&#x29;&#x29;,&#x27;-&#x27;&#x29;,SUBSTRING&#x28;BIRTH_DATE,7,2&#x29;&#x29; as BirthDate,&#xd;&#xa;		CASE WHEN &#x27;X&#x24;&#x7b;EMPLOYEENO&#x7d;&#x27; &#x3d; &#x27;X&#x27; THEN hec.EMPLOYEE_NO ELSE RTRIM&#x28;&#x27;&#x24;&#x7b;EMPLOYEENO&#x7d; &#x27;&#x29; END as Empno &#xd;&#xa;  FROM HR_EMPLOYEE_CERTIFICATION hec, HR_EMPLOYEE_DEMOGRAPHICS hed, HR_EMPLOYEE_INTERLINK hei&#xd;&#xa;  WHERE hed.EMPLOYEE_NO &#x3d; hec.EMPLOYEE_NO&#xd;&#xa;	AND hei.EMPLOYEE_NO &#x3d; hed.EMPLOYEE_NO&#xd;&#xa;	AND hei.PAYROLL_ID &#x3d; &#x27;HRON&#x27;&#xd;&#xa;	AND CERT_NO &#x3e; &#x27; &#x27;&#xd;&#xa;	AND &#x24;&#x7b;Employee_Filter&#x7d;&#xd;&#xa;  ORDER by EMPLOYEE_STATUS, hec.EMPLOYEE_NO, CERT_CLASS, EXPIRY_DATE&#xd;&#xa;</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -994,40 +993,6 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>58</xloc>
-      <yloc>230</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter Employees</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Merge Join Status</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <conditions>
-  <condition>
-   <negated>N</negated>
-   <leftvalue>EMPLOYEE_NO</leftvalue>
-   <function>&#x3d;</function>
-   <rightvalue>EMPNO</rightvalue>
-   </condition>
-  </conditions>
- </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>194</xloc>
       <yloc>230</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1102,7 +1067,7 @@
            <schema_name/>
            </partitioning>
 <join_type>INNER</join_type>
-<step1>Filter Employees</step1>
+<step1>Employee&#x2f;Certificate</step1>
 <step2>Status</step2>
     <keys_1>
       <key>EMPLOYEE_STATUS</key>
@@ -1281,39 +1246,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>839</xloc>
       <yloc>411</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Set Date to Feb 1, 2018</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>Current_date</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>20180201</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>330</xloc>
-      <yloc>506</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

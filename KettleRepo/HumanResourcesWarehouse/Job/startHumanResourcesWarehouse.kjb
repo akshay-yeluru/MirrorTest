@@ -8,7 +8,7 @@
   <created_user>-</created_user>
   <created_date>2014&#x2f;07&#x2f;11 08&#x3a;04&#x3a;22.604</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2017&#x2f;09&#x2f;06 09&#x3a;01&#x3a;01.669</modified_date>
+  <modified_date>2017&#x2f;10&#x2f;30 10&#x3a;03&#x3a;49.623</modified_date>
     <parameters>
         <parameter>
             <name>SRB_PROPERTIES_FILE_PARAM</name>
@@ -311,8 +311,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>984</xloc>
-      <yloc>68</yloc>
+      <xloc>877</xloc>
+      <yloc>64</yloc>
       </entry>
     <entry>
       <name>Check Db connections</name>
@@ -333,8 +333,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>752</xloc>
-      <yloc>68</yloc>
+      <xloc>718</xloc>
+      <yloc>69</yloc>
       </entry>
     <entry>
       <name>HUMAN_RESOURCES_WAREHOUSE</name>
@@ -522,6 +522,40 @@
       <xloc>1220</xloc>
       <yloc>130</yloc>
       </entry>
+    <entry>
+      <name>SetDates</name>
+      <description/>
+      <type>TRANS</type>
+      <specification_method>rep_name</specification_method>
+      <trans_object_id/>
+      <filename/>
+      <transname>SetDates</transname>
+      <directory>&#x2f;HumanResourcesWarehouse&#x2f;Transformation</directory>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1017</xloc>
+      <yloc>68</yloc>
+      </entry>
   </entries>
   <hops>
     <hop>
@@ -554,15 +588,6 @@
     <hop>
       <from>Check Db connections</from>
       <to>HUMAN_RESOURCES</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>HUMAN_RESOURCES</from>
-      <to>HUMAN_RESOURCES_WAREHOUSE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -617,6 +642,24 @@
     <hop>
       <from>LOG_Shrink</from>
       <to>EMAIL LOG</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>HUMAN_RESOURCES</from>
+      <to>SetDates</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>SetDates</from>
+      <to>HUMAN_RESOURCES_WAREHOUSE</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
